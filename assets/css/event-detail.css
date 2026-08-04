@@ -514,7 +514,7 @@
    MOBILE RESPONSIVE OVERRIDES (≤ 768 px)
    ============================================================ */
 @media (max-width: 768px) {
-
+  
   /* ---- Mobile sidebar position ---- */
   .event-detail-sidebar {
     position: static !important;

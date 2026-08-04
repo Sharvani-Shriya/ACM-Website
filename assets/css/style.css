@@ -283,6 +283,7 @@ p {
   position: relative;
   z-index: 400;
   box-shadow: 0 4px 12px rgba(11, 31, 77, 0.15);
+  margin: 15px 0;
 }
 
 .event-marquee-badge {
@@ -960,20 +961,58 @@ p {
 
 #tab-our-mission .line-reveal {
   padding-left: 14px;
-  border-left: 3px solid transparent;
-  transition: border-color 0.4s ease;
+  box-shadow: inset 3px 0 0 transparent;
+  transition: box-shadow 0.4s ease;
 }
 
 #tab-our-mission.active .line-reveal:nth-child(2) {
-  border-left-color: var(--blue);
+  box-shadow: inset 3px 0 0 var(--blue);
 }
 
 #tab-our-mission.active .line-reveal:nth-child(3) {
-  border-left-color: var(--gold);
+  box-shadow: inset 3px 0 0 var(--gold);
 }
 
 #tab-our-mission.active .line-reveal:nth-child(4) {
-  border-left-color: var(--crimson);
+  box-shadow: inset 3px 0 0 var(--crimson);
+}
+
+/* Same colored side-line treatment for About ACM */
+#tab-about-acm .line-reveal {
+  padding-left: 14px;
+  box-shadow: inset 3px 0 0 transparent;
+  transition: box-shadow 0.4s ease;
+}
+
+#tab-about-acm.active .line-reveal:nth-child(2) {
+  box-shadow: inset 3px 0 0 var(--blue);
+}
+
+#tab-about-acm.active .line-reveal:nth-child(3) {
+  box-shadow: inset 3px 0 0 var(--gold);
+}
+
+#tab-about-acm.active .line-reveal:nth-child(4) {
+  box-shadow: inset 3px 0 0 var(--crimson);
+}
+
+/* Same colored side-line treatment for Our Vision */
+#tab-our-vision .line-reveal {
+  padding-left: 14px;
+  box-shadow: inset 3px 0 0 transparent;
+  transition: box-shadow 0.4s ease;
+}
+
+#tab-our-vision.active .line-reveal:nth-child(2) {
+  box-shadow: inset 3px 0 0 var(--blue);
+}
+
+#tab-our-vision.active .line-reveal:nth-child(3) {
+  box-shadow: inset 3px 0 0 var(--gold);
+}
+
+#tab-our-vision.active .line-reveal:nth-child(4) {
+  box-shadow: inset 3px 0 0 var(--crimson);
 }
 
 @keyframes lineRevealUp {
