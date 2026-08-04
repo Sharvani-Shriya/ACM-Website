@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   /* ---------- Mobile nav toggle ---------- */
   var navToggle = document.querySelector('.nav-toggle');
-  var navLinks  = document.querySelector('.nav-links');
+  var navLinks = document.querySelector('.nav-links');
   if (navToggle && navLinks) {
     navToggle.addEventListener('click', function () {
       navLinks.classList.toggle('open');
@@ -60,10 +60,77 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  /* ---------- About page Tab Switching ---------- */
+  var tabBtns = document.querySelectorAll('.about-tab-btn');
+  var tabPanels = document.querySelectorAll('.about-tab-panel');
+  var tabImgs = document.querySelectorAll('.about-tab-img');
+  var tabNav = document.querySelector('.about-tabs-nav');
+  if (tabBtns.length && tabPanels.length) {
+    var activeTabIndex = 0;
+    var tabAutoplay = null;
+
+    function switchTab(index) {
+      activeTabIndex = (index + tabBtns.length) % tabBtns.length;
+      tabBtns.forEach(function (b) { b.classList.remove('active'); });
+      tabPanels.forEach(function (p) { p.classList.remove('active'); });
+      tabImgs.forEach(function (img) { img.classList.remove('active'); });
+
+      var targetBtn = tabBtns[activeTabIndex];
+      if (targetBtn) {
+        targetBtn.classList.add('active');
+        var dataTab = targetBtn.getAttribute('data-tab');
+        var activePanel = document.getElementById('tab-' + dataTab);
+        if (activePanel) {
+          void activePanel.offsetWidth;
+          activePanel.classList.add('active');
+        }
+        var activeImg = document.getElementById('tab-img-' + dataTab);
+        if (activeImg) {
+          activeImg.classList.add('active');
+        }
+      }
+    }
+
+    function startAutoplay() {
+      if (tabAutoplay) clearInterval(tabAutoplay);
+      tabAutoplay = setInterval(function () {
+        switchTab(activeTabIndex + 1);
+      }, 2000);
+    }
+
+    function stopAutoplay() {
+      if (tabAutoplay) {
+        clearInterval(tabAutoplay);
+        tabAutoplay = null;
+      }
+    }
+
+    // Start auto-switching initially
+    startAutoplay();
+
+    // When a tab button is clicked: pause auto-switch and stay on clicked tab
+    tabBtns.forEach(function (btn, index) {
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        stopAutoplay();
+        switchTab(index);
+      });
+    });
+
+    // When user clicks anywhere outside the tab buttons, resume auto-switching
+    document.addEventListener('click', function (e) {
+      if (tabNav && !tabNav.contains(e.target)) {
+        if (!tabAutoplay) {
+          startAutoplay();
+        }
+      }
+    });
+  }
+
   /* ---------- Events: master grid -> TECHNIZEN sub-grid ---------- */
   var masterCards = document.querySelectorAll('[data-open-master]');
-  var masterView   = document.getElementById('events-master-view');
-  var subView      = document.getElementById('events-sub-view');
+  var masterView = document.getElementById('events-master-view');
+  var subView = document.getElementById('events-sub-view');
   var subViewTitle = document.getElementById('sub-view-title');
 
   function showSubView(title) {
@@ -117,7 +184,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   /* ---------- Event detail modal ---------- */
   var modalBackdrop = document.getElementById('event-modal');
-  var modalBody      = document.getElementById('event-modal-body');
+  var modalBody = document.getElementById('event-modal-body');
 
   document.querySelectorAll('[data-view-details]').forEach(function (trigger) {
     trigger.addEventListener('click', function (e) {
