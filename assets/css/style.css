@@ -2370,38 +2370,51 @@ table.data-table td.placeholder {
 }
 
 .team-card-info {
-  padding: 18px 20px;
+  padding: 20px;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .member-card .team-card-info {
-  padding: 14px 16px;
+  padding: 16px;
+  justify-content: center;
 }
 
 .badge {
-  display: inline-block;
-  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
   font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  padding: 4px 10px;
+  padding: 5px 14px;
   border-radius: 20px;
+  margin-top: -24px;
   margin-bottom: 10px;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 4px 12px rgba(11, 31, 77, 0.12);
+  white-space: nowrap;
 }
 
 .faculty-badge {
-  background: rgba(200, 161, 58, 0.15);
+  background: #ffffff;
   color: #926d18;
-  border: 1px solid rgba(200, 161, 58, 0.3);
+  border: 1.5px solid rgba(200, 161, 58, 0.6);
+  box-shadow: 0 4px 14px rgba(200, 161, 58, 0.2);
 }
 
 .member-badge {
-  background: var(--blue-soft);
+  background: #ffffff;
   color: var(--blue-dark);
-  border: 1px solid rgba(20, 80, 158, 0.2);
+  border: 1.5px solid var(--blue);
+  box-shadow: 0 4px 14px rgba(20, 80, 158, 0.18);
 }
 
 .team-card-info h3 {
@@ -2410,6 +2423,7 @@ table.data-table td.placeholder {
   color: var(--navy);
   margin: 0 0 4px 0;
   font-weight: 700;
+  text-align: center;
 }
 
 .team-card-info h4 {
@@ -2418,20 +2432,23 @@ table.data-table td.placeholder {
   color: var(--navy);
   margin: 0 0 4px 0;
   font-weight: 700;
+  text-align: center;
 }
 
 .team-card-info .designation {
   font-size: 0.86rem;
   color: var(--crimson);
   font-weight: 600;
-  margin: 0 0 8px 0;
+  margin: 0;
+  text-align: center;
 }
 
 .team-card-info .bio {
   font-size: 0.88rem;
   color: var(--ink-soft);
   line-height: 1.5;
-  margin: 0;
+  margin: 8px 0 0 0;
+  text-align: center;
 }
 
 @media (max-width: 1024px) {
@@ -3019,4 +3036,4 @@ table.data-table td.placeholder {
 }
 @media (max-width: 400px) {
   .ev-stats-strip { grid-template-columns: 1fr 1fr; }
-}
+}
