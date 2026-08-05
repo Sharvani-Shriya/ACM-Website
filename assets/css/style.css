@@ -2312,6 +2312,14 @@ table.data-table td.placeholder {
   height: 100%;
 }
 
+.members-grid .member-card {
+  border: 2px solid rgba(20, 80, 158, 0.3);
+}
+
+.members-grid .member-card:hover {
+  border-color: var(--blue);
+}
+
 .member-card .team-img-placeholder {
   height: 140px;
 }
