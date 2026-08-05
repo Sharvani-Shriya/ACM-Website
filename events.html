@@ -118,6 +118,7 @@
             <span class="eyebrow" style="color:var(--gold);">Eight years, one chapter</span>
             <h2 style="font-size:var(--text-h3);margin-top:4px;">Activity by year</h2>
           </div>
+          <div class="ev-chart-hover-pill" id="ev-chart-hover-info" style="display:none;"></div>
         </div>
         <div class="ev-chart-canvas-wrap">
           <canvas id="activityChart"></canvas>
@@ -313,7 +314,7 @@
         });
 
         var ctx = canvas.getContext('2d');
-        new Chart(ctx, {
+        var chartInstance = new Chart(ctx, {
           type: 'bar',
           data: {
             labels: years,
@@ -345,17 +346,17 @@
                 });
 
                 hoverInfo.innerHTML = '<strong>' + year + ':</strong> ' + (parts.join(' · ') || 'No events');
+                hoverInfo.style.display = 'inline-flex';
                 hoverInfo.style.borderColor = 'rgba(20, 80, 158, 0.35)';
                 hoverInfo.style.boxShadow = '0 4px 14px rgba(20, 80, 158, 0.12)';
               } else {
-                hoverInfo.innerHTML = '<span class="ev-hover-hint">💡 Hover over any bar for details</span>';
-                hoverInfo.style.borderColor = 'var(--line)';
-                hoverInfo.style.boxShadow = '0 2px 10px rgba(11, 31, 77, 0.06)';
+                hoverInfo.innerHTML = '';
+                hoverInfo.style.display = 'none';
               }
             },
             interaction: {
-              mode: 'nearest',
-              intersect: true
+              mode: 'index',
+              intersect: false
             },
             plugins: {
               legend: {
@@ -418,6 +419,21 @@
                 }
               }
             }
+          }
+        });
+
+        canvas.addEventListener('mouseleave', function () {
+          var hoverInfo = document.getElementById('ev-chart-hover-info');
+          if (hoverInfo) {
+            hoverInfo.innerHTML = '';
+            hoverInfo.style.display = 'none';
+          }
+          if (chartInstance) {
+            chartInstance.setActiveElements([]);
+            if (chartInstance.tooltip) {
+              chartInstance.tooltip.setActiveElements([], { x: 0, y: 0 });
+            }
+            chartInstance.update();
           }
         });
       }
