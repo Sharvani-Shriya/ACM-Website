@@ -5,12 +5,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Events | ACM Student Chapter – Dept. of CSE, RVRJC</title>
-  <meta name="description" content="Explore all events hosted by the ACM Student Chapter, Dept. of CSE at R.V.R. & J.C. College — Technizen, Hour of Code, Guest Lectures, Outreach, Workshops and more.">
+  <meta name="description"
+    content="Explore all events hosted by the ACM Student Chapter, Dept. of CSE at R.V.R. & J.C. College — Technizen, Hour of Code, Guest Lectures, Outreach, Workshops and more.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@500&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
 
 <body>
@@ -42,7 +44,8 @@
     <div class="container">
       <div class="crumb">ACM Student Chapter · 2018–2026</div>
       <h1>Events</h1>
-      <p>Eight years of school outreach, guest lectures, technical contests and our flagship fest — all in one place.</p>
+      <p>Eight years of school outreach, guest lectures, technical contests and our flagship fest — all in one place.
+      </p>
     </div>
   </header>
 
@@ -108,20 +111,14 @@
         </div>
       </div>
 
-      <!-- Stacked Bar Chart -->
+      <!-- Grouped Vertical Bar Chart -->
       <div class="ev-chart-card">
         <div class="ev-section-intro" style="text-align:left;margin-bottom:var(--space-md);">
           <span class="eyebrow" style="color:var(--gold);">Eight years, one chapter</span>
           <h2 style="font-size:var(--text-h3);margin-top:4px;">Activity by year</h2>
         </div>
-        <div class="ev-chart-wrap" id="ev-chart-bars">
-          <!-- Rendered by JS -->
-        </div>
-        <div class="ev-bar-labels" id="ev-chart-labels">
-          <!-- Rendered by JS -->
-        </div>
-        <div class="ev-legend" id="ev-chart-legend">
-          <!-- Rendered by JS -->
+        <div class="ev-chart-canvas-wrap">
+          <canvas id="activityChart"></canvas>
         </div>
       </div>
 
@@ -129,14 +126,13 @@
       <div class="ev-section-intro">
         <span class="eyebrow">All events</span>
         <h2>Explore by category</h2>
-        <p>The gold "Open" pill marks a category with a currently upcoming instance — click through to see details and register.</p>
+        <p>The gold "Open" pill marks a category with a currently upcoming instance — click through to see details and
+          register.</p>
       </div>
 
       <div class="ev-cat-grid" id="ev-cat-grid">
         <!-- Rendered by JS -->
       </div>
-
-
 
     </div>
   </section>
@@ -286,95 +282,150 @@
   <script src="assets/js/events-data.js"></script>
   <script src="assets/js/script.js"></script>
   <script>
-  /* ---- Master events page renderer ---- */
-  (function () {
-    /* Stats */
-    var totalEl  = document.getElementById('ev-total-count');
-    var guestEl  = document.getElementById('ev-guests-count');
-    if (totalEl)  totalEl.textContent  = EV_TOTAL_EVENTS;
-    if (guestEl)  guestEl.textContent  = EV_GUEST_COUNT;
+    /* ---- Master events page renderer ---- */
+    (function () {
+      /* Stats */
+      var totalEl = document.getElementById('ev-total-count');
+      var guestEl = document.getElementById('ev-guests-count');
+      if (totalEl) totalEl.textContent = EV_TOTAL_EVENTS;
+      if (guestEl) guestEl.textContent = EV_GUEST_COUNT;
 
-    /* Chart */
-    var catKeys = ['technizen','hourOfCode','outreach','guestLectures','intraCollege','workshops'];
-    var maxVal = 0;
-    EV_CHART_DATA.forEach(function(row) {
-      var s = catKeys.reduce(function(a,k){ return a + (row[k]||0); }, 0);
-      if (s > maxVal) maxVal = s;
-    });
+      /* Chart: Grouped Vertical Bar Chart (2018–2026) */
+      var years = ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026'];
+      var catKeys = ['technizen', 'hourOfCode', 'outreach', 'guestLectures', 'intraCollege', 'workshops'];
 
-    var barsEl   = document.getElementById('ev-chart-bars');
-    var labelsEl = document.getElementById('ev-chart-labels');
-    var legendEl = document.getElementById('ev-chart-legend');
-    if (barsEl && maxVal > 0) {
-      EV_CHART_DATA.forEach(function(row) {
-        var col = document.createElement('div');
-        col.className = 'ev-bar-col';
-        catKeys.forEach(function(k) {
-          var v = row[k] || 0;
-          if (v === 0) return;
-          var seg = document.createElement('div');
-          seg.className = 'ev-seg';
-          var pct = (v / maxVal) * 100;
-          seg.style.height = pct + '%';
-          seg.style.background = EV_CATEGORIES[k].color;
-          seg.title = EV_CATEGORIES[k].name + ': ' + v + ' (' + row.year + ')';
-          col.appendChild(seg);
+      function initActivityChart() {
+        var canvas = document.getElementById('activityChart');
+        if (!canvas) return;
+
+        var datasets = catKeys.map(function (k) {
+          var cat = EV_CATEGORIES[k];
+          return {
+            label: cat.name,
+            data: EV_CHART_DATA.map(function (row) { return row[k] || 0; }),
+            backgroundColor: cat.color,
+            borderColor: cat.color,
+            borderWidth: 1,
+            borderRadius: 3
+          };
         });
-        barsEl.appendChild(col);
-      });
-      EV_CHART_DATA.forEach(function(row) {
-        var sp = document.createElement('span');
-        sp.textContent = row.year;
-        labelsEl.appendChild(sp);
-      });
-      catKeys.forEach(function(k) {
+
+        var ctx = canvas.getContext('2d');
+        new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: years,
+            datasets: datasets
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            animation: {
+              duration: 1200,
+              easing: 'easeOutQuart'
+            },
+            interaction: {
+              mode: 'index',
+              intersect: false
+            },
+            plugins: {
+              legend: {
+                position: 'bottom',
+                labels: {
+                  font: {
+                    family: "'Source Sans 3', sans-serif",
+                    size: 12,
+                    weight: '600'
+                  },
+                  padding: 16,
+                  usePointStyle: true,
+                  pointStyle: 'rectRounded'
+                }
+              },
+              tooltip: {
+                backgroundColor: 'rgba(11, 31, 77, 0.92)',
+                titleFont: { family: "'IBM Plex Mono', monospace", size: 13, weight: 'bold' },
+                bodyFont: { family: "'Source Sans 3', sans-serif", size: 12 },
+                padding: 12,
+                cornerRadius: 8
+              }
+            },
+            scales: {
+              x: {
+                grid: { display: false },
+                ticks: {
+                  font: { family: "'IBM Plex Mono', monospace", size: 12, weight: '600' },
+                  color: '#5b6376'
+                }
+              },
+              y: {
+                beginAtZero: true,
+                title: {
+                  display: true,
+                  text: 'Number of Activities',
+                  color: '#0b1f4d',
+                  font: { family: "'Source Sans 3', sans-serif", size: 12, weight: '700' }
+                },
+                ticks: {
+                  stepSize: 1,
+                  precision: 0,
+                  font: { family: "'Source Sans 3', sans-serif", size: 12 },
+                  color: '#5b6376'
+                },
+                grid: {
+                  color: '#e2e7f0'
+                }
+              }
+            }
+          }
+        });
+      }
+
+      if (typeof Chart !== 'undefined') {
+        initActivityChart();
+      } else {
+        window.addEventListener('load', initActivityChart);
+      }
+
+      /* Category cards */
+      var grid = document.getElementById('ev-cat-grid');
+      if (!grid) return;
+
+      var dataMap = {
+        technizen: EV_TECHNIZEN,
+        hourOfCode: EV_HOUR_OF_CODE,
+        outreach: EV_OUTREACH,
+        guestLectures: EV_GUEST_LECTURES,
+        intraCollege: EV_INTRA_COLLEGE,
+        workshops: EV_WORKSHOPS
+      };
+
+      catKeys.forEach(function (k) {
         var cat = EV_CATEGORIES[k];
-        var item = document.createElement('div');
-        item.className = 'ev-legend-item';
-        item.innerHTML = '<span class="ev-legend-swatch" style="background:' + cat.color + '"></span>' + cat.name;
-        legendEl.appendChild(item);
-      });
-    }
+        var data = dataMap[k];
+        var open = evHasUpcoming(data);
+        var total = evTotalInstances(data);
+        var years = data.length ? data.reduce(function (mn, e) { return Math.min(mn, e.year); }, 9999) : 2018;
 
-    /* Category cards */
-    var grid = document.getElementById('ev-cat-grid');
-    if (!grid) return;
+        var isTechnizen = (k === 'technizen');
+        var tag = isTechnizen
+          ? 'div'
+          : 'a';
 
-    var dataMap = {
-      technizen:     EV_TECHNIZEN,
-      hourOfCode:    EV_HOUR_OF_CODE,
-      outreach:      EV_OUTREACH,
-      guestLectures: EV_GUEST_LECTURES,
-      intraCollege:  EV_INTRA_COLLEGE,
-      workshops:     EV_WORKSHOPS
-    };
+        var card = document.createElement(tag);
+        card.className = 'ev-cat-card';
+        if (!isTechnizen && cat.url) {
+          card.setAttribute('href', cat.url);
+        }
+        if (isTechnizen) {
+          card.setAttribute('data-open-master', 'TECHNIZEN');
+          card.style.cursor = 'pointer';
+        }
 
-    catKeys.forEach(function(k) {
-      var cat  = EV_CATEGORIES[k];
-      var data = dataMap[k];
-      var open = evHasUpcoming(data);
-      var total = evTotalInstances(data);
-      var years = data.length ? data.reduce(function(mn,e){ return Math.min(mn,e.year); }, 9999) : 2018;
-
-      var isTechnizen = (k === 'technizen');
-      var tag = isTechnizen
-        ? 'div'
-        : 'a';
-
-      var card = document.createElement(tag);
-      card.className = 'ev-cat-card';
-      if (!isTechnizen && cat.url) {
-        card.setAttribute('href', cat.url);
-      }
-      if (isTechnizen) {
-        card.setAttribute('data-open-master', 'TECHNIZEN');
-        card.style.cursor = 'pointer';
-      }
-
-      card.innerHTML =
-        '<div class="ev-cat-swatch" style="background:' + cat.color + '"></div>' +
-        (open ? '<span class="ev-open-pill">● Open</span>' : '') +
-        '<div class="ev-cat-body">' +
+        card.innerHTML =
+          '<div class="ev-cat-swatch" style="background:' + cat.color + '"></div>' +
+          (open ? '<span class="ev-open-pill">● Open</span>' : '') +
+          '<div class="ev-cat-body">' +
           '<div class="ev-cat-badge" style="background:' + cat.color + '">' + cat.abbr + '</div>' +
           '<h3>' + cat.name + '</h3>' +
           '<p>' + cat.description + '</p>' +
@@ -385,25 +436,25 @@
           '</span>' +
         '</div>';
 
-      grid.appendChild(card);
-    });
-
-    /* Re-attach Technizen click handler for any newly rendered cards */
-    grid.querySelectorAll('[data-open-master]').forEach(function(card) {
-      card.addEventListener('click', function () {
-        var masterName = card.getAttribute('data-open-master') || 'TECHNIZEN';
-        var masterView = document.getElementById('events-master-view');
-        var subView    = document.getElementById('events-sub-view');
-        var titleEl    = document.getElementById('sub-view-title');
-        if (!masterView || !subView) return;
-        masterView.style.display = 'none';
-        subView.style.display    = 'block';
-        if (titleEl) titleEl.textContent = masterName;
-        window.location.hash = masterName.toLowerCase();
-        window.scrollTo({ top: subView.offsetTop - 90, behavior: 'smooth' });
+        grid.appendChild(card);
       });
-    });
-  })();
+
+      /* Re-attach Technizen click handler for any newly rendered cards */
+      grid.querySelectorAll('[data-open-master]').forEach(function (card) {
+        card.addEventListener('click', function () {
+          var masterName = card.getAttribute('data-open-master') || 'TECHNIZEN';
+          var masterView = document.getElementById('events-master-view');
+          var subView = document.getElementById('events-sub-view');
+          var titleEl = document.getElementById('sub-view-title');
+          if (!masterView || !subView) return;
+          masterView.style.display = 'none';
+          subView.style.display = 'block';
+          if (titleEl) titleEl.textContent = masterName;
+          window.location.hash = masterName.toLowerCase();
+          window.scrollTo({ top: subView.offsetTop - 90, behavior: 'smooth' });
+        });
+      });
+    })();
   </script>
 </body>
 
