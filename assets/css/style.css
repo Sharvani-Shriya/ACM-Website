@@ -2309,10 +2309,66 @@ table.data-table td.placeholder {
 /* ============================================================
    WHO WE ARE - FACULTY & TEAM SECTION
    ============================================================ */
+.team-master-card {
+  position: relative;
+  background: var(--white);
+  border: 1.5px solid var(--line);
+  border-radius: 24px;
+  padding: 40px 36px;
+  box-shadow: 
+    0 20px 50px rgba(11, 31, 77, 0.07),
+    0 2px 14px rgba(20, 80, 158, 0.04);
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.team-master-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--gold) 0%, var(--blue) 50%, var(--gold) 100%);
+}
+
+.team-card-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 28px 0 24px;
+  position: relative;
+  text-align: center;
+}
+
+.team-card-divider::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: var(--line);
+  z-index: 1;
+}
+
+.team-card-divider span {
+  position: relative;
+  z-index: 2;
+  background: var(--white);
+  padding: 0 18px;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 600;
+}
+
 .team-layout-grid {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 24px;
 }
 
 .team-card {
