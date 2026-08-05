@@ -50,23 +50,61 @@
   <section class="section" id="events-master-view">
     <div class="container">
 
-      <!-- Stats Strip -->
+      <!-- Stats Strip (Decorative Professional Bar) -->
       <div class="ev-stats-strip" id="ev-master-stats">
         <div class="ev-stat-item">
-          <span class="ev-stat-num" id="ev-total-count">—</span>
-          <span class="ev-stat-label">Events since 2018</span>
+          <div class="ev-stat-icon bg-blue" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+          </div>
+          <div class="ev-stat-info">
+            <span class="ev-stat-num" id="ev-total-count">—</span>
+            <span class="ev-stat-label">Events since 2018</span>
+          </div>
         </div>
+
         <div class="ev-stat-item">
-          <span class="ev-stat-num" id="ev-schools-count">27</span>
-          <span class="ev-stat-label">Schools visited</span>
+          <div class="ev-stat-icon bg-gold" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+              <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+            </svg>
+          </div>
+          <div class="ev-stat-info">
+            <span class="ev-stat-num" id="ev-schools-count">27</span>
+            <span class="ev-stat-label">Schools visited</span>
+          </div>
         </div>
+
         <div class="ev-stat-item">
-          <span class="ev-stat-num" id="ev-guests-count">—</span>
-          <span class="ev-stat-label">Guest lectures hosted</span>
+          <div class="ev-stat-icon bg-purple" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"></path>
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+              <line x1="12" y1="19" x2="12" y2="23"></line>
+              <line x1="8" y1="23" x2="16" y2="23"></line>
+            </svg>
+          </div>
+          <div class="ev-stat-info">
+            <span class="ev-stat-num" id="ev-guests-count">—</span>
+            <span class="ev-stat-label">Guest lectures hosted</span>
+          </div>
         </div>
+
         <div class="ev-stat-item">
-          <span class="ev-stat-num">9</span>
-          <span class="ev-stat-label">Years of activity</span>
+          <div class="ev-stat-icon bg-emerald" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+          </div>
+          <div class="ev-stat-info">
+            <span class="ev-stat-num">9</span>
+            <span class="ev-stat-label">Years of activity</span>
+          </div>
         </div>
       </div>
 
@@ -98,12 +136,7 @@
         <!-- Rendered by JS -->
       </div>
 
-      <!-- Divider before Technizen sub-grid -->
-      <div style="margin-top:var(--space-xl);text-align:center;padding-top:var(--space-xl);border-top:1px solid var(--line);">
-        <span style="font-family:var(--font-mono);font-size:var(--text-xs);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);">
-          ↓ Click the Technizen card above to explore this year's sub-events
-        </span>
-      </div>
+
 
     </div>
   </section>
