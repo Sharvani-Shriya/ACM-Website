@@ -49,19 +49,30 @@
   <section class="section">
     <div class="container">
 
-      <!-- Spotlight zone — rendered by JS if upcoming instance exists -->
+      <!-- Spotlight zone — rendered by JS (Technizen 2K26 is upcoming) -->
       <div id="ev-spotlight-zone"></div>
 
-      <!-- Detail stat strip -->
+      <!-- Stat strip -->
       <div class="ev-detail-stats" id="ev-detail-stats"></div>
+
+      <!-- Sub-events shortcut -->
+      <div id="ev-subevent-cta" style="display:none; text-align:center; margin-bottom:var(--space-xl);">
+        <a href="../events.html" id="ev-subevent-link" class="btn"
+           style="background:var(--ev-technizen);color:var(--navy-dark) !important;font-weight:700;padding:12px 32px;font-size:1rem;">
+          &#9658; Explore all 6 Sub-events
+        </a>
+      </div>
 
       <!-- Timeline -->
       <div class="ev-timeline-wrap">
         <div class="ev-timeline-head">
-          <span class="eyebrow" id="ev-timeline-eyebrow" style="color:var(--ev-technizen);">2026 → present</span>
+          <span class="eyebrow" id="ev-timeline-eyebrow" style="color:var(--ev-technizen);">Editions</span>
           <h2>Year by year</h2>
         </div>
         <div class="ev-timeline" id="ev-timeline"></div>
+        <p id="ev-timeline-empty" style="text-align:center;color:var(--ink-soft);font-size:var(--text-sm);display:none;">
+          Technizen 2K26 is the inaugural edition — past editions will appear here after each year.
+        </p>
       </div>
 
       <!-- Photo strip -->
@@ -115,70 +126,85 @@
   <script>
   (function () {
     var CAT_KEY   = 'technizen';
-    var CAT_COLOR = EV_CATEGORIES[CAT_KEY].color;
+    var CAT_COLOR = EV_CATEGORIES[CAT_KEY].color;   /* #c8a13a */
     var DATA      = EV_TECHNIZEN;
 
-    /* Stats */
-    var pastInstances = evGetPast(DATA);
+    var past      = evGetPast(DATA);
+    var upcoming  = evGetUpcoming(DATA);
+
+    /* ---- Stats strip ---- */
     var stats = [
-      { num: DATA.length,             label: 'Edition' + (DATA.length !== 1 ? 's' : '') + ' held' },
-      { num: 6,                       label: 'Sub-events per edition' },
-      { num: pastInstances.length || '1st', label: 'Years running' }
+      { num: DATA.length,      label: 'Edition' + (DATA.length !== 1 ? 's' : '') + ' held' },
+      { num: 6,                label: 'Sub-events per edition' },
+      { num: upcoming ? '● Open' : 'Past', label: 'Status' }
     ];
     var statsEl = document.getElementById('ev-detail-stats');
     if (statsEl) {
-      stats.forEach(function(s) {
+      stats.forEach(function (s) {
         var item = document.createElement('div');
         item.className = 'ev-stat-item';
-        item.innerHTML = '<span class="ev-stat-num">' + s.num + '</span><span class="ev-stat-label">' + s.label + '</span>';
+        item.innerHTML =
+          '<span class="ev-stat-num" style="' + (s.num === '● Open' ? 'color:var(--gold);font-size:1.1rem' : '') + '">' + s.num + '</span>' +
+          '<span class="ev-stat-label">' + s.label + '</span>';
         statsEl.appendChild(item);
       });
     }
 
-    /* Spotlight */
-    var upcoming = evGetUpcoming(DATA);
+    /* ---- Spotlight (Technizen 2K26 is upcoming) ---- */
     var spotlightEl = document.getElementById('ev-spotlight-zone');
     if (upcoming && spotlightEl) {
-      var fieldsHtml = Object.keys(upcoming.fields).map(function(k) {
+      var fieldsHtml = Object.keys(upcoming.fields).map(function (k) {
         return '<div class="ev-sf"><b>' + k + '</b><span>' + upcoming.fields[k] + '</span></div>';
       }).join('');
       spotlightEl.innerHTML =
         '<div class="ev-spotlight">' +
           '<span class="ev-spotlight-badge"><span class="pulse"></span> Open &middot; Register Now</span>' +
           '<div class="ev-spotlight-grid">' +
-            '<div class="ev-spotlight-photo">' + (upcoming.photo ? '<img src="../' + upcoming.photo + '" alt="' + upcoming.title + '">' : 'Photo') + '</div>' +
+            '<div class="ev-spotlight-photo">' +
+              (upcoming.photo
+                ? '<img src="../' + upcoming.photo + '" alt="' + upcoming.title + '">'
+                : 'Technizen<br>2K26') +
+            '</div>' +
             '<div class="ev-spotlight-info">' +
               '<h3>' + upcoming.title + '</h3>' +
               '<p class="role">' + upcoming.description + '</p>' +
               '<div class="ev-spotlight-fields">' + fieldsHtml + '</div>' +
-              '<a href="technizen1.html" class="ev-reg-btn">Register Now &rarr;</a>' +
+              '<a href="../events.html#technizen" class="ev-reg-btn">' +
+                'Register Now &rarr;' +
+              '</a>' +
             '</div>' +
           '</div>' +
         '</div>';
     }
 
-    /* Timeline */
-    var timelineEl = document.getElementById('ev-timeline');
-    var eyebrowEl  = document.getElementById('ev-timeline-eyebrow');
+    /* ---- Sub-events CTA (always shown) ---- */
+    var ctaEl = document.getElementById('ev-subevent-cta');
+    if (ctaEl) ctaEl.style.display = 'block';
+
+    /* ---- Timeline ---- */
+    var timelineEl  = document.getElementById('ev-timeline');
+    var eyebrowEl   = document.getElementById('ev-timeline-eyebrow');
+    var emptyEl     = document.getElementById('ev-timeline-empty');
+
     if (timelineEl) {
-      var past = evGetPast(DATA);
-      if (eyebrowEl && past.length) {
-        var minY = past[past.length - 1].year;
-        var maxY = past[0].year;
-        eyebrowEl.textContent = minY + ' \u2192 ' + maxY;
-      }
-      /* If no past editions yet, show the upcoming as the inaugural node */
-      if (past.length === 0 && upcoming) {
-        var node = document.createElement('div');
-        node.className = 'ev-t-node';
-        node.innerHTML =
-          '<div class="ev-t-dot" style="color:' + CAT_COLOR + ';background:' + CAT_COLOR + '"></div>' +
-          '<div class="ev-t-year" style="color:' + CAT_COLOR + '">2026 — Inaugural Edition</div>' +
-          '<h4>' + upcoming.title + '</h4>' +
-          '<p>' + upcoming.description + '</p>';
-        timelineEl.appendChild(node);
+      if (past.length === 0) {
+        /* No past editions yet — show inaugural message */
+        if (emptyEl) emptyEl.style.display = 'block';
+        /* Still render the upcoming as a special node */
+        if (upcoming) {
+          var node = document.createElement('div');
+          node.className = 'ev-t-node';
+          node.innerHTML =
+            '<div class="ev-t-dot" style="color:' + CAT_COLOR + ';background:' + CAT_COLOR + '"></div>' +
+            '<div class="ev-t-year" style="color:' + CAT_COLOR + '">2026 — Inaugural Edition</div>' +
+            '<h4>' + upcoming.title + '</h4>' +
+            '<p>' + upcoming.description + '</p>';
+          timelineEl.appendChild(node);
+        }
       } else {
-        past.forEach(function(ev) {
+        /* Render past editions */
+        if (eyebrowEl) eyebrowEl.textContent = past[past.length - 1].year + ' \u2192 ' + past[0].year;
+        past.forEach(function (ev) {
           var node = document.createElement('div');
           node.className = 'ev-t-node';
           node.innerHTML =
@@ -191,17 +217,16 @@
       }
     }
 
-    /* Photo strip — placeholder tiles per past year */
+    /* ---- Photo strip (placeholder) ---- */
     var photoEl = document.getElementById('ev-photo-strip');
     if (photoEl) {
-      var years = evGetPast(DATA).map(function(e){ return e.year; }).filter(function(v,i,a){ return a.indexOf(v)===i; }).slice(0,5);
-      if (years.length === 0 && upcoming) { years = [upcoming.year]; }
-      years.forEach(function(y) {
+      var count = Math.max(past.length, 1);
+      for (var i = 0; i < Math.min(count, 5); i++) {
         var tile = document.createElement('div');
         tile.className = 'ev-photo-tile';
-        tile.textContent = 'Photo — ' + y;
+        tile.textContent = past[i] ? 'Photo — ' + past[i].year : 'Coming Aug 2026';
         photoEl.appendChild(tile);
-      });
+      }
     }
   })();
   </script>
