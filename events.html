@@ -464,14 +464,11 @@
         var total = evTotalInstances(data);
         var years = data.length ? data.reduce(function (mn, e) { return Math.min(mn, e.year); }, 9999) : 2018;
 
-        var isTechnizen = (k === 'technizen');
-
-        /* Technizen card toggles the inline sub-event grid; others are links */
-        var card = document.createElement(isTechnizen ? 'div' : 'a');
+        /* All 6 cards link to their detail pages */
+        var card = document.createElement('a');
         card.className = 'ev-cat-card';
-        if (isTechnizen) {
-          card.setAttribute('data-open-master', 'TECHNIZEN');
-          card.style.cursor = 'pointer';
+        if (k === 'technizen') {
+          card.setAttribute('href', 'events/technizen.html');
         } else if (cat.url) {
           card.setAttribute('href', cat.url);
         }
@@ -493,21 +490,7 @@
         grid.appendChild(card);
       });
 
-      /* Technizen card click → show inline sub-event grid (script.js handles hash) */
-      grid.querySelectorAll('[data-open-master]').forEach(function (card) {
-        card.addEventListener('click', function () {
-          var masterName = card.getAttribute('data-open-master') || 'TECHNIZEN';
-          var masterView = document.getElementById('events-master-view');
-          var subView    = document.getElementById('events-sub-view');
-          var titleEl    = document.getElementById('sub-view-title');
-          if (!masterView || !subView) return;
-          masterView.style.display = 'none';
-          subView.style.display    = 'block';
-          if (titleEl) titleEl.textContent = masterName;
-          window.location.hash = masterName.toLowerCase();
-          window.scrollTo({ top: subView.offsetTop - 90, behavior: 'smooth' });
-        });
-      });
+
     })();
   </script>
 </body>
