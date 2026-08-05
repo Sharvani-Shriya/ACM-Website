@@ -113,9 +113,14 @@
 
       <!-- Grouped Vertical Bar Chart -->
       <div class="ev-chart-card">
-        <div class="ev-section-intro" style="text-align:left;margin-bottom:var(--space-md);">
-          <span class="eyebrow" style="color:var(--gold);">Eight years, one chapter</span>
-          <h2 style="font-size:var(--text-h3);margin-top:4px;">Activity by year</h2>
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:var(--space-md);">
+          <div class="ev-section-intro" style="text-align:left;margin-bottom:0;">
+            <span class="eyebrow" style="color:var(--gold);">Eight years, one chapter</span>
+            <h2 style="font-size:var(--text-h3);margin-top:4px;">Activity by year</h2>
+          </div>
+          <div id="ev-chart-hover-info" class="ev-chart-hover-pill">
+            <span class="ev-hover-hint">💡 Hover over any bar for details</span>
+          </div>
         </div>
         <div class="ev-chart-canvas-wrap">
           <canvas id="activityChart"></canvas>
@@ -304,9 +309,11 @@
             label: cat.name,
             data: EV_CHART_DATA.map(function (row) { return row[k] || 0; }),
             backgroundColor: cat.color,
-            borderColor: cat.color,
-            borderWidth: 1,
-            borderRadius: 3
+            borderColor: '#ffffff',
+            borderWidth: 1.5,
+            borderRadius: 4,
+            hoverBorderColor: cat.color,
+            hoverBorderWidth: 2
           };
         });
 
@@ -321,12 +328,39 @@
             responsive: true,
             maintainAspectRatio: false,
             animation: {
-              duration: 1200,
+              duration: 1000,
               easing: 'easeOutQuart'
             },
+            onHover: function (event, activeElements) {
+              var hoverInfo = document.getElementById('ev-chart-hover-info');
+              if (!hoverInfo) return;
+
+              if (activeElements && activeElements.length > 0) {
+                var index = activeElements[0].index;
+                var year = years[index];
+                var row = EV_CHART_DATA[index];
+
+                var parts = [];
+                catKeys.forEach(function (k) {
+                  var v = row[k] || 0;
+                  if (v > 0) {
+                    var cat = EV_CATEGORIES[k];
+                    parts.push('<span style="color:' + cat.color + ';font-weight:700;">' + v + ' ' + cat.name + '</span>');
+                  }
+                });
+
+                hoverInfo.innerHTML = '<strong>' + year + ':</strong> ' + (parts.join(' · ') || 'No events');
+                hoverInfo.style.borderColor = 'rgba(20, 80, 158, 0.35)';
+                hoverInfo.style.boxShadow = '0 4px 14px rgba(20, 80, 158, 0.12)';
+              } else {
+                hoverInfo.innerHTML = '<span class="ev-hover-hint">💡 Hover over any bar for details</span>';
+                hoverInfo.style.borderColor = 'var(--line)';
+                hoverInfo.style.boxShadow = '0 2px 10px rgba(11, 31, 77, 0.06)';
+              }
+            },
             interaction: {
-              mode: 'index',
-              intersect: false
+              mode: 'nearest',
+              intersect: true
             },
             plugins: {
               legend: {
@@ -343,11 +377,22 @@
                 }
               },
               tooltip: {
-                backgroundColor: 'rgba(11, 31, 77, 0.92)',
-                titleFont: { family: "'IBM Plex Mono', monospace", size: 13, weight: 'bold' },
-                bodyFont: { family: "'Source Sans 3', sans-serif", size: 12 },
-                padding: 12,
-                cornerRadius: 8
+                enabled: true,
+                mode: 'nearest',
+                intersect: true,
+                position: 'nearest',
+                yAlign: 'bottom',
+                caretPadding: 6,
+                displayColors: false,
+                backgroundColor: 'rgba(11, 31, 77, 0.95)',
+                padding: { top: 5, bottom: 5, left: 10, right: 10 },
+                cornerRadius: 6,
+                callbacks: {
+                  title: function () { return ''; },
+                  label: function (context) {
+                    return context.dataset.label + ': ' + context.parsed.y;
+                  }
+                }
               }
             },
             scales: {
@@ -360,6 +405,7 @@
               },
               y: {
                 beginAtZero: true,
+                grace: '20%',
                 title: {
                   display: true,
                   text: 'Number of Activities',
