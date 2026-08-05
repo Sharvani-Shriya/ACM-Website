@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Events prototype — ACM Student Chapter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0B1E3D; --navy-2:#132A52; --cream:#FAF7EF; --paper:#FFFFFF;
+    --ink:#1B2338; --muted:#5B6478; --line:#E6E2D6; --gold:#C6952F;
+    --c-technizen:#C6952F; --c-hoc:#2E7D6B; --c-outreach:#B5502F;
+    --c-guest:#6B4A8A; --c-intra:#2C4E7C; --c-workshop:#6B7F3A;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--cream);color:var(--ink);font-family:'Source Sans 3',sans-serif;}
+  .container{max-width:1120px;margin:0 auto;padding:0 24px;}
+  h1,h2,h3{font-family:'Playfair Display',serif;margin:0;color:var(--navy);}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);}
+  .proto-note{background:#1B2338;color:#EDEAE0;font-family:'IBM Plex Mono',monospace;font-size:.78rem;text-align:center;padding:10px 16px;letter-spacing:.02em;}
+
+  /* IN-PAGE NAV */
+  .proto-nav{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line);padding:10px 0;}
+  .proto-nav .container{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;}
+  .proto-nav a{font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.04em;text-transform:uppercase;color:var(--navy);text-decoration:none;border-bottom:2px solid transparent;padding-bottom:4px;}
+  .proto-nav a:hover{border-color:var(--gold);}
+
+  /* HERO */
+  .hero{background:var(--navy);color:#fff;padding:64px 0 56px;text-align:center;}
+  .hero .eyebrow{color:var(--gold);}
+  .hero h1{color:#fff;font-size:2.6rem;margin:10px 0 12px;}
+  .hero p{color:#C9D0E0;max-width:560px;margin:0 auto;font-size:1.02rem;line-height:1.6;}
+
+  /* STATS STRIP */
+  .stats{padding:0;margin-top:-34px;}
+  .stats-grid{background:var(--paper);border:1px solid var(--line);border-radius:12px;display:grid;grid-template-columns:repeat(4,1fr);box-shadow:0 10px 30px rgba(11,30,61,.08);}
+  .stat{padding:26px 18px;text-align:center;border-right:1px solid var(--line);}
+  .stat:last-child{border-right:none;}
+  .stat .num{font-family:'IBM Plex Mono',monospace;font-size:1.9rem;font-weight:500;color:var(--navy);}
+  .stat .label{font-size:.82rem;color:var(--muted);margin-top:4px;}
+
+  /* SECTION TITLE */
+  .section{padding:72px 0;}
+  .section-title{text-align:center;margin-bottom:36px;}
+  .section-title .rule{width:48px;height:2px;background:var(--gold);margin:14px auto 0;}
+  .section-title h2{font-size:1.9rem;}
+  .section-title p{color:var(--muted);margin-top:10px;font-size:.98rem;}
+
+  /* CHART */
+  .chart-card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:32px 28px 24px;}
+  .chart-bars{display:flex;align-items:flex-end;justify-content:space-between;height:200px;gap:10px;border-bottom:1px solid var(--line);padding-bottom:0;}
+  .bar-col{flex:1;display:flex;flex-direction:column-reverse;align-items:stretch;}
+  .seg{width:100%;}
+  .bar-labels{display:flex;justify-content:space-between;margin-top:10px;gap:10px;}
+  .bar-labels span{flex:1;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--muted);}
+  .legend{display:flex;flex-wrap:wrap;gap:16px 22px;margin-top:26px;justify-content:center;}
+  .legend-item{display:flex;align-items:center;gap:7px;font-size:.82rem;color:var(--ink);}
+  .legend-swatch{width:11px;height:11px;border-radius:2px;display:inline-block;}
+
+  /* MASTER GRID */
+  .event-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .ev-card{background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden;position:relative;}
+  .ev-card .swatch{height:6px;}
+  .ev-card .body{padding:22px 20px 24px;}
+  .ev-card .icon-badge{width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:.75rem;font-weight:500;color:#fff;margin-bottom:14px;}
+  .ev-card h3{font-size:1.15rem;color:var(--navy);margin-bottom:6px;}
+  .ev-card p{font-size:.86rem;color:var(--muted);line-height:1.5;margin:0 0 14px;}
+  .ev-card .meta{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--gold);letter-spacing:.03em;}
+  .card-badge{position:absolute;top:14px;right:14px;background:var(--gold);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:.6rem;padding:4px 10px;border-radius:20px;letter-spacing:.04em;text-transform:uppercase;}
+
+  /* DIVIDER BETWEEN GRID AND DETAIL MOCK */
+  .divider-note{text-align:center;padding:36px 0 0;}
+  .divider-note .tag{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);background:#EFEBDD;padding:8px 16px;border-radius:20px;}
+  .example-flag{text-align:center;margin-bottom:22px;}
+  .example-flag span{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;padding:6px 14px;border-radius:20px;}
+  .flag-off{background:#EFEBDD;color:var(--muted);}
+  .flag-on{background:#FBF3E4;color:var(--gold);border:1px solid #EBD9AE;}
+
+  /* DETAIL PAGE MOCK */
+  .detail-wrap{background:var(--paper);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-top:0;}
+  .detail-header{background:var(--navy-2);color:#fff;padding:40px 40px 34px;}
+  .detail-header .eyebrow{color:#8FB4E8;}
+  .detail-header h2{color:#fff;font-size:2rem;margin:8px 0 10px;}
+  .detail-header p{color:#C9D0E0;max-width:520px;font-size:.95rem;line-height:1.6;}
+  .detail-stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);}
+  .detail-stats .stat{border-right:1px solid var(--line);padding:22px 16px;}
+  .detail-stats .stat:last-child{border-right:none;}
+
+  /* SPOTLIGHT — the conditional zone */
+  .spotlight{background:#FBF3E4;border:1px solid #EBD9AE;border-radius:14px;margin:32px 40px 0;padding:26px 28px;}
+  .spotlight-badge{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--gold);padding:5px 12px;border-radius:20px;margin-bottom:16px;}
+  .spotlight-grid{display:grid;grid-template-columns:120px 1fr;gap:22px;align-items:start;}
+  .spotlight-photo{width:120px;height:120px;border-radius:10px;background:linear-gradient(135deg,#E6E2D6,#D8D3C3);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:.62rem;color:var(--muted);text-align:center;padding:6px;}
+  .spotlight-info h3{font-size:1.35rem;color:var(--navy);margin:0 0 4px;}
+  .spotlight-info .role{font-size:.85rem;color:var(--muted);margin:0 0 16px;}
+  .spotlight-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px 28px;margin-bottom:20px;}
+  .sf b{display:block;font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin-bottom:2px;font-weight:500;}
+  .sf span{font-size:.88rem;color:var(--ink);}
+  .reg-btn{display:inline-block;background:var(--navy);color:#fff;font-weight:600;font-size:.85rem;padding:11px 24px;border-radius:8px;text-decoration:none;}
+  .reg-btn:hover{background:var(--navy-2);}
+
+  .timeline{padding:40px;}
+  .timeline-head{text-align:center;margin-bottom:34px;}
+  .t-line{position:relative;max-width:780px;margin:0 auto;}
+  .t-line::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--line);transform:translateX(-50%);}
+  .t-node{position:relative;width:50%;padding:0 34px 40px;}
+  .t-node:nth-child(odd){left:0;text-align:right;}
+  .t-node:nth-child(even){left:50%;text-align:left;}
+  .t-dot{position:absolute;top:2px;width:11px;height:11px;border-radius:50%;border:2px solid var(--paper);}
+  .t-node:nth-child(odd) .t-dot{right:-6px;}
+  .t-node:nth-child(even) .t-dot{left:-6px;}
+  .t-year{font-family:'IBM Plex Mono',monospace;font-size:.78rem;letter-spacing:.05em;margin-bottom:4px;}
+  .t-node h4{font-family:'Source Sans 3',sans-serif;font-weight:700;font-size:.98rem;color:var(--navy);margin:0 0 4px;}
+  .t-node p{font-size:.84rem;color:var(--muted);margin:0;line-height:1.5;}
+  .t-more{text-align:center;font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:var(--muted);margin-top:4px;}
+
+  .hoc .t-dot{background:var(--c-hoc);box-shadow:0 0 0 1px var(--c-hoc);}
+  .hoc .t-year{color:var(--c-hoc);}
+  .guest .t-dot{background:var(--c-guest);box-shadow:0 0 0 1px var(--c-guest);}
+  .guest .t-year{color:var(--c-guest);}
+
+  .photo-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;padding:0 40px 40px;}
+  .ph{aspect-ratio:4/3;border-radius:8px;background:linear-gradient(135deg,#E6E2D6,#D8D3C3);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--muted);text-align:center;padding:6px;}
+
+  @media (max-width:860px){
+    .stats-grid{grid-template-columns:repeat(2,1fr);}
+    .stat:nth-child(2){border-right:none;}
+    .event-grid{grid-template-columns:repeat(2,1fr);}
+    .detail-stats{grid-template-columns:1fr;}
+    .detail-stats .stat{border-right:none;border-bottom:1px solid var(--line);}
+    .photo-strip{grid-template-columns:repeat(3,1fr);}
+    .spotlight-grid{grid-template-columns:1fr;}
+    .spotlight-photo{width:100%;height:150px;}
+  }
+  @media (max-width:560px){
+    .event-grid{grid-template-columns:1fr;}
+    .t-node{width:100%;left:0 !important;text-align:left !important;padding:0 0 30px 30px;}
+    .t-line::before{left:5px;}
+    .t-node .t-dot{left:0 !important;right:auto !important;}
+    .photo-strip{grid-template-columns:repeat(2,1fr);}
+    .spotlight-fields{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="proto-note">PROTOTYPE — placeholder copy, stats and photos. Swap in real style.css tokens, images and data before shipping.</div>
+
+<nav class="proto-nav">
+  <div class="container">
+    <a href="#grid">Master grid</a>
+    <a href="#hoc-example">Hour of Code — no live instance</a>
+    <a href="#guest-example">Guest Lectures — live instance open</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="eyebrow">ACM Student Chapter · Dept. of CSE · 2018–2026</div>
+    <h1>Events</h1>
+    <p>Eight years of school outreach, guest lectures, technical contests and our flagship fest — all in one place.</p>
+  </div>
+</header>
+
+<div class="container stats">
+  <div class="stats-grid">
+    <div class="stat"><div class="num">142</div><div class="label">Events since 2018</div></div>
+    <div class="stat"><div class="num">27</div><div class="label">Schools visited</div></div>
+    <div class="stat"><div class="num">38</div><div class="label">Guest lectures hosted</div></div>
+    <div class="stat"><div class="num">9</div><div class="label">Years of activity</div></div>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div class="section-title">
+      <span class="eyebrow">Eight years, one chapter</span>
+      <h2>Activity by year</h2>
+      <div class="rule"></div>
+      <p>Every category, every year — the story builds up to Technizen in 2026.</p>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-bars">
+        <div class="bar-col"><div class="seg" style="height:16px;background:var(--c-hoc)"></div><div class="seg" style="height:8px;background:var(--c-outreach)"></div><div class="seg" style="height:16px;background:var(--c-guest)"></div><div class="seg" style="height:8px;background:var(--c-intra)"></div></div>
+        <div class="bar-col"><div class="seg" style="height:24px;background:var(--c-hoc)"></div><div class="seg" style="height:16px;background:var(--c-outreach)"></div><div class="seg" style="height:16px;background:var(--c-guest)"></div><div class="seg" style="height:16px;background:var(--c-intra)"></div><div class="seg" style="height:8px;background:var(--c-workshop)"></div></div>
+        <div class="bar-col"><div class="seg" style="height:8px;background:var(--c-hoc)"></div><div class="seg" style="height:8px;background:var(--c-outreach)"></div><div class="seg" style="height:24px;background:var(--c-guest)"></div></div>
+        <div class="bar-col"><div class="seg" style="height:16px;background:var(--c-hoc)"></div><div class="seg" style="height:16px;background:var(--c-outreach)"></div><div class="seg" style="height:24px;background:var(--c-guest)"></div><div class="seg" style="height:8px;background:var(--c-intra)"></div><div class="seg" style="height:8px;background:var(--c-workshop)"></div></div>
+        <div class="bar-col"><div class="seg" style="height:24px;background:var(--c-hoc)"></div><div class="seg" style="height:24px;background:var(--c-outreach)"></div><div class="seg" style="height:32px;background:var(--c-guest)"></div><div class="seg" style="height:16px;background:var(--c-intra)"></div><div class="seg" style="height:16px;background:var(--c-workshop)"></div></div>
+        <div class="bar-col"><div class="seg" style="height:32px;background:var(--c-hoc)"></div><div class="seg" style="height:24px;background:var(--c-outreach)"></div><div class="seg" style="height:32px;background:var(--c-guest)"></div><div class="seg" style="height:24px;background:var(--c-intra)"></div><div class="seg" style="height:16px;background:var(--c-workshop)"></div></div>
+        <div class="bar-col"><div class="seg" style="height:32px;background:var(--c-hoc)"></div><div class="seg" style="height:32px;background:var(--c-outreach)"></div><div class="seg" style="height:40px;background:var(--c-guest)"></div><div class="seg" style="height:24px;background:var(--c-intra)"></div><div class="seg" style="height:24px;background:var(--c-workshop)"></div></div>
+        <div class="bar-col"><div class="seg" style="height:40px;background:var(--c-hoc)"></div><div class="seg" style="height:32px;background:var(--c-outreach)"></div><div class="seg" style="height:40px;background:var(--c-guest)"></div><div class="seg" style="height:32px;background:var(--c-intra)"></div><div class="seg" style="height:24px;background:var(--c-workshop)"></div></div>
+        <div class="bar-col"><div class="seg" style="height:40px;background:var(--c-hoc)"></div><div class="seg" style="height:40px;background:var(--c-outreach)"></div><div class="seg" style="height:48px;background:var(--c-guest)"></div><div class="seg" style="height:32px;background:var(--c-intra)"></div><div class="seg" style="height:32px;background:var(--c-workshop)"></div><div class="seg" style="height:8px;background:var(--c-technizen)"></div></div>
+      </div>
+      <div class="bar-labels">
+        <span>2018</span><span>2019</span><span>2020</span><span>2021</span><span>2022</span><span>2023</span><span>2024</span><span>2025</span><span>2026</span>
+      </div>
+      <div class="legend">
+        <div class="legend-item"><span class="legend-swatch" style="background:var(--c-hoc)"></span>Hour of Code</div>
+        <div class="legend-item"><span class="legend-swatch" style="background:var(--c-outreach)"></span>Outreach programs</div>
+        <div class="legend-item"><span class="legend-swatch" style="background:var(--c-guest)"></span>Guest lectures</div>
+        <div class="legend-item"><span class="legend-swatch" style="background:var(--c-intra)"></span>Intra-college tech events</div>
+        <div class="legend-item"><span class="legend-swatch" style="background:var(--c-workshop)"></span>Workshops</div>
+        <div class="legend-item"><span class="legend-swatch" style="background:var(--c-technizen)"></span>Technizen</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="grid" style="padding-top:0;">
+  <div class="container">
+    <div class="section-title">
+      <span class="eyebrow">All events</span>
+      <h2>Explore by category</h2>
+      <div class="rule"></div>
+      <p>The gold "Open" pill means that category has a live instance right now — click through and you'll land on a spotlight banner, not just history.</p>
+    </div>
+
+    <div class="event-grid">
+      <div class="ev-card"><div class="card-badge">● Open</div><div class="swatch" style="background:var(--c-technizen)"></div>
+        <div class="body"><div class="icon-badge" style="background:var(--c-technizen)">TZ</div>
+          <h3>Technizen</h3><p>Our annual flagship technical fest — six competitive sub-events in one weekend.</p>
+          <div class="meta">1 edition · launched 2026</div></div></div>
+
+      <div class="ev-card"><div class="swatch" style="background:var(--c-hoc)"></div>
+        <div class="body"><div class="icon-badge" style="background:var(--c-hoc)">HC</div>
+          <h3>Hour of Code</h3><p>Volunteer visits to local schools introducing programming to young students.</p>
+          <div class="meta">27 schools · since 2018</div></div></div>
+
+      <div class="ev-card"><div class="swatch" style="background:var(--c-outreach)"></div>
+        <div class="body"><div class="icon-badge" style="background:var(--c-outreach)">OP</div>
+          <h3>Outreach programs</h3><p>Community-facing initiatives that take CSE knowledge beyond campus.</p>
+          <div class="meta">24 programs · since 2018</div></div></div>
+
+      <div class="ev-card"><div class="card-badge">● Open</div><div class="swatch" style="background:var(--c-guest)"></div>
+        <div class="body"><div class="icon-badge" style="background:var(--c-guest)">GL</div>
+          <h3>Guest lectures</h3><p>Industry and academic speakers hosted for the department each year.</p>
+          <div class="meta">38 speakers · since 2018</div></div></div>
+
+      <div class="ev-card"><div class="card-badge">● Open</div><div class="swatch" style="background:var(--c-intra)"></div>
+        <div class="body"><div class="icon-badge" style="background:var(--c-intra)">IT</div>
+          <h3>Intra-college tech events</h3><p>Coding contests, quizzes and hackathons run within the college.</p>
+          <div class="meta">19 events · since 2018</div></div></div>
+
+      <div class="ev-card"><div class="swatch" style="background:var(--c-workshop)"></div>
+        <div class="body"><div class="icon-badge" style="background:var(--c-workshop)">WS</div>
+          <h3>Workshops</h3><p>Hands-on sessions building practical skills outside the regular curriculum.</p>
+          <div class="meta">14 workshops · since 2019</div></div></div>
+    </div>
+
+    <div class="divider-note"><span class="tag">↓ two contrasting examples of what a card opens into</span></div>
+  </div>
+</section>
+
+<!-- EXAMPLE 1 — no live instance, history only -->
+<section class="section" id="hoc-example" style="padding-top:0;">
+  <div class="container">
+    <div class="example-flag"><span class="flag-off">No live instance — spotlight zone is hidden, template shows only history</span></div>
+    <div class="detail-wrap">
+      <div class="detail-header">
+        <div class="eyebrow">Event category</div>
+        <h2>Hour of Code</h2>
+        <p>Volunteer visits to schools around Guntur, introducing programming fundamentals to students who've never coded before.</p>
+      </div>
+      <div class="detail-stats">
+        <div class="stat"><div class="num">27</div><div class="label">Schools visited</div></div>
+        <div class="stat"><div class="num">1,400+</div><div class="label">Students introduced to code</div></div>
+        <div class="stat"><div class="num">9</div><div class="label">Years running</div></div>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-head">
+          <span class="eyebrow" style="color:var(--c-hoc);">2018 → 2026</span>
+          <h2 style="font-size:1.5rem;margin-top:6px;">Year by year</h2>
+        </div>
+        <div class="t-line hoc">
+          <div class="t-node"><div class="t-dot"></div><div class="t-year">2018</div><h4>Zilla Parishad High School, Chowdavaram</h4><p>First outing — 2 volunteers, block-based coding for grade 8.</p></div>
+          <div class="t-node"><div class="t-dot"></div><div class="t-year">2020</div><h4>3 schools, online format</h4><p>Shifted to virtual sessions; smaller batches, still reached every school on the list.</p></div>
+          <div class="t-node"><div class="t-dot"></div><div class="t-year">2022</div><h4>6 schools in one week</h4><p>First multi-school sprint, 40+ volunteer hours logged.</p></div>
+          <div class="t-node"><div class="t-dot"></div><div class="t-year">2024</div><h4>Partnered with district education office</h4><p>Formal tie-up widened reach to two neighbouring mandals.</p></div>
+          <div class="t-node"><div class="t-dot"></div><div class="t-year">2026</div><h4>27th school reached</h4><p>Milestone visit; feeds into this year's Technizen outreach segment.</p></div>
+        </div>
+        <div class="t-more">+ 4 more years on the live page</div>
+      </div>
+
+      <div class="photo-strip">
+        <div class="ph">Photo — 2018</div>
+        <div class="ph">Photo — 2020</div>
+        <div class="ph">Photo — 2022</div>
+        <div class="ph">Photo — 2024</div>
+        <div class="ph">Photo — 2026</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXAMPLE 2 — live instance, spotlight banner shown -->
+<section class="section" id="guest-example" style="padding-top:0;">
+  <div class="container">
+    <div class="example-flag"><span class="flag-on">Live instance open — spotlight banner appears above the timeline</span></div>
+    <div class="detail-wrap">
+      <div class="detail-header">
+        <div class="eyebrow">Event category</div>
+        <h2>Guest Lectures</h2>
+        <p>Industry professionals and academics invited to speak with CSE students on emerging topics.</p>
+      </div>
+
+      <!-- SPOTLIGHT — the conditional zone, only renders because an instance is upcoming -->
+      <div class="spotlight">
+        <span class="spotlight-badge">Open · Register Now</span>
+        <div class="spotlight-grid">
+          <div class="spotlight-photo">Photo —<br>Speaker</div>
+          <div class="spotlight-info">
+            <h3>Dr. Anjali Rao</h3>
+            <p class="role">Principal Engineer, Systems Group — Guest Speaker</p>
+            <div class="spotlight-fields">
+              <div class="sf"><b>Topic</b><span>Cloud Native Systems at Scale</span></div>
+              <div class="sf"><b>Date</b><span>14 Aug 2026</span></div>
+              <div class="sf"><b>Venue</b><span>Seminar Hall 2, CSE Block</span></div>
+              <div class="sf"><b>Time</b><span>3:00 PM – 4:30 PM</span></div>
+            </div>
+            <a href="#" class="reg-btn">Register Now →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-stats" style="margin-top:32px;">
+        <div class="stat"><div class="num">38</div><div class="label">Speakers hosted</div></div>
+        <div class="stat"><div class="num">9</div><div class="label">Years running</div></div>
+        <div class="stat"><div class="num">6</div><div class="label">Departments covered</div></div>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-head">
+          <span class="eyebrow" style="color:var(--c-guest);">2018 → 2025 · past lectures</span>
+          <h2 style="font-size:1.5rem;margin-top:6px;">Previously hosted</h2>
+        </div>
+        <div class="t-line guest">
+          <div class="t-node"><div class="t-dot"></div><div class="t-year">2019</div><h4>Mr. K. Suresh — Distributed Databases</h4><p>First guest lecture, CSE final years, 90 attendees.</p></div>
+          <div class="t-node"><div class="t-dot"></div><div class="t-year">2021</div><h4>Dr. P. Meena — Machine Learning in Industry</h4><p>Hosted online; recorded session shared with all years.</p></div>
+          <div class="t-node"><div class="t-dot"></div><div class="t-year">2023</div><h4>Mr. R. Varma — Product Engineering at Scale</h4><p>First lecture open to all departments, not just CSE.</p></div>
+          <div class="t-node"><div class="t-dot"></div><div class="t-year">2025</div><h4>Dr. S. Iyer — Responsible AI</h4><p>Paired with a hands-on workshop the following day.</p></div>
+        </div>
+        <div class="t-more">+ 34 more lectures on the live page</div>
+      </div>
+
+      <div class="photo-strip">
+        <div class="ph">Photo — 2019</div>
+        <div class="ph">Photo — 2021</div>
+        <div class="ph">Photo — 2023</div>
+        <div class="ph">Photo — 2025</div>
+        <div class="ph">Photo — more →</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
