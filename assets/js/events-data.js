@@ -60,7 +60,7 @@ var EV_CATEGORIES = {
   workshops: {
     key: 'workshops',
     name: 'Technical Workshops',
-    abbr: 'WS',
+    abbr: 'TW',
     color: '#4a7a3d',
     cssVar: '--ev-workshop',
     slug: 'workshops',
