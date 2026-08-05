@@ -14,7 +14,7 @@ var EV_CATEGORIES = {
     cssVar: '--ev-technizen',
     slug: 'technizen',
     description: 'Our flagship annual technical fest — six competitive sub-events across one weekend.',
-    url: null,          // handled by sub-event grid toggle on events.html
+    url: 'events/technizen.html',
     openMaster: 'TECHNIZEN'
   },
   hourOfCode: {
