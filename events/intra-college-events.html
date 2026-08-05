@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intra-college Tech Events | ACM Student Chapter – Dept. of CSE, RVRJC</title>
+  <meta name="description" content="Intra-college Technical Events — coding contests, hackathons and quizzes run within R.V.R. & J.C. College by the ACM Student Chapter.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body>
+
+  <div class="top-banner">
+    <img src="../assets/images/college-banner.png" alt="R.V.R. & J.C. College of Engineering – EAPCET Code: RVJC">
+  </div>
+
+  <nav class="main-nav">
+    <div class="container nav-inner">
+      <a href="../index.html" class="nav-brand">
+        <div class="nav-brand-logo"><img src="../assets/images/acm-logo.png" alt="ACM Logo"></div>
+        <div class="nav-brand-text">
+          <div class="nav-brand-title">ACM Student Chapter</div>
+          <div class="nav-brand-subtitle">Computer Science and Engineering</div>
+        </div>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle navigation">&#9776;</button>
+      <div class="nav-links">
+        <a href="../index.html">About</a>
+        <a href="../events.html">Events</a>
+        <a href="../teams.html">Teams</a>
+        <a href="../gallery.html">Photo Gallery</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="page-hero">
+    <div class="container">
+      <div class="crumb"><a href="../events.html" style="color:var(--gold);">Events</a> / Intra-college Tech Events</div>
+      <h1>Intra-college Tech Events</h1>
+      <p>Coding contests, hackathons, and quizzes run within the college — sometimes CSE-only, sometimes open to all departments and years.</p>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+
+      <div id="ev-spotlight-zone"></div>
+      <div class="ev-detail-stats" id="ev-detail-stats"></div>
+
+      <div class="ev-timeline-wrap">
+        <div class="ev-timeline-head">
+          <span class="eyebrow" id="ev-timeline-eyebrow" style="color:var(--ev-intra);">2019 → present</span>
+          <h2>Events timeline</h2>
+        </div>
+        <div class="ev-timeline" id="ev-timeline"></div>
+      </div>
+
+      <div class="ev-photo-strip" id="ev-photo-strip"></div>
+
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>R.V.R. &amp; J.C. College of Engineering</h4>
+          <p style="max-width:360px;font-size:.88rem;line-height:1.5;margin-bottom:8px;">
+            R.V.R. &amp; J.C. College of Engineering,<br>Chandramoulipuram, Chowdavaram, Guntur,<br>Andhra Pradesh — 522019.
+          </p>
+          <p style="max-width:360px;font-size:.82rem;opacity:0.8;line-height:1.4;">
+            An autonomous institution affiliated to Acharya Nagarjuna University, sponsored by Nagarjuna Education Society.
+          </p>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <a href="../index.html">About the Chapter</a>
+          <a href="../events.html">Events</a>
+          <a href="../teams.html">Teams</a>
+          <a href="../gallery.html">Photo Gallery</a>
+          <a href="https://rvrjcce.ac.in" target="_blank" rel="noopener">College Website</a>
+        </div>
+        <div>
+          <h4>Event Categories</h4>
+          <a href="../events.html">Technizen</a>
+          <a href="hour-of-code.html">Hour of Code</a>
+          <a href="outreach-programs.html">Outreach Programs</a>
+          <a href="guest-lectures.html">Guest Lectures</a>
+          <a href="intra-college-events.html">Intra-college Tech Events</a>
+          <a href="workshops.html">Technical Workshops</a>
+        </div>
+        <div>
+          <h4>Get in Touch</h4>
+          <a href="https://rvrjcce.ac.in/CSE/" target="_blank" rel="noopener">Dept. of CSE</a>
+        </div>
+      </div>
+      <div class="footer-bottom">&copy; 2026 ACM Student Chapter, Dept. of CSE — R.V.R. &amp; J.C. College of Engineering (Autonomous). All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/events-data.js"></script>
+  <script src="../assets/js/script.js"></script>
+  <script>
+  (function () {
+    var CAT_KEY   = 'intraCollege';
+    var CAT_COLOR = EV_CATEGORIES[CAT_KEY].color;
+    var DATA      = EV_INTRA_COLLEGE;
+
+    var past = evGetPast(DATA);
+
+    var stats = [
+      { num: DATA.length,  label: 'Events since 2019' },
+      { num: '500+',       label: 'Total participants' },
+      { num: 8,            label: 'Years running' }
+    ];
+    var statsEl = document.getElementById('ev-detail-stats');
+    if (statsEl) {
+      stats.forEach(function(s) {
+        var item = document.createElement('div');
+        item.className = 'ev-stat-item';
+        item.innerHTML = '<span class="ev-stat-num">' + s.num + '</span><span class="ev-stat-label">' + s.label + '</span>';
+        statsEl.appendChild(item);
+      });
+    }
+
+    var upcoming = evGetUpcoming(DATA);
+    var spotlightEl = document.getElementById('ev-spotlight-zone');
+    if (upcoming && spotlightEl) {
+      var fieldsHtml = Object.keys(upcoming.fields).map(function(k) {
+        return '<div class="ev-sf"><b>' + k + '</b><span>' + upcoming.fields[k] + '</span></div>';
+      }).join('');
+      spotlightEl.innerHTML =
+        '<div class="ev-spotlight">' +
+          '<span class="ev-spotlight-badge"><span class="pulse"></span> Open &middot; Register Now</span>' +
+          '<div class="ev-spotlight-grid">' +
+            '<div class="ev-spotlight-photo">' + (upcoming.photo ? '<img src="../' + upcoming.photo + '" alt="">' : 'Event<br>Poster') + '</div>' +
+            '<div class="ev-spotlight-info">' +
+              '<h3>' + upcoming.title + '</h3>' +
+              '<p class="role">' + upcoming.description + '</p>' +
+              '<div class="ev-spotlight-fields">' + fieldsHtml + '</div>' +
+              '<a href="' + upcoming.registerUrl + '" class="ev-reg-btn" target="_blank" rel="noopener">Register Now &rarr;</a>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+    }
+
+    var timelineEl = document.getElementById('ev-timeline');
+    var eyebrowEl  = document.getElementById('ev-timeline-eyebrow');
+    if (timelineEl && past.length) {
+      if (eyebrowEl) eyebrowEl.textContent = past[past.length-1].year + ' \u2192 ' + past[0].year;
+      past.forEach(function(ev) {
+        var node = document.createElement('div');
+        node.className = 'ev-t-node';
+        node.innerHTML =
+          '<div class="ev-t-dot" style="color:' + CAT_COLOR + ';background:' + CAT_COLOR + '"></div>' +
+          '<div class="ev-t-year" style="color:' + CAT_COLOR + '">' + ev.year + '</div>' +
+          '<h4>' + ev.title + '</h4>' +
+          '<p>' + ev.description + '</p>';
+        timelineEl.appendChild(node);
+      });
+    }
+
+    var photoEl = document.getElementById('ev-photo-strip');
+    if (photoEl) {
+      var years = past.map(function(e){ return e.year; }).filter(function(v,i,a){ return a.indexOf(v)===i; }).slice(0,5);
+      years.forEach(function(y) {
+        var tile = document.createElement('div');
+        tile.className = 'ev-photo-tile';
+        tile.textContent = 'Photo — ' + y;
+        photoEl.appendChild(tile);
+      });
+    }
+  })();
+  </script>
+</body>
+</html>

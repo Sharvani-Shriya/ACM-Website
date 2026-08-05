@@ -4,7 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Events | ACM Student Chapter â€” Dept. of CSE, RVRJC</title>
+  <title>Events | ACM Student Chapter – Dept. of CSE, RVRJC</title>
+  <meta name="description" content="Explore all events hosted by the ACM Student Chapter, Dept. of CSE at R.V.R. & J.C. College — Technizen, Hour of Code, Guest Lectures, Outreach, Workshops and more.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@500&display=swap"
@@ -15,7 +16,7 @@
 <body>
 
   <div class="top-banner">
-    <img src="assets/images/college-banner.png" alt="R.V.R. & J.C. College of Engineering â€” EAPCET Code: RVJC">
+    <img src="assets/images/college-banner.png" alt="R.V.R. & J.C. College of Engineering – EAPCET Code: RVJC">
   </div>
 
   <nav class="main-nav">
@@ -39,35 +40,71 @@
 
   <header class="page-hero">
     <div class="container">
-      <div class="crumb">Home / Events</div>
+      <div class="crumb">ACM Student Chapter · 2018–2026</div>
       <h1>Events</h1>
-      <p>Technical fests, contests and symposiums hosted by the ACM Student Chapter</p>
+      <p>Eight years of school outreach, guest lectures, technical contests and our flagship fest — all in one place.</p>
     </div>
   </header>
 
   <!-- ===================== MASTER EVENT GRID ===================== -->
   <section class="section" id="events-master-view">
     <div class="container">
-      <div class="section-title">
-        <h2>Signature Event</h2>
-        <div class="rule"></div>
-      </div>
 
-      <div class="event-master-grid">
-
-        <div class="event-master-card" data-open-master="TECHNIZEN">
-          <picture>
-            <source media="(max-width: 768px)" srcset="assets/images/mobile-responsive/untitled-10.png">
-            <img src="assets/images/Technizen banner.png" alt="TECHNIZEN 2K26 Flagship Fest">
-          </picture>
-          <div class="event-master-hover-overlay">
-            <span class="btn">View events</span>
-          </div>
+      <!-- Stats Strip -->
+      <div class="ev-stats-strip" id="ev-master-stats">
+        <div class="ev-stat-item">
+          <span class="ev-stat-num" id="ev-total-count">—</span>
+          <span class="ev-stat-label">Events since 2018</span>
         </div>
-
-
-
+        <div class="ev-stat-item">
+          <span class="ev-stat-num" id="ev-schools-count">27</span>
+          <span class="ev-stat-label">Schools visited</span>
+        </div>
+        <div class="ev-stat-item">
+          <span class="ev-stat-num" id="ev-guests-count">—</span>
+          <span class="ev-stat-label">Guest lectures hosted</span>
+        </div>
+        <div class="ev-stat-item">
+          <span class="ev-stat-num">9</span>
+          <span class="ev-stat-label">Years of activity</span>
+        </div>
       </div>
+
+      <!-- Stacked Bar Chart -->
+      <div class="ev-chart-card">
+        <div class="ev-section-intro" style="text-align:left;margin-bottom:var(--space-md);">
+          <span class="eyebrow" style="color:var(--gold);">Eight years, one chapter</span>
+          <h2 style="font-size:var(--text-h3);margin-top:4px;">Activity by year</h2>
+        </div>
+        <div class="ev-chart-wrap" id="ev-chart-bars">
+          <!-- Rendered by JS -->
+        </div>
+        <div class="ev-bar-labels" id="ev-chart-labels">
+          <!-- Rendered by JS -->
+        </div>
+        <div class="ev-legend" id="ev-chart-legend">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+
+      <!-- 6-Card Category Grid -->
+      <div class="ev-section-intro">
+        <span class="eyebrow">All events</span>
+        <h2>Explore by category</h2>
+        <p>The gold "Open" pill marks a category with a currently upcoming instance — click through to see details and register.</p>
+      </div>
+
+      <div class="ev-cat-grid" id="ev-cat-grid">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- Divider before Technizen sub-grid -->
+      <div style="margin-top:var(--space-xl);text-align:center;padding-top:var(--space-xl);border-top:1px solid var(--line);">
+        <span style="font-family:var(--font-mono);font-size:var(--text-xs);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);">
+          ↓ Click the Technizen card above to explore this year's sub-events
+        </span>
+      </div>
+
     </div>
   </section>
 
@@ -171,9 +208,6 @@
 
 
 
-
-
-
   <footer class="site-footer">
     <div class="container">
       <div class="footer-grid">
@@ -198,13 +232,13 @@
           <a href="https://rvrjcce.ac.in" target="_blank" rel="noopener">College Website</a>
         </div>
         <div>
-          <h4>Our Events</h4>
-          <a href="events/query-masters.html">Query Masters</a>
-          <a href="events/dsa-clash.html">DSA Clash</a>
-          <a href="events/ai-innovators.html">AI Innovators Arena</a>
-          <a href="events/pixel-craft.html">Pixel Craft</a>
-          <a href="events/build-pitch.html">Build and Pitch</a>
-          <a href="events/Technoverse.html">Technoverse</a>
+          <h4>Event Categories</h4>
+          <a href="events.html#technizen">Technizen</a>
+          <a href="events/hour-of-code.html">Hour of Code</a>
+          <a href="events/outreach-programs.html">Outreach Programs</a>
+          <a href="events/guest-lectures.html">Guest Lectures</a>
+          <a href="events/intra-college-events.html">Intra-college Tech Events</a>
+          <a href="events/workshops.html">Technical Workshops</a>
         </div>
         <div>
           <h4>Get in Touch</h4>
@@ -216,7 +250,124 @@
     </div>
   </footer>
 
+  <script src="assets/js/events-data.js"></script>
   <script src="assets/js/script.js"></script>
+  <script>
+  /* ---- Master events page renderer ---- */
+  (function () {
+    /* Stats */
+    var totalEl  = document.getElementById('ev-total-count');
+    var guestEl  = document.getElementById('ev-guests-count');
+    if (totalEl)  totalEl.textContent  = EV_TOTAL_EVENTS;
+    if (guestEl)  guestEl.textContent  = EV_GUEST_COUNT;
+
+    /* Chart */
+    var catKeys = ['technizen','hourOfCode','outreach','guestLectures','intraCollege','workshops'];
+    var maxVal = 0;
+    EV_CHART_DATA.forEach(function(row) {
+      var s = catKeys.reduce(function(a,k){ return a + (row[k]||0); }, 0);
+      if (s > maxVal) maxVal = s;
+    });
+
+    var barsEl   = document.getElementById('ev-chart-bars');
+    var labelsEl = document.getElementById('ev-chart-labels');
+    var legendEl = document.getElementById('ev-chart-legend');
+    if (barsEl && maxVal > 0) {
+      EV_CHART_DATA.forEach(function(row) {
+        var col = document.createElement('div');
+        col.className = 'ev-bar-col';
+        catKeys.forEach(function(k) {
+          var v = row[k] || 0;
+          if (v === 0) return;
+          var seg = document.createElement('div');
+          seg.className = 'ev-seg';
+          var pct = (v / maxVal) * 100;
+          seg.style.height = pct + '%';
+          seg.style.background = EV_CATEGORIES[k].color;
+          seg.title = EV_CATEGORIES[k].name + ': ' + v + ' (' + row.year + ')';
+          col.appendChild(seg);
+        });
+        barsEl.appendChild(col);
+      });
+      EV_CHART_DATA.forEach(function(row) {
+        var sp = document.createElement('span');
+        sp.textContent = row.year;
+        labelsEl.appendChild(sp);
+      });
+      catKeys.forEach(function(k) {
+        var cat = EV_CATEGORIES[k];
+        var item = document.createElement('div');
+        item.className = 'ev-legend-item';
+        item.innerHTML = '<span class="ev-legend-swatch" style="background:' + cat.color + '"></span>' + cat.name;
+        legendEl.appendChild(item);
+      });
+    }
+
+    /* Category cards */
+    var grid = document.getElementById('ev-cat-grid');
+    if (!grid) return;
+
+    var dataMap = {
+      technizen:     EV_TECHNIZEN,
+      hourOfCode:    EV_HOUR_OF_CODE,
+      outreach:      EV_OUTREACH,
+      guestLectures: EV_GUEST_LECTURES,
+      intraCollege:  EV_INTRA_COLLEGE,
+      workshops:     EV_WORKSHOPS
+    };
+
+    catKeys.forEach(function(k) {
+      var cat  = EV_CATEGORIES[k];
+      var data = dataMap[k];
+      var open = evHasUpcoming(data);
+      var total = evTotalInstances(data);
+      var years = data.length ? data.reduce(function(mn,e){ return Math.min(mn,e.year); }, 9999) : 2018;
+
+      var isTechnizen = (k === 'technizen');
+      var tag = isTechnizen
+        ? 'div'
+        : 'a';
+
+      var card = document.createElement(tag);
+      card.className = 'ev-cat-card';
+      if (!isTechnizen && cat.url) {
+        card.setAttribute('href', cat.url);
+      }
+      if (isTechnizen) {
+        card.setAttribute('data-open-master', 'TECHNIZEN');
+        card.style.cursor = 'pointer';
+      }
+
+      card.innerHTML =
+        '<div class="ev-cat-swatch" style="background:' + cat.color + '"></div>' +
+        (open ? '<span class="ev-open-pill">● Open</span>' : '') +
+        '<div class="ev-cat-body">' +
+          '<div class="ev-cat-badge" style="background:' + cat.color + '">' + cat.abbr + '</div>' +
+          '<h3>' + cat.name + '</h3>' +
+          '<p>' + cat.description + '</p>' +
+          '<span class="ev-cat-meta">' + total + ' event' + (total !== 1 ? 's' : '') + ' · since ' + years + '</span>' +
+        '</div>';
+
+      grid.appendChild(card);
+    });
+
+    /* Re-attach Technizen click handler for any newly rendered cards */
+    grid.querySelectorAll('[data-open-master]').forEach(function(card) {
+      card.addEventListener('click', function () {
+        var masterName = card.getAttribute('data-open-master') || 'TECHNIZEN';
+        var masterView = document.getElementById('events-master-view');
+        var subView    = document.getElementById('events-sub-view');
+        var titleEl    = document.getElementById('sub-view-title');
+        if (!masterView || !subView) return;
+        masterView.style.display = 'none';
+        subView.style.display    = 'block';
+        if (titleEl) titleEl.textContent = masterName;
+        window.location.hash = masterName.toLowerCase();
+        window.scrollTo({ top: subView.offsetTop - 90, behavior: 'smooth' });
+      });
+    });
+  })();
+  </script>
 </body>
 
 </html>
