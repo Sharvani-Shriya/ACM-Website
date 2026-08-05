@@ -2475,113 +2475,169 @@ table.data-table td.placeholder {
 /* ============================================================
    CHAPTER OVERVIEW STATS (Replaces old table)
    ============================================================ */
+/* ============================================================
+   CHAPTER OVERVIEW STATS (Sleek Unified Capsule Bar Style)
+   ============================================================ */
 .stats-overview-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--white);
+  border-radius: 20px;
+  border: 1px solid var(--line);
+  box-shadow: 0 10px 35px rgba(11, 31, 77, 0.07);
   max-width: 1150px;
-  margin: 32px auto 0;
-  padding: 0 12px;
+  margin: 36px auto 0;
+  padding: 20px 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Vibrant 4-color top accent bar */
+.stats-overview-grid::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #0284c7 0%, #f59e0b 33%, #8b5cf6 66%, #10b981 100%);
 }
 
 .stat-overview-card {
+  flex: 1;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  text-align: center;
-  background: var(--white);
-  padding: 36px 20px 30px;
-  border-radius: 16px;
-  border: 1px solid var(--line);
-  box-shadow: 0 4px 20px rgba(11, 31, 77, 0.05);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  justify-content: center;
+  gap: 16px;
+  padding: 16px 20px;
+  border-right: 1px solid var(--line);
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  border: none;
+  transition: transform 0.25s ease, background-color 0.25s ease;
+}
+
+.stat-overview-card:last-child {
+  border-right: none;
 }
 
 .stat-overview-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 14px 32px rgba(11, 31, 77, 0.12);
+  transform: translateY(-2px);
+  background-color: rgba(248, 250, 252, 0.85);
+  box-shadow: none;
 }
 
 .stat-icon-circle {
-  width: 76px;
-  height: 76px;
+  width: 58px;
+  height: 58px;
+  min-width: 58px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--white);
-  margin-bottom: 20px;
-  transition: transform 0.3s ease;
+  margin-bottom: 0;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 6px 16px rgba(11, 31, 77, 0.12);
 }
 
 .stat-overview-card:hover .stat-icon-circle {
-  transform: scale(1.08);
+  transform: scale(1.1);
 }
 
-/* Color schemes - Distinct vibrant palette */
+/* Color schemes - Vibrant Gradients */
 .stat-icon-circle.bg-blue {
   background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
-  box-shadow: 0 8px 20px rgba(2, 132, 199, 0.35);
+  box-shadow: 0 6px 18px rgba(2, 132, 199, 0.3);
 }
 
 .stat-icon-circle.bg-gold {
   background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-  box-shadow: 0 8px 20px rgba(245, 158, 11, 0.35);
+  box-shadow: 0 6px 18px rgba(245, 158, 11, 0.3);
 }
 
 .stat-icon-circle.bg-purple {
   background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
-  box-shadow: 0 8px 20px rgba(139, 92, 246, 0.35);
+  box-shadow: 0 6px 18px rgba(139, 92, 246, 0.3);
 }
 
 .stat-icon-circle.bg-emerald {
   background: linear-gradient(135deg, #10b981 0%, #047857 100%);
-  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.35);
+  box-shadow: 0 6px 18px rgba(16, 185, 129, 0.3);
+}
+
+.stat-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
 }
 
 .stat-number {
   font-family: var(--font-body);
-  font-size: 2.7rem;
+  font-size: 2.15rem;
   font-weight: 800;
   color: var(--navy);
   line-height: 1.1;
-  margin-bottom: 8px;
+  margin-bottom: 2px;
   letter-spacing: -0.02em;
 }
 
 .stat-label {
-  font-size: 0.98rem;
+  font-size: 0.88rem;
   font-weight: 600;
   color: var(--ink-soft);
-  line-height: 1.35;
+  line-height: 1.3;
+  white-space: nowrap;
 }
 
+/* Responsive Breakpoints */
 @media (max-width: 992px) {
   .stats-overview-grid {
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
+    padding: 16px;
+    gap: 0;
+    border-radius: 16px;
+  }
+
+  .stat-overview-card {
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 20px 16px;
+  }
+
+  .stat-overview-card:nth-child(2n) {
+    border-right: none;
+  }
+
+  .stat-overview-card:nth-child(3),
+  .stat-overview-card:nth-child(4) {
+    border-bottom: none;
   }
 }
 
-@media (max-width: 540px) {
+@media (max-width: 576px) {
   .stats-overview-grid {
     grid-template-columns: 1fr;
-    gap: 18px;
+    padding: 12px;
   }
+
   .stat-overview-card {
-    padding: 28px 16px;
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+    justify-content: flex-start;
+    padding: 16px;
   }
-  .stat-icon-circle {
-    width: 68px;
-    height: 68px;
-    margin-bottom: 16px;
+
+  .stat-overview-card:last-child {
+    border-bottom: none;
   }
-  .stat-icon-circle svg {
-    width: 28px;
-    height: 28px;
-  }
+
   .stat-number {
-    font-size: 2.2rem;
+    font-size: 1.85rem;
   }
 }
 
