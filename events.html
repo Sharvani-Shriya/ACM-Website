@@ -378,7 +378,11 @@
           '<div class="ev-cat-badge" style="background:' + cat.color + '">' + cat.abbr + '</div>' +
           '<h3>' + cat.name + '</h3>' +
           '<p>' + cat.description + '</p>' +
-          '<span class="ev-cat-meta">' + total + ' event' + (total !== 1 ? 's' : '') + ' · since ' + years + '</span>' +
+          '<span class="ev-cat-meta">' +
+            '<span class="ev-meta-count">' + total + ' event' + (total !== 1 ? 's' : '') + '</span>' +
+            '<span class="ev-meta-divider">·</span>' +
+            '<span class="ev-meta-since">since ' + years + '</span>' +
+          '</span>' +
         '</div>';
 
       grid.appendChild(card);
