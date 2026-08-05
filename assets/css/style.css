@@ -506,6 +506,11 @@ p {
   overflow: hidden;
 }
 
+.page-hero .container {
+  position: relative;
+  z-index: 2;
+}
+
 .page-hero::after {
   content: "";
   position: absolute;
@@ -514,6 +519,22 @@ p {
     radial-gradient(circle at 15% 20%, rgba(200, 161, 58, .18), transparent 40%),
     radial-gradient(circle at 85% 80%, rgba(200, 161, 58, .14), transparent 45%);
   pointer-events: none;
+  z-index: 1;
+}
+
+/* Transparent Tech Overlay for Events Hero Section */
+.page-hero.events-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('../images/image2.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.32;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 1;
 }
 
 .page-hero .crumb {
