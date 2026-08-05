@@ -549,6 +549,21 @@ p {
   z-index: 1;
 }
 
+/* Transparent Tech Overlay for Teams Hero Section */
+.page-hero.teams-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('../images/img2.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.35;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 1;
+}
+
 .page-hero .crumb {
   font-size: var(--text-sm);
   text-transform: uppercase;
