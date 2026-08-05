@@ -78,7 +78,7 @@
             </svg>
           </div>
           <div class="ev-stat-info">
-            <span class="ev-stat-num" id="ev-schools-count">27</span>
+            <span class="ev-stat-num" id="ev-schools-count" data-count="27">27</span>
             <span class="ev-stat-label">Schools visited</span>
           </div>
         </div>
@@ -105,7 +105,7 @@
             </svg>
           </div>
           <div class="ev-stat-info">
-            <span class="ev-stat-num">9</span>
+            <span class="ev-stat-num" id="ev-years-count" data-count="9">9</span>
             <span class="ev-stat-label">Years of activity</span>
           </div>
         </div>
@@ -288,8 +288,29 @@
       /* Stats */
       var totalEl = document.getElementById('ev-total-count');
       var guestEl = document.getElementById('ev-guests-count');
-      if (totalEl) totalEl.textContent = EV_TOTAL_EVENTS;
-      if (guestEl) guestEl.textContent = EV_GUEST_COUNT;
+      var schoolsEl = document.getElementById('ev-schools-count');
+      var yearsEl = document.getElementById('ev-years-count');
+
+      if (totalEl && typeof EV_TOTAL_EVENTS !== 'undefined') {
+        totalEl.setAttribute('data-count', EV_TOTAL_EVENTS);
+        totalEl.textContent = EV_TOTAL_EVENTS;
+      }
+      if (guestEl && typeof EV_GUEST_COUNT !== 'undefined') {
+        guestEl.setAttribute('data-count', EV_GUEST_COUNT);
+        guestEl.textContent = EV_GUEST_COUNT;
+      }
+      if (schoolsEl && typeof EV_SCHOOLS_VISITED !== 'undefined') {
+        schoolsEl.setAttribute('data-count', EV_SCHOOLS_VISITED);
+        schoolsEl.textContent = EV_SCHOOLS_VISITED;
+      }
+      if (yearsEl && typeof EV_YEARS_ACTIVE !== 'undefined') {
+        yearsEl.setAttribute('data-count', EV_YEARS_ACTIVE);
+        yearsEl.textContent = EV_YEARS_ACTIVE;
+      }
+
+      if (window.initStatCounters) {
+        window.initStatCounters();
+      }
 
       /* Chart: Grouped Vertical Bar Chart (2018–2026) */
       var years = ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026'];
