@@ -217,4 +217,66 @@ document.addEventListener('DOMContentLoaded', function () {
     row.innerHTML += row.innerHTML;
   });
 
+  /* ---------- Animated Fast Stat Counter (Starts from 1 to target) ---------- */
+  var statNumbers = document.querySelectorAll('.stat-number');
+  if (statNumbers.length) {
+    var animatedCounters = false;
+
+    function animateCounters() {
+      if (animatedCounters) return;
+      animatedCounters = true;
+
+      statNumbers.forEach(function (el) {
+        var rawText = el.textContent.trim();
+        var targetNum = parseInt(el.getAttribute('data-count') || rawText.replace(/\D/g, ''), 10);
+        var suffix = el.getAttribute('data-suffix') || (rawText.includes('+') ? '+' : '');
+        var prefix = el.getAttribute('data-prefix') || '';
+
+        if (isNaN(targetNum)) return;
+
+        var startNum = 1; // Starts from 1 as requested
+        var duration = 1200; // Fast 1.2s count-up duration
+        var startTime = null;
+
+        function updateCounter(timestamp) {
+          if (!startTime) startTime = timestamp;
+          var elapsed = timestamp - startTime;
+          var progress = Math.min(elapsed / duration, 1);
+
+          // Fast ease-out cubic timing function
+          var easeOut = 1 - Math.pow(1 - progress, 3);
+          var currentVal = Math.floor(startNum + (targetNum - startNum) * easeOut);
+
+          if (currentVal > targetNum) currentVal = targetNum;
+
+          el.textContent = prefix + currentVal + suffix;
+
+          if (progress < 1) {
+            requestAnimationFrame(updateCounter);
+          } else {
+            el.textContent = prefix + targetNum + suffix;
+          }
+        }
+
+        el.textContent = prefix + startNum + suffix;
+        requestAnimationFrame(updateCounter);
+      });
+    }
+
+    var statsGrid = document.querySelector('.stats-overview-grid');
+    if (statsGrid && 'IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            animateCounters();
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      observer.observe(statsGrid);
+    } else {
+      animateCounters();
+    }
+  }
+
 });
