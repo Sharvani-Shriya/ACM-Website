@@ -564,6 +564,21 @@ p {
   z-index: 1;
 }
 
+/* Transparent Tech Overlay for Hour of Code Hero Section */
+.page-hero.hoc-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('../images/banners/hour-of-code-hero.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.4;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 1;
+}
+
 .page-hero .crumb {
   font-size: var(--text-sm);
   text-transform: uppercase;
