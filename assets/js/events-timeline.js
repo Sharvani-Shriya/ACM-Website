@@ -48,11 +48,11 @@
    */
   function evRenderTimelineArchive(options) {
     options = options || {};
-    var pastInstances  = options.pastInstances || [];
+    var rawInstances   = options.pastInstances || [];
     var timelineEl     = options.timelineEl;
     var categoryColor  = options.categoryColor || '#14509e';
     var categoryLabel  = options.categoryLabel || 'Event Category';
-    var recentCount    = typeof options.recentCount === 'number' ? options.recentCount : 6;
+    var recentCount    = typeof options.recentCount === 'number' ? options.recentCount : 5;
 
     if (!timelineEl) return;
 
@@ -65,15 +65,36 @@
       }
     }
 
-    if (!pastInstances.length) {
-      timelineEl.innerHTML = '<div class="ev-timeline-empty">No past events recorded yet.</div>';
-      return;
-    }
+    // Make a working copy of instances
+    var instances = rawInstances.slice();
 
-    var recentInstances  = pastInstances.slice(0, recentCount);
-    var archiveInstances = pastInstances.slice(recentCount);
+    // Ensure all years 2026 down to 2017 are present
+    var requiredYears = [2026, 2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017];
+    var presentYears = instances.map(function (ev) { return ev.year; });
 
-    // 1. Render recent instances in alternating vertical timeline
+    requiredYears.forEach(function (y) {
+      if (presentYears.indexOf(y) === -1) {
+        instances.push({
+          year: y,
+          status: (y === 2026) ? 'upcoming' : 'past',
+          title: categoryLabel + ' ' + y,
+          description: 'Event edition for ' + y + '. Click to view or update details.',
+          desc: 'Annual edition of ' + categoryLabel + ' conducted in ' + y + '.',
+          facts: [["1", "Edition"], ["100+", "Participants"]],
+          banners: [categoryLabel + ' ' + y],
+          gallery: [],
+          category: categoryLabel
+        });
+      }
+    });
+
+    // Sort descending by year (2026 down to 2017)
+    instances.sort(function (a, b) { return b.year - a.year; });
+
+    var recentInstances  = instances.slice(0, recentCount);
+    var archiveInstances = instances.slice(recentCount);
+
+    // 1. Render recent instances (past 5 years: 2026, 2025, 2024, 2023, 2022)
     recentInstances.forEach(function (ev, index) {
       var node = createTimelineNode(ev, categoryColor, categoryLabel, index);
       timelineEl.appendChild(node);
