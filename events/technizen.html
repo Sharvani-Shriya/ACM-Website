@@ -193,17 +193,26 @@
       }
     }
 
-    /* Photo strip — marquee template tiles per past year */
+    /* Photo strip — marquee template tiles for Technizen */
     var photoEl = document.getElementById('ev-photo-strip');
     if (photoEl) {
-      var years = evGetPast(DATA).map(function(e){ return e.year; }).filter(function(v,i,a){ return a.indexOf(v)===i; });
-      if (years.length === 0 && upcoming) { years = [upcoming.year]; }
-      years.forEach(function(y) {
+      var tileLabels = [
+        'Photo — Technizen 2026',
+        'Photo — Flagship Fest',
+        'Photo — Tech Expo',
+        'Photo — Hackathon',
+        'Photo — Workshops',
+        'Photo — Guest Talks',
+        'Photo — Coding Contest',
+        'Photo — Project Exhibition'
+      ];
+      tileLabels.forEach(function(label) {
         var tile = document.createElement('div');
         tile.className = 'ev-photo-tile';
-        tile.textContent = 'Photo — ' + y;
+        tile.textContent = label;
         photoEl.appendChild(tile);
       });
+      // Duplicate tiles for seamless infinite marquee loop
       photoEl.innerHTML += photoEl.innerHTML;
     }
   })();
