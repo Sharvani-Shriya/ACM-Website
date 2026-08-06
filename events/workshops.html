@@ -107,6 +107,7 @@
   </footer>
 
   <script src="../assets/js/events-data.js"></script>
+  <script src="../assets/js/events-timeline.js"></script>
   <script src="../assets/js/script.js"></script>
   <script>
   (function () {
@@ -156,28 +157,18 @@
     var eyebrowEl  = document.getElementById('ev-timeline-eyebrow');
     if (timelineEl && past.length) {
       if (eyebrowEl) eyebrowEl.textContent = past[past.length-1].year + ' \u2192 ' + past[0].year;
-      past.forEach(function(ev) {
-        var node = document.createElement('div');
-        node.className = 'ev-t-node';
-        node.innerHTML =
-          '<div class="ev-t-dot" style="color:' + CAT_COLOR + ';background:' + CAT_COLOR + '"></div>' +
-          '<div class="ev-t-year" style="color:' + CAT_COLOR + '">' + ev.year + '</div>' +
-          '<h4>' + ev.title + '</h4>' +
-          '<p>' + ev.description + '</p>';
-        timelineEl.appendChild(node);
+      evRenderTimelineArchive({
+        pastInstances: past,
+        timelineEl: timelineEl,
+        categoryColor: CAT_COLOR,
+        categoryLabel: 'Technical Workshops',
+        recentCount: 6
       });
     }
 
     var photoEl = document.getElementById('ev-photo-strip');
-    if (photoEl) {
-      var years = past.map(function(e){ return e.year; }).filter(function(v,i,a){ return a.indexOf(v)===i; });
-      years.forEach(function(y) {
-        var tile = document.createElement('div');
-        tile.className = 'ev-photo-tile';
-        tile.textContent = 'Photo — ' + y;
-        photoEl.appendChild(tile);
-      });
-      photoEl.innerHTML += photoEl.innerHTML;
+    if (photoEl && typeof evRenderPhotoMarquee === 'function') {
+      evRenderPhotoMarquee(photoEl, past, 'Technical Workshops');
     }
   })();
   </script>

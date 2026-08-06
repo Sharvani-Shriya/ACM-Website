@@ -113,6 +113,7 @@
   </footer>
 
   <script src="../assets/js/events-data.js"></script>
+  <script src="../assets/js/events-timeline.js"></script>
   <script src="../assets/js/script.js"></script>
   <script>
   (function () {
@@ -169,42 +170,18 @@
         var maxY = past[0].year;
         eyebrowEl.textContent = minY + ' \u2192 ' + maxY;
       }
-      /* If no past editions yet, show the inaugural node */
-      if (past.length === 0 && upcoming) {
-        var node = document.createElement('div');
-        node.className = 'ev-t-node';
-        node.innerHTML =
-          '<div class="ev-t-dot" style="color:' + CAT_COLOR + ';background:' + CAT_COLOR + '"></div>' +
-          '<div class="ev-t-year" style="color:' + CAT_COLOR + '">2026 — Inaugural Edition</div>' +
-          '<h4>' + upcoming.title + '</h4>' +
-          '<p>' + upcoming.description + '</p>';
-        timelineEl.appendChild(node);
-      } else {
-        past.forEach(function(ev) {
-          var node = document.createElement('div');
-          node.className = 'ev-t-node';
-          node.innerHTML =
-            '<div class="ev-t-dot" style="color:' + CAT_COLOR + ';background:' + CAT_COLOR + '"></div>' +
-            '<div class="ev-t-year" style="color:' + CAT_COLOR + '">' + ev.year + '</div>' +
-            '<h4>' + ev.title + '</h4>' +
-            '<p>' + ev.description + '</p>';
-          timelineEl.appendChild(node);
-        });
-      }
+      evRenderTimelineArchive({
+        pastInstances: past,
+        timelineEl: timelineEl,
+        categoryColor: CAT_COLOR,
+        categoryLabel: 'Technizen',
+        recentCount: 6
+      });
     }
 
-    /* Photo strip — marquee template tiles for Technizen */
     var photoEl = document.getElementById('ev-photo-strip');
-    if (photoEl) {
-      var years = ['2026', '2025', '2024', '2023', '2022', '2021', '2020', '2019', '2018'];
-      years.forEach(function(y) {
-        var tile = document.createElement('div');
-        tile.className = 'ev-photo-tile';
-        tile.textContent = 'Photo — ' + y;
-        photoEl.appendChild(tile);
-      });
-      // Duplicate tiles for seamless infinite marquee loop
-      photoEl.innerHTML += photoEl.innerHTML;
+    if (photoEl && typeof evRenderPhotoMarquee === 'function') {
+      evRenderPhotoMarquee(photoEl, past, 'Technizen');
     }
   })();
   </script>

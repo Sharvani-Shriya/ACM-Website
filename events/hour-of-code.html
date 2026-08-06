@@ -113,6 +113,7 @@
   </footer>
 
   <script src="../assets/js/events-data.js"></script>
+  <script src="../assets/js/events-timeline.js"></script>
   <script src="../assets/js/script.js"></script>
   <script>
   (function () {
@@ -169,30 +170,18 @@
         var maxY = past[0].year;
         eyebrowEl.textContent = minY + ' \u2192 ' + maxY;
       }
-      past.forEach(function(ev) {
-        var node = document.createElement('div');
-        node.className = 'ev-t-node';
-        node.innerHTML =
-          '<div class="ev-t-dot" style="color:' + CAT_COLOR + ';background:' + CAT_COLOR + '"></div>' +
-          '<div class="ev-t-year" style="color:' + CAT_COLOR + '">' + ev.year + '</div>' +
-          '<h4>' + ev.title + '</h4>' +
-          '<p>' + ev.description + '</p>';
-        timelineEl.appendChild(node);
+      evRenderTimelineArchive({
+        pastInstances: past,
+        timelineEl: timelineEl,
+        categoryColor: CAT_COLOR,
+        categoryLabel: 'Hour of Code',
+        recentCount: 6
       });
     }
 
-    /* Photo strip marquee — template tiles per past year */
     var photoEl = document.getElementById('ev-photo-strip');
-    if (photoEl) {
-      var years = evGetPast(DATA).map(function(e){ return e.year; }).filter(function(v,i,a){ return a.indexOf(v)===i; });
-      years.forEach(function(y) {
-        var tile = document.createElement('div');
-        tile.className = 'ev-photo-tile';
-        tile.textContent = 'Photo — ' + y;
-        photoEl.appendChild(tile);
-      });
-      // Duplicate tiles for seamless infinite marquee loop
-      photoEl.innerHTML += photoEl.innerHTML;
+    if (photoEl && typeof evRenderPhotoMarquee === 'function') {
+      evRenderPhotoMarquee(photoEl, past, 'Hour of Code');
     }
   })();
   </script>
