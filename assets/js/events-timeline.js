@@ -535,7 +535,6 @@
       tile.innerHTML =
         '<img src="' + escapeHtml(resolvedPhoto) + '" alt="' + escapeHtml(titleText) + '">' +
         '<div class="ev-photo-overlay">' +
-          '<span class="ev-photo-badge">' + yearTag + ' &middot; GALLERY</span>' +
           '<div class="ev-photo-title-wrap">' +
             '<h5 class="ev-photo-title">' + escapeHtml(titleText) + '</h5>' +
             '<span class="ev-photo-cta-arrow">&rarr;</span>' +
