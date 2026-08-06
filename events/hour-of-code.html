@@ -64,8 +64,31 @@
         <div class="ev-timeline" id="ev-timeline"></div>
       </div>
 
-      <!-- Photo strip -->
-      <div class="ev-photo-strip" id="ev-photo-strip"></div>
+      <!-- Photo marquee strip -->
+      <div class="ev-section-intro" style="margin-top:var(--space-xl);margin-bottom:var(--space-md);text-align:center;">
+        <span class="eyebrow" style="color:var(--ev-hoc);">In Action</span>
+        <h2>Moments from Hour of Code</h2>
+      </div>
+
+      <div class="gallery-marquee-wrap" style="margin-bottom:var(--space-xl);">
+        <!-- Row A — scrolls left -->
+        <div class="marquee-row row-a">
+          <div class="gallery-tile"><img src="../assets/images/gallery/gallery-1.jpg" alt="Hour of Code Session 1"></div>
+          <div class="gallery-tile"><img src="../assets/images/gallery/gallery-2.jpg" alt="Hour of Code Session 2"></div>
+          <div class="gallery-tile"><img src="../assets/images/gallery/gallery-3.jpg" alt="Hour of Code Session 3"></div>
+          <div class="gallery-tile"><img src="../assets/images/gallery/gallery-4.jpg" alt="Hour of Code Session 4"></div>
+          <div class="gallery-tile"><img src="../assets/images/gallery/gallery-5.jpg" alt="Hour of Code Session 5"></div>
+        </div>
+
+        <!-- Row B — scrolls right -->
+        <div class="marquee-row row-b">
+          <div class="gallery-tile"><img src="../assets/images/gallery/gallery-6.jpg" alt="Hour of Code Session 6"></div>
+          <div class="gallery-tile"><img src="../assets/images/gallery/gallery-7.jpg" alt="Hour of Code Session 7"></div>
+          <div class="gallery-tile"><img src="../assets/images/gallery/gallery-8.jpg" alt="Hour of Code Session 8"></div>
+          <div class="gallery-tile"><img src="../assets/images/gallery/gallery-9.jpg" alt="Hour of Code Session 9"></div>
+          <div class="gallery-tile"><img src="../assets/images/gallery/gallery-10.jpg" alt="Hour of Code Session 10"></div>
+        </div>
+      </div>
 
     </div>
   </section>
@@ -176,18 +199,6 @@
           '<h4>' + ev.title + '</h4>' +
           '<p>' + ev.description + '</p>';
         timelineEl.appendChild(node);
-      });
-    }
-
-    /* Photo strip — placeholder tiles per past year */
-    var photoEl = document.getElementById('ev-photo-strip');
-    if (photoEl) {
-      var years = evGetPast(DATA).map(function(e){ return e.year; }).filter(function(v,i,a){ return a.indexOf(v)===i; }).slice(0,5);
-      years.forEach(function(y) {
-        var tile = document.createElement('div');
-        tile.className = 'ev-photo-tile';
-        tile.textContent = 'Photo — ' + y;
-        photoEl.appendChild(tile);
       });
     }
   })();
