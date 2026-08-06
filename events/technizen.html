@@ -124,9 +124,9 @@
     /* Stats */
     var pastInstances = evGetPast(DATA);
     var stats = [
-      { num: DATA.length,             label: 'Edition' + (DATA.length !== 1 ? 's' : '') + ' held' },
-      { num: 6,                       label: 'Sub-events per edition' },
-      { num: pastInstances.length || '1st', label: 'Years running' }
+      { num: '1,849+',                label: 'Total Participants' },
+      { num: '5+',                     label: 'Sub-events per edition' },
+      { num: pastInstances.length,    label: 'Past Editions' }
     ];
     var statsEl = document.getElementById('ev-detail-stats');
     if (statsEl) {
@@ -145,16 +145,19 @@
       var fieldsHtml = Object.keys(upcoming.fields).map(function(k) {
         return '<div class="ev-sf"><b>' + k + '</b><span>' + upcoming.fields[k] + '</span></div>';
       }).join('');
+      var posterPath = upcoming.photo || 'assets/images/events/poster.jpg';
       spotlightEl.innerHTML =
-        '<div class="ev-spotlight">' +
-          '<span class="ev-spotlight-badge"><span class="pulse"></span> Open &middot; Register Now</span>' +
+        '<div class="ev-spotlight is-technizen">' +
+          '<span class="ev-spotlight-badge ev-gradient-badge"><span class="pulse"></span> ' + (upcoming.status === 'ongoing' ? 'ONGOING NOW &middot; 11 &amp; 12 August 2026' : 'Open &middot; Register Now') + '</span>' +
           '<div class="ev-spotlight-grid">' +
-            '<div class="ev-spotlight-photo">' + (upcoming.photo ? '<img src="../' + upcoming.photo + '" alt="' + upcoming.title + '">' : 'Photo') + '</div>' +
+            '<div class="ev-spotlight-photo ev-poster-box">' +
+              '<img src="../' + posterPath + '" alt="' + upcoming.title + ' Poster" class="ev-poster-img">' +
+            '</div>' +
             '<div class="ev-spotlight-info">' +
-              '<h3>' + upcoming.title + '</h3>' +
+              '<h3 class="ev-gradient-heading">' + upcoming.title + '</h3>' +
               '<p class="role">' + upcoming.description + '</p>' +
               '<div class="ev-spotlight-fields">' + fieldsHtml + '</div>' +
-              '<a href="sub-events/technizen1.html" class="ev-reg-btn">Register Now &rarr;</a>' +
+              '<a href="' + (upcoming.registerUrl || 'https://docs.google.com/forms/d/e/1FAIpQLSeDW0DpeITrhsGaFSjEOmpCF9epj_gNF6fMaIv4bmQzgfpsgQ/viewform') + '" class="ev-reg-btn ev-gradient-btn" target="_blank" rel="noopener">Register Now &rarr;</a>' +
             '</div>' +
           '</div>' +
         '</div>';
@@ -164,14 +167,14 @@
     var timelineEl = document.getElementById('ev-timeline');
     var eyebrowEl  = document.getElementById('ev-timeline-eyebrow');
     if (timelineEl) {
-      var past = evGetPast(DATA);
-      if (eyebrowEl && past.length) {
-        var minY = past[past.length - 1].year;
-        var maxY = past[0].year;
+      var allInstances = DATA.slice().sort(function(a, b) { return b.year - a.year; });
+      if (eyebrowEl && allInstances.length) {
+        var minY = allInstances[allInstances.length - 1].year;
+        var maxY = allInstances[0].year;
         eyebrowEl.textContent = minY + ' \u2192 ' + maxY;
       }
       evRenderTimelineArchive({
-        pastInstances: past,
+        pastInstances: allInstances,
         timelineEl: timelineEl,
         categoryColor: CAT_COLOR,
         categoryLabel: 'Technizen',
@@ -181,7 +184,7 @@
 
     var photoEl = document.getElementById('ev-photo-strip');
     if (photoEl && typeof evRenderPhotoMarquee === 'function') {
-      evRenderPhotoMarquee(photoEl, past, 'Technizen');
+      evRenderPhotoMarquee(photoEl, allInstances, 'Technizen');
     }
   })();
   </script>

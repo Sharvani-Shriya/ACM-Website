@@ -132,22 +132,26 @@
       });
     }
 
-    var upcoming = evGetUpcoming(DATA);
+    /* Spotlight */
+    var upcoming = evGetUpcoming(EV_TECHNIZEN) || evGetUpcoming(DATA);
     var spotlightEl = document.getElementById('ev-spotlight-zone');
     if (upcoming && spotlightEl) {
       var fieldsHtml = Object.keys(upcoming.fields).map(function(k) {
         return '<div class="ev-sf"><b>' + k + '</b><span>' + upcoming.fields[k] + '</span></div>';
       }).join('');
+      var posterPath = upcoming.photo || 'assets/images/events/poster.jpg';
       spotlightEl.innerHTML =
-        '<div class="ev-spotlight">' +
-          '<span class="ev-spotlight-badge"><span class="pulse"></span> Open &middot; Register Now</span>' +
+        '<div class="ev-spotlight is-technizen">' +
+          '<span class="ev-spotlight-badge ev-gradient-badge"><span class="pulse"></span> ' + (upcoming.status === 'ongoing' ? 'ONGOING NOW &middot; 11 &amp; 12 August 2026' : 'Open &middot; Register Now') + '</span>' +
           '<div class="ev-spotlight-grid">' +
-            '<div class="ev-spotlight-photo">' + (upcoming.photo ? '<img src="../' + upcoming.photo + '" alt="">' : 'Event<br>Poster') + '</div>' +
+            '<div class="ev-spotlight-photo ev-poster-box">' +
+              '<img src="../' + posterPath + '" alt="' + upcoming.title + ' Poster" class="ev-poster-img">' +
+            '</div>' +
             '<div class="ev-spotlight-info">' +
-              '<h3>' + upcoming.title + '</h3>' +
+              '<h3 class="ev-gradient-heading">' + upcoming.title + '</h3>' +
               '<p class="role">' + upcoming.description + '</p>' +
               '<div class="ev-spotlight-fields">' + fieldsHtml + '</div>' +
-              '<a href="' + upcoming.registerUrl + '" class="ev-reg-btn" target="_blank" rel="noopener">Register Now &rarr;</a>' +
+              '<a href="' + (upcoming.registerUrl || 'https://docs.google.com/forms/d/e/1FAIpQLSeDW0DpeITrhsGaFSjEOmpCF9epj_gNF6fMaIv4bmQzgfpsgQ/viewform') + '" class="ev-reg-btn ev-gradient-btn" target="_blank" rel="noopener">Register Now &rarr;</a>' +
             '</div>' +
           '</div>' +
         '</div>';

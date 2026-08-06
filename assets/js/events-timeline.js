@@ -68,27 +68,7 @@
     // Make a working copy of instances
     var instances = rawInstances.slice();
 
-    // Ensure all years 2026 down to 2017 are present
-    var requiredYears = [2026, 2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017];
-    var presentYears = instances.map(function (ev) { return ev.year; });
-
-    requiredYears.forEach(function (y) {
-      if (presentYears.indexOf(y) === -1) {
-        instances.push({
-          year: y,
-          status: (y === 2026) ? 'upcoming' : 'past',
-          title: categoryLabel + ' ' + y,
-          description: 'Event edition for ' + y + '. Click to view or update details.',
-          desc: 'Annual edition of ' + categoryLabel + ' conducted in ' + y + '.',
-          facts: [["1", "Edition"], ["100+", "Participants"]],
-          banners: [categoryLabel + ' ' + y],
-          gallery: [],
-          category: categoryLabel
-        });
-      }
-    });
-
-    // Sort descending by year (2026 down to 2017)
+    // Sort descending by year
     instances.sort(function (a, b) { return b.year - a.year; });
 
     var recentInstances  = instances.slice(0, recentCount);
@@ -210,8 +190,8 @@
     node.style.cursor = 'pointer';
 
     var dateComp = getEventDateComponents(ev, index);
-    var badgeText = (ev.badgeText || (ev.year === 2026 ? '2026 EDITION' : 'COMPLETED'));
-    var badgeClass = (ev.year === 2026) ? 'ev-t-badge is-signature' : 'ev-t-badge';
+    var badgeText = (ev.badgeText || (ev.status === 'ongoing' ? 'ONGOING NOW' : (ev.year === 2026 ? '2026 EDITION' : 'COMPLETED')));
+    var badgeClass = (ev.status === 'ongoing' || ev.year === 2026) ? 'ev-t-badge is-signature' : 'ev-t-badge';
     var yearBg = hexToRgba(nodeColor, 0.12);
 
     var photoSrc = ev.photo || SAMPLE_PHOTOS[index % SAMPLE_PHOTOS.length];
@@ -505,9 +485,6 @@
     }
   }
 
-  /**
-   * Enhanced Bottom Photo Marquee Gallery Renderer
-   */
   function evRenderPhotoMarquee(photoEl, pastInstances, categoryLabel) {
     if (!photoEl) return;
     photoEl.innerHTML = '';
@@ -523,18 +500,42 @@
       ];
     }
 
-    // Build enhanced photo cards
-    items.forEach(function (ev, index) {
-      var photoSrc = ev.photo || SAMPLE_PHOTOS[(index * 2) % SAMPLE_PHOTOS.length];
+    var cardList = [];
+    items.forEach(function (ev) {
+      if (ev.banners && ev.banners.length > 0) {
+        ev.banners.forEach(function (bLabel) {
+          cardList.push({
+            ev: ev,
+            year: ev.year,
+            title: bLabel,
+            sub: ev.title
+          });
+        });
+      } else {
+        cardList.push({
+          ev: ev,
+          year: ev.year,
+          title: ev.title,
+          sub: categoryLabel
+        });
+      }
+    });
+
+    cardList.forEach(function (card, index) {
+      var photoSrc = (card.ev.photo && card.ev.photo.indexOf('poster.jpg') === -1)
+        ? card.ev.photo
+        : SAMPLE_PHOTOS[index % SAMPLE_PHOTOS.length];
       var resolvedPhoto = resolveImagePath(photoSrc);
-      var yearTag = ev.year || '2026';
-      var titleText = ev.title || (categoryLabel + ' ' + yearTag);
+      var yearTag = card.year || '2026';
+      var titleText = card.title;
+      var subText = card.sub;
 
       var tile = document.createElement('div');
       tile.className = 'ev-photo-tile';
       tile.innerHTML =
         '<img src="' + escapeHtml(resolvedPhoto) + '" alt="' + escapeHtml(titleText) + '">' +
         '<div class="ev-photo-overlay">' +
+          '<span class="ev-photo-badge">' + yearTag + ' &middot; ' + escapeHtml(subText) + '</span>' +
           '<div class="ev-photo-title-wrap">' +
             '<h5 class="ev-photo-title">' + escapeHtml(titleText) + '</h5>' +
             '<span class="ev-photo-cta-arrow">&rarr;</span>' +
@@ -543,7 +544,7 @@
 
       tile.addEventListener('click', function () {
         if (typeof evOpenModal === 'function') {
-          evOpenModal(ev, categoryLabel || 'Events Gallery', '#14509e');
+          evOpenModal(card.ev, categoryLabel || 'Events Gallery', '#14509e');
         }
       });
 

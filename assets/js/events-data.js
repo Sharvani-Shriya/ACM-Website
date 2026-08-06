@@ -78,11 +78,11 @@ var EV_CHART_DATA = [
   { year: 2019, technizen: 1, hourOfCode: 1, outreach: 1, guestLectures: 1, intraCollege: 3, workshops: 0 },
   { year: 2020, technizen: 0, hourOfCode: 1, outreach: 0, guestLectures: 0, intraCollege: 3, workshops: 1 },
   { year: 2021, technizen: 0, hourOfCode: 0, outreach: 1, guestLectures: 1, intraCollege: 3, workshops: 0 },
-  { year: 2022, technizen: 0, hourOfCode: 1, outreach: 1, guestLectures: 0, intraCollege: 3, workshops: 0 },
+  { year: 2022, technizen: 0, hourOfCode: 0, outreach: 1, guestLectures: 0, intraCollege: 3, workshops: 0 },
   { year: 2023, technizen: 0, hourOfCode: 1, outreach: 1, guestLectures: 1, intraCollege: 1, workshops: 0 },
   { year: 2024, technizen: 1, hourOfCode: 0, outreach: 1, guestLectures: 0, intraCollege: 2, workshops: 0 },
   { year: 2025, technizen: 0, hourOfCode: 1, outreach: 1, guestLectures: 0, intraCollege: 3, workshops: 0 },
-  { year: 2026, technizen: 1, hourOfCode: 1, outreach: 1, guestLectures: 0, intraCollege: 1, workshops: 0 }
+  { year: 2026, technizen: 1, hourOfCode: 0, outreach: 1, guestLectures: 0, intraCollege: 1, workshops: 0 }
 ];
 
 /* ---- Instance Arrays ---- */
@@ -93,151 +93,191 @@ var EV_CHART_DATA = [
 var EV_TECHNIZEN = [
   {
     year: 2019,
+    day: '16',
+    month: 'JULY',
+    date: '16-07-2019',
     status: 'past',
     title: 'Technizen 2K19',
-    description: 'First edition of the chapter\'s flagship technical fest -- four sub-events, 200+ participants from across departments.',
-    desc: 'The inaugural edition of Technizen brought together over 200 enthusiastic engineering students for an action-packed weekend. Featuring four core competitions — Code Blitz, WebCraft, Paper Presentation, and CS Quiz — the fest set the benchmark for technical excellence across the department.',
-    facts: [["4", "Sub-events"], ["200+", "Participants"], ["Rs.15K", "Prize Pool"]],
-    banners: ["Code Blitz Arena", "WebCraft Lab", "Paper Presentation Hall"],
+    description: 'Inter-collegiate flagship technical fest -- 5 sub-events (Tech-End, Logic Mystery, Exceed Your Idea, Innovate, URL), 809 participants.',
+    desc: 'The inaugural inter-collegiate edition of Technizen brought together 809 engineering and MCA students from across colleges. The fest featured 5 core technical tracks: Tech-End, Logic Mystery, Exceed Your Idea, Innovate, and URL.',
+    facts: [["5", "Sub-events"], ["809", "Participants"], ["Inter", "Collegiate"]],
+    banners: ["Tech-End Arena", "Logic Mystery Lab", "Exceed Your Idea & Innovate", "URL Design Hub"],
     gallery: [],
-    fields: {},
+    fields: {
+      'Date': '16-07-2019',
+      'Type': 'Inter Collegiate',
+      'Sub-events': 'Tech-End, Logic Mystery, Exceed Your Idea, Innovate, URL',
+      'Organizers': 'Faculty & Student Committee',
+      'Target Audience': 'B.Tech (all branches), MCA & External participants',
+      'Participants': '809'
+    },
     registerUrl: null,
     photo: null,
     category: 'technizen'
   },
   {
     year: 2024,
+    day: '05',
+    month: 'FEBRUARY',
+    date: '05-02-2024 & 06-02-2024',
     status: 'past',
     title: 'Technizen 2K24',
-    description: 'Revived after a multi-year hiatus -- five competitive sub-events, 300+ participants, inter-college participation opened.',
-    desc: 'Technizen 2K24 marked a triumphant revival of our signature technical fest. Expanded to five high-intensity tracks including DSA Clash and AI Innovators Arena, the edition welcomed external college teams for the first time, achieving record-breaking turnout and industry mentorship.',
-    facts: [["5", "Competitions"], ["320+", "Attendees"], ["8", "Colleges Participating"]],
-    banners: ["DSA Clash Round 2", "AI Innovators Expo", "Project Presentation Hub"],
+    description: 'Two-day inter-collegiate technical fest -- 1,040 participants across B.Tech, MCA, and external institutions.',
+    desc: 'Technizen 2K24 was organized on 5th & 6th February 2024 as a major inter-collegiate technical extravaganza. Organized by the Faculty and Student Committee Members, the event recorded 1,040 total participants competing across multiple high-intensity competitions.',
+    facts: [["2", "Days Fest"], ["1,040", "Participants"], ["Inter", "Collegiate"]],
+    banners: ["Technizen 2K24 Main Stage", "Competitive Track Arena", "Exhibition & Pitching Hub"],
     gallery: [],
-    fields: {},
+    fields: {
+      'Dates': '05-02-2024 & 06-02-2024',
+      'Type': 'Inter Collegiate',
+      'Organizers': 'Faculty & Student Committee',
+      'Target Audience': 'B.Tech (all branches), MCA & External participants',
+      'Participants': '1,040'
+    },
     registerUrl: null,
     photo: null,
     category: 'technizen'
   },
   {
     year: 2026,
-    status: 'upcoming',
+    day: '11',
+    month: 'AUGUST',
+    date: '11-12 August 2026',
+    status: 'ongoing',
+    badgeText: 'ONGOING NOW',
     title: 'Technizen 2K26',
-    description: 'The latest edition of our flagship fest -- six technical sub-events competing for the top prize.',
-    desc: 'Technizen 2K26 is our biggest flagship extravaganza yet! Spanning six specialized technical tracks from database optimization to AI startup pitching, students from across the region will compete for prestigious awards, cash prizes, and industry internships.',
-    facts: [["6", "Sub-events"], ["500+", "Expected Participants"], ["Rs.50K", "Total Prize Pool"]],
+    description: 'Flagship annual technical fest is ONGOING NOW (11th & 12th August 2026) -- six competitive sub-events.',
+    desc: 'Technizen 2K26 is currently ONGOING on 11th & 12th August 2026! Spanning six specialized technical tracks from database optimization to AI startup pitching, students from across the region are competing for prestigious awards, cash prizes, and industry internships.',
+    facts: [["6", "Sub-events"], ["500+", "Participants"], ["Rs.50K", "Total Prize Pool"]],
     banners: ["Query Masters", "DSA Clash", "AI Innovators Arena", "Pixel Craft", "Build & Pitch", "Technoverse"],
     gallery: [],
     fields: {
+      'Status': 'ONGOING NOW',
+      'Dates': '11-12 August 2026',
       'Sub-events': '6 competitions',
       'Theme': 'Beyond Limits',
-      'Dates': '20-21 Aug 2026',
       'Venue': 'R.V.R. & J.C. College of Engineering'
     },
-    registerUrl: 'https://forms.gle/pvjNgiCEq3Ao3XE36',
-    photo: null,
+    registerUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSeDW0DpeITrhsGaFSjEOmpCF9epj_gNF6fMaIv4bmQzgfpsgQ/viewform',
+    photo: 'assets/images/events/poster.jpg',
     category: 'technizen'
   }
 ];
 
 /* ===========================================
-   HOUR OF CODE  -- 2018(1) 2019(1) 2020(1) 2022(1) 2023(1) 2025(1) 2026(1)
+   HOUR OF CODE  -- 2018(1) 2019(1) 2020(1) 2023(1) 2025(1)
    =========================================== */
 var EV_HOUR_OF_CODE = [
   {
     year: 2018,
+    day: '05',
+    month: 'DECEMBER',
+    date: '05-12-2018',
     status: 'past',
-    title: 'Zilla Parishad High School, Chowdavaram',
-    description: 'First Hour of Code visit -- 2 volunteers, block-based coding for Grade 8, 60+ students.',
-    desc: 'In 2018, the ACM Student Chapter launched its foundational school outreach initiative at ZPHS Chowdavaram. Student volunteers introduced middle school students to logic building using Scratch visual programming tools.',
-    facts: [["1", "School Visited"], ["2", "Volunteers"], ["60+", "Students Reached"]],
-    banners: ["Zilla Parishad High School, Chowdavaram"],
+    title: 'Yanamadala Zilla Parishad High School, Yanamadala',
+    description: 'Social outreach event -- Hour of Code organized for high school students at Yanamadala ZPHS (200 participants).',
+    desc: 'ACM Student Chapter organized the Hour of Code social outreach event at Yanamadala Zilla Parishad High School, Yanamadala on 5th December 2018. Over 200 high school students participated in hands-on coding and computer literacy activities.',
+    facts: [["1", "School Visited"], ["200", "Students Participated"]],
+    banners: ["Yanamadala ZPHS Campus", "Hour of Code Session"],
     gallery: [],
-    fields: {},
+    fields: {
+      'Date': '05-12-2018',
+      'Event': 'Hour of Code (Social Outreach)',
+      'Venue': 'Yanamadala Zilla Parishad High School, Yanamadala',
+      'Target Audience': 'High School Students',
+      'Participants': '200'
+    },
     registerUrl: null,
     photo: null,
     category: 'hourOfCode'
   },
   {
     year: 2019,
+    day: '12',
+    month: 'DECEMBER',
+    date: '12-12-2019',
     status: 'past',
-    title: 'Sankar Vilas High School & Govt. High School, Koritepadu',
-    description: 'Two-school sprint -- scratch-based activities, 120 students introduced to programming.',
-    desc: 'Expanding our footprint across Guntur city, volunteers visited two municipal high schools. Through interactive drag-and-drop programming games and logic puzzles, over 120 students coded their first program.',
-    facts: [["2", "Schools Visited"], ["6", "Volunteers"], ["120+", "Students Reached"]],
-    banners: ["Sankar Vilas High School", "Govt. High School, Koritepadu"],
+    title: 'Sri Venkateswara Bala Kuteer School, Chowdavaram',
+    description: 'Social outreach event -- Hour of Code organized at Sri Venkateswara Bala Kuteer School (250 participants).',
+    desc: 'ACM Student Chapter organized the Hour of Code social outreach event at Sri Venkateswara Bala Kuteer School, Chowdavaram on 12th December 2019. Over 250 school students were introduced to logic building and programming basics.',
+    facts: [["1", "School Visited"], ["250", "Students Participated"]],
+    banners: ["Sri Venkateswara Bala Kuteer School", "Interactive Coding Session"],
     gallery: [],
-    fields: {},
+    fields: {
+      'Date': '12-12-2019',
+      'Event': 'Hour of Code (Social Outreach)',
+      'Venue': 'Sri Venkateswara Bala Kuteer School, Chowdavaram',
+      'Target Audience': 'School Students',
+      'Participants': '250'
+    },
     registerUrl: null,
     photo: null,
     category: 'hourOfCode'
   },
   {
     year: 2020,
+    day: '26',
+    month: 'DECEMBER',
+    date: '26-12-2020',
     status: 'past',
-    title: 'Online -- Three Schools (Virtual Format)',
-    description: 'Shifted to virtual sessions due to the pandemic; smaller batches but full reach maintained.',
-    desc: 'Adapting to global pandemic restrictions, ACM volunteers conducted live interactive computer literacy sessions via Google Meet for Grade 8 and 9 students across three rural schools.',
-    facts: [["3", "Virtual Schools"], ["8", "Volunteers"], ["90+", "Students Reached"]],
-    banners: ["Virtual Coding Lab - Session 1", "Interactive Quiz Session"],
+    title: 'Virtual Hour of Code (Online Format)',
+    description: 'Social outreach event -- Hour of Code organized online for students of various schools during lockdown (45 participants).',
+    desc: 'Adapting to pandemic restrictions, ACM Student Chapter conducted the Hour of Code event online on 26th December 2020. Students from various schools participated remotely in interactive virtual coding sessions.',
+    facts: [["Online", "Virtual Format"], ["45", "Students Participated"]],
+    banners: ["Virtual Coding Lab", "Online Session Stream"],
     gallery: [],
-    fields: {},
-    registerUrl: null,
-    photo: null,
-    category: 'hourOfCode'
-  },
-  {
-    year: 2022,
-    status: 'past',
-    title: 'Six Schools in One Week',
-    description: 'First multi-school sprint -- 40+ volunteer hours, Arduino demonstration added to curriculum.',
-    desc: 'Our largest sprint to date! Over a 5-day school drive, ACM members conducted workshops across six government schools. In addition to block coding, students experienced hands-on hardware demos with microcontrollers.',
-    facts: [["6", "Schools Visited"], ["14", "Volunteers"], ["350+", "Students Reached"]],
-    banners: ["Govt High School Nallapadu", "ZPHS Boyapalem", "Municipal High School Pattabhipuram"],
-    gallery: [],
-    fields: {},
+    fields: {
+      'Date': '26-12-2020',
+      'Format': 'Online / Virtual',
+      'Target Audience': 'Students of various schools',
+      'Participants': '45'
+    },
     registerUrl: null,
     photo: null,
     category: 'hourOfCode'
   },
   {
     year: 2023,
+    day: '08',
+    month: 'DECEMBER',
+    date: '08-12-2023',
     status: 'past',
-    title: 'Outreach Sprint -- Guntur District',
-    description: 'Four schools, 350+ students; first collaboration with district education office.',
-    desc: 'Partnering with the District Educational Officer, four suburban schools were selected for intensive 2-hour coding bootcamps. Students received certificates of participation from the ACM Chapter.',
-    facts: [["4", "Schools Visited"], ["12", "Volunteers"], ["350+", "Students Reached"]],
-    banners: ["St. Joseph's High School", "ZPHS Kaza", "Municipal High School"],
+    title: 'Yanamadala Zilla Parishad High School, Yanamadala',
+    description: 'Social outreach event -- Hour of Code organized at Yanamadala ZPHS (200 participants).',
+    desc: 'ACM Student Chapter organized the Hour of Code social outreach event at Yanamadala Zilla Parishad High School, Yanamadala on 8th December 2023. 200 high school students engaged in coding workshops and problem-solving activities.',
+    facts: [["1", "School Visited"], ["200", "Students Participated"]],
+    banners: ["Yanamadala ZPHS Session", "Hands-on Workshop"],
     gallery: [],
-    fields: {},
+    fields: {
+      'Date': '08-12-2023',
+      'Event': 'Hour of Code (Social Outreach)',
+      'Venue': 'Yanamadala Zilla Parishad High School, Yanamadala',
+      'Target Audience': 'High School Students',
+      'Participants': '200'
+    },
     registerUrl: null,
     photo: null,
     category: 'hourOfCode'
   },
   {
     year: 2025,
+    day: '12',
+    month: 'DECEMBER',
+    date: '12-12-2025',
     status: 'past',
-    title: '27th School Reached -- Milestone Visit',
-    description: 'Milestone outing; feeds into Technizen 2026 outreach segment. 600+ students reached.',
-    desc: 'Marking a major milestone in chapter history, our 27th school visit reached over 600 students across 4 institutions. Students were introduced to basic Python syntax alongside logic games.',
-    facts: [["4", "Schools Visited"], ["18", "Volunteers"], ["600+", "Students Reached"]],
-    banners: ["Sri Vidya School, Guntur", "Nagarjuna Public School", "St. Mary's High School"],
+    title: 'Yanamadala Zilla Parishad High School, Yanamadala',
+    description: 'Social outreach event -- Hour of Code organized at Yanamadala ZPHS (139 participants).',
+    desc: 'ACM Student Chapter organized the Hour of Code social outreach event at Yanamadala Zilla Parishad High School, Yanamadala on 12th December 2025. 139 high school students participated in interactive programming exercises.',
+    facts: [["1", "School Visited"], ["139", "Students Participated"]],
+    banners: ["Yanamadala ZPHS Workshop", "Student Coding Lab"],
     gallery: [],
-    fields: {},
-    registerUrl: null,
-    photo: null,
-    category: 'hourOfCode'
-  },
-  {
-    year: 2026,
-    status: 'past',
-    title: 'Pre-Technizen Schools Drive -- 5 Schools',
-    description: 'Five schools in the run-up to Technizen; introduced AI concepts to middle-school students.',
-    desc: 'As a curtain-raiser to Technizen 2K26, our team engaged 5 local schools in interactive sessions covering Artificial Intelligence basics, prompt thinking, and coding fundamentals.',
-    facts: [["5", "Schools Visited"], ["15", "Volunteers"], ["450+", "Students Reached"]],
-    banners: ["Nagarjuna High School", "ZPHS Perecherla", "Govt Model School"],
-    gallery: [],
-    fields: {},
+    fields: {
+      'Date': '12-12-2025',
+      'Event': 'Hour of Code (Social Outreach)',
+      'Venue': 'Yanamadala Zilla Parishad High School, Yanamadala',
+      'Target Audience': 'High School Students',
+      'Participants': '139'
+    },
     registerUrl: null,
     photo: null,
     category: 'hourOfCode'
@@ -837,7 +877,7 @@ var EV_WORKSHOPS = [
 /* ---- Helper Functions ---- */
 
 function evGetUpcoming(arr) {
-  return arr.filter(function (e) { return e.status === 'upcoming'; })[0] || null;
+  return arr.filter(function (e) { return e.status === 'upcoming' || e.status === 'ongoing'; })[0] || null;
 }
 
 function evGetPast(arr) {
@@ -850,7 +890,7 @@ function evTotalInstances(arr) {
 }
 
 function evHasUpcoming(arr) {
-  return arr.some(function (e) { return e.status === 'upcoming'; });
+  return arr.some(function (e) { return e.status === 'upcoming' || e.status === 'ongoing'; });
 }
 
 /* Global totals for the master stats strip */
