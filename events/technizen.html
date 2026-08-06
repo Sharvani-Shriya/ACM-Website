@@ -64,30 +64,9 @@
         <div class="ev-timeline" id="ev-timeline"></div>
       </div>
 
-      <!-- Photo marquee strip -->
-      <div class="ev-section-intro" style="margin-top:var(--space-xl);margin-bottom:var(--space-md);text-align:center;">
-        <span class="eyebrow" style="color:var(--ev-technizen);">In Action</span>
-        <h2>Moments from Technizen</h2>
-      </div>
-
-      <div class="gallery-marquee-wrap" style="margin-bottom:var(--space-xl);">
-        <!-- Row A — scrolls left -->
-        <div class="marquee-row row-a">
-          <div class="gallery-tile"><img src="../assets/images/events/event-technoverse.jpeg" alt="Technoverse Event"></div>
-          <div class="gallery-tile"><img src="../assets/images/events/event-ai-innovators.jpeg" alt="AI Innovators Event"></div>
-          <div class="gallery-tile"><img src="../assets/images/events/event-build-pitch.jpeg" alt="Build &amp; Pitch Event"></div>
-          <div class="gallery-tile"><img src="../assets/images/events/event-dsa-clash.jpeg" alt="DSA Clash Event"></div>
-          <div class="gallery-tile"><img src="../assets/images/events/event-pixel-craft.jpeg" alt="Pixel Craft Event"></div>
-        </div>
-
-        <!-- Row B — scrolls right -->
-        <div class="marquee-row row-b">
-          <div class="gallery-tile"><img src="../assets/images/events/event-query-masters.jpeg" alt="Query Masters Event"></div>
-          <div class="gallery-tile"><img src="../assets/images/global/Technizen banner.png" alt="Technizen Flagship Fest"></div>
-          <div class="gallery-tile"><img src="../assets/images/gallery/gallery-1.jpg" alt="Technizen Highlight 1"></div>
-          <div class="gallery-tile"><img src="../assets/images/gallery/gallery-2.jpg" alt="Technizen Highlight 2"></div>
-          <div class="gallery-tile"><img src="../assets/images/gallery/gallery-3.jpg" alt="Technizen Highlight 3"></div>
-        </div>
+      <!-- Photo strip marquee of template grid tiles -->
+      <div class="ev-photo-marquee-wrap">
+        <div class="ev-photo-strip-marquee" id="ev-photo-strip"></div>
       </div>
 
     </div>
@@ -212,6 +191,20 @@
           timelineEl.appendChild(node);
         });
       }
+    }
+
+    /* Photo strip — marquee template tiles per past year */
+    var photoEl = document.getElementById('ev-photo-strip');
+    if (photoEl) {
+      var years = evGetPast(DATA).map(function(e){ return e.year; }).filter(function(v,i,a){ return a.indexOf(v)===i; });
+      if (years.length === 0 && upcoming) { years = [upcoming.year]; }
+      years.forEach(function(y) {
+        var tile = document.createElement('div');
+        tile.className = 'ev-photo-tile';
+        tile.textContent = 'Photo — ' + y;
+        photoEl.appendChild(tile);
+      });
+      photoEl.innerHTML += photoEl.innerHTML;
     }
   })();
   </script>
