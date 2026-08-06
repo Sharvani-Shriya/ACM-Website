@@ -599,11 +599,11 @@ p {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url('../images/banners/guest-lectures-hero.png');
+  background-image: url('../images/banners/guest-lectures-hero.jpg');
   background-size: cover;
-  background-position: right 35% center;
+  background-position: center;
   background-repeat: no-repeat;
-  opacity: 0.55;
+  opacity: 0.45;
   mix-blend-mode: screen;
   pointer-events: none;
   z-index: 1;
@@ -630,6 +630,21 @@ p {
   position: absolute;
   inset: 0;
   background-image: url('../images/banners/intra-college-hero.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.45;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Transparent Tech Overlay for Technizen Fest Hero Section */
+.page-hero.tz-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('../images/banners/technizen-hero.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
