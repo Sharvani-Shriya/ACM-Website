@@ -196,20 +196,11 @@
     /* Photo strip — marquee template tiles for Technizen */
     var photoEl = document.getElementById('ev-photo-strip');
     if (photoEl) {
-      var tileLabels = [
-        'Photo — Technizen 2026',
-        'Photo — Flagship Fest',
-        'Photo — Tech Expo',
-        'Photo — Hackathon',
-        'Photo — Workshops',
-        'Photo — Guest Talks',
-        'Photo — Coding Contest',
-        'Photo — Project Exhibition'
-      ];
-      tileLabels.forEach(function(label) {
+      var years = ['2026', '2025', '2024', '2023', '2022', '2021', '2020', '2019', '2018'];
+      years.forEach(function(y) {
         var tile = document.createElement('div');
         tile.className = 'ev-photo-tile';
-        tile.textContent = label;
+        tile.textContent = 'Photo — ' + y;
         photoEl.appendChild(tile);
       });
       // Duplicate tiles for seamless infinite marquee loop
