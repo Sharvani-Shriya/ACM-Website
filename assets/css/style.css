@@ -609,6 +609,36 @@ p {
   z-index: 1;
 }
 
+/* Transparent Tech Overlay for Technical Workshops Hero Section */
+.page-hero.ws-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('../images/banners/workshops-hero.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.45;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Transparent Tech Overlay for Intra College Tech Events Hero Section */
+.page-hero.intra-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('../images/banners/intra-college-hero.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.45;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 1;
+}
+
 .page-hero .crumb {
   font-size: var(--text-sm);
   text-transform: uppercase;
