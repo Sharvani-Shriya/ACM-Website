@@ -62,7 +62,10 @@
         <div class="ev-timeline" id="ev-timeline"></div>
       </div>
 
-      <div class="ev-photo-strip" id="ev-photo-strip"></div>
+      <!-- Photo strip marquee of template grid tiles -->
+      <div class="ev-photo-marquee-wrap">
+        <div class="ev-photo-strip-marquee" id="ev-photo-strip"></div>
+      </div>
 
     </div>
   </section>
@@ -174,13 +177,14 @@
     /* Photo strip */
     var photoEl = document.getElementById('ev-photo-strip');
     if (photoEl) {
-      var years = past.map(function(e){ return e.year; }).filter(function(v,i,a){ return a.indexOf(v)===i; }).slice(0,5);
+      var years = past.map(function(e){ return e.year; }).filter(function(v,i,a){ return a.indexOf(v)===i; });
       years.forEach(function(y) {
         var tile = document.createElement('div');
         tile.className = 'ev-photo-tile';
         tile.textContent = 'Photo — ' + y;
         photoEl.appendChild(tile);
       });
+      photoEl.innerHTML += photoEl.innerHTML;
     }
   })();
   </script>

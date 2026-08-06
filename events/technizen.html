@@ -64,8 +64,10 @@
         <div class="ev-timeline" id="ev-timeline"></div>
       </div>
 
-      <!-- Photo strip -->
-      <div class="ev-photo-strip" id="ev-photo-strip"></div>
+      <!-- Photo strip marquee of template grid tiles -->
+      <div class="ev-photo-marquee-wrap">
+        <div class="ev-photo-strip-marquee" id="ev-photo-strip"></div>
+      </div>
 
     </div>
   </section>
@@ -167,7 +169,7 @@
         var maxY = past[0].year;
         eyebrowEl.textContent = minY + ' \u2192 ' + maxY;
       }
-      /* If no past editions yet, show the upcoming as the inaugural node */
+      /* If no past editions yet, show the inaugural node */
       if (past.length === 0 && upcoming) {
         var node = document.createElement('div');
         node.className = 'ev-t-node';
@@ -191,10 +193,10 @@
       }
     }
 
-    /* Photo strip — placeholder tiles per past year */
+    /* Photo strip — marquee template tiles per past year */
     var photoEl = document.getElementById('ev-photo-strip');
     if (photoEl) {
-      var years = evGetPast(DATA).map(function(e){ return e.year; }).filter(function(v,i,a){ return a.indexOf(v)===i; }).slice(0,5);
+      var years = evGetPast(DATA).map(function(e){ return e.year; }).filter(function(v,i,a){ return a.indexOf(v)===i; });
       if (years.length === 0 && upcoming) { years = [upcoming.year]; }
       years.forEach(function(y) {
         var tile = document.createElement('div');
@@ -202,6 +204,7 @@
         tile.textContent = 'Photo — ' + y;
         photoEl.appendChild(tile);
       });
+      photoEl.innerHTML += photoEl.innerHTML;
     }
   })();
   </script>
