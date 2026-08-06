@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timeline + Archive + Modal prototype</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --navy: #0B1E3D;
+            --navy-2: #132A52;
+            --cream: #FAF7EF;
+            --paper: #FFFFFF;
+            --ink: #1B2338;
+            --muted: #5B6478;
+            --line: #E6E2D6;
+            --gold: #C6952F;
+            --ev-hoc: #2E7D6B;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--cream);
+            color: var(--ink);
+            font-family: 'Source Sans 3', sans-serif;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 24px 100px;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Playfair Display', serif;
+            margin: 0;
+            color: var(--navy);
+        }
+
+        .eyebrow {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: .72rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--ev-hoc);
+        }
+
+        .proto-note {
+            background: #1B2338;
+            color: #EDEAE0;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: .78rem;
+            text-align: center;
+            padding: 10px 16px;
+        }
+
+        .page-head {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .page-head h1 {
+            font-size: 2rem;
+            margin-top: 8px;
+        }
+
+        .page-head p {
+            color: var(--muted);
+            margin-top: 8px;
+            font-size: .92rem;
+        }
+
+        /* ===== COMPACT TIMELINE (recent years) ===== */
+        .t-line {
+            position: relative;
+            max-width: 780px;
+            margin: 0 auto 8px;
+        }
+
+        .t-line::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: var(--line);
+            transform: translateX(-50%);
+        }
+
+        .t-node {
+            position: relative;
+            width: 50%;
+            padding: 0 30px 34px;
+            cursor: pointer;
+        }
+
+        .t-node:nth-child(odd) {
+            left: 0;
+            text-align: right;
+        }
+
+        .t-node:nth-child(even) {
+            left: 50%;
+            text-align: left;
+        }
+
+        .t-dot {
+            position: absolute;
+            top: 4px;
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            background: var(--ev-hoc);
+            border: 2px solid var(--paper);
+            box-shadow: 0 0 0 1px var(--ev-hoc);
+            transition: transform .18s ease;
+        }
+
+        .t-node:nth-child(odd) .t-dot {
+            right: -6px;
+        }
+
+        .t-node:nth-child(even) .t-dot {
+            left: -6px;
+        }
+
+        .t-card {
+            display: inline-block;
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 14px 16px;
+            transition: box-shadow .18s ease, transform .18s ease;
+            position: relative;
+            max-width: 320px;
+            text-align: left;
+        }
+
+        .t-node:nth-child(odd) .t-card {
+            text-align: right;
+        }
+
+        .t-year {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: .76rem;
+            color: var(--ev-hoc);
+            margin-bottom: 3px;
+        }
+
+        .t-card h4 {
+            font-size: .96rem;
+            color: var(--navy);
+            margin: 0 0 4px;
+        }
+
+        .t-card p {
+            font-size: .83rem;
+            color: var(--muted);
+            margin: 0;
+            line-height: 1.45;
+        }
+
+        .t-node:hover .t-dot {
+            transform: scale(1.3);
+        }
+
+        .t-node:hover .t-card {
+            box-shadow: 0 10px 26px rgba(11, 30, 61, .12);
+            transform: translateY(-2px);
+        }
+
+        /* hover peek — appears inside the card, no layout jump */
+        .peek {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .22s ease;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-top: 0;
+        }
+
+        .t-node:hover .peek {
+            max-height: 70px;
+            margin-top: 10px;
+        }
+
+        .peek-thumb {
+            width: 52px;
+            height: 52px;
+            border-radius: 6px;
+            flex: none;
+            background: linear-gradient(135deg, #E6E2D6, #D8D3C3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: .55rem;
+            color: var(--muted);
+            text-align: center;
+        }
+
+        .peek-cta {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: .68rem;
+            color: var(--ev-hoc);
+            white-space: nowrap;
+        }
+
+        /* ===== ARCHIVE TOGGLE ===== */
+        .archive-toggle-wrap {
+            text-align: center;
+            margin: 10px 0 30px;
+        }
+
+        .archive-toggle {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: .76rem;
+            letter-spacing: .03em;
+            color: var(--navy);
+            background: var(--paper);
+            border: 1px solid var(--line);
+            padding: 10px 20px;
+            border-radius: 24px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: background .15s ease, border-color .15s ease;
+        }
+
+        .archive-toggle:hover {
+            border-color: var(--ev-hoc);
+        }
+
+        .archive-toggle .chev {
+            transition: transform .2s ease;
+        }
+
+        .archive-toggle.open .chev {
+            transform: rotate(180deg);
+        }
+
+        /* ===== ARCHIVE CARD GRID ===== */
+        .archive-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .35s ease;
+        }
+
+        .archive-grid.open {
+            max-height: 900px;
+        }
+
+        .a-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-left: 3px solid var(--ev-hoc);
+            border-radius: 10px;
+            padding: 16px 18px;
+            cursor: pointer;
+            position: relative;
+            transition: box-shadow .18s ease, transform .18s ease;
+        }
+
+        .a-card:hover {
+            box-shadow: 0 10px 26px rgba(11, 30, 61, .1);
+            transform: translateY(-2px);
+        }
+
+        .a-badge {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: #EFEBDD;
+            color: var(--muted);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: .66rem;
+            padding: 3px 10px;
+            border-radius: 12px;
+        }
+
+        .a-year {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: .78rem;
+            color: var(--ev-hoc);
+            margin-bottom: 6px;
+        }
+
+        .a-card h4 {
+            font-size: .98rem;
+            color: var(--navy);
+            margin: 0 0 4px;
+        }
+
+        .a-card p {
+            font-size: .83rem;
+            color: var(--muted);
+            margin: 0;
+            line-height: 1.45;
+        }
+
+        .a-peek {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .2s ease;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .a-card:hover .a-peek {
+            max-height: 60px;
+            margin-top: 10px;
+        }
+
+        @media (max-width:600px) {
+            .t-node {
+                width: 100%;
+                left: 0 !important;
+                text-align: left !important;
+                padding: 0 0 26px 26px;
+            }
+
+            .t-line::before {
+                left: 5px;
+            }
+
+            .t-node .t-dot {
+                left: 0 !important;
+                right: auto !important;
+            }
+
+            .t-node .t-card {
+                text-align: left !important;
+                max-width: none;
+            }
+
+            .archive-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== MODAL ===== */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(11, 20, 40, .55);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            z-index: 100;
+        }
+
+        .modal-backdrop.show {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--paper);
+            border-radius: 16px;
+            max-width: 640px;
+            width: 100%;
+            max-height: 88vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .9);
+            border: none;
+            font-size: 1.1rem;
+            cursor: pointer;
+            color: var(--navy);
+            z-index: 2;
+        }
+
+        .modal-hero {
+            background: var(--navy-2);
+            color: #fff;
+            padding: 32px 32px 24px;
+        }
+
+        .modal-hero .eyebrow {
+            color: #8FB4E8;
+        }
+
+        .modal-hero h2 {
+            color: #fff;
+            font-size: 1.6rem;
+            margin: 6px 0 8px;
+        }
+
+        .modal-hero p {
+            color: #C9D0E0;
+            font-size: .9rem;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .modal-body {
+            padding: 26px 32px 32px;
+        }
+
+        .modal-facts {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-bottom: 22px;
+        }
+
+        .mf {
+            background: var(--cream);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .mf b {
+            display: block;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 1rem;
+            color: var(--navy);
+        }
+
+        .mf span {
+            font-size: .72rem;
+            color: var(--muted);
+        }
+
+        .modal-desc {
+            font-size: .92rem;
+            line-height: 1.6;
+            color: var(--ink);
+            margin-bottom: 24px;
+        }
+
+        .modal-slider {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/8;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .slider-track {
+            display: flex;
+            height: 100%;
+            transition: transform .5s ease;
+        }
+
+        .slide {
+            flex: 0 0 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #E6E2D6, #D8D3C3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: .72rem;
+            color: var(--muted);
+            text-align: center;
+            padding: 10px;
+        }
+
+        .slide b {
+            display: block;
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: .86rem;
+            color: var(--navy);
+            font-weight: 700;
+            margin-top: 5px;
+        }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 20px;
+        }
+
+        .s-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--line);
+            cursor: pointer;
+            transition: background .2s ease, transform .2s ease;
+        }
+
+        .s-dot.active {
+            background: var(--ev-hoc);
+            transform: scale(1.35);
+        }
+
+        .modal-gallery-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: .7rem;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 10px;
+        }
+
+        .modal-gallery {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        .mg-tile {
+            aspect-ratio: 1/1;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #E6E2D6, #D8D3C3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: .6rem;
+            color: var(--muted);
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="proto-note">PROTOTYPE — sample "Hour of Code" data only. Same pattern applies to all 6 categories, using
+        your existing events-data.js structure.</div>
+
+    <div class="container">
+        <div class="page-head">
+            <span class="eyebrow">Hour of Code · 2017 → 2026</span>
+            <h1>Year by year</h1>
+            <p>Hover a card for a quick peek. Click any card to open the full story, group photo and gallery.</p>
+        </div>
+
+        <!-- Recent years — always visible, compact timeline -->
+        <div class="t-line" id="recentTimeline"></div>
+
+        <!-- Archive toggle -->
+        <div class="archive-toggle-wrap">
+            <button class="archive-toggle" id="archiveToggle">
+                <span id="archiveToggleLabel">Show 4 earlier years (2017–2020)</span>
+                <span class="chev">&#9662;</span>
+            </button>
+        </div>
+
+        <!-- Archive grid — hidden until toggled -->
+        <div class="archive-grid" id="archiveGrid"></div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal-backdrop" id="modalBackdrop">
+        <div class="modal">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <div class="modal-hero">
+                <span class="eyebrow" id="modalYear"></span>
+                <h2 id="modalTitle"></h2>
+                <p id="modalSummary"></p>
+            </div>
+            <div class="modal-body">
+                <div class="modal-facts" id="modalFacts"></div>
+                <div class="modal-desc" id="modalDesc"></div>
+                <div class="modal-slider" id="modalSlider">
+                    <div class="slider-track" id="sliderTrack"></div>
+                </div>
+                <div class="slider-dots" id="sliderDots"></div>
+                <div class="modal-gallery-label">Photo gallery</div>
+                <div class="modal-gallery" id="modalGallery"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* ===== Sample data — mirrors your real events-data.js shape, just extended
+           with groupPhoto + gallery + facts for the modal ===== */
+        var HOC_INSTANCES = [
+            {
+                year: 2026, title: "27th school reached", summary: "Milestone visit; feeds into Technizen's outreach segment.",
+                desc: "This visit marked the 27th school reached since the program began in 2017. Ten volunteers ran three parallel sessions across grades 6 to 8, closing the year on a milestone that folds directly into Technizen's outreach programming.",
+                facts: [["1", "School visited"], ["10", "Volunteers"], ["120", "Students reached"]], schools: "1 school",
+                schoolNames: ["Zilla Parishad HS, Chowdavaram"]
+            },
+            {
+                year: 2025, title: "Three-school autumn sprint", summary: "Three schools covered back to back in the same week.",
+                desc: "Three schools were visited across the same week, testing a tighter scheduling format that let two volunteer teams run all three sessions without a break week in between.",
+                facts: [["3", "Schools visited"], ["11", "Volunteers"], ["150", "Students reached"]], schools: "3 schools",
+                schoolNames: ["Sri Vidya School, Guntur", "Nagarjuna Public School", "St. Mary's High School"]
+            },
+            {
+                year: 2024, title: "Partnered with district education office", summary: "Formal tie-up widened reach to two neighbouring mandals.",
+                desc: "A formal partnership with the district education office opened access to two neighbouring mandals for the first time, more than doubling the program's practical reach for future years.",
+                facts: [["3", "Schools visited"], ["12", "Volunteers"], ["210", "Students reached"]], schools: "3 schools",
+                schoolNames: ["Municipal High School, Arundelpet", "Government High School, Tenali", "APSWREIS Guntur"]
+            },
+            {
+                year: 2023, title: "First full week sprint", summary: "5 schools covered in a single week.",
+                desc: "The program's first full-week sprint format — five schools covered back to back, coordinated across two volunteer teams working in parallel.",
+                facts: [["5", "Schools visited"], ["14", "Volunteers"], ["260", "Students reached"]], schools: "5 schools",
+                schoolNames: ["Ravindra Bharathi School", "Sri Chaitanya School, Kanuru", "Vignan Vidyalayam", "DAV Public School, Guntur", "Bapatla Zilla Parishad School"]
+            },
+            {
+                year: 2022, title: "6 schools in one week", summary: "First multi-school sprint, 40+ volunteer hours logged.",
+                desc: "The first true multi-school sprint. Six schools in one week, over 40 cumulative volunteer hours, and the first year attendance was tracked formally school by school.",
+                facts: [["6", "Schools visited"], ["16", "Volunteers"], ["300", "Students reached"]], schools: "6 schools",
+                schoolNames: ["Zilla Parishad HS, Chowdavaram", "Sri Vidya School, Guntur", "Nagarjuna Public School", "St. Mary's High School", "Municipal High School, Arundelpet", "Government High School, Tenali"]
+            },
+            {
+                year: 2021, title: "Return to in-person visits", summary: "Two schools visited as restrictions eased.",
+                desc: "With restrictions easing, the program returned to in-person visits for the first time since 2019, visiting two schools with reduced batch sizes as a precaution.",
+                facts: [["2", "Schools visited"], ["6", "Volunteers"], ["70", "Students reached"]], schools: "2 schools",
+                schoolNames: ["APSWREIS Guntur", "Ravindra Bharathi School"]
+            },
+            {
+                year: 2020, title: "3 schools, online format", summary: "Shifted to virtual sessions; every school on the list still reached.",
+                desc: "The program shifted entirely online. Batches were smaller, but every school already committed for the year was still reached, just over video call instead of in person.",
+                facts: [["3", "Schools visited"], ["5", "Volunteers"], ["60", "Students reached"]], schools: "3 schools",
+                schoolNames: ["Sri Chaitanya School, Kanuru", "Vignan Vidyalayam", "DAV Public School, Guntur"]
+            },
+            {
+                year: 2019, title: "Two-school spring visit", summary: "Expanded beyond the founding school.",
+                desc: "The program's first expansion beyond its founding school, adding a second location in the spring term and doubling the volunteer roster to cover both.",
+                facts: [["2", "Schools visited"], ["4", "Volunteers"], ["50", "Students reached"]], schools: "2 schools",
+                schoolNames: ["Zilla Parishad HS, Chowdavaram", "Sri Vidya School, Guntur"]
+            },
+            {
+                year: 2018, title: "Zilla Parishad HS, Chowdavaram", summary: "First outing — block-based coding for grade 8.",
+                desc: "The founding visit of Hour of Code at RVRJC — two volunteers introduced block-based coding to a single grade-8 classroom at Zilla Parishad High School, Chowdavaram.",
+                facts: [["1", "School visited"], ["2", "Volunteers"], ["35", "Students reached"]], schools: "1 school",
+                schoolNames: ["Zilla Parishad HS, Chowdavaram"]
+            },
+            {
+                year: 2017, title: "Program founded", summary: "Chapter's first-ever community outreach initiative.",
+                desc: "Hour of Code began as the chapter's very first community outreach initiative, planting the idea that would later grow into the full program running today.",
+                facts: [["—", "Planning year"], ["3", "Founding members"], ["—", "No visits yet"]], schools: "Founded",
+                schoolNames: []
+            }
+        ];
+
+        var RECENT_COUNT = 6;
+        var recent = HOC_INSTANCES.slice(0, RECENT_COUNT);
+        var earlier = HOC_INSTANCES.slice(RECENT_COUNT);
+
+        function makePeek(item) {
+            return '<div class="peek"><div class="peek-thumb">Photo —<br>' + item.year + '</div>' +
+                '<div class="peek-cta">' + item.schools + ' &middot; click for full story &rarr;</div></div>';
+        }
+
+        /* Render recent timeline */
+        var timelineEl = document.getElementById('recentTimeline');
+        recent.forEach(function (item, i) {
+            var node = document.createElement('div');
+            node.className = 't-node';
+            node.innerHTML =
+                '<div class="t-dot"></div>' +
+                '<div class="t-card">' +
+                '<div class="t-year">' + item.year + '</div>' +
+                '<h4>' + item.title + '</h4>' +
+                '<p>' + item.summary + '</p>' +
+                makePeek(item) +
+                '</div>';
+            node.addEventListener('click', function () { openModal(item); });
+            timelineEl.appendChild(node);
+        });
+
+        /* Render archive grid */
+        var archiveEl = document.getElementById('archiveGrid');
+        earlier.forEach(function (item) {
+            var card = document.createElement('div');
+            card.className = 'a-card';
+            card.innerHTML =
+                '<span class="a-badge">' + item.schools + '</span>' +
+                '<div class="a-year">' + item.year + '</div>' +
+                '<h4>' + item.title + '</h4>' +
+                '<p>' + item.summary + '</p>' +
+                '<div class="a-peek">' + makePeek(item).replace('peek', 'a-peek-inner') + '</div>';
+            card.addEventListener('click', function () { openModal(item); });
+            archiveEl.appendChild(card);
+        });
+
+        /* Archive toggle */
+        var toggleBtn = document.getElementById('archiveToggle');
+        var toggleLabel = document.getElementById('archiveToggleLabel');
+        var years = earlier.map(function (e) { return e.year; });
+        var yearRangeLabel = earlier.length ? ('Show ' + earlier.length + ' earlier years (' + Math.min.apply(null, years) + '–' + Math.max.apply(null, years) + ')') : '';
+        toggleLabel.textContent = yearRangeLabel;
+        toggleBtn.addEventListener('click', function () {
+            var isOpen = archiveEl.classList.toggle('open');
+            toggleBtn.classList.toggle('open', isOpen);
+            toggleLabel.textContent = isOpen ? 'Hide earlier years' : yearRangeLabel;
+        });
+
+        /* Modal + auto-sliding banner carousel */
+        var backdrop = document.getElementById('modalBackdrop');
+        var sliderInterval = null;
+        var currentSlide = 0;
+        var slideCount = 1;
+
+        function buildSlider(item) {
+            var names = (item.schoolNames && item.schoolNames.length) ? item.schoolNames : null;
+            var track = document.getElementById('sliderTrack');
+            var dotsEl = document.getElementById('sliderDots');
+            track.innerHTML = '';
+            dotsEl.innerHTML = '';
+
+            var slides = names || ['No visits yet'];
+            slideCount = slides.length;
+
+            slides.forEach(function (name) {
+                var s = document.createElement('div');
+                s.className = 'slide';
+                s.innerHTML = 'Group photo &mdash; ' + item.year + '<b>' + name + '</b>';
+                track.appendChild(s);
+            });
+
+            if (slideCount > 1) {
+                slides.forEach(function (_, i) {
+                    var d = document.createElement('div');
+                    d.className = 's-dot' + (i === 0 ? ' active' : '');
+                    d.addEventListener('click', function () { goToSlide(i); resetAutoSlide(); });
+                    dotsEl.appendChild(d);
+                });
+            }
+
+            currentSlide = 0;
+            updateSliderPosition();
+            resetAutoSlide();
+        }
+
+        function updateSliderPosition() {
+            document.getElementById('sliderTrack').style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
+            var dots = document.querySelectorAll('.s-dot');
+            dots.forEach(function (d, i) { d.classList.toggle('active', i === currentSlide); });
+        }
+
+        function goToSlide(i) { currentSlide = i; updateSliderPosition(); }
+
+        function resetAutoSlide() {
+            clearInterval(sliderInterval);
+            if (slideCount > 1) {
+                sliderInterval = setInterval(function () {
+                    goToSlide((currentSlide + 1) % slideCount);
+                }, 2800);
+            }
+        }
+
+        var sliderEl = document.getElementById('modalSlider');
+        sliderEl.addEventListener('mouseenter', function () { clearInterval(sliderInterval); });
+        sliderEl.addEventListener('mouseleave', function () { resetAutoSlide(); });
+
+        function openModal(item) {
+            document.getElementById('modalYear').textContent = 'Hour of Code · ' + item.year;
+            document.getElementById('modalTitle').textContent = item.title;
+            document.getElementById('modalSummary').textContent = item.summary;
+            document.getElementById('modalDesc').textContent = item.desc;
+            buildSlider(item);
+
+            var factsEl = document.getElementById('modalFacts');
+            factsEl.innerHTML = '';
+            item.facts.forEach(function (f) {
+                var d = document.createElement('div');
+                d.className = 'mf';
+                d.innerHTML = '<b>' + f[0] + '</b><span>' + f[1] + '</span>';
+                factsEl.appendChild(d);
+            });
+
+            var galEl = document.getElementById('modalGallery');
+            galEl.innerHTML = '';
+            for (var i = 1; i <= 4; i++) {
+                var tile = document.createElement('div');
+                tile.className = 'mg-tile';
+                tile.textContent = 'Photo ' + i;
+                galEl.appendChild(tile);
+            }
+
+            backdrop.classList.add('show');
+        }
+        function closeModal() { backdrop.classList.remove('show'); clearInterval(sliderInterval); }
+        document.getElementById('modalClose').addEventListener('click', closeModal);
+        backdrop.addEventListener('click', function (e) { if (e.target === backdrop) closeModal(); });
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
+    </script>
+
+</body>
+
+</html>
