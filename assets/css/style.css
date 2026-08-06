@@ -3521,7 +3521,7 @@ table.data-table td.placeholder {
   gap: 14px;
   width: max-content;
   will-change: transform;
-  animation: scrollLeft 25s linear infinite;
+  animation: scrollLeft 55s linear infinite;
 }
 
 .ev-photo-marquee-wrap:hover .ev-photo-strip-marquee {
