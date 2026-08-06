@@ -147,8 +147,8 @@ var EV_TECHNIZEN = [
     badgeText: 'ONGOING NOW',
     title: 'Technizen 2K26',
     description: 'Flagship annual technical fest is ONGOING NOW (11th & 12th August 2026) -- six competitive sub-events.',
-    desc: 'Technizen 2K26 is currently ONGOING on 11th & 12th August 2026! Spanning six specialized technical tracks from database optimization to AI startup pitching, students from across the region are competing for prestigious awards, cash prizes, and industry internships.',
-    facts: [["6", "Sub-events"], ["500+", "Participants"], ["Rs.50K", "Total Prize Pool"]],
+    desc: 'Technizen 2K26 is currently ONGOING on 11th & 12th August 2026! Spanning six specialized technical tracks from database optimization to AI startup pitching, students from across the region are competing for prestigious awards, recognition, and industry internships.',
+    facts: [["6", "Sub-events"], ["500+", "Participants"], ["Merit & Participation", "Certificates"]],
     banners: ["Query Masters", "DSA Clash", "AI Innovators Arena", "Pixel Craft", "Build & Pitch", "Technoverse"],
     gallery: [],
     fields: {

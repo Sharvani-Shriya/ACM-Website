@@ -407,8 +407,22 @@
                   }
                 });
 
-                hoverInfo.innerHTML = '<strong>' + year + ':</strong> ' + (parts.join(' · ') || 'No events');
+                var activeCount = parts.length;
+                var fontSize = '13.5px';
+                var paddingStr = '5px 14px';
+
+                if (activeCount >= 5) {
+                  fontSize = '11.8px';
+                  paddingStr = '4px 10px';
+                } else if (activeCount >= 4) {
+                  fontSize = '12.5px';
+                  paddingStr = '4px 12px';
+                }
+
+                hoverInfo.innerHTML = '<span style="white-space:nowrap;font-size:' + fontSize + ';display:inline-flex;align-items:center;gap:4px;"><strong>' + year + ':</strong> ' + (parts.join('<span style="opacity:0.4;margin:0 2px;">·</span>') || 'No events') + '</span>';
                 hoverInfo.style.display = 'inline-flex';
+                hoverInfo.style.whiteSpace = 'nowrap';
+                hoverInfo.style.padding = paddingStr;
                 hoverInfo.style.borderColor = 'rgba(20, 80, 158, 0.35)';
                 hoverInfo.style.boxShadow = '0 4px 14px rgba(20, 80, 158, 0.12)';
               } else {
