@@ -594,6 +594,21 @@ p {
   z-index: 1;
 }
 
+/* Transparent Tech Overlay for Guest Lectures Hero Section */
+.page-hero.gl-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('../images/banners/guest-lectures-hero.png');
+  background-size: cover;
+  background-position: right 35% center;
+  background-repeat: no-repeat;
+  opacity: 0.55;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 1;
+}
+
 .page-hero .crumb {
   font-size: var(--text-sm);
   text-transform: uppercase;
