@@ -64,8 +64,10 @@
         <div class="ev-timeline" id="ev-timeline"></div>
       </div>
 
-      <!-- Photo strip -->
-      <div class="ev-photo-strip" id="ev-photo-strip"></div>
+      <!-- Photo strip marquee of template grid tiles -->
+      <div class="ev-photo-marquee-wrap">
+        <div class="ev-photo-strip-marquee" id="ev-photo-strip"></div>
+      </div>
 
     </div>
   </section>
@@ -179,16 +181,18 @@
       });
     }
 
-    /* Photo strip — placeholder tiles per past year */
+    /* Photo strip marquee — template tiles per past year */
     var photoEl = document.getElementById('ev-photo-strip');
     if (photoEl) {
-      var years = evGetPast(DATA).map(function(e){ return e.year; }).filter(function(v,i,a){ return a.indexOf(v)===i; }).slice(0,5);
+      var years = evGetPast(DATA).map(function(e){ return e.year; }).filter(function(v,i,a){ return a.indexOf(v)===i; });
       years.forEach(function(y) {
         var tile = document.createElement('div');
         tile.className = 'ev-photo-tile';
         tile.textContent = 'Photo — ' + y;
         photoEl.appendChild(tile);
       });
+      // Duplicate tiles for seamless infinite marquee loop
+      photoEl.innerHTML += photoEl.innerHTML;
     }
   })();
   </script>

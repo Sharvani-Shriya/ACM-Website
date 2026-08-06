@@ -73,9 +73,9 @@ var EV_CATEGORIES = {
    Order of keys must match EV_CATEGORIES keys above.
    Values are counts of instances that year.                  */
 var EV_CHART_DATA = [
-  { year: 2018, technizen: 0, hourOfCode: 1, outreach: 1, guestLectures: 1, intraCollege: 0, workshops: 0 },
+  { year: 2018, technizen: 0, hourOfCode: 1, outreach: 1, guestLectures: 1, intraCollege: 2, workshops: 2 },
   { year: 2019, technizen: 0, hourOfCode: 2, outreach: 1, guestLectures: 2, intraCollege: 1, workshops: 1 },
-  { year: 2020, technizen: 0, hourOfCode: 1, outreach: 1, guestLectures: 1, intraCollege: 0, workshops: 0 },
+  { year: 2020, technizen: 0, hourOfCode: 1, outreach: 1, guestLectures: 1, intraCollege: 5, workshops: 6 },
   { year: 2021, technizen: 0, hourOfCode: 2, outreach: 2, guestLectures: 3, intraCollege: 2, workshops: 1 },
   { year: 2022, technizen: 0, hourOfCode: 3, outreach: 3, guestLectures: 4, intraCollege: 2, workshops: 2 },
   { year: 2023, technizen: 0, hourOfCode: 4, outreach: 3, guestLectures: 5, intraCollege: 3, workshops: 3 },
@@ -1102,12 +1102,12 @@ var EV_WORKSHOPS = [
 /* ---- Helper Functions ---- */
 
 function evGetUpcoming(arr) {
-  return arr.filter(function(e) { return e.status === 'upcoming'; })[0] || null;
+  return arr.filter(function (e) { return e.status === 'upcoming'; })[0] || null;
 }
 
 function evGetPast(arr) {
-  return arr.filter(function(e) { return e.status === 'past'; })
-            .sort(function(a, b) { return b.year - a.year; });
+  return arr.filter(function (e) { return e.status === 'past'; })
+    .sort(function (a, b) { return b.year - a.year; });
 }
 
 function evTotalInstances(arr) {
@@ -1115,12 +1115,12 @@ function evTotalInstances(arr) {
 }
 
 function evHasUpcoming(arr) {
-  return arr.some(function(e) { return e.status === 'upcoming'; });
+  return arr.some(function (e) { return e.status === 'upcoming'; });
 }
 
 /* Global totals for the master stats strip */
 var EV_ALL_INSTANCES = [].concat(EV_TECHNIZEN, EV_HOUR_OF_CODE, EV_OUTREACH, EV_GUEST_LECTURES, EV_INTRA_COLLEGE, EV_WORKSHOPS);
-var EV_TOTAL_EVENTS   = EV_ALL_INSTANCES.length;
+var EV_TOTAL_EVENTS = EV_ALL_INSTANCES.length;
 var EV_SCHOOLS_VISITED = 27;   // Hour of Code cumulative
-var EV_GUEST_COUNT    = EV_GUEST_LECTURES.length;
-var EV_YEARS_ACTIVE   = 9;     // 2018–2026
+var EV_GUEST_COUNT = EV_GUEST_LECTURES.length;
+var EV_YEARS_ACTIVE = 9;     // 2018–2026

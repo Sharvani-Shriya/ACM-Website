@@ -3508,7 +3508,32 @@ table.data-table td.placeholder {
   letter-spacing: .04em;
 }
 
-/* ---- Photo strip ---- */
+/* ---- Photo strip marquee ---- */
+.ev-photo-marquee-wrap {
+  overflow: hidden;
+  padding: 10px 0;
+  margin-bottom: var(--space-xl);
+  width: 100%;
+}
+
+.ev-photo-strip-marquee {
+  display: flex;
+  gap: 14px;
+  width: max-content;
+  will-change: transform;
+  animation: scrollLeft 55s linear infinite;
+}
+
+.ev-photo-marquee-wrap:hover .ev-photo-strip-marquee {
+  animation-play-state: paused;
+}
+
+.ev-photo-strip-marquee .ev-photo-tile {
+  flex: none;
+  width: 220px;
+  height: 150px;
+}
+
 .ev-photo-strip {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
