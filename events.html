@@ -42,9 +42,9 @@
 
   <header class="page-hero events-hero">
     <div class="container">
-      <div class="crumb">ACM Student Chapter · 2018–2026</div>
+      <div class="crumb">ACM Student Chapter · 2017–2026</div>
       <h1>Events</h1>
-      <p>Eight years of school outreach, guest lectures, technical contests and our flagship fest — all in one place.
+      <p>Ten years of school outreach, guest lectures, technical contests and our flagship fest — all in one place.
       </p>
     </div>
   </header>
@@ -115,7 +115,7 @@
       <div class="ev-chart-card">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:var(--space-md);">
           <div class="ev-section-intro" style="text-align:left;margin-bottom:0;">
-            <span class="eyebrow" style="color:var(--gold);">Eight years, one chapter</span>
+            <span class="eyebrow" style="color:var(--gold);">Ten years, one chapter</span>
             <h2 style="font-size:var(--text-h2);margin-top:4px;">Activity by year</h2>
           </div>
           <div class="ev-chart-hover-pill" id="ev-chart-hover-info" style="display:none;"></div>
@@ -312,8 +312,8 @@
         window.initStatCounters();
       }
 
-      /* Chart: Grouped Vertical Bar Chart (2018–2026) */
-      var years = ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026'];
+      /* Chart: Grouped Vertical Bar Chart (2017–2026) */
+      var years = EV_CHART_DATA.map(function (row) { return String(row.year); });
       var catKeys = ['hourOfCode', 'outreach', 'guestLectures', 'workshops', 'intraCollege', 'technizen'];
 
       function initActivityChart() {
@@ -326,6 +326,7 @@
             label: cat.name,
             data: EV_CHART_DATA.map(function (row) { return row[k] ? row[k] : null; }),
             skipNull: true,
+            maxBarThickness: 16,
             backgroundColor: cat.color,
             borderColor: '#ffffff',
             borderWidth: 1.5,
@@ -335,6 +336,44 @@
           };
         });
 
+        var customCenteredBarPlugin = {
+          id: 'customCenteredBar',
+          beforeDatasetsDraw: function (chart) {
+            var xAxis = chart.scales.x;
+            if (!xAxis) return;
+            var numYears = chart.data.labels.length;
+            var numDatasets = chart.data.datasets.length;
+            var W = 16; // fixed bar width in px
+            var G = 3;  // fixed gap between adjacent bars in px
+
+            for (var i = 0; i < numYears; i++) {
+              var xCenter = xAxis.getPixelForValue(i);
+
+              var activeBars = [];
+              for (var d = 0; d < numDatasets; d++) {
+                var meta = chart.getDatasetMeta(d);
+                if (meta && meta.data && meta.data[i]) {
+                  var val = chart.data.datasets[d].data[i];
+                  if (val !== null && val !== undefined && val > 0) {
+                    activeBars.push(meta.data[i]);
+                  }
+                }
+              }
+
+              var N = activeBars.length;
+              if (N > 0) {
+                var totalWidth = N * W + (N - 1) * G;
+                var startX = xCenter - (totalWidth / 2);
+                for (var k = 0; k < N; k++) {
+                  var bar = activeBars[k];
+                  bar.x = startX + k * (W + G) + (W / 2);
+                  bar.width = W;
+                }
+              }
+            }
+          }
+        };
+
         var ctx = canvas.getContext('2d');
         var chartInstance = new Chart(ctx, {
           type: 'bar',
@@ -342,6 +381,7 @@
             labels: years,
             datasets: datasets
           },
+          plugins: [customCenteredBarPlugin],
           options: {
             responsive: true,
             maintainAspectRatio: false,
