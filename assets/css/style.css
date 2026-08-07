@@ -3822,10 +3822,8 @@ table.data-table td.placeholder {
 
 .ev-photo-strip-marquee .ev-photo-tile:hover {
   transform: translateY(-8px) scale(1.02);
-  border-color: rgba(20, 80, 158, 0.3);
-  box-shadow: 
-    0 20px 40px rgba(11, 31, 77, 0.16),
-    0 0 30px rgba(20, 80, 158, 0.22);
+  border-color: var(--white);
+  box-shadow: 0 20px 40px rgba(11, 31, 77, 0.16);
 }
 
 .ev-photo-tile img {
@@ -3846,30 +3844,18 @@ table.data-table td.placeholder {
   background: linear-gradient(180deg, rgba(7, 20, 51, 0) 35%, rgba(7, 20, 51, 0.4) 65%, rgba(7, 20, 51, 0.85) 100%);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-end;
   padding: 14px 16px;
   color: var(--white);
   transition: background 0.35s ease;
 }
 
 .ev-photo-tile:hover .ev-photo-overlay {
-  background: linear-gradient(180deg, rgba(7, 20, 51, 0.1) 20%, rgba(20, 80, 158, 0.45) 60%, rgba(7, 20, 51, 0.92) 100%);
+  background: linear-gradient(180deg, rgba(7, 20, 51, 0.1) 35%, rgba(7, 20, 51, 0.5) 65%, rgba(7, 20, 51, 0.92) 100%);
 }
 
 .ev-photo-badge {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  color: var(--navy);
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  padding: 4px 10px;
-  border-radius: 20px;
-  align-self: flex-start;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.9);
+  display: none !important;
 }
 
 .ev-photo-title-wrap {
