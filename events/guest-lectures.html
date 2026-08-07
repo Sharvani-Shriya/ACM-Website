@@ -52,7 +52,7 @@
       <!-- Spotlight zone — rendered by JS; visible because Dr. Anjali Rao's lecture is upcoming -->
       <div id="ev-spotlight-zone"></div>
 
-      <div class="ev-detail-stats" id="ev-detail-stats"></div>
+      <div class="ev-detail-stats" id="ev-detail-stats" style="--ev-theme-color:#6b4a8a;"></div>
 
       <div class="ev-timeline-wrap">
         <div class="ev-timeline-head">
@@ -128,12 +128,22 @@
     ];
     var statsEl = document.getElementById('ev-detail-stats');
     if (statsEl) {
-      stats.forEach(function(s) {
+      statsEl.style.setProperty('--ev-theme-color', CAT_COLOR);
+      statsEl.innerHTML = '';
+      var inner = document.createElement('div');
+      inner.className = 'ev-detail-stats-inner';
+      stats.forEach(function(s, i) {
+        if (i > 0) {
+          var slash = document.createElement('div');
+          slash.className = 'ev-stat-slash';
+          inner.appendChild(slash);
+        }
         var item = document.createElement('div');
         item.className = 'ev-stat-item';
         item.innerHTML = '<span class="ev-stat-num">' + s.num + '</span><span class="ev-stat-label">' + s.label + '</span>';
-        statsEl.appendChild(item);
+        inner.appendChild(item);
       });
+      statsEl.appendChild(inner);
     }
 
     /* Spotlight */
