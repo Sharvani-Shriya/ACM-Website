@@ -3608,24 +3608,20 @@ table.data-table td.placeholder {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  gap: clamp(12px, 2.5vw, 32px);
-  background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  border-radius: 24px;
-  box-shadow: 
-    0 10px 30px rgba(0, 0, 0, 0.04),
-    0 4px 12px rgba(0, 0, 0, 0.02);
+  gap: clamp(16px, 3.5vw, 40px);
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
   margin-bottom: var(--space-xl);
   position: relative;
   overflow: visible;
-  padding: clamp(18px, 3vw, 28px) 16px;
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  padding: 12px 0;
+  transition: transform 0.3s ease;
 }
 
 .ev-detail-stats:hover {
-  box-shadow: 
-    0 14px 36px rgba(0, 0, 0, 0.07),
-    0 6px 16px rgba(0, 0, 0, 0.03);
+  box-shadow: none !important;
 }
 
 .ev-detail-stats::before,
@@ -3923,7 +3919,7 @@ table.data-table td.placeholder {
   .ev-cat-grid { grid-template-columns: repeat(2, 1fr); }
   .ev-stats-strip { display: grid; grid-template-columns: repeat(2, 1fr); padding: 12px; gap: 8px; border: none; }
   .ev-stat-item { border: none; padding: 16px 14px; }
-  .ev-detail-stats { flex-direction: column; gap: 16px; padding: 20px 14px; }
+  .ev-detail-stats { flex-direction: column; gap: 20px; padding: 12px 0; background: transparent !important; border: none !important; box-shadow: none !important; }
   .ev-detail-stats .ev-stat-item { width: 165px; height: 190px; }
   .ev-detail-stats .ev-stat-item:not(:last-child) { border-bottom: none !important; padding-bottom: 0; }
   .ev-photo-strip { grid-template-columns: repeat(3, 1fr); }
