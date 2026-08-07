@@ -3574,20 +3574,21 @@ table.data-table td.placeholder {
   box-shadow: 0 8px 22px rgba(20, 80, 158, 0.35);
 }
 
-/* ---- Detail stat strip (Exact Fixed-Slant Card Design - card.png) ---- */
+/* ---- Detail stat strip (Smooth Slanting Curved Chevron Banner - card.png) ---- */
 .ev-detail-stats {
   position: relative;
   width: 100%;
   max-width: 1000px;
-  height: 124px;
   margin: 0 auto var(--space-xl) auto;
-  background: var(--ev-theme-color, #14509e);
-  padding: 2.5px;
-  clip-path: polygon(46px 0%, calc(100% - 46px) 0%, 100% 50%, calc(100% - 46px) 100%, 46px 100%, 0% 50%);
   filter: drop-shadow(0 12px 28px rgba(11, 31, 77, 0.10));
   transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), filter 0.3s ease;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  clip-path: none;
+  padding: 0;
   overflow: visible;
-  box-sizing: border-box;
 }
 
 .ev-detail-stats:hover {
@@ -3595,40 +3596,29 @@ table.data-table td.placeholder {
   filter: drop-shadow(0 18px 36px rgba(11, 31, 77, 0.16));
 }
 
+.ev-card-svg-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: visible;
+}
+
 .ev-detail-stats-inner {
   position: relative;
   z-index: 2;
-  background: #ffffff;
+  background: transparent;
   width: 100%;
   height: 100%;
-  clip-path: polygon(44px 0%, calc(100% - 44px) 0%, calc(100% - 2.5px) 50%, calc(100% - 44px) 100%, 44px 100%, 2.5px 50%);
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding: 0 54px;
+  padding: 34px 64px;
   box-sizing: border-box;
-}
-
-/* Left & Right Glowing Gradient Side Caps (card.png) */
-.ev-card-cap {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 50px;
-  z-index: 3;
-  pointer-events: none;
-}
-
-.ev-card-cap-left {
-  left: 0;
-  background: linear-gradient(135deg, var(--ev-theme-color, #14509e) 0%, #38bdf8 45%, var(--ev-theme-color, #14509e) 100%);
-  clip-path: polygon(46px 0%, 46px 8px, 14px 50%, 46px calc(100% - 8px), 46px 100%, 0% 50%);
-}
-
-.ev-card-cap-right {
-  right: 0;
-  background: linear-gradient(225deg, var(--ev-theme-color, #14509e) 0%, #38bdf8 45%, var(--ev-theme-color, #14509e) 100%);
-  clip-path: polygon(calc(100% - 46px) 0%, calc(100% - 46px) 8px, calc(100% - 14px) 50%, calc(100% - 46px) calc(100% - 8px), calc(100% - 46px) 100%, 100% 50%);
+  clip-path: none;
 }
 
 .ev-detail-stats .ev-stat-item {
@@ -3904,19 +3894,8 @@ table.data-table td.placeholder {
   .ev-cat-grid { grid-template-columns: repeat(2, 1fr); }
   .ev-stats-strip { display: grid; grid-template-columns: repeat(2, 1fr); padding: 12px; gap: 8px; border: none; }
   .ev-stat-item { border: none; padding: 16px 14px; }
-  .ev-detail-stats {
-    height: 106px;
-    clip-path: polygon(30px 0%, calc(100% - 30px) 0%, 100% 50%, calc(100% - 30px) 100%, 30px 100%, 0% 50%);
-  }
   .ev-detail-stats-inner {
-    clip-path: polygon(28px 0%, calc(100% - 28px) 0%, calc(100% - 2.5px) 50%, calc(100% - 28px) 100%, 28px 100%, 2.5px 50%);
-    padding: 0 32px;
-  }
-  .ev-card-cap-left {
-    clip-path: polygon(30px 0%, 30px 6px, 10px 50%, 30px calc(100% - 6px), 30px 100%, 0% 50%);
-  }
-  .ev-card-cap-right {
-    clip-path: polygon(calc(100% - 30px) 0%, calc(100% - 30px) 6px, calc(100% - 10px) 50%, calc(100% - 30px) calc(100% - 6px), calc(100% - 30px) 100%, 100% 50%);
+    padding: 26px 36px;
   }
   .ev-stat-slash {
     height: 42px;
