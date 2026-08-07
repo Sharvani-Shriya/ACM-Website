@@ -7,12 +7,12 @@
 document.addEventListener('DOMContentLoaded', function () {
 
   var roleColors = {
-    "Chair":       "var(--teams-crimson)",
-    "Vice Chair":  "var(--teams-navy-700)",
-    "Secretary":   "var(--teams-purple)",
-    "Treasurer":   "var(--teams-green)",
-    "Web Master":  "var(--teams-blue)",
-    "Event Lead":  "var(--teams-gold)"
+    "Chair": "var(--teams-crimson)",
+    "Vice Chair": "var(--teams-navy-700)",
+    "Secretary": "var(--teams-purple)",
+    "Treasurer": "var(--teams-green)",
+    "Web Master": "var(--teams-blue)",
+    "Event Lead": "var(--teams-gold)"
   };
 
   function initials(name) {
@@ -21,9 +21,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function genMembers(n, seedNames) {
     var out = seedNames ? seedNames.slice() : [];
-    var first = ["Aarav","Sai","Priya","Divya","Rahul","Sneha","Vikram","Ananya","Kiran","Meena",
-                 "Arjun","Lakshmi","Yashwanth","Pooja","Naveen","Deepika","Rohit","Swathi","Bhavana","Charan"];
-    var last  = ["Reddy","Kumar","Naidu","Rao","Sharma","Varma","Chowdary","Prasad","Devi","Babu"];
+    var first = ["Aarav", "Sai", "Priya", "Divya", "Rahul", "Sneha", "Vikram", "Ananya", "Kiran", "Meena",
+      "Arjun", "Lakshmi", "Yashwanth", "Pooja", "Naveen", "Deepika", "Rohit", "Swathi", "Bhavana", "Charan"];
+    var last = ["Reddy", "Kumar", "Naidu", "Rao", "Sharma", "Varma", "Chowdary", "Prasad", "Devi", "Babu"];
     for (var i = out.length; i < n; i++) {
       out.push({ name: first[i % first.length] + " " + last[(i * 3) % last.length], branch: "CSE" });
     }
@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', function () {
   };
 
   /* Render Year Tabs */
-  var tabsEl  = document.getElementById('yearTabs');
+  var tabsEl = document.getElementById('yearTabs');
   var panelEl = document.getElementById('yearPanel');
   if (!tabsEl || !panelEl) return;
 
@@ -187,11 +187,11 @@ document.addEventListener('DOMContentLoaded', function () {
     /* 6 Leadership Cards */
     var leadHtml = d.leadership.map(function (m) {
       return '<div class="lead-card">' +
-               '<span class="role-badge" style="background:' + (roleColors[m.role] || 'var(--teams-navy-800)') + '">' + m.role + '</span>' +
-               '<div class="avatar">' + initials(m.name) + '</div>' +
-               '<div class="mname">' + m.name + '</div>' +
-               '<div class="mrole">' + m.branch + '</div>' +
-             '</div>';
+        '<span class="role-badge" style="background:' + (roleColors[m.role] || 'var(--teams-navy-800)') + '">' + m.role + '</span>' +
+        '<div class="avatar">' + initials(m.name) + '</div>' +
+        '<div class="mname">' + m.name + '</div>' +
+        '<div class="mrole">' + m.branch + '</div>' +
+        '</div>';
     }).join('');
 
     /* Cohort Breakdown */
@@ -204,18 +204,19 @@ document.addEventListener('DOMContentLoaded', function () {
     /* Staff Cards */
     var staffHtml = d.staffList.map(function (s) {
       return '<div class="staff-card">' +
-               '<div class="avatar">' + initials(s.name) + '</div>' +
-               '<div><div class="mname">' + s.name + '</div><div class="mrole">' + s.role + '</div></div>' +
-             '</div>';
+        '<div class="avatar">' + initials(s.name) + '</div>' +
+        '<div><div class="mname">' + s.name + '</div><div class="mrole">' + s.role + '</div></div>' +
+        '</div>';
     }).join('');
 
     panelEl.innerHTML =
       '<div class="year-panel-head">' +
-        '<div>' +
+        '<div class="year-head-left">' +
           '<h3>' + year + '</h3>' +
           '<div class="meta"><b>' + d.students + '</b> student members · <b>' + d.staff + '</b> staff members</div>' +
         '</div>' +
         '<button class="btn-prototype btn-primary" id="openRosterBtn">View full member directory ↗</button>' +
+        '<div></div>' +
       '</div>' +
       '<div class="subhead">Leadership team</div>' +
       '<div class="lead-grid">' + leadHtml + '</div>' +
@@ -223,8 +224,8 @@ document.addEventListener('DOMContentLoaded', function () {
       '<div class="breakdown-row">' + breakdownHtml + '</div>' +
       '<div class="subhead">Look someone up in ' + year + '</div>' +
       '<div class="year-search">' +
-        '<input placeholder="Type a name…" id="yearSearchInput">' +
-        '<button id="yearSearchTrigger">Search</button>' +
+      '<input placeholder="Type a name…" id="yearSearchInput">' +
+      '<button id="yearSearchTrigger">Search</button>' +
       '</div>' +
       '<div class="year-search-hint">Nothing shows until you search — every one of the ' + d.students + ' members has equal footing here. Prefer to scan the whole list? Use the directory button above.</div>' +
       '<div class="year-search-results" id="yearSearchResults"></div>' +
@@ -233,12 +234,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     /* Attach clean event listeners */
     var btnOpen = document.getElementById('openRosterBtn');
-    if (btnOpen) btnOpen.onclick = function() { window.openModal(year); };
+    if (btnOpen) btnOpen.onclick = function () { window.openModal(year); };
 
     var sInput = document.getElementById('yearSearchInput');
     var sTrigger = document.getElementById('yearSearchTrigger');
-    if (sInput) sInput.oninput = function() { window.onYearSearch(this.value); };
-    if (sTrigger && sInput) sTrigger.onclick = function() { window.onYearSearch(sInput.value); };
+    if (sInput) sInput.oninput = function () { window.onYearSearch(this.value); };
+    if (sTrigger && sInput) sTrigger.onclick = function () { window.onYearSearch(sInput.value); };
   }
 
   window.onYearSearch = function (q) {
@@ -252,8 +253,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var hits = pool.filter(function (m) { return m.name.toLowerCase().indexOf(q) !== -1; }).slice(0, 8);
     box.innerHTML = hits.length
       ? hits.map(function (h) {
-          return '<div class="hit-row"><span><b>' + h.name + '</b> · ' + h.branch + '</span><span class="tag">' + h.tag + '</span></div>';
-        }).join('')
+        return '<div class="hit-row"><span><b>' + h.name + '</b> · ' + h.branch + '</span><span class="tag">' + h.tag + '</span></div>';
+      }).join('')
       : '<div class="hit-row"><span>No one matching "' + q + '" in ' + activeYear + '.</span></div>';
   };
 
@@ -261,17 +262,17 @@ document.addEventListener('DOMContentLoaded', function () {
   renderPanel(activeYear);
 
   /* Modal Roster */
-  var modalRows   = [];
+  var modalRows = [];
   var modalFilter = "All";
-  var modalQuery  = "";
-  var modalPage   = 1;
-  var PAGE_SIZE   = 25;
+  var modalQuery = "";
+  var modalPage = 1;
+  var PAGE_SIZE = 25;
 
   window.openModal = function (year) {
     var d = yearsData[year];
     document.getElementById('modalYearBadge').textContent = "ROSTER · " + year;
-    document.getElementById('modalTitle').textContent     = "Full Member Roster";
-    document.getElementById('modalMeta').textContent      = d.students + " students · " + d.staff + " staff";
+    document.getElementById('modalTitle').textContent = "Full Member Roster";
+    document.getElementById('modalMeta').textContent = d.students + " students · " + d.staff + " staff";
 
     modalRows = [].concat(
       d.leadership.map(function (m) { return { name: m.name, role: m.role, branch: m.branch, type: "Leadership" }; }).sort(byName),
@@ -288,7 +289,7 @@ document.addEventListener('DOMContentLoaded', function () {
       chip.className = 'filter-chip' + (f === 'All' ? ' active' : '');
       chip.textContent = f;
       chip.dataset.f = f;
-      chip.onclick = function() { window.setModalFilter(f); };
+      chip.onclick = function () { window.setModalFilter(f); };
       modalFiltersEl.appendChild(chip);
     });
 
@@ -312,10 +313,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function renderModalTable() {
     var rows = modalRows.filter(function (r) {
-      var mf = modalFilter === "All"        ? true
-             : modalFilter === "Leadership" ? r.type === "Leadership"
-             : modalFilter === "Staff"      ? r.type === "Staff"
-             : r.branch === modalFilter;
+      var mf = modalFilter === "All" ? true
+        : modalFilter === "Leadership" ? r.type === "Leadership"
+          : modalFilter === "Staff" ? r.type === "Staff"
+            : r.branch === modalFilter;
       return mf && (!modalQuery || r.name.toLowerCase().indexOf(modalQuery) !== -1);
     });
 
@@ -331,14 +332,14 @@ document.addEventListener('DOMContentLoaded', function () {
     pagEl.innerHTML =
       '<span>' + rows.length + ' result' + (rows.length === 1 ? '' : 's') + ' · page ' + modalPage + ' of ' + totalPages + '</span>' +
       '<div class="pg-btns">' +
-        '<button id="modalPrevBtn" ' + (modalPage <= 1 ? 'disabled' : '') + '>← Prev</button>' +
-        '<button id="modalNextBtn" ' + (modalPage >= totalPages ? 'disabled' : '') + '>Next →</button>' +
+      '<button id="modalPrevBtn" ' + (modalPage <= 1 ? 'disabled' : '') + '>← Prev</button>' +
+      '<button id="modalNextBtn" ' + (modalPage >= totalPages ? 'disabled' : '') + '>Next →</button>' +
       '</div>';
 
     var btnP = document.getElementById('modalPrevBtn');
     var btnN = document.getElementById('modalNextBtn');
-    if (btnP) btnP.onclick = function() { window.changeModalPage(-1); };
-    if (btnN) btnN.onclick = function() { window.changeModalPage(1); };
+    if (btnP) btnP.onclick = function () { window.changeModalPage(-1); };
+    if (btnN) btnN.onclick = function () { window.changeModalPage(1); };
   }
 
   window.changeModalPage = function (delta) {
@@ -371,8 +372,8 @@ document.addEventListener('DOMContentLoaded', function () {
     hits = hits.slice(0, 6);
     box.innerHTML = hits.length
       ? hits.map(function (h) {
-          return '<div class="hit"><span><b>' + h.name + '</b> · ' + (h.branch || '') + '</span><span>' + h.year + '</span></div>';
-        }).join('')
+        return '<div class="hit"><span><b>' + h.name + '</b> · ' + (h.branch || '') + '</span><span>' + h.year + '</span></div>';
+      }).join('')
       : '<div class="hit"><span>No matches in the digitized years. Try a shorter name.</span></div>';
   };
 

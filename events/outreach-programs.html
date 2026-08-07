@@ -118,11 +118,12 @@
     var past = evGetPast(DATA);
     var stats = [
       { num: DATA.length,  label: 'Programs since 2019' },
-      { num: '1,814+',     label: 'Participants reached' },
+      { num: '1,800+',     label: 'Participants reached' },
       { num: 8,            label: 'Years running' }
     ];
     var statsEl = document.getElementById('ev-detail-stats');
     if (statsEl) {
+      statsEl.classList.add('ev-stats-' + CAT_KEY);
       stats.forEach(function(s) {
         var item = document.createElement('div');
         item.className = 'ev-stat-item';

@@ -122,12 +122,13 @@
     /* Stats */
     var depts = 6;
     var stats = [
+      { num: depts,           label: 'Departments covered' },
       { num: EV_GUEST_COUNT,  label: 'Speakers hosted' },
-      { num: 9,               label: 'Years running' },
-      { num: depts,           label: 'Departments covered' }
+      { num: 9,               label: 'Years running' }
     ];
     var statsEl = document.getElementById('ev-detail-stats');
     if (statsEl) {
+      statsEl.classList.add('ev-stats-' + CAT_KEY);
       stats.forEach(function(s) {
         var item = document.createElement('div');
         item.className = 'ev-stat-item';
