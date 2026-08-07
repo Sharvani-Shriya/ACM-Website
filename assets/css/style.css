@@ -3667,8 +3667,8 @@ table.data-table td.placeholder {
 /* Stat Items - Reduced Compact Hexagonal Card Styling */
 .ev-detail-stats .ev-stat-item {
   position: relative;
-  width: clamp(145px, 20vw, 175px);
-  height: clamp(167px, 23vw, 201px);
+  width: clamp(137px, 16.62vw, 167px);
+  height: clamp(153px, 18.65vw, 186px);
   aspect-ratio: 200 / 230;
   display: flex;
   flex-direction: column;
@@ -3713,7 +3713,7 @@ table.data-table td.placeholder {
 /* Stat Numbers */
 .ev-detail-stats .ev-stat-num {
   font-family: 'Plus Jakarta Sans', var(--font-sans), system-ui, -apple-system, sans-serif;
-  font-size: clamp(1.6rem, 2.4vw, 2.0rem);
+  font-size: clamp(1.27rem, 1.82vw, 1.58rem);
   font-weight: 800;
   line-height: 1;
   color: #0052cc !important;
@@ -3741,7 +3741,7 @@ table.data-table td.placeholder {
 /* Stat Labels */
 .ev-detail-stats .ev-stat-label {
   font-family: 'Plus Jakarta Sans', var(--font-sans), system-ui, -apple-system, sans-serif;
-  font-size: clamp(0.60rem, 0.76vw, 0.68rem);
+  font-size: clamp(0.58rem, 0.72vw, 0.67rem);
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.025em;
