@@ -174,18 +174,41 @@
   line-height: 1.6;
 }
 
-/* ---------- GROWTH CHART ---------- */
+/* ---------- GROWTH CHART (Events page chart card design) ---------- */
 .chart-card {
   max-width: 1120px;
   margin: 0 auto;
-  background: var(--teams-bg-soft2);
-  border: 1px solid var(--teams-line);
+  background: linear-gradient(145deg, #ffffff 0%, #f8fafc 60%, #f1f5f9 100%);
+  background-image: 
+    radial-gradient(circle at 8% 15%, rgba(200, 161, 58, 0.07) 0%, transparent 45%),
+    radial-gradient(circle at 92% 85%, rgba(20, 80, 158, 0.08) 0%, transparent 45%);
+  border: 1px solid rgba(226, 231, 240, 0.85);
   border-radius: 20px;
   padding: 36px 40px 24px;
   display: grid;
   grid-template-columns: 1fr 300px;
   gap: 36px;
   align-items: center;
+  box-shadow: 
+    0 16px 40px rgba(11, 31, 77, 0.06),
+    0 2px 12px rgba(20, 80, 158, 0.04);
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+}
+
+.chart-card:hover {
+  box-shadow: 
+    0 20px 48px rgba(11, 31, 77, 0.09),
+    0 4px 16px rgba(20, 80, 158, 0.08);
+}
+
+.chart-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #c8a13a 0%, #14509e 33%, #2e7d6b 66%, #6b4a8a 100%);
 }
 
 .chart-copy h3 {
@@ -331,54 +354,73 @@
 }
 .subhead::after { content: ""; flex: 1; height: 1px; background: var(--teams-line); }
 
-/* ---------- LEADERSHIP CARDS ---------- */
+/* ---------- LEADERSHIP CARDS (Events Category Card Grid Style) ---------- */
 .lead-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  gap: 20px;
   margin-bottom: 38px;
 }
 
 .lead-card {
+  background: #ffffff;
   border: 1px solid var(--teams-line);
-  border-radius: 14px;
-  padding: 20px 16px;
+  border-radius: 16px;
+  padding: 24px 20px;
   text-align: center;
-  transition: .2s;
   position: relative;
-}
-.lead-card:hover {
-  transform: translateY(-3px);
+  overflow: hidden;
   box-shadow: var(--teams-shadow-soft);
-  border-color: transparent;
+  transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+}
+
+.lead-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #14509e, #c8a13a);
+}
+
+.lead-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 36px rgba(11, 31, 77, 0.12);
+  border-color: rgba(20, 80, 158, 0.25);
 }
 
 .avatar {
-  width: 60px;
-  height: 60px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
-  margin: 0 auto 12px;
+  margin: 4px auto 14px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #fff;
   font-family: 'Playfair Display', serif;
   font-weight: 700;
-  font-size: 19px;
-  background: linear-gradient(135deg, var(--teams-navy-800), var(--teams-navy-700));
+  font-size: 20px;
+  background: linear-gradient(135deg, #14509e 0%, #0b1f4d 100%);
+  box-shadow: 0 4px 14px rgba(20, 80, 158, 0.25);
+  transition: transform 0.28s ease;
+}
+
+.lead-card:hover .avatar {
+  transform: scale(1.06);
 }
 
 .role-badge {
   display: inline-block;
   font-family: 'Space Grotesk', system-ui, sans-serif;
-  font-size: 10px;
+  font-size: 10.5px;
   font-weight: 700;
-  letter-spacing: .06em;
+  letter-spacing: .08em;
   text-transform: uppercase;
-  padding: 4px 10px;
+  padding: 4px 12px;
   border-radius: 999px;
   color: #fff;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }
 
 .lead-card .mname {
@@ -458,21 +500,31 @@
   color: var(--teams-muted);
 }
 
-/* ---------- STAFF CARDS ---------- */
-.staff-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+/* ---------- STAFF CARDS (Events Meta Card Style) ---------- */
+.staff-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
 .staff-card {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
+  background: #ffffff;
   border: 1px solid var(--teams-line);
-  border-radius: 12px;
-  padding: 12px;
+  border-radius: 14px;
+  padding: 14px 16px;
+  box-shadow: 0 4px 12px rgba(11, 31, 77, 0.04);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.staff-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(11, 31, 77, 0.09);
+  border-color: rgba(20, 80, 158, 0.3);
 }
 .staff-card .avatar {
-  width: 40px;
-  height: 40px;
-  font-size: 12.5px;
+  width: 44px;
+  height: 44px;
+  font-size: 13px;
   background: linear-gradient(135deg, var(--teams-crimson), #7c1c1c);
+  box-shadow: 0 4px 12px rgba(200, 16, 46, 0.25);
+  margin: 0;
 }
 .staff-card .mname { font-family: 'Inter', system-ui, sans-serif; font-size: 13px; font-weight: 600; color: var(--teams-navy-900); }
 .staff-card .mrole { font-family: 'Inter', system-ui, sans-serif; font-size: 11px; color: var(--teams-muted); }
@@ -535,43 +587,91 @@
 }
 .search-results .hit b { color: #fff; }
 
-/* ---------- ALUMNI SPOTLIGHT ---------- */
+/* ---------- ALUMNI SPOTLIGHT (Events Spotlight Card Design) ---------- */
 .spotlight-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
+  gap: 24px;
   max-width: 1120px;
   margin: 0 auto;
 }
 
 .spot-card {
-  border: 1px solid var(--teams-line);
-  border-radius: 18px;
-  padding: 26px;
+  background: #fdf6e7;
+  border: 1px solid #e8d49a;
+  border-radius: 20px;
+  padding: 28px 24px;
   position: relative;
   overflow: hidden;
-  transition: .2s;
+  box-shadow: 0 10px 30px rgba(11, 31, 77, 0.06);
+  transition: transform 0.28s ease, box-shadow 0.28s ease;
 }
-.spot-card:hover { box-shadow: var(--teams-shadow-soft); transform: translateY(-4px); }
+
+.spot-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #c8a13a 0%, #14509e 100%);
+}
+
+.spot-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 42px rgba(11, 31, 77, 0.14);
+}
 
 .spot-card .quote-mark {
   position: absolute;
-  top: 14px; right: 20px;
+  top: 10px; right: 20px;
   font-family: 'Playfair Display', serif;
-  font-size: 52px;
-  color: var(--teams-bg-soft);
+  font-size: 56px;
+  color: rgba(200, 161, 58, 0.2);
   z-index: 0;
 }
-.spot-card .avatar { width: 52px; height: 52px; font-size: 16px; margin: 0 0 14px; background: linear-gradient(135deg, var(--teams-gold), #a97c1e); }
-.spot-card h4 { font-family: 'Playfair Display', serif; font-size: 16.5px; color: var(--teams-navy-900); position: relative; z-index: 1; margin: 0; }
-.spot-card .role-y { font-family: 'Inter', system-ui, sans-serif; font-size: 12px; color: var(--teams-muted); margin: 2px 0 12px; }
-.spot-card p.txt { font-family: 'Inter', system-ui, sans-serif; font-size: 13.5px; color: var(--teams-ink); line-height: 1.65; position: relative; z-index: 1; margin: 0; }
-.spot-card .now {
-  margin-top: 14px;
+
+.spot-card .avatar {
+  width: 54px;
+  height: 54px;
+  font-size: 17px;
+  margin: 0 0 14px;
+  background: linear-gradient(135deg, #c8a13a, #926d18);
+  box-shadow: 0 4px 14px rgba(200, 161, 58, 0.3);
+}
+
+.spot-card h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #0b1f4d;
+  position: relative;
+  z-index: 1;
+  margin: 0 0 2px;
+}
+
+.spot-card .role-y {
   font-family: 'Inter', system-ui, sans-serif;
   font-size: 12px;
-  color: var(--teams-navy-800);
   font-weight: 600;
+  color: #5c6480;
+  margin-bottom: 12px;
+}
+
+.spot-card p.txt {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 13.5px;
+  color: #1a2040;
+  line-height: 1.65;
+  position: relative;
+  z-index: 1;
+  margin: 0;
+}
+
+.spot-card .now {
+  margin-top: 16px;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: 12.5px;
+  color: #14509e;
+  font-weight: 700;
   display: flex;
   align-items: center;
   gap: 6px;
