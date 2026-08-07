@@ -53,7 +53,7 @@
       <div id="ev-spotlight-zone"></div>
 
       <!-- Detail stat strip -->
-      <div class="ev-detail-stats" id="ev-detail-stats" style="--ev-theme-color:#c8a13a;"></div>
+      <div class="ev-detail-stats" id="ev-detail-stats"></div>
 
       <!-- Timeline -->
       <div class="ev-timeline-wrap">
@@ -130,47 +130,12 @@
     ];
     var statsEl = document.getElementById('ev-detail-stats');
     if (statsEl) {
-      statsEl.style.setProperty('--ev-theme-color', CAT_COLOR);
-      statsEl.innerHTML = '';
-
-      var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      svg.setAttribute('class', 'ev-card-svg-bg');
-      svg.setAttribute('viewBox', '0 0 1000 130');
-      svg.setAttribute('preserveAspectRatio', 'none');
-      svg.innerHTML =
-        '<defs>' +
-          '<linearGradient id="evCapLeft_technizen" x1="0%" y1="0%" x2="100%" y2="100%">' +
-            '<stop offset="0%" stop-color="' + CAT_COLOR + '" stop-opacity="1" />' +
-            '<stop offset="50%" stop-color="' + CAT_COLOR + '" stop-opacity="0.85" />' +
-            '<stop offset="100%" stop-color="' + CAT_COLOR + '" stop-opacity="1" />' +
-          '</linearGradient>' +
-          '<linearGradient id="evCapRight_technizen" x1="100%" y1="0%" x2="0%" y2="100%">' +
-            '<stop offset="0%" stop-color="' + CAT_COLOR + '" stop-opacity="1" />' +
-            '<stop offset="50%" stop-color="' + CAT_COLOR + '" stop-opacity="0.85" />' +
-            '<stop offset="100%" stop-color="' + CAT_COLOR + '" stop-opacity="1" />' +
-          '</linearGradient>' +
-        '</defs>' +
-        '<path d="M 50 2 L 950 2 C 968 2, 998 25, 998 65 C 998 105, 968 128, 950 128 L 50 128 C 32 128, 2 105, 2 65 C 2 25, 32 2, 50 2 Z" fill="#ffffff" />' +
-        '<line x1="50" y1="2" x2="950" y2="2" stroke="' + CAT_COLOR + '" stroke-width="2.5" />' +
-        '<line x1="50" y1="128" x2="950" y2="128" stroke="' + CAT_COLOR + '" stroke-width="2.5" />' +
-        '<path d="M 55 2 C 30 2, 4 25, 4 65 C 4 105, 30 128, 55 128" fill="none" stroke="url(#evCapLeft_technizen)" stroke-width="11" stroke-linecap="round" />' +
-        '<path d="M 945 2 C 970 2, 996 25, 996 65 C 996 105, 970 128, 945 128" fill="none" stroke="url(#evCapRight_technizen)" stroke-width="11" stroke-linecap="round" />';
-      statsEl.appendChild(svg);
-
-      var inner = document.createElement('div');
-      inner.className = 'ev-detail-stats-inner';
-      stats.forEach(function(s, i) {
-        if (i > 0) {
-          var slash = document.createElement('div');
-          slash.className = 'ev-stat-slash';
-          inner.appendChild(slash);
-        }
+      stats.forEach(function(s) {
         var item = document.createElement('div');
         item.className = 'ev-stat-item';
         item.innerHTML = '<span class="ev-stat-num">' + s.num + '</span><span class="ev-stat-label">' + s.label + '</span>';
-        inner.appendChild(item);
+        statsEl.appendChild(item);
       });
-      statsEl.appendChild(inner);
     }
 
     /* Spotlight */
