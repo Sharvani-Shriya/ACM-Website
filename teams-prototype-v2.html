@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ACM Student Chapter — Teams (Prototype v4)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0a1f3d; --navy-deep:#071730; --blue:#14335e;
+    --gold:#c99a3a; --gold-light:#e3c876; --red:#b5342b;
+    --paper:#f6f5f1; --panel:#ffffff; --ink:#1b2434; --ink-soft:#5b6478;
+    --line:#e3e1d9; --line-soft:#eeece5;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3{font-family:'Fraunces',serif;}
+
+  .brandbar{background:var(--panel);border-bottom:1px solid var(--line);padding:14px 40px;display:flex;align-items:center;gap:14px;}
+  .brandbar .crest{width:38px;height:38px;border-radius:50%;background:conic-gradient(var(--gold),var(--red),var(--navy),var(--gold));flex-shrink:0;}
+  .brandbar .name{font-weight:700;color:var(--red);font-size:15px;}
+  .brandbar .sub{font-size:11px;color:var(--ink-soft);}
+  .navbar{background:var(--navy-deep);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:56px;}
+  .navbar .brand{display:flex;align-items:center;gap:10px;color:#fff;font-weight:600;font-size:14px;}
+  .navbar .diamond{width:26px;height:26px;background:var(--blue);border:1px solid var(--gold);transform:rotate(45deg);display:inline-block;}
+  .navbar nav a{color:#c9d3e6;text-decoration:none;font-size:13.5px;margin-left:26px;font-weight:500;}
+  .navbar nav a.active{color:#fff;border-bottom:2px solid var(--gold);padding-bottom:18px;}
+
+  .hero{
+    background:radial-gradient(circle at 12% 25%, rgba(201,154,58,.18), transparent 45%),
+               radial-gradient(circle at 88% 75%, rgba(181,52,43,.15), transparent 50%),
+               linear-gradient(180deg, var(--navy-deep), var(--navy) 75%);
+    color:#fff;padding:56px 40px 40px;text-align:center;
+  }
+  .hero .eyebrow{color:var(--gold-light);letter-spacing:2.5px;font-size:11.5px;font-weight:600;text-transform:uppercase;}
+  .hero h1{font-size:42px;margin:10px 0 12px;font-weight:600;}
+  .hero p{color:#c9d3e6;max-width:600px;margin:0 auto;font-size:15px;line-height:1.6;}
+
+  .stat-strip{max-width:1180px;margin:-26px auto 0;padding:0 40px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;position:relative;z-index:5;}
+  .stat-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;box-shadow:0 8px 20px rgba(10,31,61,.06);}
+  .stat-card .n{font-family:'Fraunces',serif;font-size:24px;color:var(--navy);font-weight:600;}
+  .stat-card .l{font-size:11.5px;color:var(--ink-soft);margin-top:2px;}
+
+  .section-head{max-width:1180px;margin:56px auto 0;padding:0 40px;display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;}
+  .section-head .eyebrow{color:var(--red);font-size:11.5px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;}
+  .section-head h2{font-size:28px;color:var(--navy);margin:6px 0 8px;font-weight:600;}
+  .section-head .rule{width:56px;height:3px;background:var(--gold);border-radius:2px;}
+  .section-head p.desc{max-width:560px;color:var(--ink-soft);font-size:14px;line-height:1.6;margin-top:12px;}
+
+  .quick-search{
+    position:relative;
+    width:280px;
+  }
+  .quick-search input{
+    width:100%;
+    padding:10px 14px 10px 34px;
+    border:1px solid var(--line);
+    border-radius:9px;
+    font-size:13.5px;
+    background:#fff;
+    outline:none;
+  }
+  .quick-search input:focus{border-color:var(--gold);}
+  .quick-search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:14px;height:14px;color:var(--ink-soft);}
+  .quick-search .hint{font-size:11px; color:var(--ink-soft); margin-top:6px;}
+
+  /* ============ archive wall of plaques ============ */
+  .wall{
+    max-width:1180px;
+    margin:36px auto 100px;
+    padding:0 40px;
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:20px;
+  }
+  .plaque{
+    position:relative;
+    background:linear-gradient(155deg, var(--navy) 0%, var(--navy-deep) 100%);
+    border-radius:14px;
+    padding:24px 22px 20px;
+    color:#fff;
+    cursor:pointer;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.06);
+    transition: transform .28s cubic-bezier(.2,.8,.3,1), box-shadow .28s;
+    min-height:190px;
+    display:flex;
+    flex-direction:column;
+  }
+  .plaque::before{
+    content:"";
+    position:absolute; top:0; left:0; right:0; height:3px;
+    background:linear-gradient(90deg, var(--gold), transparent 70%);
+    opacity:.8;
+  }
+  .plaque::after{
+    content:"";
+    position:absolute; right:-30px; top:-30px; width:120px; height:120px;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(227,200,118,.14), transparent 70%);
+  }
+  .plaque:hover, .plaque:focus-visible{
+    transform:translateY(-6px);
+    box-shadow:0 18px 36px rgba(10,31,61,.28);
+  }
+  .plaque .tag{
+    font-family:'JetBrains Mono',monospace;
+    font-size:10.5px;
+    color:var(--gold-light);
+    letter-spacing:1px;
+    text-transform:uppercase;
+  }
+  .plaque h3{
+    font-size:24px;
+    margin:8px 0 2px;
+    font-weight:600;
+  }
+  .plaque .chair{
+    font-size:12px;
+    color:#c9d3e6;
+    margin-bottom:14px;
+  }
+  .plaque .counts{
+    margin-top:auto;
+    display:flex;
+    gap:16px;
+    padding-top:14px;
+    border-top:1px solid rgba(255,255,255,.1);
+  }
+  .plaque .counts div{font-family:'JetBrains Mono',monospace;}
+  .plaque .counts .n{font-size:16px;font-weight:600;color:#fff;}
+  .plaque .counts .l{font-size:9.5px;color:#8496b8;text-transform:uppercase;letter-spacing:.6px;}
+
+  /* hover preview strip that slides in */
+  .plaque .preview{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .3s ease;
+    font-size:11.5px;
+    color:#c9d3e6;
+    line-height:1.7;
+  }
+  .plaque:hover .preview, .plaque:focus-visible .preview{
+    max-height:80px;
+    margin-top:10px;
+  }
+  .plaque .preview b{color:var(--gold-light); font-weight:600;}
+
+  .plaque.current{
+    background:linear-gradient(155deg, #16345f 0%, var(--navy-deep) 100%);
+    border-color:var(--gold);
+  }
+  .plaque.current .tag{color:var(--gold);}
+  .plaque.current .badge-current{
+    position:absolute; top:14px; right:14px;
+    font-size:9px; font-weight:700; letter-spacing:.6px;
+    background:var(--gold); color:var(--navy-deep);
+    padding:3px 8px; border-radius:100px;
+  }
+
+  /* ============ overlay detail panel ============ */
+  .overlay{
+    position:fixed; inset:0;
+    background:rgba(7,23,48,.55);
+    backdrop-filter:blur(3px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:200;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .25s;
+    padding:30px;
+  }
+  .overlay.open{opacity:1; pointer-events:all;}
+  .sheet{
+    background:var(--panel);
+    width:100%;
+    max-width:820px;
+    max-height:82vh;
+    border-radius:16px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    transform:translateY(18px) scale(.98);
+    transition:transform .28s cubic-bezier(.2,.8,.3,1);
+    box-shadow:0 30px 70px rgba(0,0,0,.35);
+  }
+  .overlay.open .sheet{transform:translateY(0) scale(1);}
+  .sheet-head{
+    background:linear-gradient(135deg, var(--navy), var(--navy-deep));
+    color:#fff;
+    padding:26px 30px 20px;
+    position:relative;
+  }
+  .sheet-head .close{
+    position:absolute; top:16px; right:18px;
+    background:rgba(255,255,255,.08);
+    border:none; color:#fff;
+    width:30px; height:30px; border-radius:50%;
+    cursor:pointer; font-size:16px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .sheet-head .close:hover{background:rgba(255,255,255,.18);}
+  .sheet-head .tag{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--gold-light);letter-spacing:1px;text-transform:uppercase;}
+  .sheet-head h2{font-size:30px;margin:6px 0 4px;font-weight:600;}
+  .sheet-head .chairline{font-size:13px;color:#c9d3e6;}
+  .sheet-stats{
+    display:flex;
+    gap:22px;
+    margin-top:16px;
+  }
+  .sheet-stats div{font-family:'JetBrains Mono',monospace;}
+  .sheet-stats .n{font-size:18px;font-weight:600;color:#fff;}
+  .sheet-stats .l{font-size:9.5px;color:#8496b8;text-transform:uppercase;letter-spacing:.6px;}
+
+  .sheet-search{
+    padding:14px 30px;
+    border-bottom:1px solid var(--line);
+    position:relative;
+  }
+  .sheet-search input{
+    width:100%;
+    padding:8px 12px 8px 30px;
+    border:1px solid var(--line);
+    border-radius:8px;
+    font-size:13px;
+    outline:none;
+    background:var(--paper);
+  }
+  .sheet-search input:focus{border-color:var(--gold);background:#fff;}
+  .sheet-search svg{position:absolute;left:41px;top:50%;transform:translateY(-50%);width:13px;height:13px;color:var(--ink-soft);}
+
+  .sheet-body{
+    padding:20px 30px 28px;
+    overflow-y:auto;
+  }
+  .role-block{margin-bottom:20px;}
+  .role-block h4{
+    font-size:10.5px;
+    text-transform:uppercase;
+    letter-spacing:1.3px;
+    color:var(--gold);
+    margin:0 0 10px;
+    font-weight:700;
+    display:flex; align-items:center; gap:8px;
+  }
+  .role-block h4::after{content:"";flex:1;height:1px;background:var(--line);}
+  .member-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:6px 18px;
+  }
+  .member-row{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:6px 8px;
+    border-radius:6px;
+    font-size:13px;
+  }
+  .member-row.hl{background:linear-gradient(90deg, rgba(227,200,118,.3), transparent);}
+  .member-row .dot{width:6px;height:6px;border-radius:50%;background:var(--blue);flex-shrink:0;}
+  .member-row.staff .dot{background:var(--red);}
+  .member-row .role-tag{margin-left:auto;font-size:10.5px;color:var(--ink-soft);font-family:'JetBrains Mono',monospace;}
+
+  footer{text-align:center;padding:26px;font-size:12px;color:var(--ink-soft);border-top:1px solid var(--line);}
+
+  @media (max-width:980px){ .wall{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:620px){
+    .wall{grid-template-columns:1fr;}
+    .stat-strip{grid-template-columns:repeat(2,1fr);}
+    .navbar nav{display:none;}
+    .section-head{flex-direction:column; align-items:flex-start;}
+    .quick-search{width:100%;}
+    .member-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="brandbar">
+  <div class="crest"></div>
+  <div>
+    <div class="name">R.V.R. &amp; J.C. COLLEGE OF ENGINEERING</div>
+    <div class="sub">(Autonomous) · ACM Student Chapter, Dept. of CSE</div>
+  </div>
+</div>
+<div class="navbar">
+  <div class="brand"><span class="diamond"></span> ACM Student Chapter</div>
+  <nav><a href="#">About</a><a href="#">Events</a><a href="#" class="active">Teams</a><a href="#">Photo Gallery</a></nav>
+</div>
+
+<div class="hero">
+  <div class="eyebrow">Home / Teams</div>
+  <h1>Our Teams</h1>
+  <p>Eight years of the chapter, one wall. Hover a year for a preview, click it to open the full roster.</p>
+</div>
+
+<div class="stat-strip">
+  <div class="stat-card"><div class="n">746</div><div class="l">Members on record</div></div>
+  <div class="stat-card"><div class="n">8</div><div class="l">Academic years archived</div></div>
+  <div class="stat-card"><div class="n">73</div><div class="l">Active this year (2025-26)</div></div>
+  <div class="stat-card"><div class="n">2018</div><div class="l">Chapter founded</div></div>
+</div>
+
+<div class="section-head">
+  <div>
+    <div class="eyebrow">Chapter Strength</div>
+    <h2>The Archive</h2>
+    <div class="rule"></div>
+    <p class="desc">Each plaque is one academic year. The wall only ever grows sideways — a new year is one more tile, never a longer page.</p>
+  </div>
+  <div class="quick-search">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input id="quick-search" type="text" placeholder="Or find a member directly…">
+    <div class="hint">Jumps straight into their year</div>
+  </div>
+</div>
+
+<div class="wall" id="wall"></div>
+
+<div class="overlay" id="overlay">
+  <div class="sheet">
+    <div class="sheet-head">
+      <button class="close" id="close-btn">✕</button>
+      <div class="tag" id="sheet-tag">Academic Year</div>
+      <h2 id="sheet-title">2025-2026</h2>
+      <div class="chairline" id="sheet-chair">Chair: —</div>
+      <div class="sheet-stats" id="sheet-stats"></div>
+    </div>
+    <div class="sheet-search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input id="sheet-search-input" type="text" placeholder="Search within this year…">
+    </div>
+    <div class="sheet-body" id="sheet-body"></div>
+  </div>
+</div>
+
+<footer>Prototype v4 for internal review — R.V.R. &amp; J.C. College of Engineering, ACM Student Chapter · Dept. of CSE</footer>
+
+<script>
+function makeYear(year, coreNames, volunteerCount, staffNames){
+  const core = coreNames.map(n=>({name:n.split(' — ')[0], role:n.split(' — ')[1]||'Member', type:'core'}));
+  const staff = staffNames.map(n=>({name:n.split(' — ')[0], role:n.split(' — ')[1]||'Faculty', type:'staff'}));
+  const firstNames = ["Aditya","Bhavya","Chetan","Divya","Eshwar","Farha","Gopi","Harini","Ishaan","Jyothi","Kavya","Lokesh","Manasa","Nikhil","Om","Pallavi","Qadir","Rithika","Sohan","Tanya","Uday","Varsha","Wasim","Yamini","Zoya"];
+  const lastNames = ["Reddy","Sharma","Rao","Naidu","Kumar","Prasad","Chowdary","Varma","Sastry","Patel"];
+  const volunteers = [];
+  for(let i=0;i<volunteerCount;i++){
+    const fn = firstNames[i % firstNames.length];
+    const ln = lastNames[(i*7 + year.length) % lastNames.length];
+    volunteers.push({name:`${fn} ${ln}`, role:'Volunteer', type:'volunteer'});
+  }
+  return {core, volunteers, staff, all:[...core, ...volunteers, ...staff]};
+}
+
+const DATA = [
+  {year:"2025-2026", tagline:"Current chapter roster", chair:"K. Sindhu Priya", ...makeYear("2025-2026", ["K. Sindhu Priya — Chair","M. Bhargav — Vice Chair","T. Anitha — Secretary","D. Vamsi — Treasurer","R. Charitha — Web Master","S. Yashwanth — Event Lead"], 52, ["Dr. P. Rama Krishna — Advisor","Dr. K. Suresh — Co-advisor","Mr. B. Naga Raju — Staff"])},
+  {year:"2024-2025", tagline:"Record staff involvement", chair:"N. Harika", ...makeYear("2024-2025", ["N. Harika — Chair","P. Siddharth — Vice Chair","V. Lakshmi — Secretary","J. Rohit — Treasurer","K. Meghana — Web Master","S. Abhinav — Event Lead"], 66, ["Dr. K. Suresh — Advisor","Mrs. T. Padma — Co-advisor"])},
+  {year:"2023-2024", tagline:"Largest cohort on record", chair:"A. Deepika", ...makeYear("2023-2024", ["A. Deepika — Chair","B. Sai Kumar — Vice Chair","C. Nithya — Secretary","D. Vinay — Treasurer","E. Ramya — Web Master","F. Yaswanth — Event Lead"], 110, ["Dr. M. Venkatesh — Advisor"])},
+  {year:"2022-2023", tagline:"Peak membership year", chair:"S. Manoj", ...makeYear("2022-2023", ["S. Manoj — Chair","P. Anusha — Vice Chair","R. Teja — Secretary","N. Sowmya — Treasurer","K. Vishnu — Web Master","T. Harshitha — Event Lead"], 133, ["Dr. R. Prasad — Advisor"])},
+  {year:"2021-2022", tagline:"Tech events resumed post-pandemic", chair:"V. Sai Teja", ...makeYear("2021-2022", ["V. Sai Teja — Chair","M. Anjali — Vice Chair","K. Rohit — Secretary","P. Divya — Treasurer","S. Charan — Web Master","N. Keerthana — Event Lead"], 119, ["Dr. A. Naga Malleswari — Advisor"])},
+  {year:"2020-2021", tagline:"Virtual-first season", chair:"T. Bhavana", ...makeYear("2020-2021", ["T. Bhavana — Chair","U. Sai Kiran — Vice Chair","V. Deepthi — Secretary","W. Ganesh — Treasurer","X. Harika — Web Master","Y. Rahul — Event Lead"], 57, ["Dr. S. Lakshmi — Advisor"])},
+  {year:"2019-2020", tagline:"Outreach expanded to 8 schools", chair:"Z. Naveen", ...makeYear("2019-2020", ["Z. Naveen — Chair","A. Sai Priya — Vice Chair","B. Ganesh — Secretary","C. Ramya — Treasurer","D. Vinay Kumar — Web Master","E. Sandhya — Event Lead"], 96, ["Dr. K. Chandra Sekhar — Advisor"])},
+  {year:"2018-2019", tagline:"Chapter founded", chair:"L. Praveen Kumar", ...makeYear("2018-2019", ["L. Praveen Kumar — Founding Chair","M. Swathi — Vice Chair","N. Kiran Babu — Secretary","O. Haritha — Treasurer"], 27, ["Dr. G. Appa Rao — Founding Advisor"])},
+];
+
+const wall = document.getElementById('wall');
+DATA.forEach((y, idx) => {
+  const el = document.createElement('div');
+  el.className = 'plaque' + (idx===0 ? ' current' : '');
+  el.tabIndex = 0;
+  el.innerHTML = `
+    ${idx===0 ? '<div class="badge-current">HEAD</div>' : ''}
+    <div class="tag">Academic Year</div>
+    <h3>${y.year}</h3>
+    <div class="chair">Chair — ${y.chair}</div>
+    <div class="preview">${y.core.slice(1,4).map(m=>`<b>${m.name}</b> · ${m.role}`).join('<br>')}</div>
+    <div class="counts">
+      <div><div class="n">${y.all.length}</div><div class="l">Total</div></div>
+      <div><div class="n">${y.core.length + y.volunteers.length}</div><div class="l">Students</div></div>
+      <div><div class="n">${y.staff.length}</div><div class="l">Staff</div></div>
+    </div>
+  `;
+  el.addEventListener('click', () => openSheet(idx));
+  el.addEventListener('keydown', (e) => { if (e.key==='Enter') openSheet(idx); });
+  wall.appendChild(el);
+});
+
+const overlay = document.getElementById('overlay');
+let activeIdx = 0;
+
+function openSheet(idx, searchTerm=''){
+  activeIdx = idx;
+  const y = DATA[idx];
+  document.getElementById('sheet-title').textContent = y.year;
+  document.getElementById('sheet-chair').textContent = `${y.tagline} · Chair — ${y.chair}`;
+  document.getElementById('sheet-stats').innerHTML = `
+    <div><div class="n">${y.all.length}</div><div class="l">Total</div></div>
+    <div><div class="n">${y.core.length}</div><div class="l">Core</div></div>
+    <div><div class="n">${y.volunteers.length}</div><div class="l">Volunteers</div></div>
+    <div><div class="n">${y.staff.length}</div><div class="l">Staff</div></div>
+  `;
+  document.getElementById('sheet-search-input').value = searchTerm;
+  renderSheetBody(y, searchTerm);
+  overlay.classList.add('open');
+}
+
+function renderSheetBody(y, q=''){
+  q = q.trim().toLowerCase();
+  const body = document.getElementById('sheet-body');
+  function block(title, list, isStaff){
+    const filtered = q ? list.filter(m=>m.name.toLowerCase().includes(q)) : list;
+    if (!filtered.length) return '';
+    return `<div class="role-block"><h4>${title} (${filtered.length})</h4><div class="member-grid">
+      ${filtered.map(m => `<div class="member-row ${isStaff?'staff':''} ${q && m.name.toLowerCase().includes(q)?'hl':''}"><span class="dot"></span>${m.name}<span class="role-tag">${m.role}</span></div>`).join('')}
+    </div></div>`;
+  }
+  const html = block('Core Team', y.core, false) + block('Volunteers', y.volunteers, false) + block('Faculty & Staff', y.staff, true);
+  body.innerHTML = html || `<div style="text-align:center;color:var(--ink-soft);padding:30px;font-size:13.5px;">No members match "${q}" in ${y.year}.</div>`;
+}
+
+document.getElementById('close-btn').addEventListener('click', () => overlay.classList.remove('open'));
+overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.classList.remove('open'); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') overlay.classList.remove('open'); });
+
+document.getElementById('sheet-search-input').addEventListener('input', (e) => {
+  renderSheetBody(DATA[activeIdx], e.target.value);
+});
+
+// global quick search: finds member anywhere, opens their year, pre-filled
+document.getElementById('quick-search').addEventListener('keydown', (e) => {
+  if (e.key !== 'Enter') return;
+  const q = e.target.value.trim().toLowerCase();
+  if (!q) return;
+  for (let i=0;i<DATA.length;i++){
+    if (DATA[i].all.some(m=>m.name.toLowerCase().includes(q))){
+      openSheet(i, e.target.value);
+      return;
+    }
+  }
+});
+</script>
+</body>
+</html>
