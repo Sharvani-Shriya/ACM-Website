@@ -130,6 +130,7 @@
     ];
     var statsEl = document.getElementById('ev-detail-stats');
     if (statsEl) {
+      statsEl.classList.add('ev-stats-' + CAT_KEY);
       stats.forEach(function(s, i) {
         var item = document.createElement('div');
         item.className = 'ev-stat-item';
