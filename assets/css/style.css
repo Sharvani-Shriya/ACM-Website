@@ -4483,6 +4483,7 @@ table.data-table td.placeholder {
   box-sizing: border-box;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  border-top: 5px solid var(--modal-accent, var(--blue));
 }
 
 .ev-modal::-webkit-scrollbar,
@@ -4498,10 +4499,15 @@ table.data-table td.placeholder {
 }
 
 .ev-modal-close {
-  position: absolute;
+  position: sticky;
   top: 16px;
-  right: 20px;
-  background: rgba(241, 245, 249, 0.9);
+  float: right;
+  margin-top: 14px;
+  margin-right: 20px;
+  margin-bottom: -44px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   border: 1px solid var(--line);
   width: 36px;
   height: 36px;
@@ -4513,20 +4519,20 @@ table.data-table td.placeholder {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10;
+  z-index: 100;
+  box-shadow: 0 4px 12px rgba(11, 31, 77, 0.12);
   transition: all 0.2s ease;
 }
 
 .ev-modal-close:hover {
   background: var(--navy);
   color: var(--white);
-  transform: rotate(90deg);
+  transform: scale(1.1) rotate(90deg);
 }
 
 .ev-modal-hero {
   padding: 28px 32px 20px;
   border-bottom: 1px solid var(--line);
-  border-top: 6px solid var(--blue);
   background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 }

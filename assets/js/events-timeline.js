@@ -302,10 +302,16 @@
     ensureModalDOM();
 
     var backdrop  = document.getElementById('ev-modal-backdrop');
+    var modalEl   = backdrop ? backdrop.querySelector('.ev-modal') : null;
     var heroEl    = document.getElementById('ev-modal-hero');
     var bodyEl    = document.getElementById('ev-modal-body');
 
     if (!backdrop || !heroEl || !bodyEl) return;
+
+    if (modalEl) {
+      modalEl.style.borderTopColor = categoryColor;
+      modalEl.scrollTop = 0;
+    }
 
     // Clear previous auto-advance interval
     if (currentSliderInterval) {
@@ -313,8 +319,6 @@
       currentSliderInterval = null;
     }
 
-    // 1. Populate Hero
-    heroEl.style.borderTopColor = categoryColor;
     heroEl.innerHTML =
       '<div class="ev-modal-cat-tag" style="background-color:' + hexToRgba(categoryColor, 0.15) + ';color:' + categoryColor + '">' +
         escapeHtml(categoryLabel) + ' &middot; ' + instance.year +
@@ -477,6 +481,10 @@
     var backdrop = document.getElementById('ev-modal-backdrop');
     if (backdrop) {
       backdrop.classList.remove('is-open');
+      var modalEl = backdrop.querySelector('.ev-modal');
+      if (modalEl) {
+        modalEl.scrollTop = 0;
+      }
     }
     document.body.style.overflow = '';
     if (currentSliderInterval) {
