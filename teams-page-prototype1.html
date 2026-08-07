@@ -216,12 +216,10 @@
     border:1px solid var(--line);border-radius:20px;padding:36px;background:#fff;
     box-shadow:var(--shadow-soft);
   }
-  .year-panel-head{
-    display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;
-    margin-bottom:28px;padding-bottom:22px;border-bottom:1px solid var(--line);
-  }
-  .year-panel-head h3{font-size:26px;}
-  .year-panel-head .meta{font-size:13.5px;color:var(--muted);margin-top:6px;}
+  .year-panel-head{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;margin-bottom:28px;padding-bottom:22px;border-bottom:1px solid var(--line);}
+  .year-head-left{display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left;}
+  .year-panel-head h3{font-size:26px;margin:0;}
+  .year-panel-head .meta{font-size:13.5px;color:var(--muted);margin-top:2px;text-align:left;}
   .year-panel-head .meta b{color:var(--navy-900);}
   .btn{
     font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13.5px;
@@ -788,11 +786,12 @@ function renderPanel(year){
 
   panelEl.innerHTML = `
     <div class="year-panel-head">
-      <div>
+      <div class="year-head-left">
         <h3>${year}</h3>
         <div class="meta"><b>${d.students}</b> student members · <b>${d.staff}</b> staff members</div>
       </div>
       <button class="btn btn-primary" onclick="openModal('${year}')">View full member directory ↗</button>
+      <div></div>
     </div>
     <div class="subhead">Leadership team</div>
     <div class="lead-grid">${leadHtml}</div>
