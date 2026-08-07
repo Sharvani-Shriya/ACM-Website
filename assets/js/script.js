@@ -224,7 +224,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   /* ---------- Animated Fast Stat Counter (Starts from 1 to target) ---------- */
   function initStatCounters() {
-    var containers = document.querySelectorAll('.stats-overview-grid, .ev-stats-strip');
+    var containers = document.querySelectorAll('.stats-overview-grid, .ev-stats-strip, .ev-detail-stats');
 
     containers.forEach(function (container) {
       var counterEls = container.querySelectorAll('.stat-number, .ev-stat-num');

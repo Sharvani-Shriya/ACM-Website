@@ -125,7 +125,7 @@
     var pastInstances = evGetPast(DATA);
     var stats = [
       { num: '3+',                  label: 'Schools Visited' },
-      { num: '800',                 label: 'Students Reached' },
+      { num: '800+',                 label: 'Students Reached' },
       { num: pastInstances.length,  label: 'Editions Conducted' }
     ];
     var statsEl = document.getElementById('ev-detail-stats');
@@ -137,6 +137,7 @@
         item.innerHTML = '<span class="ev-stat-num">' + s.num + '</span><span class="ev-stat-label">' + s.label + '</span>';
         statsEl.appendChild(item);
       });
+      if (typeof initStatCounters === 'function') initStatCounters();
     }
 
     /* Spotlight */

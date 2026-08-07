@@ -130,6 +130,7 @@
         item.innerHTML = '<span class="ev-stat-num">' + s.num + '</span><span class="ev-stat-label">' + s.label + '</span>';
         statsEl.appendChild(item);
       });
+      if (typeof initStatCounters === 'function') initStatCounters();
     }
 
     var upcoming = evGetUpcoming(DATA);

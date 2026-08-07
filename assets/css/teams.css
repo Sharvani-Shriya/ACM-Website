@@ -319,9 +319,9 @@
 }
 
 .year-panel-head {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 16px;
   margin-bottom: 28px;
   padding-bottom: 24px;
