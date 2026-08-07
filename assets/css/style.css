@@ -83,6 +83,11 @@
   --shadow-sm: 0 1px 3px rgba(11, 31, 77, .08);
   --shadow-md: 0 6px 24px rgba(11, 31, 77, .12);
   --shadow-lg: 0 16px 48px rgba(11, 31, 77, .18);
+
+  /* ---- Global Marquee Speed Control (Photo Gallery & Events) ---- */
+  /* Constant speed in pixels per second (independent of photo count) */
+  --marquee-speed-px: 35;
+  --marquee-speed: 40s;
 }
 
 *,
@@ -1896,12 +1901,12 @@ table.data-table td.placeholder {
 }
 
 .marquee-row.row-a {
-  animation: scrollLeft 40s linear infinite;
+  animation: scrollLeft var(--marquee-speed, 40s) linear infinite;
   margin-bottom: 22px;
 }
 
 .marquee-row.row-b {
-  animation: scrollRight 40s linear infinite;
+  animation: scrollRight var(--marquee-speed, 40s) linear infinite;
 }
 
 .gallery-marquee-wrap:hover .marquee-row {
@@ -3817,7 +3822,7 @@ table.data-table td.placeholder {
   gap: 20px;
   width: max-content;
   will-change: transform;
-  animation: scrollLeft 45s linear infinite;
+  animation: scrollLeft var(--marquee-speed, 40s) linear infinite;
   padding: 4px 0;
 }
 

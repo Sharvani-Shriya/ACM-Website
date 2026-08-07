@@ -212,9 +212,14 @@ document.addEventListener('DOMContentLoaded', function () {
     if (e.key === 'Escape') closeModal();
   });
 
-  /* ---------- Gallery marquee: duplicate row content for seamless loop ---------- */
+  /* ---------- Gallery marquee: duplicate row content & apply constant speed ---------- */
   document.querySelectorAll('.marquee-row').forEach(function (row) {
     row.innerHTML += row.innerHTML;
+    if (typeof applyConstantMarqueeSpeed === 'function') {
+      applyConstantMarqueeSpeed(row);
+    } else if (typeof window.applyConstantMarqueeSpeed === 'function') {
+      window.applyConstantMarqueeSpeed(row);
+    }
   });
 
   /* ---------- Animated Fast Stat Counter (Starts from 1 to target) ---------- */

@@ -553,6 +553,31 @@
 
     // Duplicate tiles to ensure seamless infinite scrolling marquee
     photoEl.innerHTML += photoEl.innerHTML;
+
+    // Apply constant speed in pixels/sec regardless of photo count
+    applyConstantMarqueeSpeed(photoEl);
+  }
+
+  function applyConstantMarqueeSpeed(el) {
+    if (!el) return;
+    function calcSpeed() {
+      var rawCssSpeed = getComputedStyle(document.documentElement).getPropertyValue('--marquee-speed-px').trim();
+      var speedPxPerSec = window.MARQUEE_SPEED_PX || parseFloat(rawCssSpeed);
+      if (!speedPxPerSec || isNaN(speedPxPerSec) || speedPxPerSec <= 0) {
+        speedPxPerSec = 35;
+      }
+      var totalWidth = el.scrollWidth;
+      var halfWidth = totalWidth / 2;
+      if (halfWidth > 0) {
+        var duration = halfWidth / speedPxPerSec;
+        el.style.animationDuration = duration.toFixed(2) + 's';
+      }
+    }
+    requestAnimationFrame(function () {
+      calcSpeed();
+      setTimeout(calcSpeed, 200);
+    });
+    window.addEventListener('resize', calcSpeed);
   }
 
   // Utilities
@@ -582,5 +607,6 @@
   global.evRenderTimelineArchive = evRenderTimelineArchive;
   global.evOpenModal = evOpenModal;
   global.evRenderPhotoMarquee = evRenderPhotoMarquee;
+  global.applyConstantMarqueeSpeed = applyConstantMarqueeSpeed;
 
 })(typeof window !== 'undefined' ? window : this);
