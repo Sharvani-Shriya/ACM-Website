@@ -3600,88 +3600,84 @@ table.data-table td.placeholder {
 }
 
 .ev-detail-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: clamp(16px, 3vw, 40px);
   background: #ffffff;
-  border: 3px solid #0052cc;
+  border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 28px;
   box-shadow: 
-    0 10px 30px rgba(0, 82, 204, 0.06),
-    0 2px 8px rgba(0, 0, 0, 0.02);
+    0 12px 35px rgba(0, 0, 0, 0.04),
+    0 4px 12px rgba(0, 0, 0, 0.02);
   margin-bottom: var(--space-xl);
   position: relative;
   overflow: visible;
-  padding: 20px 16px;
-  transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+  padding: clamp(30px, 4.5vw, 45px) 24px;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .ev-detail-stats:hover {
   box-shadow: 
-    0 14px 40px rgba(0, 82, 204, 0.12),
-    0 4px 14px rgba(0, 0, 0, 0.04);
-  border-color: #0040a8;
-  transform: translateY(-2px);
+    0 16px 40px rgba(0, 0, 0, 0.07),
+    0 6px 16px rgba(0, 0, 0, 0.03);
 }
 
-/* Split Border Darkness Overlays */
-/* Top Border Light Blue Segment (from ~15% to ~64%) */
-.ev-detail-stats::before {
-  content: '';
-  position: absolute;
-  top: -3px;
-  left: 15%;
-  right: 36%;
-  height: 3px;
-  background: #7eaaff;
-  z-index: 2;
-  border-radius: 2px;
-}
-
-/* Bottom Border Light Blue Segment (from ~33.5% to ~77.5%) */
+.ev-detail-stats::before,
 .ev-detail-stats::after {
-  content: '';
-  position: absolute;
-  bottom: -3px;
-  left: 33.5%;
-  right: 22.5%;
-  height: 3px;
-  background: #7eaaff;
-  z-index: 2;
-  border-radius: 2px;
+  display: none !important;
 }
 
-/* Stat Items & Vertical Dividers */
+/* Stat Items - Hexagonal Card Styling */
 .ev-detail-stats .ev-stat-item {
-  background: transparent !important;
-  border: none !important;
-  border-radius: 0 !important;
-  padding: 4px 12px;
-  text-align: center;
   position: relative;
-  box-shadow: none !important;
-  animation: none !important;
+  width: clamp(190px, 25vw, 215px);
+  height: clamp(218px, 28.75vw, 247px);
+  aspect-ratio: 200 / 230;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  transition: transform 0.25s ease;
+  gap: 4px;
+  padding: 0 16px;
+  text-align: center;
+  box-sizing: border-box;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  animation: none !important;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  filter: drop-shadow(0 4px 10px rgba(0, 82, 204, 0.06));
+}
+
+/* SVG Hexagonal Border matching test.png */
+.ev-detail-stats .ev-stat-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 230'%3E%3Cpath d='M 92,15 Q 100,8 108,15 L 183,57 Q 190,62 190,70 L 190,160 Q 190,168 183,173 L 108,215 Q 100,222 92,215 L 17,173 Q 10,168 10,160 L 10,70 Q 10,62 17,57 Z' fill='%23ffffff' stroke='%230052cc' stroke-width='4'/%3E%3C/svg%3E") center center / contain no-repeat;
+  z-index: 1;
+  pointer-events: none;
+  transition: transform 0.3s ease;
 }
 
 .ev-detail-stats .ev-stat-item:hover {
-  transform: translateY(-2px) !important;
+  transform: translateY(-4px) scale(1.02) !important;
+  filter: drop-shadow(0 8px 18px rgba(0, 82, 204, 0.14));
   background: transparent !important;
   box-shadow: none !important;
 }
 
-/* Thin vertical divider lines between columns */
 .ev-detail-stats .ev-stat-item:not(:last-child) {
-  border-right: 1.5px solid #80b3ff !important;
+  border-right: none !important;
+  border-bottom: none !important;
 }
 
-/* Stat Numbers & Blue Horizontal Accent Bar */
+/* Stat Numbers */
 .ev-detail-stats .ev-stat-num {
   font-family: 'Plus Jakarta Sans', var(--font-sans), system-ui, -apple-system, sans-serif;
-  font-size: clamp(1.8rem, 2.8vw, 2.3rem);
+  font-size: clamp(2rem, 3.2vw, 2.5rem);
   font-weight: 800;
   line-height: 1;
   color: #0052cc !important;
@@ -3689,24 +3685,17 @@ table.data-table td.placeholder {
   -webkit-background-clip: initial !important;
   -webkit-text-fill-color: initial !important;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  margin-bottom: 6px;
+  justify-content: center;
+  margin: 0;
   position: relative;
-  z-index: 1;
+  z-index: 2;
   text-align: center;
   transition: transform 0.25s ease, color 0.25s ease;
 }
 
-/* Underline accent line under numbers */
 .ev-detail-stats .ev-stat-num::after {
-  content: '';
-  display: block;
-  width: 32px;
-  height: 3px;
-  background: #0052cc;
-  border-radius: 2px;
-  margin-top: 6px;
+  display: none !important;
 }
 
 .ev-detail-stats .ev-stat-item:hover .ev-stat-num {
@@ -3714,21 +3703,23 @@ table.data-table td.placeholder {
   color: #0040a8 !important;
 }
 
+/* Stat Labels */
 .ev-detail-stats .ev-stat-label {
   font-family: 'Plus Jakarta Sans', var(--font-sans), system-ui, -apple-system, sans-serif;
-  font-size: 0.8rem;
+  font-size: clamp(0.72rem, 1vw, 0.78rem);
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
   color: #0b1f4d !important;
   display: block;
   position: relative;
-  z-index: 1;
+  z-index: 2;
   opacity: 0.95;
-  line-height: 1.35;
+  line-height: 1.18;
   text-align: center;
-  max-width: 170px;
+  max-width: 140px;
   margin: 0 auto;
+  word-wrap: break-word;
 }
 
 /* ---- Timeline ---- */
@@ -3927,12 +3918,9 @@ table.data-table td.placeholder {
   .ev-cat-grid { grid-template-columns: repeat(2, 1fr); }
   .ev-stats-strip { display: grid; grid-template-columns: repeat(2, 1fr); padding: 12px; gap: 8px; border: none; }
   .ev-stat-item { border: none; padding: 16px 14px; }
-  .ev-detail-stats { grid-template-columns: 1fr; gap: 16px; padding: 24px 16px; }
-  .ev-detail-stats .ev-stat-item:not(:last-child) { border-right: none !important; border-bottom: 1.5px solid rgba(0, 102, 204, 0.2) !important; padding-bottom: 20px; }
-  .ev-detail-stats .ev-stat-item:not(:last-child)::before,
-  .ev-detail-stats .ev-stat-item:not(:last-child)::after,
-  .ev-detail-stats .ev-stat-item::before,
-  .ev-detail-stats .ev-stat-item::after { display: none !important; }
+  .ev-detail-stats { flex-direction: column; gap: 24px; padding: 30px 16px; }
+  .ev-detail-stats .ev-stat-item { width: 210px; height: 235px; }
+  .ev-detail-stats .ev-stat-item:not(:last-child) { border-bottom: none !important; padding-bottom: 0; }
   .ev-photo-strip { grid-template-columns: repeat(3, 1fr); }
 }
 
