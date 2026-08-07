@@ -13,7 +13,7 @@ var EV_CATEGORIES = {
     color: '#c8a13a',
     cssVar: '--ev-technizen',
     slug: 'technizen',
-    description: 'Our flagship annual technical fest — six competitive sub-events across one weekend.',
+    description: 'The flagship annual technical fest featuring competitive sub-events across core domain tracks.',
     url: 'events/technizen.html',
     openMaster: 'TECHNIZEN'
   },
@@ -24,7 +24,7 @@ var EV_CATEGORIES = {
     color: '#2e7d6b',
     cssVar: '--ev-hoc',
     slug: 'hour-of-code',
-    description: 'Volunteer visits to local schools introducing programming basics to young students.',
+    description: 'Outreach initiatives introducing computer science and programming fundamentals to school students.',
     url: 'events/hour-of-code.html'
   },
   outreach: {
@@ -34,7 +34,7 @@ var EV_CATEGORIES = {
     color: '#b5502f',
     cssVar: '--ev-outreach',
     slug: 'outreach-programs',
-    description: 'ACM Awareness Programmes (intra-collegiate) and social Outreach events at local schools — spreading knowledge within campus and beyond.',
+    description: 'Social outreach events and awareness programs within campus and beyond.',
     url: 'events/outreach-programs.html'
   },
   guestLectures: {
@@ -146,8 +146,8 @@ var EV_TECHNIZEN = [
     status: 'ongoing',
     badgeText: 'ONGOING NOW',
     title: 'Technizen 2K26',
-    description: 'Flagship annual technical fest is ONGOING NOW (11th & 12th August 2026) -- six competitive sub-events.',
-    desc: 'Technizen 2K26 is currently ONGOING on 11th & 12th August 2026! Spanning six specialized technical tracks from database optimization to AI startup pitching, students from across the region are competing for prestigious awards, recognition, and industry internships.',
+    description: 'Flagship annual technical fest conducted on 11th & 12th August 2026 featuring six competitive sub-events.',
+    desc: 'Technizen 2K26 features six specialized technical tracks ranging from database optimization to AI innovation, where participants compete for merit recognition, awards, and industry opportunities.',
     facts: [["6", "Sub-events"], ["500+", "Participants"], ["Merit & Participation", "Certificates"]],
     banners: ["Query Masters", "DSA Clash", "AI Innovators Arena", "Pixel Craft", "Build & Pitch", "Technoverse"],
     gallery: [],
@@ -924,6 +924,37 @@ var EV_INTRA_COLLEGE = [
     photo: null,
     category: 'intraCollege'
   },
+  /* 
+     ===================================================================================
+     WHEN AN INTRA-COLLEGE EVENT IS CONDUCTED / COMPLETED:
+     1. Change status from 'upcoming' to 'past'.
+     2. Add actual participant numbers, facts, description, and gallery photos.
+     3. Copy the template block below to add a new upcoming intra-college event when announced.
+
+     Template for new upcoming event:
+     {
+       year: 2026,
+       day: '10',
+       month: 'SEPTEMBER',
+       date: '10-09-2026',
+       status: 'upcoming', // 'upcoming' | 'ongoing' | 'past'
+       title: 'Event Title',
+       description: 'Short event summary',
+       desc: 'Full event description',
+       facts: [["150+", "Registered"], ["Rs.10K", "Prize Pool"]],
+       banners: ["Event Banner Text"],
+       gallery: [],
+       fields: {
+         'Eligibility': 'All years, all departments',
+         'Format': 'Individual / Team',
+         'Date': 'DD MMM YYYY'
+       },
+       registerUrl: 'https://registration-link-here',
+       photo: 'assets/images/events/poster.jpg',
+       category: 'intraCollege'
+     }
+     ===================================================================================
+  */
   {
     year: 2026,
     status: 'upcoming',

@@ -132,7 +132,15 @@
       });
     }
 
-    /* Spotlight */
+    /* Spotlight: Default renders the upcoming intra-college event (e.g. Code Blitz).
+       -----------------------------------------------------------------------------------
+       NOTE FOR EVENT CONDUCTORS / ADMINS:
+       When Technizen or a major fest is actively being conducted and you want to feature it
+       at the top of the Intra-College page, UNCOMMENT the Technizen spotlight block below
+       and comment out the default spotlight block.
+       ----------------------------------------------------------------------------------- */
+
+    // --- DEFAULT SPOTLIGHT (Intra-College Events) ---
     var upcoming = evGetUpcoming(DATA);
     var spotlightEl = document.getElementById('ev-spotlight-zone');
     if (upcoming && spotlightEl) {
@@ -153,6 +161,34 @@
           '</div>' +
         '</div>';
     }
+
+    /* 
+    // --- OPTIONAL OVERRIDE: FEATURE TECHNIZEN / MAJOR FEST SPOTLIGHT WHEN CONDUCTED ---
+    // Uncomment this block below when Technizen / flagship event is live/conducted:
+    
+    var upcomingFest = evGetUpcoming(EV_TECHNIZEN) || evGetUpcoming(DATA);
+    if (upcomingFest && spotlightEl) {
+      var fieldsHtmlFest = Object.keys(upcomingFest.fields).map(function(k) {
+        return '<div class="ev-sf"><b>' + k + '</b><span>' + upcomingFest.fields[k] + '</span></div>';
+      }).join('');
+      var posterPathFest = upcomingFest.photo || 'assets/images/events/poster.jpg';
+      spotlightEl.innerHTML =
+        '<div class="ev-spotlight is-technizen">' +
+          '<span class="ev-spotlight-badge ev-gradient-badge"><span class="pulse"></span> ' + (upcomingFest.status === 'ongoing' ? 'ONGOING NOW &middot; 11 &amp; 12 August 2026' : 'Open &middot; Register Now') + '</span>' +
+          '<div class="ev-spotlight-grid">' +
+            '<div class="ev-spotlight-photo ev-poster-box">' +
+              '<img src="../' + posterPathFest + '" alt="' + upcomingFest.title + ' Poster" class="ev-poster-img">' +
+            '</div>' +
+            '<div class="ev-spotlight-info">' +
+              '<h3 class="ev-gradient-heading">' + upcomingFest.title + '</h3>' +
+              '<p class="role">' + upcomingFest.description + '</p>' +
+              '<div class="ev-spotlight-fields">' + fieldsHtmlFest + '</div>' +
+              '<a href="' + (upcomingFest.registerUrl || 'https://docs.google.com/forms/d/e/1FAIpQLSeDW0DpeITrhsGaFSjEOmpCF9epj_gNF6fMaIv4bmQzgfpsgQ/viewform') + '" class="ev-reg-btn" target="_blank" rel="noopener">Register Now &rarr;</a>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+    }
+    */
 
     var timelineEl = document.getElementById('ev-timeline');
     var eyebrowEl  = document.getElementById('ev-timeline-eyebrow');
