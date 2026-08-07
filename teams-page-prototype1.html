@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Teams — ACM Student Chapter, RVR & JC College of Engineering</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-950:#070d2c;
+    --navy-900:#0b1442;
+    --navy-800:#101c58;
+    --navy-700:#182670;
+    --gold:#cf9f2f;
+    --gold-soft:#f0d488;
+    --crimson:#ad2a2a;
+    --paper:#ffffff;
+    --bg-soft:#eef1f9;
+    --bg-soft2:#f7f8fc;
+    --ink:#1a2040;
+    --muted:#5c6480;
+    --line:#e3e6f3;
+    --purple:#6a3fb0;
+    --green:#1f7a4d;
+    --blue:#1f6fb2;
+    --radius:16px;
+    --shadow-soft: 0 10px 30px -14px rgba(11,20,66,.18);
+    --shadow-lift: 0 20px 45px -18px rgba(11,20,66,.30);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{
+    font-family:'Playfair Display',serif;
+    margin:0;
+    color:var(--navy-900);
+  }
+  .num{font-family:'Space Grotesk',sans-serif;}
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 32px;}
+  .eyebrow{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:12.5px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    font-weight:600;
+  }
+  .eyebrow.gold{color:var(--gold);}
+  .eyebrow.crimson{color:var(--crimson);}
+  .eyebrow.light{color:var(--gold-soft);}
+
+  /* ---------- PROTOTYPE NOTICE ---------- */
+  .proto-flag{
+    background:var(--navy-950);
+    color:#cdd4ee;
+    text-align:center;
+    font-size:12.5px;
+    padding:8px 16px;
+    letter-spacing:.03em;
+    font-family:'Space Grotesk',sans-serif;
+  }
+  .proto-flag b{color:var(--gold-soft);}
+
+  /* ---------- TOP BRAND STRIP ---------- */
+  .brandstrip{
+    padding:14px 32px;
+    display:flex;
+    align-items:center;
+    gap:18px;
+    border-bottom:1px solid var(--line);
+    flex-wrap:wrap;
+  }
+  .brandstrip .crest{width:52px;height:52px;border-radius:50%;background:radial-gradient(circle at 35% 30%, #10306f, #060c26);flex:none;display:flex;align-items:center;justify-content:center;color:var(--gold-soft);font-family:'Playfair Display',serif;font-weight:700;font-size:11px;text-align:center;}
+  .brandstrip .name{
+    font-family:'Playfair Display',serif;
+    font-weight:800;
+    font-size:22px;
+    color:var(--crimson);
+    line-height:1.15;
+  }
+  .brandstrip .sub{font-size:11px;color:var(--muted);letter-spacing:.02em;}
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position:sticky;top:0;z-index:40;
+    background:var(--navy-900);
+    color:#fff;
+  }
+  .nav-inner{
+    max-width:1240px;margin:0 auto;padding:14px 32px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .nav-brand{display:flex;align-items:center;gap:12px;}
+  .nav-brand .mark{
+    width:38px;height:38px;border-radius:10px;
+    background:linear-gradient(135deg,var(--gold-soft),var(--gold));
+    display:flex;align-items:center;justify-content:center;
+    color:var(--navy-900);font-weight:800;font-family:'Space Grotesk',sans-serif;font-size:13px;
+    transform:rotate(45deg);
+  }
+  .nav-brand .mark span{transform:rotate(-45deg);}
+  .nav-brand h4{color:#fff;font-size:17px;}
+  .nav-brand p{margin:0;font-size:10.5px;letter-spacing:.09em;color:var(--gold-soft);text-transform:uppercase;}
+  .nav-links{display:flex;gap:30px;font-size:14.5px;font-weight:500;}
+  .nav-links a{padding:6px 2px;color:#c9d0ea;border-bottom:2px solid transparent;transition:.2s;}
+  .nav-links a:hover{color:#fff;}
+  .nav-links a.active{color:#fff;border-color:var(--gold);}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    background:
+      radial-gradient(1200px 500px at 15% -10%, rgba(207,159,47,.25), transparent 60%),
+      linear-gradient(120deg,#0a1442 0%, #0d1c5c 55%, #101f66 100%);
+    color:#fff;
+    padding:76px 32px 92px;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;inset:0;
+    background-image:
+      radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,.35) 1px, transparent 0),
+      radial-gradient(1px 1px at 80% 40%, rgba(255,255,255,.25) 1px, transparent 0),
+      radial-gradient(1px 1px at 60% 80%, rgba(255,255,255,.3) 1px, transparent 0),
+      radial-gradient(1px 1px at 30% 65%, rgba(255,255,255,.2) 1px, transparent 0);
+    opacity:.7;
+  }
+  .hero-inner{position:relative;max-width:1240px;margin:0 auto;text-align:center;}
+  .hero h1{color:#fff;font-size:46px;margin:14px 0 16px;letter-spacing:.01em;}
+  .hero p{max-width:640px;margin:0 auto;color:#c7ceec;font-size:16.5px;line-height:1.65;}
+
+  /* ---------- STATS STRIP ---------- */
+  .stats{
+    max-width:1120px;margin:-46px auto 0;
+    background:#fff;border-radius:var(--radius);
+    box-shadow:var(--shadow-lift);
+    display:grid;grid-template-columns:repeat(4,1fr);
+    position:relative;z-index:2;
+  }
+  .stats::before{
+    content:"";position:absolute;top:0;left:0;right:0;height:4px;border-radius:var(--radius) var(--radius) 0 0;
+    background:linear-gradient(90deg,var(--blue),var(--purple),var(--gold),var(--green));
+  }
+  .stat{padding:28px 20px;text-align:center;border-right:1px solid var(--line);}
+  .stat:last-child{border-right:none;}
+  .stat .icon{
+    width:42px;height:42px;border-radius:50%;margin:0 auto 12px;
+    display:flex;align-items:center;justify-content:center;font-size:17px;color:#fff;
+  }
+  .stat .num{font-size:28px;font-weight:700;color:var(--navy-900);}
+  .stat .lbl{font-size:12.5px;color:var(--muted);margin-top:2px;}
+
+  section{padding:88px 32px 0;}
+  .section-head{text-align:center;max-width:640px;margin:0 auto 44px;}
+  .section-head h2{font-size:32px;margin:10px 0 12px;}
+  .section-head .rule{width:64px;height:3px;background:var(--gold);margin:16px auto 0;border-radius:3px;}
+  .section-head p{color:var(--muted);font-size:15px;line-height:1.6;}
+
+  /* ---------- GROWTH CHART (signature element) ---------- */
+  .chart-card{
+    max-width:1120px;margin:0 auto;background:var(--bg-soft2);
+    border:1px solid var(--line);border-radius:20px;padding:36px 40px 24px;
+    display:grid;grid-template-columns:1fr 300px;gap:36px;align-items:center;
+  }
+  .chart-copy h3{font-size:22px;margin-bottom:10px;}
+  .chart-copy p{color:var(--muted);font-size:14.5px;line-height:1.65;margin-bottom:18px;}
+  .chart-copy .legend{display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--ink);}
+  .chart-copy .legend span.dot{width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:8px;}
+  #growthSvg{width:100%;height:auto;display:block;}
+  .growth-path{
+    stroke-dasharray:1400;stroke-dashoffset:1400;
+    transition:stroke-dashoffset 1.6s cubic-bezier(.2,.7,.2,1);
+  }
+  .chart-card.in-view .growth-path{stroke-dashoffset:0;}
+  .growth-area{opacity:0;transition:opacity 1.2s ease .4s;}
+  .chart-card.in-view .growth-area{opacity:1;}
+  .growth-pt{opacity:0;transform-origin:center;transition:opacity .5s ease, transform .5s ease;}
+  .chart-card.in-view .growth-pt{opacity:1;}
+  .gpt-label{font-family:'Space Grotesk',sans-serif;font-size:10.5px;fill:var(--muted);}
+  .gpt-val{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;fill:var(--navy-900);}
+
+  /* ---------- YEAR EXPLORER ---------- */
+  .explorer{max-width:1120px;margin:0 auto;}
+  .year-tabs{
+    display:flex;gap:10px;overflow-x:auto;padding:6px 4px 22px;
+    scrollbar-width:thin;
+  }
+  .year-tab{
+    flex:none;padding:11px 20px;border-radius:999px;border:1.5px solid var(--line);
+    font-family:'Space Grotesk',sans-serif;font-size:13.5px;font-weight:600;color:var(--navy-800);
+    background:#fff;cursor:pointer;transition:.2s;white-space:nowrap;position:relative;
+  }
+  .year-tab:hover{border-color:var(--gold);}
+  .year-tab.active{
+    background:var(--navy-900);color:#fff;border-color:var(--navy-900);
+    box-shadow:0 8px 18px -8px rgba(16,28,88,.5);
+  }
+  .year-tab .dot-empty{
+    display:none;
+  }
+  .year-tab.empty::after{
+    content:"";position:absolute;top:7px;right:9px;width:6px;height:6px;border-radius:50%;
+    background:var(--gold);
+  }
+
+  .year-panel{
+    border:1px solid var(--line);border-radius:20px;padding:36px;background:#fff;
+    box-shadow:var(--shadow-soft);
+  }
+  .year-panel-head{
+    display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;
+    margin-bottom:28px;padding-bottom:22px;border-bottom:1px solid var(--line);
+  }
+  .year-panel-head h3{font-size:26px;}
+  .year-panel-head .meta{font-size:13.5px;color:var(--muted);margin-top:6px;}
+  .year-panel-head .meta b{color:var(--navy-900);}
+  .btn{
+    font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13.5px;
+    padding:11px 20px;border-radius:10px;border:none;cursor:pointer;transition:.2s;
+    display:inline-flex;align-items:center;gap:8px;
+  }
+  .btn-primary{background:var(--navy-900);color:#fff;}
+  .btn-primary:hover{background:var(--navy-800);}
+  .btn-ghost{background:transparent;color:var(--navy-900);border:1.5px solid var(--line);}
+  .btn-ghost:hover{border-color:var(--navy-900);}
+
+  .subhead{
+    font-family:'Space Grotesk',sans-serif;font-size:11.5px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--muted);margin:0 0 16px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .subhead::after{content:"";flex:1;height:1px;background:var(--line);}
+
+  .lead-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:38px;
+  }
+  .lead-card{
+    border:1px solid var(--line);border-radius:14px;padding:20px 16px;text-align:center;
+    transition:.2s; position:relative;
+  }
+  .lead-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-soft);border-color:transparent;}
+  .avatar{
+    width:60px;height:60px;border-radius:50%;margin:0 auto 12px;
+    display:flex;align-items:center;justify-content:center;color:#fff;
+    font-family:'Playfair Display',serif;font-weight:700;font-size:19px;
+    background:linear-gradient(135deg,var(--navy-800),var(--navy-700));
+  }
+  .role-badge{
+    display:inline-block;font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:700;
+    letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:999px;
+    color:#fff;margin-bottom:8px;
+  }
+  .lead-card .mname{font-size:14.5px;font-weight:700;color:var(--navy-900);}
+  .lead-card .mrole{font-size:12px;color:var(--muted);margin-top:2px;}
+
+  .breakdown-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px;}
+  .breakdown-chip{
+    background:var(--bg-soft2);border:1px solid var(--line);border-radius:999px;
+    padding:9px 16px;font-family:'Space Grotesk',sans-serif;font-size:12.5px;color:var(--navy-800);
+  }
+  .breakdown-chip b{color:var(--navy-900);font-size:13.5px;}
+
+  .year-search{
+    display:flex;gap:8px;background:var(--bg-soft2);border:1px solid var(--line);
+    border-radius:12px;padding:6px;margin-bottom:6px;
+  }
+  .year-search input{
+    flex:1;border:none;background:transparent;outline:none;padding:10px 12px;
+    font-family:'Inter';font-size:14px;
+  }
+  .year-search button{
+    background:var(--navy-900);color:#fff;border:none;border-radius:8px;padding:0 18px;
+    font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13px;cursor:pointer;
+  }
+  .year-search-hint{font-size:12px;color:var(--muted);margin:8px 2px 26px;}
+  .year-search-results{margin:10px 0 26px;display:flex;flex-direction:column;gap:6px;}
+  .year-search-results .hit-row{
+    display:flex;justify-content:space-between;align-items:center;
+    border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:13.5px;
+  }
+  .year-search-results .hit-row b{color:var(--navy-900);}
+  .year-search-results .hit-row span.tag{
+    font-family:'Space Grotesk',sans-serif;font-size:11px;color:var(--muted);
+  }
+
+  .staff-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+  .staff-card{
+    display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:12px;padding:12px;
+  }
+  .staff-card .avatar{width:40px;height:40px;font-size:12.5px;background:linear-gradient(135deg,var(--crimson),#7c1c1c);}
+  .staff-card .mname{font-size:13px;font-weight:600;}
+  .staff-card .mrole{font-size:11px;color:var(--muted);}
+
+  /* empty state */
+  .empty-state{
+    text-align:center;padding:50px 20px;
+  }
+  .empty-state .icon{font-size:34px;margin-bottom:14px;}
+  .empty-state h4{font-size:19px;margin-bottom:8px;}
+  .empty-state p{color:var(--muted);font-size:14px;max-width:420px;margin:0 auto 22px;line-height:1.6;}
+
+  /* ---------- ALUMNI SEARCH ---------- */
+  .search-band{
+    max-width:1120px;margin:88px auto 0;
+    background:linear-gradient(120deg,var(--navy-900),var(--navy-800));
+    border-radius:22px;padding:46px 44px;color:#fff;
+    display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center;
+  }
+  .search-band h3{color:#fff;font-size:25px;margin-bottom:10px;}
+  .search-band p{color:#b9c2e6;font-size:14.5px;line-height:1.6;}
+  .search-box{
+    background:#fff;border-radius:14px;padding:8px;display:flex;gap:8px;
+    box-shadow:var(--shadow-lift);
+  }
+  .search-box input{
+    flex:1;border:none;outline:none;padding:12px 14px;font-family:'Inter';font-size:14.5px;color:var(--ink);
+    border-radius:10px;
+  }
+  .search-box button{
+    background:var(--gold);color:var(--navy-900);border:none;border-radius:10px;padding:0 22px;
+    font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13.5px;cursor:pointer;
+  }
+  .search-results{margin-top:14px;font-size:13px;color:#dbe1f7;}
+  .search-results .hit{
+    background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);
+    border-radius:10px;padding:10px 14px;margin-top:8px;display:flex;justify-content:space-between;
+  }
+  .search-results .hit b{color:#fff;}
+
+  /* ---------- SPOTLIGHT ---------- */
+  .spotlight-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1120px;margin:0 auto;
+  }
+  .spot-card{
+    border:1px solid var(--line);border-radius:18px;padding:26px;position:relative;overflow:hidden;
+    transition:.2s;
+  }
+  .spot-card:hover{box-shadow:var(--shadow-soft);transform:translateY(-4px);}
+  .spot-card .quote-mark{
+    position:absolute;top:14px;right:20px;font-family:'Playfair Display',serif;font-size:52px;
+    color:var(--bg-soft);z-index:0;
+  }
+  .spot-card .avatar{width:52px;height:52px;font-size:16px;margin:0 0 14px;background:linear-gradient(135deg,var(--gold),#a97c1e);}
+  .spot-card h4{font-size:16.5px;position:relative;z-index:1;}
+  .spot-card .role-y{font-size:12px;color:var(--muted);margin:2px 0 12px;}
+  .spot-card p.txt{font-size:13.5px;color:var(--ink);line-height:1.65;position:relative;z-index:1;}
+  .spot-card .now{
+    margin-top:14px;font-size:12px;color:var(--navy-800);font-weight:600;
+    display:flex;align-items:center;gap:6px;
+  }
+  .spot-card .now::before{content:"→";color:var(--gold);}
+
+  /* ---------- MODAL ---------- */
+  .modal-overlay{
+    position:fixed;inset:0;background:rgba(8,13,40,.65);backdrop-filter:blur(2px);
+    display:none;align-items:flex-start;justify-content:center;z-index:100;padding:60px 20px;overflow-y:auto;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal-card{
+    background:#fff;border-radius:18px;max-width:760px;width:100%;padding:34px 34px 30px;
+    box-shadow:var(--shadow-lift);position:relative;
+  }
+  .modal-close{
+    position:absolute;top:18px;right:18px;width:32px;height:32px;border-radius:50%;
+    border:1px solid var(--line);background:#fff;cursor:pointer;font-size:15px;color:var(--muted);
+  }
+  .modal-card h3{font-size:22px;margin-bottom:4px;}
+  .modal-card .meta{font-size:13px;color:var(--muted);margin-bottom:20px;}
+  .modal-table{width:100%;border-collapse:collapse;font-size:13.5px;}
+  .modal-table th{
+    text-align:left;background:var(--bg-soft);padding:10px 12px;color:var(--navy-900);
+    font-family:'Space Grotesk',sans-serif;font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;
+  }
+  .modal-table td{padding:9px 12px;border-bottom:1px solid var(--line);}
+  .modal-search{
+    width:100%;padding:11px 14px;border:1.5px solid var(--line);border-radius:10px;margin-bottom:12px;
+    font-family:'Inter';font-size:13.5px;
+  }
+  .modal-filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;}
+  .filter-chip{
+    font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;
+    padding:6px 13px;border-radius:999px;border:1.5px solid var(--line);background:#fff;
+    color:var(--navy-800);cursor:pointer;transition:.15s;
+  }
+  .filter-chip:hover{border-color:var(--gold);}
+  .filter-chip.active{background:var(--navy-900);color:#fff;border-color:var(--navy-900);}
+  .modal-table-wrap{max-height:340px;overflow-y:auto;border:1px solid var(--line);border-radius:10px;}
+  .modal-pagination{
+    display:flex;align-items:center;justify-content:space-between;margin-top:14px;
+    font-family:'Space Grotesk',sans-serif;font-size:12.5px;color:var(--muted);
+  }
+  .modal-pagination .pg-btns{display:flex;gap:8px;}
+  .modal-pagination button{
+    font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:12.5px;
+    padding:7px 14px;border-radius:8px;border:1.5px solid var(--line);background:#fff;cursor:pointer;
+  }
+  .modal-pagination button:disabled{opacity:.4;cursor:not-allowed;}
+  .modal-pagination button:not(:disabled):hover{border-color:var(--navy-900);}
+
+  footer{
+    margin-top:100px;background:var(--navy-950);color:#c9d0ea;padding:56px 32px 24px;
+  }
+  .foot-grid{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:36px;}
+  footer h5{color:#fff;font-family:'Playfair Display',serif;font-size:16px;margin-bottom:14px;}
+  footer p, footer a{font-size:13px;line-height:1.7;color:#a9b1d8;}
+  footer .flinks{display:flex;flex-direction:column;gap:9px;}
+  .foot-bottom{
+    text-align:center;font-size:12px;color:#7c85ad;margin-top:40px;padding-top:22px;
+    border-top:1px solid rgba(255,255,255,.08);
+  }
+
+  @media(max-width:980px){
+    .stats{grid-template-columns:repeat(2,1fr);}
+    .stat:nth-child(2){border-right:none;}
+    .chart-card{grid-template-columns:1fr;}
+    .lead-grid{grid-template-columns:repeat(2,1fr);}
+    .member-grid{grid-template-columns:repeat(3,1fr);}
+    .staff-row{grid-template-columns:repeat(2,1fr);}
+    .search-band{grid-template-columns:1fr;}
+    .spotlight-grid{grid-template-columns:1fr;}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+    .nav-links{display:none;}
+  }
+  @media(max-width:600px){
+    .lead-grid{grid-template-columns:1fr 1fr;}
+    .member-grid{grid-template-columns:repeat(2,1fr);}
+    .hero h1{font-size:32px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="proto-flag">PROTOTYPE — <b>concept only</b>, sample names shown for layout purposes. Swap in your real roster before publishing.</div>
+
+<div class="brandstrip">
+  <div class="crest">RVR<br>JC</div>
+  <div>
+    <div class="name">R.V.R. &amp; J.C. COLLEGE OF ENGINEERING</div>
+    <div class="sub">(Autonomous) · Sponsored by Nagarjuna Education Society · Affiliated to Acharya Nagarjuna University</div>
+  </div>
+</div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-brand">
+      <div class="mark"><span>acm</span></div>
+      <div><h4>ACM Student Chapter</h4><p>Computer Science &amp; Engineering</p></div>
+    </div>
+    <div class="nav-links">
+      <a href="#">About</a>
+      <a href="#">Events</a>
+      <a href="#" class="active">Teams</a>
+      <a href="#">Photo Gallery</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow light">HOME / TEAMS</div>
+    <h1>Eight Years, One Chapter</h1>
+    <p>Every cohort that has run this chapter since 2018 — leadership, members and faculty — in one searchable archive.</p>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="stat">
+    <div class="icon" style="background:var(--blue)">👥</div>
+    <div class="num">721</div>
+    <div class="lbl">Members since 2018</div>
+  </div>
+  <div class="stat">
+    <div class="icon" style="background:var(--purple)">🎓</div>
+    <div class="num">15+</div>
+    <div class="lbl">Faculty coordinators (2025-26)</div>
+  </div>
+  <div class="stat">
+    <div class="icon" style="background:var(--gold)">📅</div>
+    <div class="num">8</div>
+    <div class="lbl">Academic years archived</div>
+  </div>
+  <div class="stat">
+    <div class="icon" style="background:var(--green)">⭐</div>
+    <div class="num">139</div>
+    <div class="lbl">Largest single-year cohort (2022-23)</div>
+  </div>
+</div>
+
+<!-- ============ SIGNATURE GROWTH CHART ============ -->
+<section id="growth">
+  <div class="chart-card" id="chartCard">
+    <div class="chart-copy">
+      <div class="eyebrow gold">CHAPTER STRENGTH</div>
+      <h3>How the chapter has grown</h3>
+      <p>Total members (students + staff) recorded for every academic year. Hover a point on the line for the exact split — the same numbers behind the archive below.</p>
+      <div class="legend">
+        <div><span class="dot" style="background:var(--gold)"></span>Total members that year</div>
+      </div>
+    </div>
+    <svg id="growthSvg" viewBox="0 0 300 190">
+      <defs>
+        <linearGradient id="areaFill" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#cf9f2f" stop-opacity="0.35"/>
+          <stop offset="100%" stop-color="#cf9f2f" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <!-- gridlines -->
+      <line x1="10" y1="20" x2="10" y2="160" stroke="#e3e6f3" stroke-width="1"/>
+      <line x1="10" y1="160" x2="290" y2="160" stroke="#e3e6f3" stroke-width="1"/>
+      <polygon class="growth-area" points="10,160 10,120 51,101 92,66 133,48 174,58 215,97 256,74 290,138 290,160" fill="url(#areaFill)"/>
+      <polyline class="growth-path" points="10,120 51,101 92,66 133,48 174,58 215,97 256,74 290,138" fill="none" stroke="#cf9f2f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- points: 2018-19(63) 19-20(133) 20-21(96) 21-22(152) 22-23(160) 23-24(137) 24-25(94) 25-26(73) -->
+      <g class="growth-pt" style="transition-delay:.5s"><circle cx="10" cy="120" r="4" fill="#0b1442"/><text x="10" y="176" text-anchor="middle" class="gpt-label">'18-19</text></g>
+      <g class="growth-pt" style="transition-delay:.6s"><circle cx="51" cy="101" r="4" fill="#0b1442"/><text x="51" y="176" text-anchor="middle" class="gpt-label">'19-20</text></g>
+      <g class="growth-pt" style="transition-delay:.7s"><circle cx="92" cy="66" r="4" fill="#0b1442"/><text x="92" y="176" text-anchor="middle" class="gpt-label">'20-21</text></g>
+      <g class="growth-pt" style="transition-delay:.8s"><circle cx="133" cy="48" r="4" fill="#0b1442"/><text x="133" y="176" text-anchor="middle" class="gpt-label">'21-22</text></g>
+      <g class="growth-pt" style="transition-delay:.9s"><circle cx="174" cy="58" r="5.5" fill="#cf9f2f"/><text x="174" y="176" text-anchor="middle" class="gpt-label">'22-23</text><text x="174" y="40" text-anchor="middle" class="gpt-val">160</text></g>
+      <g class="growth-pt" style="transition-delay:1s"><circle cx="215" cy="97" r="4" fill="#0b1442"/><text x="215" y="176" text-anchor="middle" class="gpt-label">'23-24</text></g>
+      <g class="growth-pt" style="transition-delay:1.1s"><circle cx="256" cy="74" r="4" fill="#0b1442"/><text x="256" y="176" text-anchor="middle" class="gpt-label">'24-25</text></g>
+      <g class="growth-pt" style="transition-delay:1.2s"><circle cx="290" cy="138" r="4" fill="#0b1442"/><text x="290" y="176" text-anchor="middle" class="gpt-label">'25-26</text></g>
+    </svg>
+  </div>
+</section>
+
+<!-- ============ YEAR EXPLORER ============ -->
+<section id="explorer">
+  <div class="section-head">
+    <div class="eyebrow crimson">CHAPTER ARCHIVE</div>
+    <h2>Meet every batch</h2>
+    <div class="rule"></div>
+    <p>Pick an academic year to see who led the chapter, the full member list and the faculty who supported it.</p>
+  </div>
+
+  <div class="explorer">
+    <div class="year-tabs" id="yearTabs"></div>
+    <div class="year-panel" id="yearPanel"></div>
+  </div>
+</section>
+
+<!-- ============ ALUMNI SEARCH ============ -->
+<section>
+  <div class="search-band">
+    <div>
+      <div class="eyebrow light">FIND SOMEONE</div>
+      <h3>Search the full alumni archive</h3>
+      <p>Looking for someone specific? Search across all 721 members recorded since 2018 by name — no need to know which year they joined.</p>
+    </div>
+    <div>
+      <div class="search-box">
+        <input id="alumniSearch" type="text" placeholder="Try “Sai”, “Priya”, or a full name…">
+        <button onclick="runAlumniSearch()">Search</button>
+      </div>
+      <div class="search-results" id="alumniResults"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ALUMNI SPOTLIGHT ============ -->
+<section style="padding-bottom:20px;">
+  <div class="section-head">
+    <div class="eyebrow gold">WHERE ARE THEY NOW</div>
+    <h2>Alumni spotlight</h2>
+    <div class="rule"></div>
+    <p>A few former chairs and leads, and what they've gone on to do.</p>
+  </div>
+  <div class="spotlight-grid">
+    <div class="spot-card">
+      <div class="quote-mark">"</div>
+      <div class="avatar">KP</div>
+      <h4>K. Praveen Kumar</h4>
+      <div class="role-y">Chair, 2021-2022</div>
+      <p class="txt">Led the chapter through its first fully virtual Technizen and set up the mentorship pairing system still used today.</p>
+      <div class="now">SDE II, Microsoft Hyderabad</div>
+    </div>
+    <div class="spot-card">
+      <div class="quote-mark">"</div>
+      <div class="avatar">MS</div>
+      <h4>M. Sindhu Reddy</h4>
+      <div class="role-y">Vice Chair, 2019-2020</div>
+      <p class="txt">Started the Hour of Code school-outreach track, now the chapter's longest-running community programme.</p>
+      <div class="now">MS Computer Science, ASU</div>
+    </div>
+    <div class="spot-card">
+      <div class="quote-mark">"</div>
+      <div class="avatar">RV</div>
+      <h4>R. Venkatesh</h4>
+      <div class="role-y">Web Master, 2022-2023</div>
+      <p class="txt">Built the chapter's first member database — the foundation this archive page is now replacing.</p>
+      <div class="now">Founding Engineer, early-stage startup</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FULL ROSTER MODAL ============ -->
+<div class="modal-overlay" id="rosterModal">
+  <div class="modal-card">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="eyebrow crimson" id="modalYearBadge">ROSTER · 2025-2026</div>
+    <h3 id="modalTitle">Full Member Roster</h3>
+    <div class="meta" id="modalMeta">58 students · 15 staff</div>
+    <input class="modal-search" id="modalSearchInput" placeholder="Search by name…" oninput="onModalSearch(this.value)">
+    <div class="modal-filters" id="modalFilters"></div>
+    <div class="modal-table-wrap">
+      <table class="modal-table">
+        <thead><tr><th>Name</th><th>Role</th><th>Branch / Dept</th><th>Type</th></tr></thead>
+        <tbody id="modalTableBody"></tbody>
+      </table>
+    </div>
+    <div class="modal-pagination" id="modalPagination"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="foot-grid">
+    <div>
+      <h5>R.V.R. &amp; J.C. College of Engineering</h5>
+      <p>Chandramoulipuram, Chowdavaram, Guntur,<br>Andhra Pradesh — 522019.</p>
+      <p>An autonomous institution affiliated to Acharya Nagarjuna University, sponsored by Nagarjuna Education Society.</p>
+    </div>
+    <div>
+      <h5>Quick Links</h5>
+      <div class="flinks"><a href="#">About the Chapter</a><a href="#">Events</a><a href="#">Teams</a><a href="#">Photo Gallery</a><a href="#">College Website</a></div>
+    </div>
+    <div>
+      <h5>Our Events</h5>
+      <div class="flinks"><a href="#">Query Masters</a><a href="#">DSA Clash</a><a href="#">AI Innovators Arena</a><a href="#">Pixel Craft</a><a href="#">Build and Pitch</a><a href="#">Technoverse</a></div>
+    </div>
+    <div>
+      <h5>Get in Touch</h5>
+      <p>Dept. of CSE</p>
+    </div>
+  </div>
+  <div class="foot-bottom">© 2026 ACM Student Chapter, Dept. of CSE — R.V.R. &amp; J.C. College of Engineering (Autonomous). All rights reserved.</div>
+</footer>
+
+<script>
+/* ================= SAMPLE DATA ================= */
+const roleColors = {
+  "Chair":"var(--crimson)","Vice Chair":"var(--navy-700)","Secretary":"var(--purple)",
+  "Treasurer":"var(--green)","Web Master":"var(--blue)","Event Lead":"var(--gold)"
+};
+const branches = ["CSE","CSE-AI","IT","CSE-DS","ECE"];
+function initials(name){ return name.split(" ").map(w=>w[0]).slice(0,2).join("").toUpperCase(); }
+
+function genMembers(n, seedNames){
+  const out=[...seedNames];
+  const first=["Aarav","Sai","Priya","Divya","Rahul","Sneha","Vikram","Ananya","Kiran","Meena","Arjun","Lakshmi","Yashwanth","Pooja","Naveen","Deepika","Rohit","Swathi","Bhavana","Charan"];
+  const last=["Reddy","Kumar","Naidu","Rao","Sharma","Varma","Chowdary","Prasad","Devi","Babu"];
+  for(let i=out.length;i<n;i++){
+    out.push({name:`${first[i%first.length]} ${last[(i*3)%last.length]}`, branch:branches[i%branches.length]});
+  }
+  return out;
+}
+
+const yearsData = {
+  "2025-2026": {
+    students:58, staff:15, hasData:true,
+    leadership:[
+      {name:"P. Sai Teja", role:"Chair", branch:"CSE"},
+      {name:"K. Sindhu Priya", role:"Vice Chair", branch:"CSE-AI"},
+      {name:"M. Rohit Varma", role:"Secretary", branch:"IT"},
+      {name:"D. Ananya", role:"Treasurer", branch:"CSE-DS"},
+      {name:"V. Charan Kumar", role:"Web Master", branch:"CSE"},
+      {name:"S. Bhavana", role:"Event Lead", branch:"ECE"},
+    ],
+    members: genMembers(58, []),
+    staffList:[
+      {name:"Dr. N. Ravi Shankar", role:"Faculty Advisor"},
+      {name:"Dr. K. Lakshmi", role:"Co-Advisor"},
+      {name:"Mr. B. Praveen", role:"Coordinator"},
+      {name:"Ms. T. Anitha", role:"Coordinator"},
+    ]
+  },
+  "2024-2025": {
+    students:72, staff:22, hasData:true,
+    leadership:[
+      {name:"R. Venkatesh", role:"Chair", branch:"CSE"},
+      {name:"J. Deepika", role:"Vice Chair", branch:"IT"},
+      {name:"A. Naveen", role:"Secretary", branch:"CSE-AI"},
+      {name:"P. Swathi", role:"Treasurer", branch:"CSE"},
+      {name:"K. Yashwanth", role:"Web Master", branch:"CSE-DS"},
+      {name:"N. Meena", role:"Event Lead", branch:"ECE"},
+    ],
+    members: genMembers(72, []),
+    staffList:[
+      {name:"Dr. N. Ravi Shankar", role:"Faculty Advisor"},
+      {name:"Dr. S. Padma", role:"Co-Advisor"},
+      {name:"Mr. C. Suresh", role:"Coordinator"},
+    ]
+  },
+  "2023-2024": {
+    students:116, staff:21, hasData:true,
+    leadership:[
+      {name:"M. Sai Kiran", role:"Chair", branch:"CSE"},
+      {name:"V. Pooja", role:"Vice Chair", branch:"CSE-AI"},
+      {name:"S. Arjun", role:"Secretary", branch:"IT"},
+      {name:"K. Divya", role:"Treasurer", branch:"CSE-DS"},
+      {name:"R. Kiran Babu", role:"Web Master", branch:"CSE"},
+      {name:"T. Snigdha", role:"Event Lead", branch:"ECE"},
+    ],
+    members: genMembers(116, []),
+    staffList:[
+      {name:"Dr. N. Ravi Shankar", role:"Faculty Advisor"},
+      {name:"Dr. K. Lakshmi", role:"Co-Advisor"},
+    ]
+  },
+  "2022-2023": {students:139, staff:21, hasData:false},
+  "2021-2022": {students:125, staff:27, hasData:false},
+  "2020-2021": {students:68,  staff:28, hasData:false},
+  "2019-2020": {
+    students:106, staff:27, hasData:true,
+    leadership:[
+      {name:"M. Sindhu Reddy", role:"Vice Chair", branch:"CSE"},
+      {name:"K. Praveen Kumar", role:"Chair", branch:"CSE"},
+      {name:"B. Harika", role:"Secretary", branch:"IT"},
+      {name:"G. Vamsi", role:"Treasurer", branch:"ECE"},
+      {name:"S. Nikhita", role:"Web Master", branch:"CSE"},
+      {name:"P. Raju", role:"Event Lead", branch:"CSE-DS"},
+    ],
+    members: genMembers(106, []),
+    staffList:[{name:"Dr. N. Ravi Shankar", role:"Faculty Advisor"}]
+  },
+  "2018-2019": {students:37, staff:26, hasData:false},
+};
+
+/* ================= RENDER YEAR TABS ================= */
+const tabsEl = document.getElementById('yearTabs');
+const panelEl = document.getElementById('yearPanel');
+let activeYear = "2025-2026";
+
+Object.keys(yearsData).forEach(year=>{
+  const btn=document.createElement('button');
+  btn.className='year-tab'+(yearsData[year].hasData?'':' empty');
+  btn.textContent=year;
+  btn.onclick=()=>{activeYear=year; renderTabs(); renderPanel(year);};
+  btn.dataset.year=year;
+  tabsEl.appendChild(btn);
+});
+
+function renderTabs(){
+  [...tabsEl.children].forEach(b=>b.classList.toggle('active', b.dataset.year===activeYear));
+}
+
+function renderPanel(year){
+  const d = yearsData[year];
+  if(!d.hasData){
+    panelEl.innerHTML = `
+      <div class="empty-state">
+        <div class="icon">🗂️</div>
+        <h4>${year} records aren't digitized yet</h4>
+        <p>We know this year had <b>${d.students} students</b> and <b>${d.staff} staff</b> from the old register, but individual names haven't been entered into the archive.</p>
+        <button class="btn btn-primary" onclick="alert('This would open a simple form for alumni / faculty to submit names for ${year}.')">Help fill this in</button>
+      </div>`;
+    return;
+  }
+  const leadHtml = d.leadership.map(m=>`
+    <div class="lead-card">
+      <span class="role-badge" style="background:${roleColors[m.role]||'var(--navy-800)'}">${m.role}</span>
+      <div class="avatar">${initials(m.name)}</div>
+      <div class="mname">${m.name}</div>
+      <div class="mrole">${m.branch}</div>
+    </div>`).join('');
+
+  // Aggregate only — no individual member is featured over another on the page itself.
+  const branchCounts = {};
+  d.members.forEach(m=> branchCounts[m.branch] = (branchCounts[m.branch]||0)+1 );
+  const breakdownHtml = Object.entries(branchCounts).map(([b,c])=>
+    `<div class="breakdown-chip"><b>${c}</b> ${b}</div>`
+  ).join('');
+
+  const staffHtml = d.staffList.map(s=>`
+    <div class="staff-card">
+      <div class="avatar">${initials(s.name)}</div>
+      <div><div class="mname">${s.name}</div><div class="mrole">${s.role}</div></div>
+    </div>`).join('');
+
+  panelEl.innerHTML = `
+    <div class="year-panel-head">
+      <div>
+        <h3>${year}</h3>
+        <div class="meta"><b>${d.students}</b> student members · <b>${d.staff}</b> staff members</div>
+      </div>
+      <button class="btn btn-primary" onclick="openModal('${year}')">View full member directory ↗</button>
+    </div>
+    <div class="subhead">Leadership team</div>
+    <div class="lead-grid">${leadHtml}</div>
+
+    <div class="subhead">Cohort breakdown</div>
+    <div class="breakdown-row">${breakdownHtml}</div>
+
+    <div class="subhead">Look someone up in ${year}</div>
+    <div class="year-search">
+      <input placeholder="Type a name…" oninput="onYearSearch(this.value)" id="yearSearchInput">
+      <button onclick="onYearSearch(document.getElementById('yearSearchInput').value)">Search</button>
+    </div>
+    <div class="year-search-hint">Nothing shows until you search — every one of the ${d.students} members has equal footing here. Prefer to scan the whole list? Use the directory button above.</div>
+    <div class="year-search-results" id="yearSearchResults"></div>
+
+    <div class="subhead" style="margin-top:6px;">Faculty &amp; staff</div>
+    <div class="staff-row">${staffHtml}</div>
+  `;
+}
+
+function onYearSearch(q){
+  const d = yearsData[activeYear];
+  const box = document.getElementById('yearSearchResults');
+  q = q.trim().toLowerCase();
+  if(!q){ box.innerHTML=''; return; }
+  const pool = [
+    ...d.leadership.map(m=>({...m, tag:m.role})),
+    ...d.members.map(m=>({...m, tag:"Member"})),
+  ];
+  const hits = pool.filter(m=>m.name.toLowerCase().includes(q)).slice(0,8);
+  box.innerHTML = hits.length
+    ? hits.map(h=>`<div class="hit-row"><span><b>${h.name}</b> · ${h.branch}</span><span class="tag">${h.tag}</span></div>`).join('')
+    : `<div class="hit-row"><span>No one matching “${q}” in ${activeYear}.</span></div>`;
+}
+
+renderTabs();
+renderPanel(activeYear);
+
+/* ================= MODAL: full roster with filter + pagination =================
+   Built so a 139-person year is exactly as easy to open and scan as a 37-person year —
+   the table is always capped to one page height, filters narrow it, pagination pages through it. */
+let modalRows = [];
+let modalFilter = "All";
+let modalQuery = "";
+let modalPage = 1;
+const PAGE_SIZE = 25;
+
+function openModal(year){
+  const d = yearsData[year];
+  document.getElementById('modalYearBadge').textContent = "ROSTER · "+year;
+  document.getElementById('modalTitle').textContent = "Full Member Roster";
+  document.getElementById('modalMeta').textContent = `${d.students} students · ${d.staff} staff`;
+
+  modalRows = [
+    ...d.leadership.map(m=>({name:m.name, role:m.role, branch:m.branch, type:"Leadership"})).sort((a,b)=>a.name.localeCompare(b.name)),
+    ...d.members.map(m=>({name:m.name, role:"Member", branch:m.branch, type:"Student"})).sort((a,b)=>a.name.localeCompare(b.name)),
+    ...d.staffList.map(s=>({name:s.name, role:s.role, branch:"—", type:"Staff"})).sort((a,b)=>a.name.localeCompare(b.name)),
+  ];
+
+  const branchSet = [...new Set(d.members.map(m=>m.branch))];
+  const filters = ["All","Leadership","Staff",...branchSet];
+  document.getElementById('modalFilters').innerHTML = filters.map(f=>
+    `<button class="filter-chip ${f==='All'?'active':''}" data-f="${f}" onclick="setModalFilter('${f}')">${f}</button>`
+  ).join('');
+
+  modalFilter="All"; modalQuery=""; modalPage=1;
+  document.getElementById('modalSearchInput').value="";
+  renderModalTable();
+  document.getElementById('rosterModal').classList.add('open');
+}
+
+function setModalFilter(f){
+  modalFilter=f; modalPage=1;
+  document.querySelectorAll('.filter-chip').forEach(c=>c.classList.toggle('active', c.dataset.f===f));
+  renderModalTable();
+}
+function onModalSearch(v){ modalQuery=v.toLowerCase(); modalPage=1; renderModalTable(); }
+
+function renderModalTable(){
+  let rows = modalRows.filter(r=>{
+    const matchesFilter = modalFilter==="All" ? true
+      : modalFilter==="Leadership" ? r.type==="Leadership"
+      : modalFilter==="Staff" ? r.type==="Staff"
+      : r.branch===modalFilter;
+    const matchesQuery = !modalQuery || r.name.toLowerCase().includes(modalQuery);
+    return matchesFilter && matchesQuery;
+  });
+
+  const totalPages = Math.max(1, Math.ceil(rows.length/PAGE_SIZE));
+  modalPage = Math.min(modalPage, totalPages);
+  const pageRows = rows.slice((modalPage-1)*PAGE_SIZE, modalPage*PAGE_SIZE);
+
+  document.getElementById('modalTableBody').innerHTML = pageRows.length ? pageRows.map(r=>`
+    <tr><td>${r.name}</td><td>${r.role}</td><td>${r.branch}</td><td>${r.type}</td></tr>
+  `).join('') : `<tr><td colspan="4" style="color:var(--muted);text-align:center;padding:24px;">No one matches that search or filter.</td></tr>`;
+
+  document.getElementById('modalPagination').innerHTML = `
+    <span>${rows.length} result${rows.length===1?'':'s'} · page ${modalPage} of ${totalPages}</span>
+    <div class="pg-btns">
+      <button ${modalPage<=1?'disabled':''} onclick="modalPage--;renderModalTable()">← Prev</button>
+      <button ${modalPage>=totalPages?'disabled':''} onclick="modalPage++;renderModalTable()">Next →</button>
+    </div>`;
+}
+
+function closeModal(){ document.getElementById('rosterModal').classList.remove('open'); }
+document.getElementById('rosterModal').addEventListener('click', e=>{
+  if(e.target.id==='rosterModal') closeModal();
+});
+
+/* ================= ALUMNI SEARCH (across all years) ================= */
+function runAlumniSearch(){
+  const q = document.getElementById('alumniSearch').value.trim().toLowerCase();
+  const box = document.getElementById('alumniResults');
+  if(!q){ box.innerHTML=''; return; }
+  let hits=[];
+  Object.entries(yearsData).forEach(([year,d])=>{
+    if(!d.hasData) return;
+    [...d.leadership, ...d.members].forEach(m=>{
+      if(m.name.toLowerCase().includes(q)) hits.push({...m, year});
+    });
+  });
+  hits = hits.slice(0,6);
+  box.innerHTML = hits.length
+    ? hits.map(h=>`<div class="hit"><span><b>${h.name}</b> · ${h.branch||''}</span><span>${h.year}</span></div>`).join('')
+    : `<div class="hit"><span>No matches in the digitized years. Try a shorter name, or it may be in a year not yet archived.</span></div>`;
+}
+document.getElementById('alumniSearch').addEventListener('keydown', e=>{ if(e.key==='Enter') runAlumniSearch(); });
+
+/* ================= SCROLL REVEAL FOR CHART ================= */
+const chartCard = document.getElementById('chartCard');
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(en=>{ if(en.isIntersecting){ chartCard.classList.add('in-view'); io.unobserve(en.target); } });
+},{threshold:.35});
+io.observe(chartCard);
+</script>
+</body>
+</html>
