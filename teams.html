@@ -1,50 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Teams | ACM Student Chapter — Dept. of CSE, RVRJC</title>
+  <title>Our Teams — ACM Student Chapter, RVR &amp; JC College of Engineering</title>
+  <meta name="description" content="Every cohort that has run the ACM Student Chapter at R.V.R. &amp; J.C. College of Engineering since 2018 — leadership, members and faculty — in one searchable archive.">
+  
+  <!-- Prototype Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@500&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Global site styles -->
   <link rel="stylesheet" href="assets/css/style.css">
-  <style>
-    /* Additional custom styles for teams table/page to match design aesthetics */
-    .table-wrap {
-      margin-top: 24px;
-    }
-    
-    .data-table td {
-      vertical-align: middle;
-    }
-    
-    .member-count {
-      font-weight: 600;
-      color: var(--navy);
-    }
-    
-    .table-btn-group {
-      display: flex;
-      gap: 8px;
-    }
-    
-    /* Ensure the table looks balanced on mobile */
-    @media (max-width: 768px) {
-      .table-btn-group {
-        flex-direction: column;
-        gap: 6px;
-      }
-    }
-  </style>
+  <!-- Teams prototype styles -->
+  <link rel="stylesheet" href="assets/css/teams.css">
 </head>
-
 <body>
 
   <!-- ===================== TOP IDENTITY BANNER ===================== -->
   <div class="top-banner">
-    <img src="assets/images/global/college-banner.png" alt="R.V.R. & J.C. College of Engineering — EAPCET Code: RVJC">
+    <img src="assets/images/global/college-banner.png" alt="R.V.R. &amp; J.C. College of Engineering — EAPCET Code: RVJC">
   </div>
 
   <!-- ===================== NAVIGATION ===================== -->
@@ -61,314 +36,169 @@
       <div class="nav-links">
         <a href="index.html">About</a>
         <a href="events.html">Events</a>
-        <a href="teams.html">Teams</a>
+        <a href="teams.html" class="active">Teams</a>
         <a href="gallery.html">Photo Gallery</a>
       </div>
     </div>
   </nav>
 
-  <!-- ===================== PAGE HERO ===================== -->
+  <!-- ===================== HERO SECTION ===================== -->
   <header class="page-hero teams-hero">
-    <div class="container">
-      <div class="crumb">Home / Teams</div>
-      <h1>Our Teams</h1>
-      <p>Explore the strength of the ACM Student Chapter across various academic years</p>
+    <div class="hero-inner">
+      <div class="crumb">HOME / TEAMS</div>
+      <h1>Eight Years, One Chapter</h1>
+      <p>Every cohort that has run this chapter since 2018 — leadership, members and faculty — in one searchable archive.</p>
     </div>
   </header>
 
-  <!-- ===================== TEAMS SECTION ===================== -->
-  <section class="section">
-    <div class="container">
-      <div class="section-title">
-        <span class="eyebrow">Chapter Strength</span>
-        <h2>Yearly Statistics &amp; Members</h2>
-        <div class="rule"></div>
+  <!-- ===================== MAIN CONTENT SECTION ===================== -->
+  <section class="teams-section" style="padding-top:48px;">
+    <!-- STATS STRIP (Sits after the hero banner with a clean gap, matching events.html structure) -->
+    <div class="stats">
+      <div class="stat">
+        <div class="icon" style="background:var(--teams-blue)">👥</div>
+        <div class="num">721</div>
+        <div class="lbl">Members since 2018</div>
       </div>
-
-      <!-- View Switcher -->
-      <div class="teams-view-switcher">
-        <button id="btn-view-wheel" class="view-toggle-btn active">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10"></circle>
-            <path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M4.93 19.07L19.07 4.93"></path>
-          </svg>
-          Wheel View
-        </button>
-        <button id="btn-view-table" class="view-toggle-btn">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="3" y="3" width="18" height="18" rx="2"></rect>
-            <path d="M3 9h18M3 15h18M9 3v18M15 3v18"></path>
-          </svg>
-          Table View
-        </button>
+      <div class="stat">
+        <div class="icon" style="background:var(--teams-purple)">🎓</div>
+        <div class="num">15+</div>
+        <div class="lbl">Faculty coordinators (2025-26)</div>
       </div>
+      <div class="stat">
+        <div class="icon" style="background:var(--teams-gold)">📅</div>
+        <div class="num">8</div>
+        <div class="lbl">Academic years archived</div>
+      </div>
+      <div class="stat">
+        <div class="icon" style="background:var(--teams-green)">⭐</div>
+        <div class="num">139</div>
+        <div class="lbl">Largest single-year cohort (2022-23)</div>
+      </div>
+    </div>
 
-      <!-- INTERACTIVE SPINNING WHEEL VIEW -->
-      <div id="teams-wheel-view" class="teams-wheel-layout">
-        <!-- LEFT: Spinning Wheel Graphic -->
-        <div class="wheel-stage-container">
-          <div class="wheel-pointer-indicator">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="#0b1f4d">
-              <path d="M12 21L3 7h18z"></path>
-            </svg>
-          </div>
-          
-          <div id="teams-wheel-svg" class="wheel-svg-wrapper"></div>
-          
-          <button id="teams-wheel-spin-btn" class="wheel-center-btn" title="Click to spin or select year">
-            <span class="hub-label">ACM</span>
-            <span class="hub-sub">TEAMS</span>
-            <span class="hub-action">SPIN</span>
-          </button>
-        </div>
-
-        <!-- RIGHT: Side Pop-Up Window / Details Card -->
-        <div id="teams-details-popup" class="team-details-card">
-          <div class="popup-header-bar">
-            <div class="popup-top-meta">
-              <div class="popup-top-left-group">
-                <div class="popup-monogram">25</div>
-                <span class="popup-badge">Selected Batch</span>
-              </div>
-              <span class="popup-total-badge">Total Strength: <strong class="popup-total-count">73</strong></span>
-            </div>
-            <div class="popup-year-nav">
-              <button id="popup-prev-year" class="popup-nav-btn" title="Previous Year">&larr;</button>
-              <h3 class="popup-year-title">Academic Year 2025-2026</h3>
-              <button id="popup-next-year" class="popup-nav-btn" title="Next Year">&rarr;</button>
-            </div>
-          </div>
-
-          <p class="popup-subtitle">Click any year block on the wheel to view member statistics and download lists.</p>
-
-          <div class="popup-metrics-grid">
-            <div class="popup-metric-box staff-metric">
-              <div class="metric-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                  <circle cx="12" cy="7" r="4"></circle>
-                </svg>
-              </div>
-              <div class="metric-data">
-                <span class="metric-label">Staff Members</span>
-                <div class="metric-value popup-staff-count">15</div>
-              </div>
-            </div>
-
-            <div class="popup-metric-box student-metric">
-              <div class="metric-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M17 21v-2a4 4 0 0 0-3-3.87"></path>
-                  <path d="M9 21v-2a4 4 0 0 1 3-3.87"></path>
-                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                  <path d="M8 3.13a4 4 0 0 0 0 7.75"></path>
-                  <circle cx="12" cy="7" r="4"></circle>
-                </svg>
-              </div>
-              <div class="metric-data">
-                <span class="metric-label">Student Members</span>
-                <div class="metric-value popup-student-count">58</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Membership Ratio Breakdown Bar -->
-          <div class="popup-ratio-section">
-            <div class="ratio-header">
-              <span class="ratio-title">Composition Ratio</span>
-              <span class="ratio-legend"><span class="dot student-dot"></span> Students <span class="dot staff-dot"></span> Staff</span>
-            </div>
-            <div class="popup-ratio-bar-track">
-              <div class="popup-ratio-bar-fill student-fill" style="width: 79%;"></div>
-              <div class="popup-ratio-bar-fill staff-fill" style="width: 21%;"></div>
-            </div>
-            <div class="ratio-labels">
-              <span class="popup-student-pct">79% Students</span>
-              <span class="popup-staff-pct">21% Staff</span>
-            </div>
-          </div>
-
-          <div class="popup-downloads-container">
-            <h4 class="downloads-title">Member Lists &amp; Documents</h4>
-            <div class="popup-btn-group">
-              <a href="assets/documents/students-2025-26.pdf" target="_blank" rel="noopener" class="popup-dl-btn popup-student-btn">
-                <div class="dl-btn-content">
-                  <span class="dl-btn-main">Student List (58)</span>
-                  <span class="dl-btn-sub">Verified Chapter Roster • PDF</span>
-                </div>
-                <div class="dl-btn-icon">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                    <polyline points="7 10 12 15 17 10"></polyline>
-                    <line x1="12" y1="15" x2="12" y2="3"></line>
-                  </svg>
-                </div>
-              </a>
-              <a href="assets/documents/staff-2025-26.pdf" target="_blank" rel="noopener" class="popup-dl-btn popup-staff-btn popup-btn-outline">
-                <div class="dl-btn-content">
-                  <span class="dl-btn-main">Staff List (15)</span>
-                  <span class="dl-btn-sub">Faculty Advisors • PDF</span>
-                </div>
-                <div class="dl-btn-icon">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                    <polyline points="7 10 12 15 17 10"></polyline>
-                    <line x1="12" y1="15" x2="12" y2="3"></line>
-                  </svg>
-                </div>
-              </a>
-            </div>
-          </div>
+    <!-- GROWTH CHART -->
+    <div class="chart-card" id="chartCard">
+      <div class="chart-copy">
+        <div class="eyebrow gold">CHAPTER STRENGTH</div>
+        <h3>How the chapter has grown</h3>
+        <p>Total members (students + staff) recorded for every academic year. Hover a point on the line for the exact split — the same numbers behind the archive below.</p>
+        <div class="legend">
+          <div><span class="dot" style="background:var(--teams-gold)"></span>Total members that year</div>
         </div>
       </div>
+      <svg id="growthSvg" viewBox="0 0 300 190">
+        <defs>
+          <linearGradient id="areaFill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#c8a13a" stop-opacity="0.35"/>
+            <stop offset="100%" stop-color="#c8a13a" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <!-- gridlines -->
+        <line x1="10" y1="20" x2="10" y2="160" stroke="#e3e6f3" stroke-width="1"/>
+        <line x1="10" y1="160" x2="290" y2="160" stroke="#e3e6f3" stroke-width="1"/>
+        <polygon class="growth-area" points="10,160 10,120 51,101 92,66 133,48 174,58 215,97 256,74 290,138 290,160" fill="url(#areaFill)"/>
+        <polyline class="growth-path" points="10,120 51,101 92,66 133,48 174,58 215,97 256,74 290,138" fill="none" stroke="#c8a13a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- points: 2018-19(63) 19-20(133) 20-21(96) 21-22(152) 22-23(160) 23-24(137) 24-25(94) 25-26(73) -->
+        <g class="growth-pt" style="transition-delay:.5s"><circle cx="10" cy="120" r="4" fill="#0b1f4d"/><text x="10" y="176" text-anchor="middle" class="gpt-label">'18-19</text></g>
+        <g class="growth-pt" style="transition-delay:.6s"><circle cx="51" cy="101" r="4" fill="#0b1f4d"/><text x="51" y="176" text-anchor="middle" class="gpt-label">'19-20</text></g>
+        <g class="growth-pt" style="transition-delay:.7s"><circle cx="92" cy="66" r="4" fill="#0b1f4d"/><text x="92" y="176" text-anchor="middle" class="gpt-label">'20-21</text></g>
+        <g class="growth-pt" style="transition-delay:.8s"><circle cx="133" cy="48" r="4" fill="#0b1f4d"/><text x="133" y="176" text-anchor="middle" class="gpt-label">'21-22</text></g>
+        <g class="growth-pt" style="transition-delay:.9s"><circle cx="174" cy="58" r="5.5" fill="#c8a13a"/><text x="174" y="176" text-anchor="middle" class="gpt-label">'22-23</text><text x="174" y="40" text-anchor="middle" class="gpt-val">160</text></g>
+        <g class="growth-pt" style="transition-delay:1s"><circle cx="215" cy="97" r="4" fill="#0b1f4d"/><text x="215" y="176" text-anchor="middle" class="gpt-label">'23-24</text></g>
+        <g class="growth-pt" style="transition-delay:1.1s"><circle cx="256" cy="74" r="4" fill="#0b1f4d"/><text x="256" y="176" text-anchor="middle" class="gpt-label">'24-25</text></g>
+        <g class="growth-pt" style="transition-delay:1.2s"><circle cx="290" cy="138" r="4" fill="#0b1f4d"/><text x="290" y="176" text-anchor="middle" class="gpt-label">'25-26</text></g>
+      </svg>
+    </div>
+  </section>
 
-      <!-- TABLE VIEW (FALLBACK/TOGGLE) -->
-      <div id="teams-table-view" class="table-wrap" style="display: none;">
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th style="width: 80px;">S.No.</th>
-              <th>Academic Year</th>
-              <th>Student Members</th>
-              <th>Staff Members</th>
-              <th>Student List</th>
-              <th>Staff List</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td><strong>2025-2026</strong></td>
-              <td><span class="member-count">58</span></td>
-              <td><span class="member-count">15</span></td>
-              <td>
-                <a href="assets/documents/students-2025-26.pdf" target="_blank" rel="noopener" class="btn btn-sm">
-                  Student List
-                </a>
-              </td>
-              <td>
-                <a href="assets/documents/staff-2025-26.pdf" target="_blank" rel="noopener" class="btn btn-sm btn-outline">
-                  Staff List
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td><strong>2024-2025</strong></td>
-              <td><span class="member-count">72</span></td>
-              <td><span class="member-count">22</span></td>
-              <td>
-                <a href="assets/documents/students-2024-25.pdf" target="_blank" rel="noopener" class="btn btn-sm">
-                  Student List
-                </a>
-              </td>
-              <td>
-                <a href="assets/documents/staff-2024-25.pdf" target="_blank" rel="noopener" class="btn btn-sm btn-outline">
-                  Staff List
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td><strong>2023-2024</strong></td>
-              <td><span class="member-count">116</span></td>
-              <td><span class="member-count">21</span></td>
-              <td>
-                <a href="assets/documents/students-2023-24.pdf" target="_blank" rel="noopener" class="btn btn-sm">
-                  Student List
-                </a>
-              </td>
-              <td>
-                <a href="assets/documents/staff-2023-24.pdf" target="_blank" rel="noopener" class="btn btn-sm btn-outline">
-                  Staff List
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td><strong>2022-2023</strong></td>
-              <td><span class="member-count">139</span></td>
-              <td><span class="member-count">21</span></td>
-              <td>
-                <a href="assets/documents/students-2022-23.pdf" target="_blank" rel="noopener" class="btn btn-sm">
-                  Student List
-                </a>
-              </td>
-              <td>
-                <a href="assets/documents/staff-2022-23.pdf" target="_blank" rel="noopener" class="btn btn-sm btn-outline">
-                  Staff List
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td>5</td>
-              <td><strong>2021-2022</strong></td>
-              <td><span class="member-count">125</span></td>
-              <td><span class="member-count">27</span></td>
-              <td>
-                <a href="assets/documents/students-2021-22.pdf" target="_blank" rel="noopener" class="btn btn-sm">
-                  Student List
-                </a>
-              </td>
-              <td>
-                <a href="assets/documents/staff-2021-22.pdf" target="_blank" rel="noopener" class="btn btn-sm btn-outline">
-                  Staff List
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td>6</td>
-              <td><strong>2020-2021</strong></td>
-              <td><span class="member-count">68</span></td>
-              <td><span class="member-count">28</span></td>
-              <td>
-                <a href="assets/documents/students-2020-21.pdf" target="_blank" rel="noopener" class="btn btn-sm">
-                  Student List
-                </a>
-              </td>
-              <td>
-                <a href="assets/documents/staff-2020-21.pdf" target="_blank" rel="noopener" class="btn btn-sm btn-outline">
-                  Staff List
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td>7</td>
-              <td><strong>2019-2020</strong></td>
-              <td><span class="member-count">106</span></td>
-              <td><span class="member-count">27</span></td>
-              <td>
-                <a href="assets/documents/students-2019-20.pdf" target="_blank" rel="noopener" class="btn btn-sm">
-                  Student List
-                </a>
-              </td>
-              <td>
-                <a href="assets/documents/staff-2019-20.pdf" target="_blank" rel="noopener" class="btn btn-sm btn-outline">
-                  Staff List
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td>8</td>
-              <td><strong>2018-2019</strong></td>
-              <td><span class="member-count">37</span></td>
-              <td><span class="member-count">26</span></td>
-              <td>
-                <a href="assets/documents/students-2018-19.pdf" target="_blank" rel="noopener" class="btn btn-sm">
-                  Student List
-                </a>
-              </td>
-              <td>
-                <a href="assets/documents/staff-2018-19.pdf" target="_blank" rel="noopener" class="btn btn-sm btn-outline">
-                  Staff List
-                </a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+  <!-- ===================== YEAR EXPLORER ===================== -->
+  <section class="teams-section" id="explorer">
+    <div class="section-head">
+      <div class="eyebrow crimson">CHAPTER ARCHIVE</div>
+      <h2>Meet every batch</h2>
+      <div class="rule"></div>
+      <p>Pick an academic year to see who led the chapter, the full member list and the faculty who supported it.</p>
+    </div>
+
+    <div class="explorer">
+      <div class="year-tabs" id="yearTabs"></div>
+      <div class="year-panel" id="yearPanel"></div>
+    </div>
+  </section>
+
+  <!-- ===================== ALUMNI SEARCH ===================== -->
+  <section class="teams-section">
+    <div class="search-band">
+      <div>
+        <div class="eyebrow light">FIND SOMEONE</div>
+        <h3>Search the full alumni archive</h3>
+        <p>Looking for someone specific? Search across all 721 members recorded since 2018 by name — no need to know which year they joined.</p>
+      </div>
+      <div>
+        <div class="search-box">
+          <input id="alumniSearch" type="text" placeholder="Try “Sai”, “Priya”, or a full name…">
+          <button onclick="runAlumniSearch()">Search</button>
+        </div>
+        <div class="search-results" id="alumniResults"></div>
       </div>
     </div>
   </section>
+
+  <!-- ===================== ALUMNI SPOTLIGHT ===================== -->
+  <section class="teams-section" style="padding-bottom:20px;">
+    <div class="section-head">
+      <div class="eyebrow gold">WHERE ARE THEY NOW</div>
+      <h2>Alumni spotlight</h2>
+      <div class="rule"></div>
+      <p>A few former chairs and leads, and what they've gone on to do.</p>
+    </div>
+    <div class="spotlight-grid">
+      <div class="spot-card">
+        <div class="quote-mark">"</div>
+        <div class="avatar">KP</div>
+        <h4>K. Praveen Kumar</h4>
+        <div class="role-y">Chair, 2021-2022</div>
+        <p class="txt">Led the chapter through its first fully virtual Technizen and set up the mentorship pairing system still used today.</p>
+        <div class="now">SDE II, Microsoft Hyderabad</div>
+      </div>
+      <div class="spot-card">
+        <div class="quote-mark">"</div>
+        <div class="avatar">MS</div>
+        <h4>M. Sindhu Reddy</h4>
+        <div class="role-y">Vice Chair, 2019-2020</div>
+        <p class="txt">Started the Hour of Code school-outreach track, now the chapter's longest-running community programme.</p>
+        <div class="now">MS Computer Science, ASU</div>
+      </div>
+      <div class="spot-card">
+        <div class="quote-mark">"</div>
+        <div class="avatar">RV</div>
+        <h4>R. Venkatesh</h4>
+        <div class="role-y">Web Master, 2022-2023</div>
+        <p class="txt">Built the chapter's first member database — the foundation this archive page is now replacing.</p>
+        <div class="now">Founding Engineer, early-stage startup</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FULL ROSTER MODAL ===================== -->
+  <div class="modal-overlay" id="rosterModal">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div class="eyebrow crimson" id="modalYearBadge">ROSTER · 2025-2026</div>
+      <h3 id="modalTitle">Full Member Roster</h3>
+      <div class="meta" id="modalMeta">58 students · 15 staff</div>
+      <input class="modal-search" id="modalSearchInput" placeholder="Search by name…" oninput="onModalSearch(this.value)">
+      <div class="modal-filters" id="modalFilters"></div>
+      <div class="modal-table-wrap">
+        <table class="modal-table">
+          <thead><tr><th>Name</th><th>Role</th><th>Branch / Dept</th><th>Type</th></tr></thead>
+          <tbody id="modalTableBody"></tbody>
+        </table>
+      </div>
+      <div class="modal-pagination" id="modalPagination"></div>
+    </div>
+  </div>
 
   <!-- ===================== FOOTER ===================== -->
   <footer class="site-footer">
@@ -379,11 +209,10 @@
           <p style="max-width:360px;font-size:.88rem;line-height:1.5;margin-bottom:8px;">
             R.V.R. &amp; J.C. College of Engineering,<br>
             Chandramoulipuram, Chowdavaram, Guntur,<br>
-            Andhra Pradesh — 522019.
+            Andhra Pradesh &mdash; 522019.
           </p>
           <p style="max-width:360px;font-size:.82rem;opacity:0.8;line-height:1.4;">
-            An autonomous institution affiliated to Acharya Nagarjuna University, sponsored by Nagarjuna Education
-            Society.
+            An autonomous institution affiliated to Acharya Nagarjuna University, sponsored by Nagarjuna Education Society.
           </p>
         </div>
         <div>
@@ -408,14 +237,11 @@
           <a href="https://rvrjcce.ac.in/CSE/" target="_blank" rel="noopener">Dept. of CSE</a>
         </div>
       </div>
-      <div class="footer-bottom">&copy; 2026 ACM Student Chapter, Dept. of CSE — R.V.R. &amp; J.C. College of
-        Engineering (Autonomous). All rights reserved.</div>
+      <div class="footer-bottom">&copy; 2026 ACM Student Chapter, Dept. of CSE &mdash; R.V.R. &amp; J.C. College of Engineering (Autonomous). All rights reserved.</div>
     </div>
   </footer>
 
   <script src="assets/js/script.js"></script>
-  <script src="assets/js/teams-wheel.js"></script>
+  <script src="assets/js/teams.js"></script>
 </body>
-
 </html>
-
