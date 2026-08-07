@@ -957,7 +957,7 @@ var EV_INTRA_COLLEGE = [
   */
   {
     year: 2026,
-    status: 'upcoming',
+    status: 'past',
     title: 'Code Blitz 2026 -- Intra-college Coding Contest',
     description: 'Annual algorithmic programming contest open to all students of R.V.R. & J.C. College.',
     desc: 'The flagship intra-college coding championship returns for 2026! Solve challenging algorithmic problems in a 3-hour speedrun.',
