@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ACM Student Chapter — Photo Gallery (Prototype)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0a1f3d; --navy-deep:#071730; --blue:#14335e;
+    --gold:#c99a3a; --gold-light:#e3c876; --red:#b5342b;
+    --paper:#f6f5f1; --panel:#ffffff; --ink:#1b2434; --ink-soft:#5b6478;
+    --line:#e3e1d9; --line-soft:#eeece5;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3{font-family:'Fraunces',serif;}
+
+  .brandbar{background:var(--panel);border-bottom:1px solid var(--line);padding:14px 40px;display:flex;align-items:center;gap:14px;}
+  .brandbar .crest{width:38px;height:38px;border-radius:50%;background:conic-gradient(var(--gold),var(--red),var(--navy),var(--gold));flex-shrink:0;}
+  .brandbar .name{font-weight:700;color:var(--red);font-size:15px;}
+  .brandbar .sub{font-size:11px;color:var(--ink-soft);}
+  .navbar{background:var(--navy-deep);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:56px;}
+  .navbar .brand{display:flex;align-items:center;gap:10px;color:#fff;font-weight:600;font-size:14px;}
+  .navbar .diamond{width:26px;height:26px;background:var(--blue);border:1px solid var(--gold);transform:rotate(45deg);display:inline-block;}
+  .navbar nav a{color:#c9d3e6;text-decoration:none;font-size:13.5px;margin-left:26px;font-weight:500;}
+  .navbar nav a.active{color:#fff;border-bottom:2px solid var(--gold);padding-bottom:18px;}
+
+  .hero{
+    background:radial-gradient(circle at 12% 25%, rgba(201,154,58,.18), transparent 45%),
+               radial-gradient(circle at 88% 75%, rgba(181,52,43,.15), transparent 50%),
+               linear-gradient(180deg, var(--navy-deep), var(--navy) 75%);
+    color:#fff;padding:56px 40px 40px;text-align:center;
+  }
+  .hero .eyebrow{color:var(--gold-light);letter-spacing:2.5px;font-size:11.5px;font-weight:600;text-transform:uppercase;}
+  .hero h1{font-size:42px;margin:10px 0 12px;font-weight:600;}
+  .hero p{color:#c9d3e6;max-width:600px;margin:0 auto;font-size:15px;line-height:1.6;}
+
+  .stat-strip{max-width:1180px;margin:-26px auto 0;padding:0 40px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;position:relative;z-index:5;}
+  .stat-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;box-shadow:0 8px 20px rgba(10,31,61,.06);}
+  .stat-card .n{font-family:'Fraunces',serif;font-size:24px;color:var(--navy);font-weight:600;}
+  .stat-card .l{font-size:11.5px;color:var(--ink-soft);margin-top:2px;}
+
+  .section-head{max-width:1180px;margin:52px auto 0;padding:0 40px;}
+  .section-head .eyebrow{color:var(--red);font-size:11.5px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;}
+  .section-head h2{font-size:28px;color:var(--navy);margin:6px 0 8px;font-weight:600;}
+  .section-head .rule{width:56px;height:3px;background:var(--gold);border-radius:2px;}
+  .section-head p.desc{max-width:640px;color:var(--ink-soft);font-size:14px;line-height:1.6;margin-top:12px;}
+
+  /* ===== controls: filters + search ===== */
+  .gallery-controls{
+    max-width:1180px;
+    margin:30px auto 0;
+    padding:0 40px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    flex-wrap:wrap;
+  }
+  .filters{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+  }
+  .filters button{
+    font-size:12.5px;
+    font-weight:600;
+    padding:8px 16px;
+    border-radius:100px;
+    border:1px solid var(--line);
+    background:var(--panel);
+    color:var(--ink-soft);
+    cursor:pointer;
+    transition:.15s;
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  .filters button .dot{width:6px;height:6px;border-radius:50%;background:currentColor;}
+  .filters button:hover{border-color:var(--gold); color:var(--navy);}
+  .filters button.on{background:var(--navy); color:#fff; border-color:var(--navy);}
+
+  .gsearch{
+    margin-left:auto;
+    position:relative;
+    width:230px;
+  }
+  .gsearch input{
+    width:100%;
+    padding:8px 12px 8px 30px;
+    border:1px solid var(--line);
+    border-radius:8px;
+    font-size:12.5px;
+    background:var(--panel);
+    outline:none;
+  }
+  .gsearch input:focus{border-color:var(--gold);}
+  .gsearch svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:13px;height:13px;color:var(--ink-soft);}
+
+  /* ===== masonry grid ===== */
+  .masonry{
+    max-width:1180px;
+    margin:24px auto 90px;
+    padding:0 40px;
+    column-count:4;
+    column-gap:16px;
+  }
+  .tile{
+    break-inside:avoid;
+    margin-bottom:16px;
+    border-radius:12px;
+    overflow:hidden;
+    position:relative;
+    cursor:pointer;
+    background:var(--panel);
+    border:1px solid var(--line);
+    transition:transform .25s, box-shadow .25s;
+    opacity:0;
+    animation:fadeIn .5s forwards;
+  }
+  @keyframes fadeIn{ to{opacity:1;} }
+  .tile:hover{transform:translateY(-4px); box-shadow:0 16px 30px rgba(10,31,61,.14);}
+  .tile .ph{
+    width:100%;
+    display:block;
+    position:relative;
+  }
+  .tile .ph::before{
+    content:"";
+    display:block;
+    padding-top: var(--ratio, 75%);
+  }
+  .tile .ph .fill{
+    position:absolute; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    color:rgba(255,255,255,.85);
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    text-align:center;
+    padding:10px;
+  }
+  .tile .overlay{
+    position:absolute; left:0; right:0; bottom:0;
+    padding:22px 12px 10px;
+    background:linear-gradient(0deg, rgba(7,23,48,.88), transparent);
+    color:#fff;
+    opacity:0;
+    transition:opacity .2s;
+  }
+  .tile:hover .overlay{opacity:1;}
+  .tile .overlay .cat{
+    font-size:9.5px; text-transform:uppercase; letter-spacing:1px; color:var(--gold-light); font-weight:700;
+  }
+  .tile .overlay .cap{font-size:12px; margin-top:3px; line-height:1.35;}
+  .tile .zoom-ic{
+    position:absolute; top:10px; right:10px;
+    width:26px; height:26px;
+    border-radius:50%;
+    background:rgba(7,23,48,.55);
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; transition:opacity .2s;
+  }
+  .tile:hover .zoom-ic{opacity:1;}
+  .tile .zoom-ic svg{width:13px;height:13px;stroke:#fff;fill:none;stroke-width:2;}
+
+  .load-more{
+    display:block;
+    margin:10px auto 0;
+    padding:11px 28px;
+    background:var(--navy);
+    color:#fff;
+    border:none;
+    border-radius:9px;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.15s;
+  }
+  .load-more:hover{background:var(--blue);}
+  .load-more-wrap{max-width:1180px;margin:-60px auto 90px;padding:0 40px;text-align:center;}
+
+  /* ===== lightbox ===== */
+  .lightbox{
+    position:fixed; inset:0;
+    background:rgba(4,12,26,.92);
+    z-index:300;
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; pointer-events:none;
+    transition:opacity .25s;
+  }
+  .lightbox.open{opacity:1; pointer-events:all;}
+  .lb-content{
+    max-width:min(900px, 88vw);
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+  .lb-image{
+    width:100%;
+    aspect-ratio:16/10;
+    border-radius:10px;
+    display:flex; align-items:center; justify-content:center;
+    color:rgba(255,255,255,.7);
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;
+    position:relative;
+    overflow:hidden;
+  }
+  .lb-caption{
+    margin-top:16px;
+    text-align:center;
+    color:#fff;
+  }
+  .lb-caption .cat{font-size:10.5px; letter-spacing:1.2px; text-transform:uppercase; color:var(--gold-light); font-weight:700;}
+  .lb-caption h4{margin:6px 0 4px; font-size:19px; font-weight:600;}
+  .lb-caption p{margin:0; font-size:12.5px; color:#9fb0cc;}
+  .lb-counter{margin-top:10px; font-family:'JetBrains Mono',monospace; font-size:11.5px; color:#7688a8;}
+
+  .lb-close, .lb-prev, .lb-next{
+    position:fixed;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.15);
+    color:#fff;
+    width:42px; height:42px;
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    font-size:18px;
+  }
+  .lb-close:hover, .lb-prev:hover, .lb-next:hover{background:rgba(255,255,255,.18);}
+  .lb-close{top:26px; right:30px;}
+  .lb-prev{left:30px; top:50%; transform:translateY(-50%);}
+  .lb-next{right:30px; top:50%; transform:translateY(-50%);}
+
+  footer{text-align:center;padding:26px;font-size:12px;color:var(--ink-soft);border-top:1px solid var(--line);}
+
+  @media (max-width:1000px){ .masonry{column-count:3;} }
+  @media (max-width:720px){
+    .masonry{column-count:2;}
+    .stat-strip{grid-template-columns:repeat(2,1fr);}
+    .navbar nav{display:none;}
+    .gsearch{width:100%; margin-left:0;}
+    .lb-prev,.lb-next{width:36px;height:36px;}
+    .lb-prev{left:10px;} .lb-next{right:10px;}
+    .lb-close{top:14px; right:14px;}
+  }
+  @media (max-width:480px){ .masonry{column-count:1;} }
+</style>
+</head>
+<body>
+
+<div class="brandbar">
+  <div class="crest"></div>
+  <div>
+    <div class="name">R.V.R. &amp; J.C. COLLEGE OF ENGINEERING</div>
+    <div class="sub">(Autonomous) · ACM Student Chapter, Dept. of CSE</div>
+  </div>
+</div>
+<div class="navbar">
+  <div class="brand"><span class="diamond"></span> ACM Student Chapter</div>
+  <nav><a href="#">About</a><a href="#">Events</a><a href="#">Teams</a><a href="#" class="active">Photo Gallery</a></nav>
+</div>
+
+<div class="hero">
+  <div class="eyebrow">Home / Photo Gallery</div>
+  <h1>Photo Gallery</h1>
+  <p>Ten years of Technizen, guest lectures, outreach drives, and everything in between — captured in one place.</p>
+</div>
+
+<div class="stat-strip">
+  <div class="stat-card"><div class="n">312</div><div class="l">Photos archived</div></div>
+  <div class="stat-card"><div class="n">47</div><div class="l">Events covered</div></div>
+  <div class="stat-card"><div class="n">8</div><div class="l">Years documented</div></div>
+  <div class="stat-card"><div class="n">6</div><div class="l">Categories</div></div>
+</div>
+
+<div class="section-head">
+  <div class="eyebrow">Chapter Moments</div>
+  <h2>Browse the Archive</h2>
+  <div class="rule"></div>
+  <p class="desc">Filter by event type or search a caption. Click any photo to view it full-size with the full event context.</p>
+</div>
+
+<div class="gallery-controls">
+  <div class="filters" id="filters">
+    <button class="on" data-cat="all"><span class="dot"></span>All</button>
+    <button data-cat="technizen"><span class="dot"></span>Technizen</button>
+    <button data-cat="guest">Guest Lectures</button>
+    <button data-cat="outreach">Outreach Programs</button>
+    <button data-cat="workshop">Technical Workshops</button>
+    <button data-cat="hoc">Hour of Code</button>
+    <button data-cat="intra">Intra-college Events</button>
+  </div>
+  <div class="gsearch">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input id="search-input" type="text" placeholder="Search captions or year…">
+  </div>
+</div>
+
+<div class="masonry" id="masonry"></div>
+<div class="load-more-wrap"><button class="load-more" id="load-more">Load More Photos</button></div>
+
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" id="lb-close">✕</button>
+  <button class="lb-prev" id="lb-prev">‹</button>
+  <button class="lb-next" id="lb-next">›</button>
+  <div class="lb-content">
+    <div class="lb-image" id="lb-image"></div>
+    <div class="lb-caption">
+      <div class="cat" id="lb-cat">Technizen</div>
+      <h4 id="lb-title">Opening Ceremony 2K26</h4>
+      <p id="lb-desc">Chief guest address, Main Auditorium</p>
+      <div class="lb-counter" id="lb-counter">1 / 24</div>
+    </div>
+  </div>
+</div>
+
+<footer>Prototype for internal review — R.V.R. &amp; J.C. College of Engineering, ACM Student Chapter · Dept. of CSE</footer>
+
+<script>
+const CATS = {
+  technizen:{label:'Technizen', color1:'#0a1f3d', color2:'#14335e'},
+  guest:{label:'Guest Lectures', color1:'#4a2f6b', color2:'#6b3fa0'},
+  outreach:{label:'Outreach Programs', color1:'#8a3a1f', color2:'#b5502b'},
+  workshop:{label:'Technical Workshops', color1:'#1c5c3a', color2:'#278a52'},
+  hoc:{label:'Hour of Code', color1:'#1f5c8a', color2:'#2b7fb5'},
+  intra:{label:'Intra-college Events', color1:'#8a6a1f', color2:'#c99a3a'},
+};
+const RATIOS = ['66%','75%','100%','125%','56%'];
+
+function makePhotos(){
+  const captions = {
+    technizen: ["Opening Ceremony 2K26","Query Masters Finale","DSA Clash Round 2","Prize Distribution","AI Innovators Arena","Build & Pitch Demo Day"],
+    guest: ["Future Readiness Orientation","Micro Services Talk","Inauguration — Eminent Speaker","SMAC Technologies Session","Cloud & Cybersecurity Talk"],
+    outreach: ["School Visit — Guntur","Awareness Drive, ZPHS","Coding Basics for Kids","Community Outreach Day"],
+    workshop: ["Hands-on Python Workshop","Git & GitHub Session","Web Dev Bootcamp"],
+    hoc: ["Hour of Code — Batch 1","Hour of Code — Batch 2","Volunteer Team Briefing"],
+    intra: ["Pixel Craft Round 1","Technoverse Quiz Final","Hackathon Overnight Session","Coding Contest Winners"]
+  };
+  const years = ["2018","2019","2020","2021","2022","2023","2024","2025"];
+  let photos = [];
+  let id = 0;
+  Object.keys(captions).forEach(cat => {
+    captions[cat].forEach((title, i) => {
+      for (let v=0; v<3; v++){
+        id++;
+        photos.push({
+          id, cat, title: v===0?title:`${title} — View ${v+1}`,
+          desc: `${CATS[cat].label} · ${years[id % years.length]}`,
+          ratio: RATIOS[id % RATIOS.length]
+        });
+      }
+    });
+  });
+  return photos;
+}
+
+const ALL_PHOTOS = makePhotos();
+let visibleCount = 16;
+let currentFilter = 'all';
+let currentSearch = '';
+let currentSet = [];
+let lbIndex = 0;
+
+function getFiltered(){
+  return ALL_PHOTOS.filter(p => {
+    if (currentFilter !== 'all' && p.cat !== currentFilter) return false;
+    if (currentSearch && !(`${p.title} ${p.desc}`.toLowerCase().includes(currentSearch.toLowerCase()))) return false;
+    return true;
+  });
+}
+
+function renderGrid(){
+  const filtered = getFiltered();
+  currentSet = filtered.slice(0, visibleCount);
+  const grid = document.getElementById('masonry');
+  grid.innerHTML = '';
+  currentSet.forEach((p, idx) => {
+    const c = CATS[p.cat];
+    const tile = document.createElement('div');
+    tile.className = 'tile';
+    tile.style.animationDelay = (idx * 0.02) + 's';
+    tile.innerHTML = `
+      <div class="ph" style="--ratio:${p.ratio}; background:linear-gradient(150deg, ${c.color1}, ${c.color2});">
+        <div class="fill">${p.title}</div>
+      </div>
+      <div class="zoom-ic"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+      <div class="overlay"><div class="cat">${c.label}</div><div class="cap">${p.title}</div></div>
+    `;
+    tile.addEventListener('click', () => openLightbox(idx));
+    grid.appendChild(tile);
+  });
+  document.getElementById('load-more').style.display = filtered.length > visibleCount ? 'inline-block' : 'none';
+}
+
+document.querySelectorAll('.filters button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filters button').forEach(b=>b.classList.remove('on'));
+    btn.classList.add('on');
+    currentFilter = btn.dataset.cat;
+    visibleCount = 16;
+    renderGrid();
+  });
+});
+document.getElementById('search-input').addEventListener('input', (e) => {
+  currentSearch = e.target.value;
+  visibleCount = 16;
+  renderGrid();
+});
+document.getElementById('load-more').addEventListener('click', () => {
+  visibleCount += 16;
+  renderGrid();
+});
+
+// lightbox
+const lb = document.getElementById('lightbox');
+function openLightbox(idx){
+  lbIndex = idx;
+  showLB();
+  lb.classList.add('open');
+}
+function showLB(){
+  const p = currentSet[lbIndex];
+  const c = CATS[p.cat];
+  document.getElementById('lb-image').style.background = `linear-gradient(150deg, ${c.color1}, ${c.color2})`;
+  document.getElementById('lb-image').innerHTML = `<span>${p.title}</span>`;
+  document.getElementById('lb-cat').textContent = c.label;
+  document.getElementById('lb-title').textContent = p.title;
+  document.getElementById('lb-desc').textContent = p.desc;
+  document.getElementById('lb-counter').textContent = `${lbIndex+1} / ${currentSet.length}`;
+}
+document.getElementById('lb-close').addEventListener('click', () => lb.classList.remove('open'));
+lb.addEventListener('click', (e) => { if (e.target === lb) lb.classList.remove('open'); });
+document.getElementById('lb-prev').addEventListener('click', () => { lbIndex = (lbIndex - 1 + currentSet.length) % currentSet.length; showLB(); });
+document.getElementById('lb-next').addEventListener('click', () => { lbIndex = (lbIndex + 1) % currentSet.length; showLB(); });
+document.addEventListener('keydown', (e) => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') lb.classList.remove('open');
+  if (e.key === 'ArrowLeft') { lbIndex = (lbIndex - 1 + currentSet.length) % currentSet.length; showLB(); }
+  if (e.key === 'ArrowRight') { lbIndex = (lbIndex + 1) % currentSet.length; showLB(); }
+});
+
+renderGrid();
+</script>
+</body>
+</html>
