@@ -39,8 +39,10 @@
   /* Subsection Title (H3) */
   --text-h4: clamp(1.05rem, 1.8vw, 1.25rem);
   /* Card / Item Title (H4) */
-  --text-body: clamp(0.95rem, 1.2vw, 1.06rem);
-  /* Main Body Text */
+  --text-body: clamp(1.12rem, 1.5vw, 1.25rem);
+  /* Main Body Text (About ACM, Vision, Mission, Main Page Body) */
+  --text-popup-body: clamp(0.95rem, 1.2vw, 1.06rem);
+  /* Dedicated Font Size for Pop Up / Modal Windows */
   --text-nav: clamp(1.0rem, 1.2vw, 1.02rem);
   /* Navigation Links */
   --text-btn: clamp(0.85rem, 1.2vw, 0.98rem);
@@ -1895,9 +1897,10 @@ table.data-table td.placeholder {
   flex: none;
 }
 
-.modal-body p {
+.modal-body p,
+.modal-body li {
   color: #000000;
-  font-size: var(--text-body);
+  font-size: var(--text-popup-body);
 }
 
 .coord-row {
@@ -4558,7 +4561,7 @@ table.data-table td.placeholder {
 }
 
 .ev-modal-sub {
-  font-size: var(--text-body);
+  font-size: var(--text-popup-body);
   color: var(--ink-soft);
   margin: 0;
   line-height: var(--lh-body);
@@ -4618,7 +4621,7 @@ table.data-table td.placeholder {
 
 .ev-modal-desc {
   font-family: var(--font-body);
-  font-size: var(--text-body);
+  font-size: var(--text-popup-body);
   line-height: var(--lh-body);
   color: var(--ink);
   margin: 0 0 20px;
