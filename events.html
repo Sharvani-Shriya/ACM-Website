@@ -53,7 +53,7 @@
   <section class="section" id="events-master-view">
     <div class="container">
 
-      <!-- Stats Strip (Decorative Professional Bar) -->
+      <!-- Stats Strip (Decorative Professional Bar) - Kept in comments for future updates
       <div class="ev-stats-strip" id="ev-master-stats">
         <div class="ev-stat-item">
           <div class="ev-stat-icon bg-blue" aria-hidden="true">
@@ -116,6 +116,7 @@
           </div>
         </div>
       </div>
+      -->
 
       <!-- Grouped Vertical Bar Chart -->
       <div class="ev-chart-card">
@@ -292,7 +293,7 @@
   <script>
     /* ---- Master events page renderer ---- */
     (function () {
-      /* Stats */
+      /* Stats (commented out for future updates)
       var totalEl = document.getElementById('ev-total-count');
       var guestEl = document.getElementById('ev-guests-count');
       var schoolsEl = document.getElementById('ev-schools-count');
@@ -318,6 +319,7 @@
       if (window.initStatCounters) {
         window.initStatCounters();
       }
+      */
 
       /* Chart: Grouped Vertical Bar Chart (2017–2026) */
       var years = EV_CHART_DATA.map(function (row) { return String(row.year); });

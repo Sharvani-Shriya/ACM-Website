@@ -50,7 +50,7 @@
     <div class="container">
 
       <div id="ev-spotlight-zone"></div>
-      <div class="ev-detail-stats" id="ev-detail-stats"></div>
+      <!-- <div class="ev-detail-stats" id="ev-detail-stats"></div> -->
 
       <div class="ev-timeline-wrap">
         <div class="ev-timeline-head">
@@ -116,6 +116,7 @@
     var DATA      = EV_OUTREACH;
 
     var past = evGetPast(DATA);
+    /* Stats (commented out for future updates)
     var stats = [
       { num: DATA.length,  label: 'Programs since 2019' },
       { num: '1,800+',     label: 'Participants reached' },
@@ -132,6 +133,7 @@
       });
       if (typeof initStatCounters === 'function') initStatCounters();
     }
+    */
 
     var upcoming = evGetUpcoming(DATA);
     var spotlightEl = document.getElementById('ev-spotlight-zone');

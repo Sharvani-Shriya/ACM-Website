@@ -52,8 +52,9 @@
       <!-- Spotlight zone — rendered by JS if upcoming instance exists -->
       <div id="ev-spotlight-zone"></div>
 
-      <!-- Detail stat strip -->
+      <!-- Detail stat strip (commented for future updates)
       <div class="ev-detail-stats" id="ev-detail-stats"></div>
+      -->
 
       <!-- Timeline -->
       <div class="ev-timeline-wrap">
@@ -121,7 +122,7 @@
     var CAT_COLOR = EV_CATEGORIES[CAT_KEY].color;
     var DATA      = EV_TECHNIZEN;
 
-    /* Stats */
+    /* Stats (commented out for future updates)
     var pastInstances = evGetPast(DATA);
     var stats = [
       { num: '5+',                label: 'Sub-events per edition' },
@@ -139,6 +140,7 @@
       });
       if (typeof initStatCounters === 'function') initStatCounters();
     }
+    */
 
     /* Spotlight */
     var upcoming = evGetUpcoming(DATA);

@@ -50,7 +50,7 @@
     <div class="container">
 
       <div id="ev-spotlight-zone"></div>
-      <div class="ev-detail-stats" id="ev-detail-stats"></div>
+      <!-- <div class="ev-detail-stats" id="ev-detail-stats"></div> -->
 
       <div class="ev-timeline-wrap">
         <div class="ev-timeline-head">
@@ -117,6 +117,7 @@
 
     var past = evGetPast(DATA);
 
+    /* Stats (commented out for future updates)
     var stats = [
       { num: DATA.length,  label: 'Events since 2019' },
       { num: '500+',       label: 'Total participants' },
@@ -133,6 +134,7 @@
       });
       if (typeof initStatCounters === 'function') initStatCounters();
     }
+    */
 
     /* Spotlight: Default renders the upcoming intra-college event (e.g. Code Blitz).
        -----------------------------------------------------------------------------------

@@ -52,7 +52,7 @@
       <!-- Spotlight zone — rendered by JS; visible because Dr. Anjali Rao's lecture is upcoming -->
       <div id="ev-spotlight-zone"></div>
 
-      <div class="ev-detail-stats" id="ev-detail-stats"></div>
+      <!-- <div class="ev-detail-stats" id="ev-detail-stats"></div> -->
 
       <div class="ev-timeline-wrap">
         <div class="ev-timeline-head">
@@ -119,7 +119,7 @@
 
     var past = evGetPast(DATA);
 
-    /* Stats */
+    /* Stats (commented out for future updates)
     var depts = 6;
     var stats = [
       { num: depts,           label: 'Departments covered' },
@@ -137,6 +137,7 @@
       });
       if (typeof initStatCounters === 'function') initStatCounters();
     }
+    */
 
     /* Spotlight */
     var upcoming = evGetUpcoming(DATA);
