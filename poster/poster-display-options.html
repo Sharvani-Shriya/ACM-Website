@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Poster Display — 11 Options</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#152452; --navy-deep:#0F1C40; --gold:#C9A227; --red:#C0233F;
+    --bg:#F4F6FA; --card:#FFFFFF; --border:#E4E9F2; --muted:#5B6B8C;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; background:var(--bg); font-family:'Inter',sans-serif; color:var(--navy); padding:0 0 100px;}
+  
+  .top{
+    background:var(--navy-deep); color:#fff; padding:32px 24px 24px; text-align:center;
+    position:sticky; top:0; z-index:50; box-shadow:0 10px 30px rgba(15,28,64,0.3);
+  }
+  .top h1{font-family:'Playfair Display',serif; margin:0 0 8px; font-size:26px;}
+  .top p{margin:0 0 16px; color:#B9C2DA; font-size:14px;}
+  .nav{display:flex; gap:8px; justify-content:center; flex-wrap:wrap; max-width:1150px; margin:0 auto;}
+  .nav a{
+    color:#EFE6C4; text-decoration:none; font-size:12px; font-weight:700;
+    border:1px solid rgba(239,230,196,0.35); border-radius:999px; padding:6px 13px;
+    transition:all .2s ease;
+  }
+  .nav a:hover{background:rgba(255,255,255,0.15); border-color:var(--gold); color:#fff;}
+
+  .section{max-width:1150px; margin:55px auto 0; padding:0 24px;}
+  .section-head{margin-bottom:20px;}
+  .kicker{color:var(--red); font-weight:700; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; margin:0 0 6px;}
+  .section h2{font-family:'Playfair Display', serif; font-size:26px; margin:0 0 8px; color:var(--navy-deep);}
+  .section .desc{color:var(--muted); font-size:14.5px; line-height:1.6; max-width:720px; margin:0;}
+
+  .stage{
+    background:var(--card); border:1px solid var(--border); border-radius:18px;
+    box-shadow:0 20px 48px -24px rgba(15,28,64,.25); padding:26px; overflow:hidden;
+  }
+
+  /* ============ OPTION 1: Clean Full-Size Poster Window ============ */
+  .o1-stage{
+    position:relative; height:600px; border-radius:14px; background:#F8FAFC;
+    border:1px solid var(--border); display:flex; align-items:center; justify-content:center;
+    padding:20px; overflow:hidden;
+  }
+  .o1-img{
+    max-height:550px; max-width:100%; object-fit:contain; border-radius:10px;
+    box-shadow:0 20px 40px rgba(15,28,64,0.18); transition:opacity 0.4s ease, transform 0.4s ease;
+  }
+  .o1-arrow{
+    position:absolute; top:50%; transform:translateY(-50%); z-index:10;
+    width:46px; height:46px; border-radius:50%; background:#fff; border:1px solid var(--border);
+    display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--navy-deep);
+    box-shadow:0 8px 24px rgba(0,0,0,0.12); font-size:22px; transition:all 0.2s ease;
+  }
+  .o1-arrow:hover{background:var(--navy-deep); color:#fff; border-color:var(--navy-deep);}
+  .o1-arrow.prev{left:20px;} .o1-arrow.next{right:20px;}
+  .o1-dots{display:flex; gap:9px; justify-content:center; margin-top:16px;}
+  .o1-dots button{width:9px; height:9px; border-radius:50%; border:none; background:#D4DAE8; cursor:pointer; padding:0; transition:all 0.2s ease;}
+  .o1-dots button.active{background:var(--navy-deep); width:26px; border-radius:6px;}
+
+  /* ============ OPTION 2: Large 3D Coverflow Stage ============ */
+  .o2-stage{position:relative; height:600px; display:flex; align-items:center; justify-content:center; perspective:1400px; background:#F8FAFC; border-radius:14px; border:1px solid var(--border); overflow:hidden;}
+  .o2-item{
+    position:absolute; transition:all .55s cubic-bezier(.22,.68,0,1.01); border-radius:12px; overflow:hidden;
+    box-shadow:0 24px 50px -16px rgba(15,28,64,.35); cursor:pointer; background:#fff; padding:6px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .o2-item img{display:block; max-height:510px; width:auto; max-width:680px; object-fit:contain; border-radius:8px;}
+  .o2-arrow{
+    position:absolute; top:50%; transform:translateY(-50%); z-index:20;
+    width:46px; height:46px; border-radius:50%; background:#fff; border:1px solid var(--border);
+    cursor:pointer; color:var(--navy-deep); font-size:22px; box-shadow:0 8px 24px rgba(0,0,0,0.15);
+    display:flex; align-items:center; justify-content:center; transition:all 0.2s ease;
+  }
+  .o2-arrow:hover{background:var(--navy-deep); color:#fff; border-color:var(--navy-deep);}
+  .o2-arrow.prev{left:20px;} .o2-arrow.next{right:20px;}
+
+  /* ============ OPTION 3: Large 3D Flip Cube Box ============ */
+  .o3-wrapper{perspective:1500px; height:600px; display:flex; align-items:center; justify-content:center; position:relative; background:#F8FAFC; border-radius:14px; border:1px solid var(--border); overflow:hidden;}
+  .o3-cube{position:relative; width:640px; height:520px; transform-style:preserve-3d; transition:transform 0.75s cubic-bezier(0.4, 0, 0.2, 1);}
+  .o3-face{
+    position:absolute; inset:0; background:#fff; border:1px solid var(--border); border-radius:14px;
+    padding:16px; display:flex; align-items:center; justify-content:center; box-shadow:0 20px 45px rgba(15,28,64,0.18);
+    backface-visibility:hidden;
+  }
+  .o3-face img{max-height:100%; max-width:100%; object-fit:contain; border-radius:8px;}
+  .o3-arrow{
+    position:absolute; top:50%; transform:translateY(-50%); z-index:20; width:46px; height:46px;
+    border-radius:50%; background:#fff; border:1px solid var(--border); cursor:pointer; color:var(--navy-deep);
+    font-size:22px; box-shadow:0 8px 24px rgba(0,0,0,0.15); display:flex; align-items:center; justify-content:center; transition:all 0.2s ease;
+  }
+  .o3-arrow:hover{background:var(--navy-deep); color:#fff; border-color:var(--navy-deep);}
+  .o3-arrow.prev{left:20px;} .o3-arrow.next{right:20px;}
+
+  /* ============ OPTION 4: Blurred-backdrop letterbox carousel ============ */
+  .o4-frame{position:relative; height:420px; border-radius:12px; overflow:hidden; background:#111;}
+  .o4-slide{position:absolute; inset:0; opacity:0; transition:opacity .5s ease; display:flex; align-items:center; justify-content:center;}
+  .o4-slide.active{opacity:1;}
+  .o4-bg{position:absolute; inset:-20px; background-size:cover; background-position:center; filter:blur(28px) brightness(0.55) saturate(1.2); transform:scale(1.15);}
+  .o4-img{position:relative; max-height:100%; max-width:100%; object-fit:contain; box-shadow:0 20px 40px rgba(0,0,0,.4); border-radius:4px;}
+  .o4-arrow{
+    position:absolute; top:50%; transform:translateY(-50%); z-index:5;
+    width:40px; height:40px; border-radius:50%; background:rgba(255,255,255,.9); border:none;
+    display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--navy-deep);
+    box-shadow:0 6px 16px rgba(0,0,0,.25); font-size:18px;
+  }
+  .o4-arrow.prev{left:16px;} .o4-arrow.next{right:16px;}
+  .o4-dots{display:flex; gap:7px; justify-content:center; margin-top:14px;}
+  .o4-dots button{width:8px; height:8px; border-radius:50%; border:none; background:#D4DAE8; cursor:pointer; padding:0;}
+  .o4-dots button.active{background:var(--gold); width:22px; border-radius:5px;}
+
+  /* ============ OPTION 5: Horizontal snap filmstrip ============ */
+  .o5-track{
+    display:flex; gap:20px; overflow-x:auto; scroll-snap-type:x mandatory;
+    padding:6px 6px 18px; scrollbar-width:thin;
+  }
+  .o5-track::-webkit-scrollbar{height:8px;}
+  .o5-track::-webkit-scrollbar-thumb{background:#D4DAE8; border-radius:8px;}
+  .o5-item{
+    flex:0 0 auto; height:340px; scroll-snap-align:center;
+    border-radius:10px; overflow:hidden; box-shadow:0 12px 26px -14px rgba(15,28,64,.35);
+    border:1px solid var(--border);
+  }
+  .o5-item img{height:100%; width:auto; display:block;}
+  .o5-hint{text-align:center; color:var(--muted); font-size:12.5px; margin-top:4px;}
+
+  /* ============ OPTION 6: Pinboard scatter gallery ============ */
+  .o6-board{
+    position:relative; background:#FBFAF6; border-radius:12px; padding:36px; display:flex; flex-wrap:wrap; gap:34px; justify-content:center; align-items:flex-start;
+  }
+  .o6-pin{
+    background:#fff; padding:10px 10px 26px; box-shadow:0 14px 30px -14px rgba(15,28,64,.35);
+    border-radius:3px; transition:transform .2s ease, box-shadow .2s ease; cursor:pointer; position:relative;
+  }
+  .o6-pin:hover{transform:translateY(-6px) rotate(0deg) !important; box-shadow:0 20px 36px -14px rgba(15,28,64,.45); z-index:5;}
+  .o6-pin img{display:block; height:200px; width:auto; max-width:280px; object-fit:contain;}
+  .o6-pin::before{
+    content:""; position:absolute; top:-8px; left:50%; transform:translateX(-50%);
+    width:16px; height:16px; border-radius:50%; background:var(--red);
+    box-shadow:0 3px 6px rgba(0,0,0,.3);
+  }
+
+  /* ============ OPTION 7: Auto-scrolling marquee ============ */
+  .o7-wrap{overflow:hidden; position:relative;}
+  .o7-wrap::before, .o7-wrap::after{
+    content:""; position:absolute; top:0; bottom:0; width:70px; z-index:3; pointer-events:none;
+  }
+  .o7-wrap::before{left:0; background:linear-gradient(90deg, var(--card), transparent);}
+  .o7-wrap::after{right:0; background:linear-gradient(270deg, var(--card), transparent);}
+  .o7-track{display:flex; gap:22px; width:max-content; animation:o7scroll 26s linear infinite;}
+  .o7-wrap:hover .o7-track{animation-play-state:paused;}
+  .o7-track img{height:220px; width:auto; border-radius:8px; box-shadow:0 12px 24px -14px rgba(15,28,64,.35); display:block;}
+  @keyframes o7scroll{from{transform:translateX(0);} to{transform:translateX(-50%);}}
+
+  /* ============ OPTION 8: Card Stack / Deck Fan ============ */
+  .o8-deck{position:relative; height:410px; display:flex; align-items:center; justify-content:center; perspective:1000px;}
+  .o8-card{
+    position:absolute; width:auto; max-width:380px; height:340px; border-radius:14px; background:#fff;
+    box-shadow:0 18px 36px rgba(15,28,64,0.18); padding:12px; border:1px solid var(--border);
+    transition:transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .o8-card img{max-height:100%; max-width:100%; object-fit:contain; border-radius:8px;}
+  .o8-controls{display:flex; gap:12px; justify-content:center; margin-top:14px;}
+  .o8-btn{
+    padding:9px 20px; border-radius:999px; border:1px solid var(--border); background:#fff;
+    color:var(--navy-deep); font-weight:700; font-size:13px; cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,0.06);
+    transition:all 0.2s ease;
+  }
+  .o8-btn:hover{background:var(--navy-deep); color:#fff; border-color:var(--navy-deep);}
+
+  /* ============ OPTION 9: Split Showcase & Detail Panel ============ */
+  .o9-container{display:grid; grid-template-columns:280px 1fr; gap:24px; min-height:400px;}
+  @media(max-width:768px){ .o9-container{grid-template-columns:1fr;} }
+  .o9-thumbs{display:flex; flex-direction:column; gap:12px; justify-content:center;}
+  .o9-thumb{
+    display:flex; align-items:center; gap:14px; padding:10px 14px; border-radius:12px; border:1px solid var(--border);
+    background:#fff; cursor:pointer; transition:all 0.2s ease;
+  }
+  .o9-thumb:hover, .o9-thumb.active{border-color:var(--gold); background:rgba(201,162,39,0.08); transform:translateX(5px);}
+  .o9-thumb img{width:46px; height:46px; object-fit:contain; border-radius:6px; background:#F4F6FA;}
+  .o9-thumb-title{font-weight:700; font-size:13px; color:var(--navy-deep);}
+  .o9-thumb-sub{font-size:11.5px; color:var(--muted); margin-top:2px;}
+  .o9-preview{
+    background:#0B132B; border-radius:14px; display:flex; align-items:center; justify-content:center;
+    position:relative; overflow:hidden; min-height:380px; padding:24px; box-shadow:inset 0 0 40px rgba(0,0,0,0.5);
+  }
+  .o9-preview img{max-height:350px; max-width:100%; object-fit:contain; transition:opacity 0.35s ease, transform 0.35s ease; box-shadow:0 16px 36px rgba(0,0,0,0.6); border-radius:6px;}
+
+  /* ============ OPTION 10: Vertical Film Reel Elevator ============ */
+  .o10-stage{display:flex; gap:20px; height:400px; align-items:center; justify-content:center;}
+  .o10-viewport{height:360px; overflow:hidden; position:relative; border-radius:14px; border:1px solid var(--border); background:#0F1C40; width:100%; max-width:620px;}
+  .o10-reel{display:flex; flex-direction:column; align-items:center; transition:transform 0.5s ease; gap:24px; padding:20px 0;}
+  .o10-reel-item{height:320px; display:flex; align-items:center; justify-content:center; flex-shrink:0; width:100%;}
+  .o10-reel-item img{max-height:100%; max-width:90%; object-fit:contain; border-radius:8px; box-shadow:0 12px 30px rgba(0,0,0,0.5);}
+  .o10-nav{display:flex; flex-direction:column; gap:12px;}
+  .o10-nav-btn{width:42px; height:42px; border-radius:50%; background:#fff; border:1px solid var(--border); font-size:18px; cursor:pointer; color:var(--navy-deep); box-shadow:0 4px 12px rgba(0,0,0,0.1); display:flex; align-items:center; justify-content:center; transition:all 0.2s ease;}
+  .o10-nav-btn:hover{background:var(--gold); color:#fff; border-color:var(--gold);}
+
+  /* ============ OPTION 11: Spotlight Lightbox & Thumbnail Bar ============ */
+  .o11-hero{position:relative; min-height:430px; border-radius:14px; background:linear-gradient(135deg, #0F1C40 0%, #152452 100%); display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px; overflow:hidden;}
+  .o11-main-img{max-height:300px; max-width:100%; object-fit:contain; border-radius:8px; box-shadow:0 20px 40px rgba(0,0,0,0.5); transition:transform 0.3s ease, opacity 0.3s ease; cursor:pointer;}
+  .o11-main-img:hover{transform:scale(1.02);}
+  .o11-bar{display:flex; gap:14px; margin-top:20px; overflow-x:auto; padding:6px; z-index:2; justify-content:center;}
+  .o11-bar-item{width:64px; height:64px; border-radius:10px; overflow:hidden; border:2px solid transparent; opacity:0.55; cursor:pointer; transition:all 0.2s ease; background:#fff; padding:2px;}
+  .o11-bar-item.active, .o11-bar-item:hover{border-color:var(--gold); opacity:1; transform:translateY(-3px);}
+  .o11-bar-item img{width:100%; height:100%; object-fit:contain; border-radius:6px;}
+
+  .why{
+    margin-top:18px; background:#FBF8EF; border:1px solid #E7D48C; border-radius:12px;
+    padding:14px 18px; font-size:13.5px; color:var(--navy); line-height:1.55;
+  }
+  .why b{color:var(--navy-deep);}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <h1>Poster Display — 11 Options to Compare</h1>
+  <p>Compare full-size poster presentation, 3D transition effects, and compact gallery layouts.</p>
+  <div class="nav">
+    <a href="#o1">1 · Clean Full-Size Window</a>
+    <a href="#o2">2 · 3D Coverflow Stage</a>
+    <a href="#o3">3 · 3D Flip Cube Box</a>
+    <a href="#o4">4 · Blurred Backdrop</a>
+    <a href="#o5">5 · Snap Filmstrip</a>
+    <a href="#o6">6 · Pinboard Gallery</a>
+    <a href="#o7">7 · Auto-Scroll Ticker</a>
+    <a href="#o8">8 · Card Stack Deck</a>
+    <a href="#o9">9 · Split Showcase</a>
+    <a href="#o10">10 · Vertical Elevator</a>
+    <a href="#o11">11 · Spotlight Hero</a>
+  </div>
+</div>
+
+<!-- OPTION 1 -->
+<div class="section" id="o1">
+  <div class="section-head">
+    <p class="kicker">Option 1</p>
+    <h2>Clean Full-Size Poster Window</h2>
+    <p class="desc">Displays the poster artwork at its full original size in a clean, isolated frame. No background cards, zero grid lines, no backdrop blur—just pure poster art with smooth transitions.</p>
+  </div>
+  <div class="stage">
+    <div class="o1-stage" id="o1stage">
+      <button class="o1-arrow prev" onclick="o1go(-1)">&#8249;</button>
+      <img id="o1img" class="o1-img" src="" alt="Full Size Poster">
+      <button class="o1-arrow next" onclick="o1go(1)">&#8250;</button>
+    </div>
+    <div class="o1-dots" id="o1dots"></div>
+  </div>
+  <div class="why"><b>Why it's good:</b> maximizes poster clarity and impact. Shows every detail in high resolution without any distracting background elements or size reductions.</div>
+</div>
+
+<!-- OPTION 2 -->
+<div class="section" id="o2">
+  <div class="section-head">
+    <p class="kicker">Option 2</p>
+    <h2>Large 3D Coverflow Stage</h2>
+    <p class="desc">A gallery-style 3D Coverflow presentation where the active poster takes center stage at full size, while neighboring posters rotate smoothly in 3D perspective without any grid backgrounds.</p>
+  </div>
+  <div class="stage">
+    <div class="o2-stage" id="o2stage">
+      <button class="o2-arrow prev" onclick="o2go(-1)">&#8249;</button>
+      <button class="o2-arrow next" onclick="o2go(1)">&#8250;</button>
+    </div>
+  </div>
+  <div class="why"><b>Why it's good:</b> offers a dynamic 3D depth effect while preserving the prominent full size of the main active poster.</div>
+</div>
+
+<!-- OPTION 3 -->
+<div class="section" id="o3">
+  <div class="section-head">
+    <p class="kicker">Option 3</p>
+    <h2>Large 3D Flip Cube Box</h2>
+    <p class="desc">A 3D perspective box that smoothly flips between full-size posters in 3D space. No cards behind, zero grid lines, completely clean 3D rotation.</p>
+  </div>
+  <div class="stage">
+    <div class="o3-wrapper">
+      <button class="o3-arrow prev" onclick="o3go(-1)">&#8249;</button>
+      <div class="o3-cube" id="o3cube"></div>
+      <button class="o3-arrow next" onclick="o3go(1)">&#8250;</button>
+    </div>
+  </div>
+  <div class="why"><b>Why it's good:</b> high-tech 3D cube rotation transition that feels premium, modern, and interactive while maintaining full-scale poster visuals.</div>
+</div>
+
+<!-- OPTION 4 -->
+<div class="section" id="o4">
+  <div class="section-head">
+    <p class="kicker">Option 4</p>
+    <h2>Blurred-Backdrop Carousel</h2>
+    <p class="desc">Each poster shows in the middle, and the background empty space is filled with a soft blurred version of the same poster instead of a flat color.</p>
+  </div>
+  <div class="stage">
+    <div class="o4-frame" id="o4frame">
+      <button class="o4-arrow prev" onclick="o4go(-1)">&#8249;</button>
+      <button class="o4-arrow next" onclick="o4go(1)">&#8250;</button>
+    </div>
+    <div class="o4-dots" id="o4dots"></div>
+  </div>
+  <div class="why"><b>Why it's good:</b> solves letterboxing by generating a soft blurred backdrop directly from the poster artwork.</div>
+</div>
+
+<!-- OPTION 5 -->
+<div class="section" id="o5">
+  <div class="section-head">
+    <p class="kicker">Option 5</p>
+    <h2>Horizontal Snap Filmstrip</h2>
+    <p class="desc">Posters sit in a single row at shared height — width flexes naturally to whatever each poster's real aspect ratio is. Glides with scroll snap.</p>
+  </div>
+  <div class="stage">
+    <div class="o5-track" id="o5track"></div>
+    <p class="o5-hint">← scroll or swipe →</p>
+  </div>
+  <div class="why"><b>Why it's good:</b> zero letterboxing by construction — no fixed aspect ratio box, so posters never get cropped.</div>
+</div>
+
+<!-- OPTION 6 -->
+<div class="section" id="o6">
+  <div class="section-head">
+    <p class="kicker">Option 6</p>
+    <h2>Pinboard Gallery</h2>
+    <p class="desc">Every poster is visible at once on a soft gallery board, each scaled down proportionally and pinned at a subtle tilt.</p>
+  </div>
+  <div class="stage">
+    <div class="o6-board" id="o6board"></div>
+  </div>
+  <div class="why"><b>Why it's good:</b> removes sliding wait time — visitors see all event posters immediately.</div>
+</div>
+
+<!-- OPTION 7 -->
+<div class="section" id="o7">
+  <div class="section-head">
+    <p class="kicker">Option 7</p>
+    <h2>Auto-Scrolling Ticker</h2>
+    <p class="desc">A continuous, gentle horizontal marquee scroll cycling through posters at native size. Pauses on hover.</p>
+  </div>
+  <div class="stage">
+    <div class="o7-wrap">
+      <div class="o7-track" id="o7track"></div>
+    </div>
+  </div>
+  <div class="why"><b>Why it's good:</b> completely passive auto-rotation for homepage hero sections.</div>
+</div>
+
+<!-- OPTION 8 -->
+<div class="section" id="o8">
+  <div class="section-head">
+    <p class="kicker">Option 8</p>
+    <h2>Stacked Card Fan / Deck Swipe</h2>
+    <p class="desc">Posters are stacked like a deck of cards. Next button swishes top card into background deck with realistic fan angles.</p>
+  </div>
+  <div class="stage">
+    <div class="o8-deck" id="o8deck"></div>
+    <div class="o8-controls">
+      <button class="o8-btn" onclick="o8go(-1)">← Previous</button>
+      <button class="o8-btn" onclick="o8go(1)">Next Card →</button>
+    </div>
+  </div>
+  <div class="why"><b>Why it's good:</b> physical card shuffling interaction with depth layers.</div>
+</div>
+
+<!-- OPTION 9 -->
+<div class="section" id="o9">
+  <div class="section-head">
+    <p class="kicker">Option 9</p>
+    <h2>Split Showcase & Quick Navigator</h2>
+    <p class="desc">Dual-pane layout with a vertical list of thumbnails on the left and a dark spotlight preview stage on the right.</p>
+  </div>
+  <div class="stage">
+    <div class="o9-container">
+      <div class="o9-thumbs" id="o9thumbs"></div>
+      <div class="o9-preview">
+        <img id="o9img" src="" alt="Poster Showcase">
+      </div>
+    </div>
+  </div>
+  <div class="why"><b>Why it's good:</b> gives immediate jump-access to all posters alongside a large hero preview.</div>
+</div>
+
+<!-- OPTION 10 -->
+<div class="section" id="o10">
+  <div class="section-head">
+    <p class="kicker">Option 10</p>
+    <h2>Vertical Film Reel Elevator</h2>
+    <p class="desc">Posters slide vertically inside a dark viewport frame with up/down controls.</p>
+  </div>
+  <div class="stage">
+    <div class="o10-stage">
+      <div class="o10-viewport">
+        <div class="o10-reel" id="o10reel"></div>
+      </div>
+      <div class="o10-nav">
+        <button class="o10-nav-btn" onclick="o10go(-1)">▲</button>
+        <button class="o10-nav-btn" onclick="o10go(1)">▼</button>
+      </div>
+    </div>
+  </div>
+  <div class="why"><b>Why it's good:</b> vertical reel movement fitting naturally into vertical scroll flows.</div>
+</div>
+
+<!-- OPTION 11 -->
+<div class="section" id="o11">
+  <div class="section-head">
+    <p class="kicker">Option 11</p>
+    <h2>Spotlight Hero & Thumbnail Bar</h2>
+    <p class="desc">Cinema-style dark hero stage with a floating thumbnail bar beneath.</p>
+  </div>
+  <div class="stage">
+    <div class="o11-hero">
+      <img id="o11img" class="o11-main-img" src="" alt="Spotlight Poster">
+      <div class="o11-bar" id="o11bar"></div>
+    </div>
+  </div>
+  <div class="why"><b>Why it's good:</b> standard cinema gallery style with complete user control.</div>
+</div>
+
+<script>
+const posters = [
+  { src: 'technizen_poster.png', title: 'Technizen 2026', sub: 'Tech Fest Poster' },
+  { src: 'poster_portrait.png', title: 'Portrait Event', sub: 'Vertical Layout' },
+  { src: 'poster_square.png', title: 'Square Showcase', sub: '1:1 Aspect Ratio' },
+  { src: 'poster_wide2.png', title: 'Wide Banner', sub: 'Landscape Layout' }
+];
+
+/* ---- Option 1: Clean Full-Size Window ---- */
+let o1i = 0;
+const o1img = document.getElementById('o1img');
+const o1dots = document.getElementById('o1dots');
+
+posters.forEach((p,i)=>{
+  const dot = document.createElement('button');
+  if(i===0) dot.className = 'active';
+  dot.onclick = ()=>{ o1i = i; o1render(); };
+  o1dots.appendChild(dot);
+});
+
+function o1render(){
+  o1img.style.opacity = 0;
+  o1img.style.transform = 'scale(0.97)';
+  setTimeout(()=>{
+    o1img.src = posters[o1i].src;
+    o1img.style.opacity = 1;
+    o1img.style.transform = 'scale(1)';
+  }, 150);
+  document.querySelectorAll('#o1dots button').forEach((d,i)=>d.classList.toggle('active', i===o1i));
+}
+function o1go(dir){ o1i = (o1i + dir + posters.length) % posters.length; o1render(); }
+o1render();
+setInterval(()=>o1go(1), 5000);
+
+/* ---- Option 2: Large 3D Coverflow ---- */
+let o2i = 0;
+const o2stage = document.getElementById('o2stage');
+posters.forEach((p,i)=>{
+  const item = document.createElement('div');
+  item.className = 'o2-item';
+  item.innerHTML = `<img src="${p.src}">`;
+  item.onclick = ()=>{ o2i = i; o2render(); };
+  o2stage.appendChild(item);
+});
+function o2render(){
+  const items = document.querySelectorAll('.o2-item');
+  items.forEach((el,i)=>{
+    let offset = i - o2i;
+    if(offset > posters.length/2) offset -= posters.length;
+    if(offset < -posters.length/2) offset += posters.length;
+    const abs = Math.abs(offset);
+    el.style.zIndex = 10 - abs;
+    el.style.opacity = abs > 2 ? 0 : 1 - abs*0.25;
+    el.style.transform = `translateX(${offset*240}px) scale(${1 - abs*0.14}) rotateY(${offset*-28}deg)`;
+  });
+}
+function o2go(dir){ o2i = (o2i + dir + posters.length) % posters.length; o2render(); }
+o2render();
+
+/* ---- Option 3: Large 3D Flip Cube Box ---- */
+let o3i = 0;
+const o3cube = document.getElementById('o3cube');
+posters.forEach((p,i)=>{
+  const face = document.createElement('div');
+  face.className = 'o3-face';
+  face.style.transform = `rotateY(${i * 90}deg) translateZ(320px)`;
+  face.innerHTML = `<img src="${p.src}">`;
+  o3cube.appendChild(face);
+});
+function o3render(){
+  o3cube.style.transform = `rotateY(${-o3i * 90}deg)`;
+}
+function o3go(dir){ o3i = (o3i + dir + posters.length) % posters.length; o3render(); }
+o3render();
+
+/* ---- Option 4: Blurred Backdrop ---- */
+let o4i = 0;
+const o4frame = document.getElementById('o4frame');
+const o4dots = document.getElementById('o4dots');
+posters.forEach((p,i)=>{
+  const slide = document.createElement('div');
+  slide.className = 'o4-slide' + (i===0?' active':'');
+  slide.innerHTML = `<div class="o4-bg" style="background-image:url('${p.src}')"></div><img class="o4-img" src="${p.src}">`;
+  o4frame.insertBefore(slide, o4frame.firstChild);
+  const dot = document.createElement('button');
+  if(i===0) dot.className='active';
+  dot.onclick = ()=>{o4i=i; o4render();};
+  o4dots.appendChild(dot);
+});
+function o4render(){
+  document.querySelectorAll('.o4-slide').forEach((s,i)=>s.classList.toggle('active', i===o4i));
+  document.querySelectorAll('#o4dots button').forEach((d,i)=>d.classList.toggle('active', i===o4i));
+}
+function o4go(dir){ o4i = (o4i + dir + posters.length) % posters.length; o4render(); }
+setInterval(()=>o4go(1), 4500);
+
+/* ---- Option 5: Snap Filmstrip ---- */
+const o5track = document.getElementById('o5track');
+posters.forEach(p=>{
+  const item = document.createElement('div');
+  item.className = 'o5-item';
+  item.innerHTML = `<img src="${p.src}">`;
+  o5track.appendChild(item);
+});
+
+/* ---- Option 6: Pinboard Gallery ---- */
+const o6board = document.getElementById('o6board');
+const tilts = [-4, 3, -2, 5, -5, 2];
+posters.forEach((p,i)=>{
+  const pin = document.createElement('div');
+  pin.className = 'o6-pin';
+  pin.style.transform = `rotate(${tilts[i % tilts.length]}deg)`;
+  pin.innerHTML = `<img src="${p.src}">`;
+  o6board.appendChild(pin);
+});
+
+/* ---- Option 7: Auto Ticker ---- */
+const o7track = document.getElementById('o7track');
+[...posters, ...posters].forEach(p=>{
+  const img = document.createElement('img');
+  img.src = p.src;
+  o7track.appendChild(img);
+});
+
+/* ---- Option 8: Card Deck ---- */
+let o8i = 0;
+const o8deck = document.getElementById('o8deck');
+posters.forEach((p,i)=>{
+  const card = document.createElement('div');
+  card.className = 'o8-card';
+  card.innerHTML = `<img src="${p.src}">`;
+  card.onclick = ()=>o8go(1);
+  o8deck.appendChild(card);
+});
+function o8render(){
+  const cards = document.querySelectorAll('.o8-card');
+  cards.forEach((card, i)=>{
+    let pos = (i - o8i + posters.length) % posters.length;
+    if(pos === 0){
+      card.style.zIndex = 10; card.style.opacity = 1; card.style.transform = 'translateY(0) scale(1) rotate(0deg)';
+    } else if(pos === 1){
+      card.style.zIndex = 9; card.style.opacity = 0.9; card.style.transform = 'translateY(14px) scale(0.95) rotate(4deg)';
+    } else if(pos === 2){
+      card.style.zIndex = 8; card.style.opacity = 0.75; card.style.transform = 'translateY(28px) scale(0.9) rotate(-3deg)';
+    } else {
+      card.style.zIndex = 1; card.style.opacity = 0; card.style.transform = 'translateY(40px) scale(0.85) rotate(0deg)';
+    }
+  });
+}
+function o8go(dir){ o8i = (o8i + dir + posters.length) % posters.length; o8render(); }
+o8render();
+
+/* ---- Option 9: Split Showcase ---- */
+let o9i = 0;
+const o9thumbs = document.getElementById('o9thumbs');
+const o9img = document.getElementById('o9img');
+posters.forEach((p,i)=>{
+  const thumb = document.createElement('div');
+  thumb.className = 'o9-thumb' + (i===0?' active':'');
+  thumb.innerHTML = `
+    <img src="${p.src}">
+    <div class="o9-thumb-info">
+      <span class="o9-thumb-title">${p.title}</span>
+      <span class="o9-thumb-sub">${p.sub}</span>
+    </div>
+  `;
+  thumb.onclick = ()=>{ o9i = i; o9render(); };
+  o9thumbs.appendChild(thumb);
+});
+function o9render(){
+  o9img.style.opacity = 0; o9img.style.transform = 'scale(0.96)';
+  setTimeout(()=>{
+    o9img.src = posters[o9i].src; o9img.style.opacity = 1; o9img.style.transform = 'scale(1)';
+  }, 150);
+  document.querySelectorAll('.o9-thumb').forEach((t,i)=>t.classList.toggle('active', i===o9i));
+}
+o9render();
+
+/* ---- Option 10: Vertical Elevator ---- */
+let o10i = 0;
+const o10reel = document.getElementById('o10reel');
+posters.forEach(p=>{
+  const item = document.createElement('div');
+  item.className = 'o10-reel-item';
+  item.innerHTML = `<img src="${p.src}">`;
+  o10reel.appendChild(item);
+});
+function o10render(){
+  o10reel.style.transform = `translateY(${-o10i * 344}px)`;
+}
+function o10go(dir){ o10i = (o10i + dir + posters.length) % posters.length; o10render(); }
+o10render();
+
+/* ---- Option 11: Spotlight Hero ---- */
+let o11i = 0;
+const o11img = document.getElementById('o11img');
+const o11bar = document.getElementById('o11bar');
+posters.forEach((p,i)=>{
+  const item = document.createElement('div');
+  item.className = 'o11-bar-item' + (i===0?' active':'');
+  item.innerHTML = `<img src="${p.src}">`;
+  item.onclick = ()=>{ o11i = i; o11render(); };
+  o11bar.appendChild(item);
+});
+function o11render(){
+  o11img.style.opacity = 0;
+  setTimeout(()=>{
+    o11img.src = posters[o11i].src; o11img.style.opacity = 1;
+  }, 150);
+  document.querySelectorAll('.o11-bar-item').forEach((item,i)=>item.classList.toggle('active', i===o11i));
+}
+function o11go(dir){ o11i = (o11i + dir + posters.length) % posters.length; o11render(); }
+o11render();
+setInterval(()=>o11go(1), 5000);
+</script>
+</body>
+</html>
