@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ACM Student Chapter — Photo Gallery (Prototype v3: Bento Grid)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0a1f3d; --navy-deep:#071730; --blue:#14335e;
+    --gold:#c99a3a; --gold-light:#e3c876; --red:#b5342b;
+    --paper:#f6f5f1; --panel:#ffffff; --ink:#1b2434; --ink-soft:#5b6478;
+    --line:#e3e1d9; --line-soft:#eeece5;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3{font-family:'Fraunces',serif;}
+
+  .brandbar{background:var(--panel);border-bottom:1px solid var(--line);padding:14px 40px;display:flex;align-items:center;gap:14px;}
+  .brandbar .crest{width:38px;height:38px;border-radius:50%;background:conic-gradient(var(--gold),var(--red),var(--navy),var(--gold));flex-shrink:0;}
+  .brandbar .name{font-weight:700;color:var(--red);font-size:15px;}
+  .brandbar .sub{font-size:11px;color:var(--ink-soft);}
+  .navbar{background:var(--navy-deep);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:56px;}
+  .navbar .brand{display:flex;align-items:center;gap:10px;color:#fff;font-weight:600;font-size:14px;}
+  .navbar .diamond{width:26px;height:26px;background:var(--blue);border:1px solid var(--gold);transform:rotate(45deg);display:inline-block;}
+  .navbar nav a{color:#c9d3e6;text-decoration:none;font-size:13.5px;margin-left:26px;font-weight:500;}
+  .navbar nav a.active{color:#fff;border-bottom:2px solid var(--gold);padding-bottom:18px;}
+
+  .hero{
+    background:radial-gradient(circle at 12% 25%, rgba(201,154,58,.18), transparent 45%),
+               radial-gradient(circle at 88% 75%, rgba(181,52,43,.15), transparent 50%),
+               linear-gradient(180deg, var(--navy-deep), var(--navy) 75%);
+    color:#fff;padding:56px 40px 40px;text-align:center;
+  }
+  .hero .eyebrow{color:var(--gold-light);letter-spacing:2.5px;font-size:11.5px;font-weight:600;text-transform:uppercase;}
+  .hero h1{font-size:42px;margin:10px 0 12px;font-weight:600;}
+  .hero p{color:#c9d3e6;max-width:600px;margin:0 auto;font-size:15px;line-height:1.6;}
+
+  .stat-strip{max-width:1180px;margin:-26px auto 0;padding:0 40px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;position:relative;z-index:5;}
+  .stat-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;box-shadow:0 8px 20px rgba(10,31,61,.06);}
+  .stat-card .n{font-family:'Fraunces',serif;font-size:24px;color:var(--navy);font-weight:600;}
+  .stat-card .l{font-size:11.5px;color:var(--ink-soft);margin-top:2px;}
+
+  .section-head{max-width:1180px;margin:52px auto 0;padding:0 40px;display:flex; align-items:flex-end; justify-content:space-between; gap:24px; flex-wrap:wrap;}
+  .section-head .eyebrow{color:var(--red);font-size:11.5px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;}
+  .section-head h2{font-size:28px;color:var(--navy);margin:6px 0 8px;font-weight:600;}
+  .section-head .rule{width:56px;height:3px;background:var(--gold);border-radius:2px;}
+  .section-head p.desc{max-width:540px;color:var(--ink-soft);font-size:14px;line-height:1.6;margin-top:12px;}
+
+  .filters{display:flex; gap:8px; flex-wrap:wrap;}
+  .filters button{
+    font-size:12px; font-weight:600; padding:7px 14px; border-radius:100px;
+    border:1px solid var(--line); background:var(--panel); color:var(--ink-soft); cursor:pointer; transition:.15s;
+  }
+  .filters button:hover{border-color:var(--gold); color:var(--navy);}
+  .filters button.on{background:var(--navy); color:#fff; border-color:var(--navy);}
+
+  /* ============ bento grid ============ */
+  .bento{
+    max-width:1180px;
+    margin:30px auto 100px;
+    padding:0 40px;
+    display:grid;
+    grid-template-columns:repeat(6, 1fr);
+    grid-auto-rows:150px;
+    gap:14px;
+  }
+  .cell{
+    position:relative;
+    border-radius:16px;
+    overflow:hidden;
+    cursor:pointer;
+    display:flex; align-items:flex-end;
+    color:#fff;
+    transition:transform .3s cubic-bezier(.2,.8,.3,1), box-shadow .3s;
+  }
+  .cell:hover{transform:translateY(-5px); box-shadow:0 20px 34px rgba(10,31,61,.22); z-index:5;}
+  .cell .bg{
+    position:absolute; inset:0;
+    transition:transform .4s;
+  }
+  .cell:hover .bg{transform:scale(1.06);}
+  .cell .scrim{
+    position:absolute; inset:0;
+    background:linear-gradient(0deg, rgba(4,12,26,.82) 0%, rgba(4,12,26,.15) 55%, transparent 75%);
+  }
+  .cell .content{
+    position:relative; z-index:2;
+    padding:16px;
+    width:100%;
+  }
+  .cell .cat{
+    font-size:9.5px; text-transform:uppercase; letter-spacing:1px; font-weight:700; color:var(--gold-light);
+    display:flex; align-items:center; gap:6px;
+  }
+  .cell .cat .dot{width:5px;height:5px;border-radius:50%;background:currentColor;}
+  .cell .cap{font-size:13.5px; font-weight:600; margin-top:4px; line-height:1.3;}
+  .cell .sub{font-size:10.5px; color:#c9d3e6; margin-top:2px; font-family:'JetBrains Mono',monospace;}
+
+  .cell .center-label{
+    position:relative; z-index:2; margin:auto;
+    font-family:'JetBrains Mono',monospace; font-size:10.5px; color:rgba(255,255,255,.55);
+    text-align:center; padding:8px;
+  }
+
+  /* size variants: gives bento its uneven modular feel */
+  .cell.xl{ grid-column:span 3; grid-row:span 2; }
+  .cell.l  { grid-column:span 2; grid-row:span 2; }
+  .cell.m  { grid-column:span 2; grid-row:span 1; }
+  .cell.s  { grid-column:span 1; grid-row:span 1; }
+  .cell.tall{ grid-column:span 1; grid-row:span 2; }
+  .cell.wide{ grid-column:span 3; grid-row:span 1; }
+
+  .cell .zoom-ic{
+    position:absolute; top:12px; right:12px; z-index:3;
+    width:28px; height:28px; border-radius:50%;
+    background:rgba(255,255,255,.14);
+    backdrop-filter:blur(4px);
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; transition:opacity .2s;
+  }
+  .cell:hover .zoom-ic{opacity:1;}
+  .cell .zoom-ic svg{width:13px;height:13px;stroke:#fff;fill:none;stroke-width:2;}
+
+  .load-more-wrap{max-width:1180px;margin:-70px auto 90px;padding:0 40px;text-align:center;}
+  .load-more{
+    padding:11px 28px; background:var(--navy); color:#fff; border:none; border-radius:9px;
+    font-size:13px; font-weight:600; cursor:pointer; transition:.15s;
+  }
+  .load-more:hover{background:var(--blue);}
+
+  footer{text-align:center;padding:26px;font-size:12px;color:var(--ink-soft);border-top:1px solid var(--line);}
+
+  /* lightbox */
+  .lightbox{
+    position:fixed; inset:0; background:rgba(4,12,26,.94); z-index:300;
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; pointer-events:none; transition:opacity .25s;
+  }
+  .lightbox.open{opacity:1; pointer-events:all;}
+  .lb-content{max-width:min(860px,86vw); width:100%; display:flex; flex-direction:column; align-items:center;}
+  .lb-image{
+    width:100%; aspect-ratio:16/10; border-radius:12px;
+    display:flex; align-items:center; justify-content:center;
+    color:rgba(255,255,255,.75); font-family:'JetBrains Mono',monospace; font-size:13px;
+  }
+  .lb-caption{margin-top:16px; text-align:center; color:#fff;}
+  .lb-caption .cat{font-size:10.5px; letter-spacing:1.2px; text-transform:uppercase; color:var(--gold-light); font-weight:700;}
+  .lb-caption h4{margin:6px 0 4px; font-size:19px; font-weight:600;}
+  .lb-caption p{margin:0; font-size:12.5px; color:#9fb0cc;}
+  .lb-counter{margin-top:10px; font-family:'JetBrains Mono',monospace; font-size:11.5px; color:#7688a8;}
+  .lb-close, .lb-prev, .lb-next{
+    position:fixed; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15);
+    color:#fff; width:42px; height:42px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:18px;
+  }
+  .lb-close:hover, .lb-prev:hover, .lb-next:hover{background:rgba(255,255,255,.18);}
+  .lb-close{top:26px; right:30px;}
+  .lb-prev{left:30px; top:50%; transform:translateY(-50%);}
+  .lb-next{right:30px; top:50%; transform:translateY(-50%);}
+
+  @media (max-width:900px){
+    .bento{grid-template-columns:repeat(4,1fr); grid-auto-rows:130px;}
+    .cell.xl{grid-column:span 4; grid-row:span 2;}
+    .cell.l{grid-column:span 2;}
+    .cell.wide{grid-column:span 4;}
+  }
+  @media (max-width:620px){
+    .bento{grid-template-columns:repeat(2,1fr); grid-auto-rows:120px;}
+    .cell.xl,.cell.wide{grid-column:span 2;}
+    .cell.l,.cell.m,.cell.tall,.cell.s{grid-column:span 1;}
+    .stat-strip{grid-template-columns:repeat(2,1fr);}
+    .navbar nav{display:none;}
+    .section-head{flex-direction:column; align-items:flex-start;}
+  }
+</style>
+</head>
+<body>
+
+<div class="brandbar">
+  <div class="crest"></div>
+  <div>
+    <div class="name">R.V.R. &amp; J.C. COLLEGE OF ENGINEERING</div>
+    <div class="sub">(Autonomous) · ACM Student Chapter, Dept. of CSE</div>
+  </div>
+</div>
+<div class="navbar">
+  <div class="brand"><span class="diamond"></span> ACM Student Chapter</div>
+  <nav><a href="#">About</a><a href="#">Events</a><a href="#">Teams</a><a href="#" class="active">Photo Gallery</a></nav>
+</div>
+
+<div class="hero">
+  <div class="eyebrow">Home / Photo Gallery</div>
+  <h1>Photo Gallery</h1>
+  <p>Our biggest moments get the biggest frames. A modular wall of everything the chapter has captured since 2018.</p>
+</div>
+
+<div class="stat-strip">
+  <div class="stat-card"><div class="n">312</div><div class="l">Photos archived</div></div>
+  <div class="stat-card"><div class="n">47</div><div class="l">Events covered</div></div>
+  <div class="stat-card"><div class="n">8</div><div class="l">Years documented</div></div>
+  <div class="stat-card"><div class="n">6</div><div class="l">Categories</div></div>
+</div>
+
+<div class="section-head">
+  <div>
+    <div class="eyebrow">Chapter Moments</div>
+    <h2>The Gallery Wall</h2>
+    <div class="rule"></div>
+    <p class="desc">Sized by significance — flagship moments like Technizen get larger frames, everyday moments sit smaller alongside them. Click any tile for the full view.</p>
+  </div>
+  <div class="filters" id="filters">
+    <button class="on" data-cat="all">All</button>
+    <button data-cat="technizen">Technizen</button>
+    <button data-cat="guest">Guest Lectures</button>
+    <button data-cat="outreach">Outreach</button>
+    <button data-cat="workshop">Workshops</button>
+    <button data-cat="hoc">Hour of Code</button>
+    <button data-cat="intra">Intra-college</button>
+  </div>
+</div>
+
+<div class="bento" id="bento"></div>
+<div class="load-more-wrap"><button class="load-more" id="load-more">Load More Photos</button></div>
+
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" id="lb-close">✕</button>
+  <button class="lb-prev" id="lb-prev">‹</button>
+  <button class="lb-next" id="lb-next">›</button>
+  <div class="lb-content">
+    <div class="lb-image" id="lb-image"></div>
+    <div class="lb-caption">
+      <div class="cat" id="lb-cat">Technizen</div>
+      <h4 id="lb-title">Opening Ceremony 2K26</h4>
+      <p id="lb-desc">Main Auditorium</p>
+      <div class="lb-counter" id="lb-counter">1 / 24</div>
+    </div>
+  </div>
+</div>
+
+<footer>Prototype v3 for internal review — R.V.R. &amp; J.C. College of Engineering, ACM Student Chapter · Dept. of CSE</footer>
+
+<script>
+const CATS = {
+  technizen:{label:'Technizen', c1:'#0a1f3d', c2:'#1c3f73'},
+  guest:{label:'Guest Lectures', c1:'#4a2f6b', c2:'#6b3fa0'},
+  outreach:{label:'Outreach Programs', c1:'#8a3a1f', c2:'#b5502b'},
+  workshop:{label:'Technical Workshops', c1:'#1c5c3a', c2:'#278a52'},
+  hoc:{label:'Hour of Code', c1:'#1f5c8a', c2:'#2b7fb5'},
+  intra:{label:'Intra-college Events', c1:'#8a6a1f', c2:'#c99a3a'},
+};
+
+// size pattern repeats every N cells to keep a consistent, intentional bento rhythm
+const SIZE_PATTERN = ['xl','s','s','m','tall','wide','s','s','l','m','tall','s','s','wide','l','s'];
+
+const SOURCE = [
+  {cat:'technizen', title:'Opening Ceremony 2K26', sub:'Main Auditorium · Aug 2026'},
+  {cat:'guest', title:'Future Readiness Talk', sub:'Dr. Hari Prasad · 2023'},
+  {cat:'outreach', title:'School Visit, Guntur', sub:'ZPHS · 2024'},
+  {cat:'technizen', title:'Query Masters Finale', sub:'Lab Block · 2026'},
+  {cat:'intra', title:'Hackathon Overnight', sub:'CSE Seminar Hall · 2025'},
+  {cat:'workshop', title:'Python Hands-on Session', sub:'Since 2019'},
+  {cat:'hoc', title:'Hour of Code — Batch 1', sub:'2024'},
+  {cat:'technizen', title:'AI Innovators Arena', sub:'2026'},
+  {cat:'guest', title:'Inauguration — 2017', sub:'Sri Ajay Deshpande'},
+  {cat:'outreach', title:'Coding Basics for Kids', sub:'2023'},
+  {cat:'intra', title:'Technoverse Quiz Final', sub:'2025'},
+  {cat:'technizen', title:'Build & Pitch Demo', sub:'2026'},
+  {cat:'hoc', title:'Volunteer Team Briefing', sub:'2022'},
+  {cat:'workshop', title:'Git & GitHub Workshop', sub:'2021'},
+  {cat:'guest', title:'SMAC Technologies Talk', sub:'2017'},
+  {cat:'intra', title:'Pixel Craft Round 1', sub:'2024'},
+];
+
+function expand(){
+  let out = [];
+  for (let i=0;i<48;i++){
+    const base = SOURCE[i % SOURCE.length];
+    out.push({...base, id:i, title: i < SOURCE.length ? base.title : `${base.title} — ${Math.floor(i/SOURCE.length)+1}`, size: SIZE_PATTERN[i % SIZE_PATTERN.length]});
+  }
+  return out;
+}
+const ALL_PHOTOS = expand();
+let visibleCount = 16;
+let currentFilter = 'all';
+let currentSet = [];
+let lbIndex = 0;
+
+function getFiltered(){
+  return ALL_PHOTOS.filter(p => currentFilter === 'all' || p.cat === currentFilter);
+}
+
+function renderBento(){
+  const filtered = getFiltered();
+  currentSet = filtered.slice(0, visibleCount);
+  const bento = document.getElementById('bento');
+  bento.innerHTML = '';
+  currentSet.forEach((p, idx) => {
+    const c = CATS[p.cat];
+    const cell = document.createElement('div');
+    cell.className = 'cell ' + p.size;
+    cell.innerHTML = `
+      <div class="bg" style="background:linear-gradient(150deg, ${c.c1}, ${c.c2});"></div>
+      <div class="scrim"></div>
+      <div class="zoom-ic"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+      <div class="content">
+        <div class="cat"><span class="dot"></span>${c.label}</div>
+        <div class="cap">${p.title}</div>
+        <div class="sub">${p.sub}</div>
+      </div>
+    `;
+    cell.addEventListener('click', () => openLightbox(idx));
+    bento.appendChild(cell);
+  });
+  document.getElementById('load-more').style.display = filtered.length > visibleCount ? 'inline-block' : 'none';
+}
+
+document.querySelectorAll('.filters button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filters button').forEach(b=>b.classList.remove('on'));
+    btn.classList.add('on');
+    currentFilter = btn.dataset.cat;
+    visibleCount = 16;
+    renderBento();
+  });
+});
+document.getElementById('load-more').addEventListener('click', () => { visibleCount += 16; renderBento(); });
+
+const lb = document.getElementById('lightbox');
+function openLightbox(idx){ lbIndex = idx; showLB(); lb.classList.add('open'); }
+function showLB(){
+  const p = currentSet[lbIndex];
+  const c = CATS[p.cat];
+  document.getElementById('lb-image').style.background = `linear-gradient(150deg, ${c.c1}, ${c.c2})`;
+  document.getElementById('lb-image').innerHTML = `<span>${p.title}</span>`;
+  document.getElementById('lb-cat').textContent = c.label;
+  document.getElementById('lb-title').textContent = p.title;
+  document.getElementById('lb-desc').textContent = p.sub;
+  document.getElementById('lb-counter').textContent = `${lbIndex+1} / ${currentSet.length}`;
+}
+document.getElementById('lb-close').addEventListener('click', () => lb.classList.remove('open'));
+lb.addEventListener('click', (e) => { if (e.target === lb) lb.classList.remove('open'); });
+document.getElementById('lb-prev').addEventListener('click', () => { lbIndex = (lbIndex-1+currentSet.length)%currentSet.length; showLB(); });
+document.getElementById('lb-next').addEventListener('click', () => { lbIndex = (lbIndex+1)%currentSet.length; showLB(); });
+document.addEventListener('keydown', (e) => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') lb.classList.remove('open');
+  if (e.key === 'ArrowLeft') { lbIndex = (lbIndex-1+currentSet.length)%currentSet.length; showLB(); }
+  if (e.key === 'ArrowRight') { lbIndex = (lbIndex+1)%currentSet.length; showLB(); }
+});
+
+renderBento();
+</script>
+</body>
+</html>
