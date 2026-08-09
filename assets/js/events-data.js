@@ -8,14 +8,14 @@
 var EV_CATEGORIES = {
   technizen: {
     key: 'technizen',
-    name: 'Technizen',
-    abbr: 'TZ',
+    name: 'Inter Collegiate',
+    abbr: 'IC',
     color: '#c8a13a',
     cssVar: '--ev-technizen',
     slug: 'technizen',
-    description: 'The flagship annual technical fest featuring competitive sub-events across core domain tracks.',
+    description: 'The flagship annual inter-collegiate technical fest featuring competitive sub-events across core domain tracks.',
     url: 'events/technizen.html',
-    openMaster: 'TECHNIZEN'
+    openMaster: 'INTER COLLEGIATE'
   },
   hourOfCode: {
     key: 'hourOfCode',
@@ -49,7 +49,7 @@ var EV_CATEGORIES = {
   },
   intraCollege: {
     key: 'intraCollege',
-    name: 'Intra-college Tech Events',
+    name: 'Intra Collegiate Tech Events',
     abbr: 'IT',
     color: '#14509e',
     cssVar: '--ev-intra',
