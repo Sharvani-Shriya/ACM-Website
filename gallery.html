@@ -7,12 +7,496 @@
   <title>Photo Gallery | ACM Student Chapter — Dept. of CSE, RVRJC</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@500&family=JetBrains+Mono:wght@500;600&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    /* ============================================================
+       PHOTO GALLERY VERSION 2 (FILM REELS & LIGHTBOX INTERACTIVE)
+       ============================================================ */
+    .gallery-v2-body {
+      background: #f8fafc;
+    }
+
+    .gallery-hero-v2 {
+      background: radial-gradient(circle at 12% 25%, rgba(201,154,58,.18), transparent 45%),
+                 radial-gradient(circle at 88% 75%, rgba(181,52,43,.15), transparent 50%),
+                 linear-gradient(180deg, #071730, #0a1f3d 75%);
+      color: #fff;
+      padding: 56px 20px 48px;
+      text-align: center;
+    }
+
+    .gallery-hero-v2 .eyebrow {
+      color: #e3c876;
+      letter-spacing: 2.5px;
+      font-size: 11.5px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .gallery-hero-v2 h1 {
+      font-family: 'Fraunces', 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      margin: 10px 0 12px;
+      font-weight: 600;
+    }
+
+    .gallery-hero-v2 p {
+      color: #c9d3e6;
+      max-width: 620px;
+      margin: 0 auto;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .v2-stat-strip {
+      max-width: 1180px;
+      margin: -26px auto 0;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      position: relative;
+      z-index: 5;
+    }
+
+    .v2-stat-card {
+      background: #ffffff;
+      border: 1px solid #e3e1d9;
+      border-radius: 12px;
+      padding: 16px 18px;
+      box-shadow: 0 8px 20px rgba(10,31,61,.06);
+    }
+
+    .v2-stat-card .n {
+      font-family: 'Fraunces', serif;
+      font-size: 24px;
+      color: #0a1f3d;
+      font-weight: 700;
+    }
+
+    .v2-stat-card .l {
+      font-size: 11.5px;
+      color: #5b6478;
+      margin-top: 2px;
+    }
+
+    .v2-section-head {
+      max-width: 1180px;
+      margin: 48px auto 0;
+      padding: 0 20px;
+    }
+
+    .v2-section-head .eyebrow {
+      color: #b5342b;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+    }
+
+    .v2-section-head h2 {
+      font-family: 'Fraunces', serif;
+      font-size: 28px;
+      color: #0a1f3d;
+      margin: 6px 0 8px;
+      font-weight: 600;
+    }
+
+    .v2-section-head .rule {
+      width: 56px;
+      height: 3px;
+      background: #c99a3a;
+      border-radius: 2px;
+    }
+
+    .v2-section-head p.desc {
+      max-width: 640px;
+      color: #5b6478;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-top: 12px;
+    }
+
+    .jump-row {
+      max-width: 1180px;
+      margin: 22px auto 0;
+      padding: 0 20px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .jump-row button {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 100px;
+      border: 1px solid #e3e1d9;
+      background: #ffffff;
+      color: #5b6478;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .jump-row button:hover {
+      border-color: #c99a3a;
+      color: #0a1f3d;
+      background: #fefce8;
+    }
+
+    /* ============ film reel rows ============ */
+    .reels {
+      max-width: 1180px;
+      margin: 34px auto 80px;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+
+    .reel {
+      scroll-margin-top: 80px;
+    }
+
+    .reel-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #e3e1d9;
+    }
+
+    .reel-head .left {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .reel-head h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 21px;
+      color: #0a1f3d;
+      margin: 0;
+      font-weight: 600;
+    }
+
+    .reel-head .meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      color: #5b6478;
+    }
+
+    .reel-nav {
+      display: flex;
+      gap: 6px;
+    }
+
+    .reel-nav button {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid #e3e1d9;
+      background: #ffffff;
+      color: #0a1f3d;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      transition: all 0.2s ease;
+    }
+
+    .reel-nav button:hover {
+      border-color: #c99a3a;
+      background: #fbf8f0;
+    }
+
+    .filmstrip-wrap {
+      position: relative;
+    }
+
+    .filmstrip-wrap::before, .filmstrip-wrap::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 36px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .filmstrip-wrap::before {
+      left: 0;
+      background: linear-gradient(90deg, #f8fafc, transparent);
+    }
+
+    .filmstrip-wrap::after {
+      right: 0;
+      background: linear-gradient(270deg, #f8fafc, transparent);
+    }
+
+    .filmstrip {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding: 10px 2px 16px;
+      scrollbar-width: thin;
+    }
+
+    .filmstrip::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .filmstrip::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 3px;
+    }
+
+    .frame {
+      flex: 0 0 auto;
+      width: 230px;
+      cursor: pointer;
+      position: relative;
+      background: #071730;
+      border-radius: 6px;
+      padding: 14px 8px;
+      box-shadow: 0 4px 12px rgba(7, 23, 48, 0.12);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .frame:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 24px rgba(7, 23, 48, 0.22);
+    }
+
+    .frame .sprockets {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 6px 0;
+      pointer-events: none;
+    }
+
+    .frame .sprockets .row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 4px;
+    }
+
+    .frame .sprockets .hole {
+      width: 6px;
+      height: 6px;
+      border-radius: 1px;
+      background: #f8fafc;
+    }
+
+    .frame .img-wrap {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      border-radius: 3px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .frame:hover img {
+      transform: scale(1.08);
+    }
+
+    .frame .frame-num {
+      position: absolute;
+      bottom: 6px;
+      left: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      color: #e3c876;
+      background: rgba(7, 23, 48, 0.75);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .frame .cap {
+      margin-top: 10px;
+      font-size: 11.5px;
+      color: #dbe3f2;
+      text-align: center;
+      line-height: 1.3;
+      padding: 0 6px;
+      font-weight: 500;
+    }
+
+    /* ============ lightbox with filmstrip nav ============ */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 12, 26, 0.94);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+      padding: 20px;
+    }
+
+    .lightbox.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .lb-main-wrap {
+      max-width: min(840px, 90vw);
+      max-height: 60vh;
+      width: 100%;
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    .lb-main-wrap img {
+      width: 100%;
+      max-height: 60vh;
+      object-fit: contain;
+    }
+
+    .lb-caption {
+      text-align: center;
+      color: #fff;
+      margin-top: 16px;
+    }
+
+    .lb-caption .cat {
+      font-size: 10.5px;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: #e3c876;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .lb-caption h4 {
+      margin: 6px 0 4px;
+      font-size: 19px;
+      font-weight: 600;
+    }
+
+    .lb-caption p {
+      margin: 0;
+      font-size: 12.5px;
+      color: #9fb0cc;
+    }
+
+    .lb-thumbs {
+      display: flex;
+      gap: 8px;
+      margin-top: 18px;
+      max-width: min(840px, 90vw);
+      overflow-x: auto;
+      padding-bottom: 6px;
+    }
+
+    .lb-thumbs .t {
+      flex: 0 0 auto;
+      width: 60px;
+      height: 45px;
+      border-radius: 5px;
+      cursor: pointer;
+      opacity: 0.45;
+      transition: opacity 0.15s, outline 0.15s;
+      outline: 2px solid transparent;
+      overflow: hidden;
+    }
+
+    .lb-thumbs .t img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .lb-thumbs .t.active {
+      opacity: 1;
+      outline-color: #c99a3a;
+    }
+
+    .lb-close, .lb-prev, .lb-next {
+      position: fixed;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 20px;
+      transition: all 0.2s ease;
+      z-index: 10000;
+    }
+
+    .lb-close:hover, .lb-prev:hover, .lb-next:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .lb-close {
+      top: 26px;
+      right: 30px;
+    }
+
+    .lb-prev {
+      left: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .lb-next {
+      right: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    @media (max-width: 720px) {
+      .v2-stat-strip {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .frame {
+        width: 190px;
+      }
+      .lb-prev, .lb-next {
+        width: 36px;
+        height: 36px;
+      }
+      .lb-prev { left: 10px; }
+      .lb-next { right: 10px; }
+      .lb-close { top: 14px; right: 14px; }
+    }
+  </style>
 </head>
 
-<body>
+<body class="gallery-v2-body">
 
   <div class="top-banner">
     <img src="assets/images/global/college-banner.png" alt="R.V.R. & J.C. College of Engineering — EAPCET Code: RVJC">
@@ -32,7 +516,7 @@
         <a href="index.html">About</a>
         <a href="events.html">Events</a>
         <a href="teams.html">Teams</a>
-        <a href="gallery.html">Photo Gallery</a>
+        <a href="gallery.html" class="active">Photo Gallery</a>
       </div>
     </div>
   </nav>
@@ -45,38 +529,39 @@
     </div>
   </header>
 
-  <section class="section">
-    <div class="container">
-      <div class="section-title">
-        <span class="eyebrow">In Pictures</span>
-        <h2>Chapter Highlights</h2>
-        <div class="rule"></div>
-      </div>
+  <div class="v2-stat-strip">
+    <div class="v2-stat-card"><div class="n">312</div><div class="l">Photos archived</div></div>
+    <div class="v2-stat-card"><div class="n">47</div><div class="l">Events covered</div></div>
+    <div class="v2-stat-card"><div class="n">8</div><div class="l">Years documented</div></div>
+    <div class="v2-stat-card"><div class="n">6</div><div class="l">Reel categories</div></div>
+  </div>
 
-      <div class="gallery-marquee-wrap">
+  <div class="v2-section-head">
+    <div class="eyebrow">Chapter Moments</div>
+    <h2>Browse by Event</h2>
+    <div class="rule"></div>
+    <p class="desc">Each event gets its own strip — drag or use the arrows to move through it. Jump straight to an event using the chips below, or just scroll down.</p>
+  </div>
 
-        <!-- Row A — scrolls left to right visually (content moves leftwards) -->
-        <div class="marquee-row row-a">
-          <div class="gallery-tile"><img src="assets/images/gallery/gallery-1.jpg" alt="ACM chapter event"></div>
-          <div class="gallery-tile"><img src="assets/images/gallery/gallery-2.jpg" alt="ACM chapter event"></div>
-          <div class="gallery-tile"><img src="assets/images/gallery/gallery-3.jpg" alt="ACM chapter event"></div>
-          <div class="gallery-tile"><img src="assets/images/gallery/gallery-4.jpg" alt="ACM chapter event"></div>
-          <div class="gallery-tile"><img src="assets/images/gallery/gallery-5.jpg" alt="ACM chapter event"></div>
-        </div>
+  <div class="jump-row" id="jump-row"></div>
 
-        <!-- Row B — scrolls in the opposite direction -->
-        <div class="marquee-row row-b">
-          <div class="gallery-tile"><img src="assets/images/gallery/gallery-6.jpg" alt="ACM chapter event"></div>
-          <div class="gallery-tile"><img src="assets/images/gallery/gallery-7.jpg" alt="ACM chapter event"></div>
-          <div class="gallery-tile"><img src="assets/images/gallery/gallery-8.jpg" alt="ACM chapter event"></div>
-          <div class="gallery-tile"><img src="assets/images/gallery/gallery-9.jpg" alt="ACM chapter event"></div>
-          <div class="gallery-tile"><img src="assets/images/gallery/gallery-10.jpg" alt="ACM chapter event"></div>
-        </div>
+  <div class="reels" id="reels"></div>
 
-      </div>
-
+  <!-- Lightbox Modal -->
+  <div class="lightbox" id="lightbox">
+    <button class="lb-close" id="lb-close" aria-label="Close modal">✕</button>
+    <button class="lb-prev" id="lb-prev" aria-label="Previous photo">‹</button>
+    <button class="lb-next" id="lb-next" aria-label="Next photo">›</button>
+    <div class="lb-main-wrap" id="lb-main-wrap">
+      <img id="lb-img" src="" alt="Gallery Image">
     </div>
-  </section>
+    <div class="lb-caption">
+      <div class="cat" id="lb-cat">Technizen</div>
+      <h4 id="lb-title">Opening Ceremony 2K26</h4>
+      <p id="lb-desc">Main Auditorium</p>
+    </div>
+    <div class="lb-thumbs" id="lb-thumbs"></div>
+  </div>
 
   <footer class="site-footer">
     <div class="container">
@@ -98,28 +583,162 @@
           <a href="events.html">Events</a>
           <a href="teams.html">Teams</a>
           <a href="gallery.html">Photo Gallery</a>
-          <a href="https://rvrjcce.ac.in" target="_blank" rel="noopener">College Website</a>
         </div>
         <div>
-          <h4>Our Events</h4>
-          <a href="events/query-masters.html">Query Masters</a>
-          <a href="events/dsa-clash.html">DSA Clash</a>
-          <a href="events/ai-innovators.html">AI Innovators Arena</a>
-          <a href="events/pixel-craft.html">Pixel Craft</a>
-          <a href="events/build-pitch.html">Build and Pitch</a>
-          <a href="events/Technoverse.html">Technoverse</a>
-        </div>
-        <div>
-          <h4>Get in Touch</h4>
-          <a href="https://rvrjcce.ac.in/CSE/" target="_blank" rel="noopener">Dept. of CSE</a>
+          <h4>Department of CSE</h4>
+          <p style="max-width:300px;font-size:.85rem;line-height:1.5;">
+            Building computing leaders through innovation, research, and technical excellence.
+          </p>
         </div>
       </div>
-      <div class="footer-bottom">&copy; 2026 ACM Student Chapter, Dept. of CSE — R.V.R. &amp; J.C. College of
-        Engineering (Autonomous). All rights reserved.</div>
+      <div class="footer-bottom">
+        &copy; 2026 Department of Computer Science and Engineering, R.V.R. &amp; J.C. College of Engineering. All rights reserved.
+      </div>
     </div>
   </footer>
 
   <script src="assets/js/script.js"></script>
-</body>
+  <script>
+  const SAMPLE_IMAGES = [
+    'assets/images/gallery/gallery-1.jpg',
+    'assets/images/gallery/gallery-2.jpg',
+    'assets/images/gallery/gallery-3.jpg',
+    'assets/images/gallery/gallery-4.jpg',
+    'assets/images/gallery/gallery-5.jpg',
+    'assets/images/gallery/gallery-6.jpg',
+    'assets/images/gallery/gallery-7.jpg',
+    'assets/images/gallery/gallery-8.jpg',
+    'assets/images/gallery/gallery-9.jpg',
+    'assets/images/gallery/gallery-10.jpg'
+  ];
 
+  const EVENTS = [
+    {id:'technizen', name:'Technizen 2K26', meta:'6 sub-events · Aug 2026', photos:['Opening Ceremony','Query Masters Finale','DSA Clash Round 2','AI Innovators Arena','Build & Pitch Demo','Prize Distribution','Registration Desk','Crowd at Main Hall']},
+    {id:'guest', name:'Guest Lectures', meta:'5 speakers · 2017–2023', photos:['Future Readiness Talk','Micro Services Session','Inauguration 2017','SMAC Technologies Talk','Q&A with Students','Certificate Distribution']},
+    {id:'outreach', name:'Outreach Programs', meta:'8 schools · since 2019', photos:['School Visit — Guntur','Awareness Drive, ZPHS','Coding Basics for Kids','Volunteer Team Photo','Community Outreach Day','Kids Coding Demo']},
+    {id:'workshop', name:'Technical Workshops', meta:'2 workshops · since 2019', photos:['Python Hands-on Session','Git & GitHub Workshop','Lab Session in Progress','Group Discussion']},
+    {id:'hoc', name:'Hour of Code', meta:'5 events · since 2018', photos:['Hour of Code Batch 1','Hour of Code Batch 2','Volunteer Briefing','Certificate Handover']},
+    {id:'intra', name:'Intra-college Tech Events', meta:'24 events · since 2017', photos:['Pixel Craft Round 1','Technoverse Quiz Final','Hackathon Overnight','Coding Contest Winners','Judges Panel','Team Presentations']}
+  ];
+
+  const jumpRow = document.getElementById('jump-row');
+  const reelsEl = document.getElementById('reels');
+  let currentReelPhotos = [];
+  let lbIndex = 0;
+  let globalImgCounter = 0;
+
+  EVENTS.forEach(ev => {
+    const chip = document.createElement('button');
+    chip.textContent = ev.name;
+    chip.addEventListener('click', () => document.getElementById('reel-'+ev.id).scrollIntoView({behavior:'smooth', block:'start'}));
+    jumpRow.appendChild(chip);
+
+    const reel = document.createElement('div');
+    reel.className = 'reel';
+    reel.id = 'reel-' + ev.id;
+    reel.innerHTML = `
+      <div class="reel-head">
+        <div class="left"><h3>${ev.name}</h3><span class="meta">${ev.meta}</span></div>
+        <div class="reel-nav">
+          <button class="rl-left" aria-label="Scroll left">‹</button>
+          <button class="rl-right" aria-label="Scroll right">›</button>
+        </div>
+      </div>
+      <div class="filmstrip-wrap">
+        <div class="filmstrip" id="strip-${ev.id}"></div>
+      </div>
+    `;
+    reelsEl.appendChild(reel);
+
+    const strip = reel.querySelector('.filmstrip');
+    const startImgIdx = globalImgCounter;
+    ev.photos.forEach((title, i) => {
+      const imgSrc = SAMPLE_IMAGES[globalImgCounter % SAMPLE_IMAGES.length];
+      globalImgCounter++;
+
+      const frame = document.createElement('div');
+      frame.className = 'frame';
+      frame.innerHTML = `
+        <div class="sprockets">
+          <div class="row"><div class="hole"></div><div class="hole"></div></div>
+          <div class="row"><div class="hole"></div><div class="hole"></div></div>
+        </div>
+        <div class="img-wrap">
+          <img src="${imgSrc}" alt="${title}" loading="lazy">
+          <span class="frame-num">#${String(i+1).padStart(2,'0')}</span>
+        </div>
+        <div class="cap">${title}</div>
+      `;
+      
+      const reelPhotoList = ev.photos.map((t, idx) => ({
+        ev,
+        title: t,
+        imgSrc: SAMPLE_IMAGES[(startImgIdx + idx) % SAMPLE_IMAGES.length]
+      }));
+
+      frame.addEventListener('click', () => openLightbox(ev, i, reelPhotoList));
+      strip.appendChild(frame);
+    });
+
+    // Auto marquee marquee-style continuous scrolling
+    let isHovered = false;
+    let autoMarquee = setInterval(() => {
+      if (!isHovered) {
+        strip.scrollLeft += 1;
+        if (strip.scrollLeft >= (strip.scrollWidth - strip.clientWidth - 2)) {
+          strip.scrollLeft = 0;
+        }
+      }
+    }, 28);
+
+    strip.addEventListener('mouseenter', () => { isHovered = true; });
+    strip.addEventListener('mouseleave', () => { isHovered = false; });
+
+    reel.querySelector('.rl-left').addEventListener('click', () => strip.scrollBy({left:-480, behavior:'smooth'}));
+    reel.querySelector('.rl-right').addEventListener('click', () => strip.scrollBy({left:480, behavior:'smooth'}));
+  });
+
+  const lb = document.getElementById('lightbox');
+  function openLightbox(ev, idx, photoList){
+    currentReelPhotos = photoList;
+    lbIndex = idx;
+    renderThumbs();
+    showLB();
+    lb.classList.add('open');
+  }
+
+  function renderThumbs(){
+    const wrap = document.getElementById('lb-thumbs');
+    wrap.innerHTML = '';
+    currentReelPhotos.forEach((p, i) => {
+      const t = document.createElement('div');
+      t.className = 't' + (i===lbIndex ? ' active' : '');
+      t.innerHTML = `<img src="${p.imgSrc}" alt="${p.title}">`;
+      t.addEventListener('click', () => { lbIndex = i; showLB(); });
+      wrap.appendChild(t);
+    });
+  }
+
+  function showLB(){
+    const p = currentReelPhotos[lbIndex];
+    document.getElementById('lb-img').src = p.imgSrc;
+    document.getElementById('lb-img').alt = p.title;
+    document.getElementById('lb-cat').textContent = p.ev.name;
+    document.getElementById('lb-title').textContent = p.title;
+    document.getElementById('lb-desc').textContent = p.ev.meta;
+    document.querySelectorAll('.lb-thumbs .t').forEach((t,i)=>t.classList.toggle('active', i===lbIndex));
+  }
+
+  document.getElementById('lb-close').addEventListener('click', () => lb.classList.remove('open'));
+  lb.addEventListener('click', (e) => { if (e.target === lb) lb.classList.remove('open'); });
+  document.getElementById('lb-prev').addEventListener('click', () => { lbIndex = (lbIndex-1+currentReelPhotos.length)%currentReelPhotos.length; showLB(); });
+  document.getElementById('lb-next').addEventListener('click', () => { lbIndex = (lbIndex+1)%currentReelPhotos.length; showLB(); });
+  document.addEventListener('keydown', (e) => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') lb.classList.remove('open');
+    if (e.key === 'ArrowLeft') { lbIndex = (lbIndex-1+currentReelPhotos.length)%currentReelPhotos.length; showLB(); }
+    if (e.key === 'ArrowRight') { lbIndex = (lbIndex+1)%currentReelPhotos.length; showLB(); }
+  });
+  </script>
+</body>
 </html>
