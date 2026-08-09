@@ -116,6 +116,54 @@ var EV_TECHNIZEN = [
     category: 'technizen'
   },
   {
+    year: 2020,
+    day: '20',
+    month: 'FEBRUARY',
+    date: '20-02-2020',
+    status: 'past',
+    title: 'Code Challenger',
+    description: 'Inter-collegiate flagship technical fest -- 5 sub-events (Tech-End, Logic Mystery, Exceed Your Idea, Innovate, URL), 809 participants.',
+    desc: 'The inaugural inter-collegiate edition of Technizen brought together 809 engineering and MCA students from across colleges. The fest featured 5 core technical tracks: Tech-End, Logic Mystery, Exceed Your Idea, Innovate, and URL.',
+    facts: [["5", "Sub-events"], ["494", "Participants"], ["Inter", "Collegiate"]],
+    banners: ["Tech-End Arena", "Logic Mystery Lab", "Exceed Your Idea & Innovate", "URL Design Hub"],
+    gallery: [],
+    fields: {
+      'Date': '20-02-2020',
+      'Type': 'Inter Collegiate',
+      'Sub-events': 'Pcode(python code), Scode(sql code), Jcode(java code), Ccode(C programming)',
+      'Organizers': 'Faculty & Student Committee',
+      'Target Audience': 'B.Tech (all branches), MCA & External participants',
+      'Participants': '494'
+    },
+    registerUrl: null,
+    photo: null,
+    category: 'technizen'
+  },
+  {
+    year: 2021,
+    day: '24',
+    month: 'APRIL',
+    date: '24-04-2021',
+    status: 'past',
+    title: 'Explore-IT (PPT Contest)',
+    description: 'Online PPT competition with 132 participants across 4 colleges, featuring tracks on AI, IoT, Networking, and Web.',
+    desc: 'Explore-IT was an online presentation-based technical contest held on 24th April 2021, attracting 31 students from four different colleges. Participants presented their insights and innovation within four core domain tracks: Artificial Intelligence, Internet of Things, Networking, and Web Technologies.',
+    facts: [["132", "Participants"], ["4", "Colleges"], ["1", "Day Fest"]],
+    banners: ["Explore-IT 2021 Main Arena", "AI Innovation Track", "IoT & Networking Hub", "Web Technologies Section"],
+    gallery: [],
+    fields: {
+      'Date': '24-04-2021',
+      'Type': 'Intra-departmental (CSE/AI/IT/CSDA)',
+      'Sub-events': 'PPT Contest',
+      'Organizers': 'Faculty & Student Committee',
+      'Target Audience': 'B.Tech students of CSE, and External participants',
+      'Participants': '132'
+    },
+    registerUrl: null,
+    photo: null,
+    category: 'technizen'
+  },
+  {
     year: 2024,
     day: '05',
     month: 'FEBRUARY',
