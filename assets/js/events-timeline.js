@@ -266,7 +266,7 @@
       '<div class="ev-t-body-col">' +
         '<div class="ev-t-title-row">' +
           '<h4>' + escapeHtml(ev.title) + '</h4>' +
-          '<span class="ev-a-badge">ARCHIVE</span>' +
+          '<span class="ev-t-badge">COMPLETED</span>' +
         '</div>' +
         '<p>' + escapeHtml(ev.description) + '</p>' +
         '<div class="ev-peek">' +
@@ -334,10 +334,11 @@
       bodyHtml += '<div class="ev-modal-section-title">Quick Highlights</div>';
       bodyHtml += '<div class="ev-modal-facts">';
       instance.facts.forEach(function (f) {
+        var labelText = (f[1] || '').trim();
         bodyHtml +=
           '<div class="ev-mf" style="border-top-color:' + categoryColor + '">' +
             '<span class="ev-mf-num" style="color:' + categoryColor + '">' + escapeHtml(f[0]) + '</span>' +
-            '<span class="ev-mf-label">' + escapeHtml(f[1]) + '</span>' +
+            (labelText ? '<span class="ev-mf-label">' + escapeHtml(labelText) + '</span>' : '') +
           '</div>';
       });
       bodyHtml += '</div>';
