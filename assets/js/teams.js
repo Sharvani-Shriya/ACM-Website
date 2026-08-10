@@ -156,6 +156,19 @@ document.addEventListener('DOMContentLoaded', function () {
       ],
       members: genMembers(37, []),
       staffList: [{ name: "Dr. N. Ravi Shankar", role: "Faculty Advisor" }]
+    },
+    "2017-2018":{
+      students: 143,staff: 30, hasData: true,
+      leadership: [
+        { name: "P. Poorna Sai Sri Harsha", role: "Chair", branch: "CSE"},
+        { name: "D. Supriya", role: "Vice Chair", branch: "CSE"},
+        { name: "K. Kalyan", role: "Secretary", branch: "CSE"},
+        { name: "B. Madhu", role: "Treasurer", branch: "CSE"},
+        { name: "K. Jaash", role: "Web Master", branch: "CSE"},
+        { name: "M. Pavan", role: "Event Lead", branch: "CSE"}  
+      ],
+      members: genMembers(143, []),
+      staffList: [{ name: "Dr. S. S. Rajamouli", role: "Faculty Advisor" }]
     }
   };
 
