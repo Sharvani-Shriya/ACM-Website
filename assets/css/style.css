@@ -3615,6 +3615,10 @@ table.data-table td.placeholder {
   color: var(--ink-soft);
   line-height: var(--lh-body);
   margin: 0 0 var(--space-sm);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .ev-cat-meta {

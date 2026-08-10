@@ -8,14 +8,14 @@
 var EV_CATEGORIES = {
   technizen: {
     key: 'technizen',
-    name: 'Inter Collegiate',
+    name: 'Inter Collegiate Tech Events',
     abbr: 'IC',
     color: '#c8a13a',
     cssVar: '--ev-technizen',
     slug: 'technizen',
-    description: 'The flagship annual inter-collegiate technical fest featuring competitive sub-events across core domain tracks.',
+    description: 'Annual inter-collegiate technical fest featuring competitive sub-events across core domain tracks.',
     url: 'events/technizen.html',
-    openMaster: 'INTER COLLEGIATE'
+    openMaster: 'INTER COLLEGIATE TECH EVENTS'
   },
   hourOfCode: {
     key: 'hourOfCode',
@@ -73,7 +73,7 @@ var EV_CATEGORIES = {
    Order of keys must match EV_CATEGORIES keys above.
    Values are counts of instances that year.                  */
 var EV_CHART_DATA = [
-  { year: 2017, technizen: 0, hourOfCode: 0, outreach: 0, guestLectures: 2, intraCollege: 3, workshops: 0 },
+  { year: 2017, technizen: 0, hourOfCode: 0, outreach: 0, guestLectures: 1, intraCollege: 3, workshops: 0 },
   { year: 2018, technizen: 0, hourOfCode: 1, outreach: 0, guestLectures: 0, intraCollege: 2, workshops: 0 },
   { year: 2019, technizen: 1, hourOfCode: 1, outreach: 1, guestLectures: 0, intraCollege: 3, workshops: 1 },
   { year: 2020, technizen: 1, hourOfCode: 1, outreach: 0, guestLectures: 0, intraCollege: 2, workshops: 1 },
@@ -82,7 +82,7 @@ var EV_CHART_DATA = [
   { year: 2023, technizen: 0, hourOfCode: 1, outreach: 1, guestLectures: 1, intraCollege: 1, workshops: 0 },
   { year: 2024, technizen: 1, hourOfCode: 0, outreach: 1, guestLectures: 0, intraCollege: 2, workshops: 0 },
   { year: 2025, technizen: 0, hourOfCode: 1, outreach: 1, guestLectures: 0, intraCollege: 3, workshops: 0 },
-  { year: 2026, technizen: 1, hourOfCode: 0, outreach: 1, guestLectures: 0, intraCollege: 0, workshops: 0 }
+  { year: 2026, technizen: 1, hourOfCode: 0, outreach: 1, guestLectures: 0, intraCollege: 1, workshops: 0 }
 ];
 
 /* ---- Instance Arrays ---- */
@@ -534,41 +534,18 @@ var EV_GUEST_LECTURES = [
     month: 'AUGUST',
     date: '30-08-2017',
     status: 'past',
-    title: 'Inauguration of ACM STUDENT CHAPTER( Eminent Speaker Programme)',
-    description: 'Department Event -- Eminent Speaker Programme guest lecture by Sri. AJAY DESHPANDE, CTO RAKYA TECHNOLOGIES, PUNE (207 participants).',
-    desc: 'Inauguration of ACM STUDENT CHAPTER (Eminent Speaker Programme) delivered by Sri. AJAY DESHPANDE, CTO RAKYA TECHNOLOGIES, PUNE on 30.08.2017 for IVth year B.Tech CSE students. 207 participants.',
-    facts: [["207", "Participants"], ["IVth B.Tech CSE"], ["Department Event"]],
-    banners: ["Inauguration of ACM STUDENT CHAPTER 2017"],
+    title: 'Inauguration of ACM Student Chapter & Guest Lecture on “SMAC Technologies and the Future”',
+    description: 'Eminent Speaker Programme keynoted by Sri. Ajay Deshpande, CTO, Rakya Technologies, Pune (410 participants).',
+    desc: 'Inauguration of the ACM Student Chapter featuring an Eminent Speaker Programme & Guest Lecture on "SMAC Technologies and the Future" delivered by Sri. Ajay Deshpande, CTO, Rakya Technologies, Pune on 30.08.2017 for IIIrd and IVth year B.Tech CSE students (410 participants).',
+    facts: [["410", "Participants"], ["III & IV B.Tech CSE"], ["Eminent Speaker"]],
+    banners: ["Inauguration of ACM Student Chapter & SMAC Technologies Talk 2017"],
     gallery: [],
     fields: {
       'Date': '30.08.2017',
-      'Type': 'Department Event',
-      'Resource Person': 'Sri. AJAY DESHPANDE, CTO RAKYA TECHNOLOGIES, PUNE.',
-      'Target Audience': 'IVth year B.Tech CSE',
-      'Participants': '207'
-    },
-    registerUrl: null,
-    photo: null,
-    category: 'guestLectures'
-  },
-  {
-    year: 2017,
-    day: '30',
-    month: 'AUGUST',
-    date: '30-08-2017',
-    status: 'past',
-    title: 'SMAC Technologies and the Future',
-    description: 'Department Event -- Guest lecture by Sri. AJAY DESHPANDE, CTO RAKYA TECHNOLOGIES, PUNE (203 participants).',
-    desc: 'Guest lecture on SMAC Technologies and the Future delivered by Sri. AJAY DESHPANDE, CTO RAKYA TECHNOLOGIES, PUNE on 30.08.2017 for IIIrd year B.Tech CSE students. 203 participants.',
-    facts: [["203", "Participants"], ["IIIrd B.Tech CSE"], ["Department Event"]],
-    banners: ["SMAC Technologies and the Future 2017"],
-    gallery: [],
-    fields: {
-      'Date': '30.08.2017',
-      'Type': 'Department Event',
-      'Resource Person': 'Sri. AJAY DESHPANDE, CTO RAKYA TECHNOLOGIES, PUNE.',
-      'Target Audience': 'IIIrd year B.Tech CSE',
-      'Participants': '203'
+      'Type': 'Eminent Speaker Programme',
+      'Resource Person': 'Sri. Ajay Deshpande, CTO, Rakya Technologies, Pune.',
+      'Target Audience': 'IIIrd & IVth year B.Tech CSE Students',
+      'Participants': '410'
     },
     registerUrl: null,
     photo: null,
@@ -627,6 +604,29 @@ var EV_GUEST_LECTURES = [
    2017(3) 2018(2) 2019(3) 2020(3) 2021(3) 2022(3) 2023(1) 2024(2) 2025(3) 2026(1)
    =========================================== */
 var EV_INTRA_COLLEGE = [
+  {
+    year: 2026,
+    day: '11',
+    month: 'MARCH',
+    date: '11-03-2026',
+    status: 'past',
+    title: '“INTELLEX” — Where Intelligence Meets Logic',
+    description: 'Intra Collegiate 1-day coding contest organized by ACM Student Chapter, Dept. of CSE (496 teams / 992 participants).',
+    desc: '“INTELLEX - Where Intelligence Meets Logic” Intra-College Coding Contest organized on 11-03-2026 by ACM Student Chapter (ID: 160342), Department of Computer Science and Engineering, R.V.R. & J.C. College of Engineering. 496 teams (992 participants).',
+    facts: [["992", "Participants"], ["496", "Teams"]],
+    banners: ["INTELLEX - Where Intelligence Meets Logic 2026"],
+    gallery: [],
+    fields: {
+      'Date': '11-03-2026',
+      'Type': 'Intra Collegiate Coding Contest',
+      'Organizers': 'ACM Student Chapter (ID: 160342), Dept. of CSE',
+      'Target Audience': 'B.Tech Students of all branches',
+      'Participants': '496 teams (992 participants)'
+    },
+    registerUrl: null,
+    photo: null,
+    category: 'intraCollege'
+  },
   {
     year: 2025,
     day: '22',
