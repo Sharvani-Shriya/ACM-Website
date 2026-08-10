@@ -75,14 +75,14 @@ var EV_CATEGORIES = {
 var EV_CHART_DATA = [
   { year: 2017, technizen: 0, hourOfCode: 0, outreach: 0, guestLectures: 2, intraCollege: 3, workshops: 0 },
   { year: 2018, technizen: 0, hourOfCode: 1, outreach: 0, guestLectures: 0, intraCollege: 2, workshops: 0 },
-  { year: 2019, technizen: 1, hourOfCode: 1, outreach: 1, guestLectures: 1, intraCollege: 3, workshops: 1 },
-  { year: 2020, technizen: 0, hourOfCode: 1, outreach: 0, guestLectures: 0, intraCollege: 3, workshops: 1 },
-  { year: 2021, technizen: 0, hourOfCode: 0, outreach: 1, guestLectures: 1, intraCollege: 3, workshops: 0 },
+  { year: 2019, technizen: 1, hourOfCode: 1, outreach: 1, guestLectures: 0, intraCollege: 3, workshops: 1 },
+  { year: 2020, technizen: 1, hourOfCode: 1, outreach: 0, guestLectures: 0, intraCollege: 2, workshops: 1 },
+  { year: 2021, technizen: 1, hourOfCode: 0, outreach: 1, guestLectures: 1, intraCollege: 2, workshops: 0 },
   { year: 2022, technizen: 0, hourOfCode: 0, outreach: 2, guestLectures: 0, intraCollege: 3, workshops: 0 },
   { year: 2023, technizen: 0, hourOfCode: 1, outreach: 1, guestLectures: 1, intraCollege: 1, workshops: 0 },
   { year: 2024, technizen: 1, hourOfCode: 0, outreach: 1, guestLectures: 0, intraCollege: 2, workshops: 0 },
   { year: 2025, technizen: 0, hourOfCode: 1, outreach: 1, guestLectures: 0, intraCollege: 3, workshops: 0 },
-  { year: 2026, technizen: 1, hourOfCode: 0, outreach: 1, guestLectures: 0, intraCollege: 1, workshops: 0 }
+  { year: 2026, technizen: 1, hourOfCode: 0, outreach: 1, guestLectures: 0, intraCollege: 0, workshops: 0 }
 ];
 
 /* ---- Instance Arrays ---- */
@@ -995,28 +995,7 @@ var EV_INTRA_COLLEGE = [
     photo: null,
     category: 'intraCollege'
   },
-  {
-    year: 2019,
-    day: '22',
-    month: 'FEBRUARY',
-    status: 'past',
-    title: 'Techstalk: Tech Hunt',
-    description: 'Intra Collegiate coding contest for B.Tech students of all branches and MCA (286 participants).',
-    desc: 'Techstalk: The Tech Hunt organized on 22-02-2019 by Faculty and Student Committee Members for B.Tech students of all branches and MCA. 286 participants.',
-    facts: [["286", "Participants"], ["All Branches & MCA"], ["Intra Collegiate"]],
-    banners: ["Techstalk: The Tech Hunt 2019"],
-    gallery: [],
-    fields: {
-      'Date': '22-02-2019',
-      'Type': 'Intra Collegiate',
-      'Organizers': 'Faculty and Student Committee Members',
-      'Target Audience': 'B.Tech students of all branches and MCA',
-      'Participants': '67'
-    },
-    registerUrl: null,
-    photo: null,
-    category: 'intraCollege'
-  },
+
   {
     year: 2018,
     day: '29',
