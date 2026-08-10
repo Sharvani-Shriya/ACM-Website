@@ -66,7 +66,7 @@
             </svg>
           </div>
           <div class="ev-stat-info">
-            <span class="ev-stat-num" id="ev-events-count" data-count="47">47</span>
+            <span class="ev-stat-num" id="ev-events-count" data-count="45">45</span>
             <span class="ev-stat-label">Events organized</span>
           </div>
         </div>
@@ -96,7 +96,7 @@
             </svg>
           </div>
           <div class="ev-stat-info">
-            <span class="ev-stat-num" id="ev-speakers-count" data-count="5">5</span>
+            <span class="ev-stat-num" id="ev-speakers-count" data-count="3">3</span>
             <span class="ev-stat-label">Guest speakers</span>
           </div>
         </div>
@@ -292,10 +292,9 @@
   <script>
     /* ---- Master events page renderer ---- */
     (function () {
-      /* Stats (commented out for future updates)
-      var totalEl = document.getElementById('ev-total-count');
-      var guestEl = document.getElementById('ev-guests-count');
-      var schoolsEl = document.getElementById('ev-schools-count');
+      /* Stats Dynamic Auto-Updater */
+      var totalEl = document.getElementById('ev-events-count');
+      var guestEl = document.getElementById('ev-speakers-count');
       var yearsEl = document.getElementById('ev-years-count');
 
       if (totalEl && typeof EV_TOTAL_EVENTS !== 'undefined') {
@@ -306,19 +305,10 @@
         guestEl.setAttribute('data-count', EV_GUEST_COUNT);
         guestEl.textContent = EV_GUEST_COUNT;
       }
-      if (schoolsEl && typeof EV_SCHOOLS_VISITED !== 'undefined') {
-        schoolsEl.setAttribute('data-count', EV_SCHOOLS_VISITED);
-        schoolsEl.textContent = EV_SCHOOLS_VISITED;
-      }
       if (yearsEl && typeof EV_YEARS_ACTIVE !== 'undefined') {
         yearsEl.setAttribute('data-count', EV_YEARS_ACTIVE);
         yearsEl.textContent = EV_YEARS_ACTIVE;
       }
-
-      if (window.initStatCounters) {
-        window.initStatCounters();
-      }
-      */
 
       /* Chart: Grouped Vertical Bar Chart (2017–2026) */
       var years = EV_CHART_DATA.map(function (row) { return String(row.year); });

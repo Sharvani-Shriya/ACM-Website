@@ -19,9 +19,9 @@
     }
 
     .gallery-hero-v2 {
-      background: radial-gradient(circle at 12% 25%, rgba(201,154,58,.18), transparent 45%),
-                 radial-gradient(circle at 88% 75%, rgba(181,52,43,.15), transparent 50%),
-                 linear-gradient(180deg, #071730, #0a1f3d 75%);
+      background: radial-gradient(circle at 12% 25%, rgba(201, 154, 58, .18), transparent 45%),
+        radial-gradient(circle at 88% 75%, rgba(181, 52, 43, .15), transparent 50%),
+        linear-gradient(180deg, #071730, #0a1f3d 75%);
       color: #fff;
       padding: 56px 20px 48px;
       text-align: center;
@@ -83,7 +83,7 @@
     .v2-section-head .rule {
       width: 56px;
       height: 3px;
-      background: #c99a3a;
+      background: #1e60c8;
       border-radius: 2px;
       margin: 4px auto 0;
     }
@@ -116,32 +116,62 @@
       background: #ffffff;
       color: #5b6478;
       cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       transition: all 0.25s ease;
     }
 
-    .jump-row button:hover {
-      border-color: #c99a3a;
-      color: #0a1f3d;
-      background: #fefce8;
+    .chip-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+      flex-shrink: 0;
     }
 
-    /* ============ film reel rows ============ */
+    .cat-badge-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 0.5px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    }
+
+    .jump-row button.active {
+      font-weight: 700;
+      box-shadow: 0 4px 12px rgba(11, 31, 77, 0.12);
+    }
+
+    /* ============ Single Reel Showcase ============ */
     .reels {
       max-width: 1180px;
       margin: 34px auto 80px;
       padding: 0 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 48px;
+      min-height: 280px;
     }
 
     .reel {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.35s ease;
       scroll-margin-top: 80px;
+    }
+
+    .reel.active {
+      display: block;
+      opacity: 1;
     }
 
     .reel-head {
       display: flex;
-      align-items: baseline;
+      align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 8px;
@@ -152,8 +182,8 @@
 
     .reel-head .left {
       display: flex;
-      align-items: baseline;
-      gap: 12px;
+      align-items: center;
+      gap: 10px;
     }
 
     .reel-head h3 {
@@ -191,15 +221,17 @@
     }
 
     .reel-nav button:hover {
-      border-color: #c99a3a;
-      background: #fbf8f0;
+      border-color: #1e60c8;
+      color: #1e60c8;
+      background: #eaf1fb;
     }
 
     .filmstrip-wrap {
       position: relative;
     }
 
-    .filmstrip-wrap::before, .filmstrip-wrap::after {
+    .filmstrip-wrap::before,
+    .filmstrip-wrap::after {
       content: "";
       position: absolute;
       top: 0;
@@ -223,7 +255,6 @@
       display: flex;
       gap: 16px;
       overflow-x: auto;
-      scroll-behavior: smooth;
       padding: 10px 2px 16px;
       scrollbar-width: none;
       -ms-overflow-style: none;
@@ -249,10 +280,9 @@
     }
 
     .photo-card:hover {
-      transform: translateY(-50%);
       transform: translateY(-5px);
-      box-shadow: 0 12px 28px rgba(11, 31, 77, 0.16);
-      border-color: #c99a3a;
+      box-shadow: 0 12px 28px rgba(30, 96, 200, 0.25);
+      border-color: #1e60c8;
     }
 
     .photo-card .img-wrap {
@@ -393,10 +423,12 @@
 
     .lb-thumbs .t.active {
       opacity: 1;
-      outline-color: #c99a3a;
+      outline-color: #1e60c8;
     }
 
-    .lb-close, .lb-prev, .lb-next {
+    .lb-close,
+    .lb-prev,
+    .lb-next {
       position: fixed;
       background: rgba(255, 255, 255, 0.12);
       border: 1px solid rgba(255, 255, 255, 0.2);
@@ -413,7 +445,9 @@
       z-index: 10000;
     }
 
-    .lb-close:hover, .lb-prev:hover, .lb-next:hover {
+    .lb-close:hover,
+    .lb-prev:hover,
+    .lb-next:hover {
       background: rgba(255, 255, 255, 0.25);
     }
 
@@ -438,13 +472,25 @@
       .frame {
         width: 190px;
       }
-      .lb-prev, .lb-next {
+
+      .lb-prev,
+      .lb-next {
         width: 36px;
         height: 36px;
       }
-      .lb-prev { left: 10px; }
-      .lb-next { right: 10px; }
-      .lb-close { top: 14px; right: 14px; }
+
+      .lb-prev {
+        left: 10px;
+      }
+
+      .lb-next {
+        right: 10px;
+      }
+
+      .lb-close {
+        top: 14px;
+        right: 14px;
+      }
     }
   </style>
 </head>
@@ -486,7 +532,8 @@
   <div class="ev-stats-strip" style="max-width:1120px;margin:48px auto 54px;">
     <div class="ev-stat-item">
       <div class="ev-stat-icon bg-blue" aria-hidden="true">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
           <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
           <circle cx="8.5" cy="8.5" r="1.5"></circle>
           <polyline points="21 15 16 10 5 21"></polyline>
@@ -500,20 +547,22 @@
 
     <div class="ev-stat-item">
       <div class="ev-stat-icon bg-purple" aria-hidden="true">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
           <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
           <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
         </svg>
       </div>
       <div class="ev-stat-info">
-        <span class="ev-stat-num">47</span>
+        <span class="ev-stat-num">45</span>
         <span class="ev-stat-label">Events covered</span>
       </div>
     </div>
 
     <div class="ev-stat-item">
       <div class="ev-stat-icon bg-gold" aria-hidden="true">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
           <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
           <line x1="16" y1="2" x2="16" y2="6"></line>
           <line x1="8" y1="2" x2="8" y2="6"></line>
@@ -528,8 +577,11 @@
 
     <div class="ev-stat-item">
       <div class="ev-stat-icon bg-emerald" aria-hidden="true">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <polygon
+            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+          </polygon>
         </svg>
       </div>
       <div class="ev-stat-info">
@@ -543,7 +595,7 @@
     <div class="eyebrow">Chapter Moments</div>
     <h2>Browse by Event</h2>
     <div class="rule"></div>
-    <p class="desc">Each event gets its own strip — drag or use the arrows to move through it. Jump straight to an event using the chips below, or just scroll down.</p>
+    <p class="desc">Select an event category below to display its single-line marquee strip. Inter Collegiate Tech Events is shown by default.</p>
   </div>
 
   <div class="jump-row" id="jump-row"></div>
@@ -577,7 +629,8 @@
             Andhra Pradesh — 522019.
           </p>
           <p style="max-width:360px;font-size:.82rem;opacity:0.8;line-height:1.4;">
-            An autonomous institution affiliated to Acharya Nagarjuna University, sponsored by Nagarjuna Education Society.
+            An autonomous institution affiliated to Acharya Nagarjuna University, sponsored by Nagarjuna Education
+            Society.
           </p>
         </div>
         <div>
@@ -595,53 +648,111 @@
         </div>
       </div>
       <div class="footer-bottom">
-        &copy; 2026 Department of Computer Science and Engineering, R.V.R. &amp; J.C. College of Engineering. All rights reserved.
+        &copy; 2026 Department of Computer Science and Engineering, R.V.R. &amp; J.C. College of Engineering. All rights
+        reserved.
       </div>
     </div>
   </footer>
 
   <script src="assets/js/script.js"></script>
   <script>
-  const SAMPLE_IMAGES = [
-    'assets/images/gallery/gallery-1.jpg',
-    'assets/images/gallery/gallery-2.jpg',
-    'assets/images/gallery/gallery-3.jpg',
-    'assets/images/gallery/gallery-4.jpg',
-    'assets/images/gallery/gallery-5.jpg',
-    'assets/images/gallery/gallery-6.jpg',
-    'assets/images/gallery/gallery-7.jpg',
-    'assets/images/gallery/gallery-8.jpg',
-    'assets/images/gallery/gallery-9.jpg',
-    'assets/images/gallery/gallery-10.jpg'
-  ];
+    const SAMPLE_IMAGES = [
+      'assets/images/gallery/gallery-1.jpg',
+      'assets/images/gallery/gallery-2.jpg',
+      'assets/images/gallery/gallery-3.jpg',
+      'assets/images/gallery/gallery-4.jpg',
+      'assets/images/gallery/gallery-5.jpg',
+      'assets/images/gallery/gallery-6.jpg',
+      'assets/images/gallery/gallery-7.jpg',
+      'assets/images/gallery/gallery-8.jpg',
+      'assets/images/gallery/gallery-9.jpg',
+      'assets/images/gallery/gallery-10.jpg'
+    ];
 
-  const EVENTS = [
-    {id:'technizen', name:'Inter Collegiate Tech Events 2K26', meta:'6 sub-events · Aug 2026', photos:['Opening Ceremony','Query Masters Finale','DSA Clash Round 2','AI Innovators Arena','Build & Pitch Demo','Prize Distribution','Registration Desk','Crowd at Main Hall']},
-    {id:'guest', name:'Guest Lectures', meta:'5 speakers · 2017–2023', photos:['Future Readiness Talk','Micro Services Session','Inauguration 2017','SMAC Technologies Talk','Q&A with Students','Certificate Distribution']},
-    {id:'outreach', name:'Outreach Programs', meta:'8 schools · since 2019', photos:['School Visit — Guntur','Awareness Drive, ZPHS','Coding Basics for Kids','Volunteer Team Photo','Community Outreach Day','Kids Coding Demo']},
-    {id:'workshop', name:'Technical Workshops', meta:'2 workshops · since 2019', photos:['Python Hands-on Session','Git & GitHub Workshop','Lab Session in Progress','Group Discussion']},
-    {id:'hoc', name:'Hour of Code', meta:'5 events · since 2018', photos:['Hour of Code Batch 1','Hour of Code Batch 2','Volunteer Briefing','Certificate Handover']},
-    {id:'intra', name:'Intra Collegiate Tech Events', meta:'24 events · since 2017', photos:['Pixel Craft Round 1','Technoverse Quiz Final','Hackathon Overnight','Coding Contest Winners','Judges Panel','Team Presentations']}
-  ];
+    const EVENTS = [
+      { id: 'technizen', name: 'Inter Collegiate Tech Events', abbr: 'IC', color: '#0284c7', meta: '6 sub-events · Aug 2026', photos: ['Opening Ceremony', 'Query Masters Finale', 'DSA Clash Round 2', 'AI Innovators Arena', 'Build & Pitch Demo', 'Prize Distribution', 'Registration Desk', 'Crowd at Main Hall'] },
+      { id: 'guest', name: 'Guest Lectures', abbr: 'GL', color: '#8b5cf6', meta: '5 speakers · 2017–2023', photos: ['Future Readiness Talk', 'Micro Services Session', 'Inauguration 2017', 'SMAC Technologies Talk', 'Q&A with Students', 'Certificate Distribution'] },
+      { id: 'outreach', name: 'Outreach Programs', abbr: 'OP', color: '#b5502f', meta: '8 schools · since 2019', photos: ['School Visit — Guntur', 'Awareness Drive, ZPHS', 'Coding Basics for Kids', 'Volunteer Team Photo', 'Community Outreach Day', 'Kids Coding Demo'] },
+      { id: 'workshop', name: 'Technical Workshops', abbr: 'TW', color: '#10b981', meta: '2 workshops · since 2019', photos: ['Python Hands-on Session', 'Git & GitHub Workshop', 'Lab Session in Progress', 'Group Discussion'] },
+      { id: 'hoc', name: 'Hour of Code', abbr: 'HC', color: '#2e7d6b', meta: '5 events · since 2018', photos: ['Hour of Code Batch 1', 'Hour of Code Batch 2', 'Volunteer Briefing', 'Certificate Handover'] },
+      { id: 'intra', name: 'Intra Collegiate Tech Events', abbr: 'IT', color: '#14509e', meta: '24 events · since 2017', photos: ['Pixel Craft Round 1', 'Technoverse Quiz Final', 'Hackathon Overnight', 'Coding Contest Winners', 'Judges Panel', 'Team Presentations'] }
+    ];
 
-  const jumpRow = document.getElementById('jump-row');
-  const reelsEl = document.getElementById('reels');
-  let currentReelPhotos = [];
-  let lbIndex = 0;
-  let globalImgCounter = 0;
+    const jumpRow = document.getElementById('jump-row');
+    const reelsEl = document.getElementById('reels');
+    let currentReelPhotos = [];
+    let lbIndex = 0;
+    let globalImgCounter = 0;
 
-  EVENTS.forEach(ev => {
-    const chip = document.createElement('button');
-    chip.textContent = ev.name;
-    chip.addEventListener('click', () => document.getElementById('reel-'+ev.id).scrollIntoView({behavior:'smooth', block:'start'}));
-    jumpRow.appendChild(chip);
+    const activeReels = [];
 
-    const reel = document.createElement('div');
-    reel.className = 'reel';
-    reel.id = 'reel-' + ev.id;
-    reel.innerHTML = `
-      <div class="reel-head">
-        <div class="left"><h3>${ev.name}</h3><span class="meta">${ev.meta}</span></div>
+    function selectEventReel(selectedEvId) {
+      EVENTS.forEach(ev => {
+        const reelEl = document.getElementById('reel-' + ev.id);
+        const chipBtn = document.getElementById('chip-' + ev.id);
+        const isActive = (ev.id === selectedEvId);
+
+        if (reelEl) {
+          if (isActive) {
+            reelEl.style.display = 'block';
+            requestAnimationFrame(() => { reelEl.classList.add('active'); });
+          } else {
+            reelEl.classList.remove('active');
+            reelEl.style.display = 'none';
+          }
+        }
+
+        if (chipBtn) {
+          if (isActive) {
+            chipBtn.classList.add('active');
+            chipBtn.style.borderColor = ev.color;
+            chipBtn.style.color = ev.color;
+            chipBtn.style.background = ev.color + '18';
+          } else {
+            chipBtn.classList.remove('active');
+            chipBtn.style.borderColor = '';
+            chipBtn.style.color = '';
+            chipBtn.style.background = '';
+          }
+        }
+      });
+    }
+
+    EVENTS.forEach((ev, idx) => {
+      // Category jump chip with matching category color dot and tab selector action
+      const chip = document.createElement('button');
+      chip.id = 'chip-' + ev.id;
+      chip.innerHTML = `<span class="chip-dot" style="background:${ev.color}"></span>${ev.name}`;
+      chip.addEventListener('mouseenter', () => {
+        if (!chip.classList.contains('active')) {
+          chip.style.borderColor = ev.color;
+          chip.style.color = ev.color;
+          chip.style.background = ev.color + '14';
+        }
+      });
+      chip.addEventListener('mouseleave', () => {
+        if (!chip.classList.contains('active')) {
+          chip.style.borderColor = '';
+          chip.style.color = '';
+          chip.style.background = '';
+        }
+      });
+      chip.addEventListener('click', () => {
+        selectEventReel(ev.id);
+      });
+      jumpRow.appendChild(chip);
+
+      // Category reel header featuring category color pill badge and border accent
+      const reel = document.createElement('div');
+      reel.className = 'reel';
+      reel.id = 'reel-' + ev.id;
+      reel.innerHTML = `
+      <div class="reel-head" style="border-left: 4px solid ${ev.color}; padding-left: 14px;">
+        <div class="left">
+          <span class="cat-badge-pill" style="background:${ev.color}">${ev.abbr}</span>
+          <h3>${ev.name}</h3>
+          <span class="meta">${ev.meta}</span>
+        </div>
         <div class="reel-nav">
           <button class="rl-left" aria-label="Scroll left">‹</button>
           <button class="rl-right" aria-label="Scroll right">›</button>
@@ -651,93 +762,206 @@
         <div class="filmstrip" id="strip-${ev.id}"></div>
       </div>
     `;
-    reelsEl.appendChild(reel);
+      reelsEl.appendChild(reel);
 
-    const strip = reel.querySelector('.filmstrip');
-    const startImgIdx = globalImgCounter;
-    ev.photos.forEach((title, i) => {
-      const imgSrc = SAMPLE_IMAGES[globalImgCounter % SAMPLE_IMAGES.length];
-      globalImgCounter++;
+      // Arrow button hover matching category color
+      const btnLeft = reel.querySelector('.rl-left');
+      const btnRight = reel.querySelector('.rl-right');
+      [btnLeft, btnRight].forEach(btn => {
+        btn.addEventListener('mouseenter', () => {
+          btn.style.borderColor = ev.color;
+          btn.style.color = ev.color;
+          btn.style.background = ev.color + '15';
+        });
+        btn.addEventListener('mouseleave', () => {
+          btn.style.borderColor = '';
+          btn.style.color = '';
+          btn.style.background = '';
+        });
+      });
 
-      const frame = document.createElement('div');
-      frame.className = 'photo-card';
-      frame.innerHTML = `
+      const strip = reel.querySelector('.filmstrip');
+      const startImgIdx = globalImgCounter;
+
+      const reelPhotoList = ev.photos.map((t, iIdx) => ({
+        ev,
+        title: t,
+        imgSrc: SAMPLE_IMAGES[(startImgIdx + iIdx) % SAMPLE_IMAGES.length]
+      }));
+
+      // Photo card creation with category color hover glow
+      function createCard(title, i) {
+        const frame = document.createElement('div');
+        frame.className = 'photo-card';
+        frame.innerHTML = `
         <div class="img-wrap">
-          <img src="${imgSrc}" alt="${title}" loading="lazy">
-          <span class="photo-badge">#${String(i+1).padStart(2,'0')}</span>
+          <img src="${SAMPLE_IMAGES[(startImgIdx + i) % SAMPLE_IMAGES.length]}" alt="${title}" loading="eager">
         </div>
         <div class="cap">${title}</div>
       `;
-      
-      const reelPhotoList = ev.photos.map((t, idx) => ({
-        ev,
-        title: t,
-        imgSrc: SAMPLE_IMAGES[(startImgIdx + idx) % SAMPLE_IMAGES.length]
-      }));
-
-      frame.addEventListener('click', () => openLightbox(ev, i, reelPhotoList));
-      strip.appendChild(frame);
-    });
-
-    // Auto marquee marquee-style continuous scrolling
-    let isHovered = false;
-    let autoMarquee = setInterval(() => {
-      if (!isHovered) {
-        strip.scrollLeft += 1;
-        if (strip.scrollLeft >= (strip.scrollWidth - strip.clientWidth - 2)) {
-          strip.scrollLeft = 0;
-        }
+        frame.addEventListener('mouseenter', () => {
+          frame.style.borderColor = ev.color;
+          frame.style.boxShadow = `0 12px 28px ${ev.color}38`;
+        });
+        frame.addEventListener('mouseleave', () => {
+          frame.style.borderColor = '';
+          frame.style.boxShadow = '';
+        });
+        frame.addEventListener('click', () => openLightbox(ev, i, reelPhotoList));
+        return frame;
       }
-    }, 28);
 
-    strip.addEventListener('mouseenter', () => { isHovered = true; });
-    strip.addEventListener('mouseleave', () => { isHovered = false; });
+      // Duplicate tiles to guarantee a continuous, seamless infinite scrolling loop without jump/flicker
+      const copies = ev.photos.length < 5 ? 4 : 2;
+      for (let c = 0; c < copies; c++) {
+        ev.photos.forEach((title, i) => {
+          if (c === 0) globalImgCounter++;
+          strip.appendChild(createCard(title, i));
+        });
+      }
 
-    reel.querySelector('.rl-left').addEventListener('click', () => strip.scrollBy({left:-480, behavior:'smooth'}));
-    reel.querySelector('.rl-right').addEventListener('click', () => strip.scrollBy({left:480, behavior:'smooth'}));
-  });
+      // Alternating direction: Even rows move left (1), Odd rows move right (-1)
+      const direction = (idx % 2 === 0) ? 1 : -1;
 
-  const lb = document.getElementById('lightbox');
-  function openLightbox(ev, idx, photoList){
-    currentReelPhotos = photoList;
-    lbIndex = idx;
-    renderThumbs();
-    showLB();
-    lb.classList.add('open');
-  }
+      const reelObj = {
+        strip,
+        reelEl: reel,
+        direction,
+        photoCount: ev.photos.length,
+        pos: 0,
+        isHovered: false,
+        isInteracting: false,
+        interactTimer: null,
+        getSingleSetWidth: function () {
+          const N = ev.photos.length;
+          if (strip.children.length > N) {
+            const w = strip.children[N].offsetLeft - strip.children[0].offsetLeft;
+            if (w > 0) return w;
+          }
+          return strip.scrollWidth / copies;
+        }
+      };
+      activeReels.push(reelObj);
 
-  function renderThumbs(){
-    const wrap = document.getElementById('lb-thumbs');
-    wrap.innerHTML = '';
-    currentReelPhotos.forEach((p, i) => {
-      const t = document.createElement('div');
-      t.className = 't' + (i===lbIndex ? ' active' : '');
-      t.innerHTML = `<img src="${p.imgSrc}" alt="${p.title}">`;
-      t.addEventListener('click', () => { lbIndex = i; showLB(); });
-      wrap.appendChild(t);
+      // Pause auto-marquee on hover
+      strip.addEventListener('pointerenter', () => { reelObj.isHovered = true; });
+      strip.addEventListener('pointerleave', () => {
+        reelObj.isHovered = false;
+        const setWidth = reelObj.getSingleSetWidth();
+        if (setWidth > 0) {
+          reelObj.pos = strip.scrollLeft % setWidth;
+        }
+      });
+
+      // Sync position during manual trackpad/touch scrolling
+      strip.addEventListener('scroll', () => {
+        if (reelObj.isHovered || reelObj.isInteracting) return;
+        const setWidth = reelObj.getSingleSetWidth();
+        if (setWidth > 0) {
+          reelObj.pos = strip.scrollLeft % setWidth;
+        }
+      }, { passive: true });
+
+      // Smooth navigation buttons
+      function handleNavClick(dir) {
+        reelObj.isInteracting = true;
+        clearTimeout(reelObj.interactTimer);
+        strip.scrollBy({ left: dir * 480, behavior: 'smooth' });
+        reelObj.interactTimer = setTimeout(() => {
+          const setWidth = reelObj.getSingleSetWidth();
+          if (setWidth > 0) {
+            reelObj.pos = strip.scrollLeft % setWidth;
+          }
+          reelObj.isInteracting = false;
+        }, 550);
+      }
+
+      reel.querySelector('.rl-left').addEventListener('click', () => handleNavClick(-1));
+      reel.querySelector('.rl-right').addEventListener('click', () => handleNavClick(1));
     });
-  }
 
-  function showLB(){
-    const p = currentReelPhotos[lbIndex];
-    document.getElementById('lb-img').src = p.imgSrc;
-    document.getElementById('lb-img').alt = p.title;
-    document.getElementById('lb-cat').textContent = p.ev.name;
-    document.getElementById('lb-title').textContent = p.title;
-    document.getElementById('lb-desc').textContent = p.ev.meta;
-    document.querySelectorAll('.lb-thumbs .t').forEach((t,i)=>t.classList.toggle('active', i===lbIndex));
-  }
+    // Default: Display Inter Collegiate Tech Events (technizen) single line marquee
+    selectEventReel('technizen');
 
-  document.getElementById('lb-close').addEventListener('click', () => lb.classList.remove('open'));
-  lb.addEventListener('click', (e) => { if (e.target === lb) lb.classList.remove('open'); });
-  document.getElementById('lb-prev').addEventListener('click', () => { lbIndex = (lbIndex-1+currentReelPhotos.length)%currentReelPhotos.length; showLB(); });
-  document.getElementById('lb-next').addEventListener('click', () => { lbIndex = (lbIndex+1)%currentReelPhotos.length; showLB(); });
-  document.addEventListener('keydown', (e) => {
-    if (!lb.classList.contains('open')) return;
-    if (e.key === 'Escape') lb.classList.remove('open');
-    if (e.key === 'ArrowLeft') { lbIndex = (lbIndex-1+currentReelPhotos.length)%currentReelPhotos.length; showLB(); }
-    if (e.key === 'ArrowRight') { lbIndex = (lbIndex+1)%currentReelPhotos.length; showLB(); }
-  });
+    // Globalised marquee movement using requestAnimationFrame & global speed setting
+    let lastTime = performance.now();
+    function marqueeLoop(now) {
+      const delta = (now - lastTime) / 1000;
+      lastTime = now;
+
+      // Retrieve globalized speed setting (--marquee-speed-px or window.MARQUEE_SPEED_PX)
+      const rawCssSpeed = getComputedStyle(document.documentElement).getPropertyValue('--marquee-speed-px').trim();
+      const speedPxPerSec = window.MARQUEE_SPEED_PX || parseFloat(rawCssSpeed) || 18;
+      const distance = speedPxPerSec * Math.min(delta, 0.1);
+
+      activeReels.forEach(reelObj => {
+        if (reelObj.reelEl.style.display === 'none') return;
+        if (reelObj.isHovered || reelObj.isInteracting) return;
+
+        const setWidth = reelObj.getSingleSetWidth();
+        if (setWidth <= 0) return;
+
+        // Update position according to direction (1 = left, -1 = right)
+        reelObj.pos += reelObj.direction * distance;
+
+        if (reelObj.direction === 1) {
+          if (reelObj.pos >= setWidth) {
+            reelObj.pos -= setWidth;
+          }
+        } else {
+          if (reelObj.pos <= 0) {
+            reelObj.pos += setWidth;
+          }
+        }
+        reelObj.strip.scrollLeft = reelObj.pos;
+      });
+
+      requestAnimationFrame(marqueeLoop);
+    }
+    requestAnimationFrame(marqueeLoop);
+
+    const lb = document.getElementById('lightbox');
+    function openLightbox(ev, idx, photoList) {
+      currentReelPhotos = photoList;
+      lbIndex = idx;
+      renderThumbs();
+      showLB();
+      lb.classList.add('open');
+    }
+
+    function renderThumbs() {
+      const wrap = document.getElementById('lb-thumbs');
+      wrap.innerHTML = '';
+      currentReelPhotos.forEach((p, i) => {
+        const t = document.createElement('div');
+        t.className = 't' + (i === lbIndex ? ' active' : '');
+        t.innerHTML = `<img src="${p.imgSrc}" alt="${p.title}">`;
+        t.addEventListener('click', () => { lbIndex = i; showLB(); });
+        wrap.appendChild(t);
+      });
+    }
+
+    function showLB() {
+      const p = currentReelPhotos[lbIndex];
+      document.getElementById('lb-img').src = p.imgSrc;
+      document.getElementById('lb-img').alt = p.title;
+      document.getElementById('lb-cat').textContent = p.ev.name;
+      document.getElementById('lb-title').textContent = p.title;
+      document.getElementById('lb-desc').textContent = p.ev.meta;
+      document.querySelectorAll('.lb-thumbs .t').forEach((t, i) => t.classList.toggle('active', i === lbIndex));
+    }
+
+    document.getElementById('lb-close').addEventListener('click', () => lb.classList.remove('open'));
+    lb.addEventListener('click', (e) => { if (e.target === lb) lb.classList.remove('open'); });
+    document.getElementById('lb-prev').addEventListener('click', () => { lbIndex = (lbIndex - 1 + currentReelPhotos.length) % currentReelPhotos.length; showLB(); });
+    document.getElementById('lb-next').addEventListener('click', () => { lbIndex = (lbIndex + 1) % currentReelPhotos.length; showLB(); });
+    document.addEventListener('keydown', (e) => {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') lb.classList.remove('open');
+      if (e.key === 'ArrowLeft') { lbIndex = (lbIndex - 1 + currentReelPhotos.length) % currentReelPhotos.length; showLB(); }
+      if (e.key === 'ArrowRight') { lbIndex = (lbIndex + 1) % currentReelPhotos.length; showLB(); }
+    });
   </script>
 </body>
+
 </html>

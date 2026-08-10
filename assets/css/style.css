@@ -94,7 +94,7 @@
 
   /* ---- Global Marquee Speed Control (Photo Gallery & Events) ---- */
   /* Constant speed in pixels per second (independent of photo count) */
-  --marquee-speed-px: 35;
+  --marquee-speed-px: 18;
   --marquee-speed: 40s;
 }
 
