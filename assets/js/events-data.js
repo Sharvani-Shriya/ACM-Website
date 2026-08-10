@@ -75,7 +75,7 @@ var EV_CATEGORIES = {
 var EV_CHART_DATA = [
   { year: 2017, technizen: 0, hourOfCode: 0, outreach: 0, guestLectures: 1, intraCollege: 3, workshops: 0 },
   { year: 2018, technizen: 0, hourOfCode: 1, outreach: 0, guestLectures: 0, intraCollege: 2, workshops: 0 },
-  { year: 2019, technizen: 1, hourOfCode: 1, outreach: 1, guestLectures: 0, intraCollege: 3, workshops: 1 },
+  { year: 2019, technizen: 1, hourOfCode: 1, outreach: 1, guestLectures: 0, intraCollege: 4, workshops: 1 },
   { year: 2020, technizen: 1, hourOfCode: 1, outreach: 0, guestLectures: 0, intraCollege: 2, workshops: 1 },
   { year: 2021, technizen: 1, hourOfCode: 0, outreach: 1, guestLectures: 1, intraCollege: 2, workshops: 0 },
   { year: 2022, technizen: 0, hourOfCode: 0, outreach: 2, guestLectures: 0, intraCollege: 3, workshops: 0 },
@@ -601,7 +601,6 @@ var EV_GUEST_LECTURES = [
 
 /* ===========================================
    INTRA-COLLEGE
-   2017(3) 2018(2) 2019(3) 2020(3) 2021(3) 2022(3) 2023(1) 2024(2) 2025(3) 2026(1)
    =========================================== */
 var EV_INTRA_COLLEGE = [
   {
@@ -613,14 +612,14 @@ var EV_INTRA_COLLEGE = [
     title: '“INTELLEX” — Where Intelligence Meets Logic',
     description: 'Intra Collegiate 1-day coding contest organized by ACM Student Chapter, Dept. of CSE (496 teams / 992 participants).',
     desc: '“INTELLEX - Where Intelligence Meets Logic” Intra-College Coding Contest organized on 11-03-2026 by ACM Student Chapter (ID: 160342), Department of Computer Science and Engineering, R.V.R. & J.C. College of Engineering. 496 teams (992 participants).',
-    facts: [["992", "Participants"], ["496", "Teams"]],
+    facts: [["992", "Participants"], ["DEPT of CSE", "Target Audience"], ["Coding Contest", "Event Type"]],
     banners: ["INTELLEX - Where Intelligence Meets Logic 2026"],
     gallery: [],
     fields: {
       'Date': '11-03-2026',
       'Type': 'Intra Collegiate Coding Contest',
       'Organizers': 'ACM Student Chapter (ID: 160342), Dept. of CSE',
-      'Target Audience': 'B.Tech Students of all branches',
+      'Target Audience': 'Dept. of CSE',
       'Participants': '496 teams (992 participants)'
     },
     registerUrl: null,
@@ -636,7 +635,7 @@ var EV_INTRA_COLLEGE = [
     title: '“TechSpark-2025” — Project-Based Contest',
     description: 'Intra Collegiate project-based contest for IV B.Tech students of CSE (40 teams / 120 participants).',
     desc: '“TechSpark-2025” Project-Based Contest organized on 22-09-2025 by Faculty and Student Committee Members for IV B.Tech Students of CSE. 40 teams (120 participants).',
-    facts: [["120", "Participants"], ["40", "Teams"], ["IV B.Tech CSE"]],
+    facts: [["120", "Participants"], ["IV B.Tech CSE", "Target Audience"], ["Project Based Contest", "Event Type"]],
     banners: ["TechSpark-2025 September Contest"],
     gallery: [],
     fields: {
@@ -659,7 +658,7 @@ var EV_INTRA_COLLEGE = [
     title: '“TechSpark-2025” — Project-Based Contest',
     description: 'Intra Collegiate project-based contest for IV B.Tech students of CSE (70 teams / 210 participants).',
     desc: '“TechSpark-2025” Project-Based Contest organized on 02-08-2025 by Faculty and Student Committee Members for IV B.Tech Students of CSE. 70 teams (210 participants).',
-    facts: [["210", "Participants"], ["70", "Teams"], ["IV B.Tech CSE"]],
+    facts: [["210", "Participants"], ["IV B.Tech CSE", "Target Audience"], ["Project Based Contest", "Event Type"]],
     banners: ["TechSpark-2025 August Contest"],
     gallery: [],
     fields: {
@@ -682,7 +681,7 @@ var EV_INTRA_COLLEGE = [
     title: '“C-Quence” — Code it, Compile it, Conquer it',
     description: 'Intra Collegiate coding contest for I and II B.Tech students of all branches (590 teams / 1180 participants).',
     desc: '“C-Quence” Code it, Compile it, Conquer it organized on 11-03-2025 by Faculty and Student Committee Members for I and II B.Tech students of all branches. 590 teams (1180 participants).',
-    facts: [["1180", "Participants"], ["590", "Teams"], ["Intra Collegiate"]],
+    facts: [["1180", "Participants"], ["I & II B.Tech (All Branches)", "Target Audience"], ["Coding Contest", "Event Type"]],
     banners: ["C-Quence Contest 2025"],
     gallery: [],
     fields: {
@@ -705,7 +704,7 @@ var EV_INTRA_COLLEGE = [
     title: '“Computer Fiesta” — A Tech Themed Event',
     description: 'Intra Collegiate tech themed event for I B.Tech students of CSE allied branches (912 participants).',
     desc: '“Computer Fiesta” - A Tech Themed Event organized on 24-10-2024 by Faculty and Student Committee Members for I B.Tech students of CSE allied branches. 912 participants.',
-    facts: [["912", "Participants"], ["I B.Tech CSE Allied"], ["Intra Collegiate"]],
+    facts: [["912", "Participants"], ["I B.Tech CSE Allied", "Target Audience"], ["Tech Themed Event", "Event Type"]],
     banners: ["Computer Fiesta 2024"],
     gallery: [],
     fields: {
@@ -728,7 +727,7 @@ var EV_INTRA_COLLEGE = [
     title: '“CODAGE” — A Programming Contest on Data Structures',
     description: 'Intra Collegiate programming contest on Data Structures for II, III, IV B.Tech students of all branches (630 teams / 1260 participants).',
     desc: '“CODAGE” - A Programming Contest on Data Structures organized on 08-08-2024 by Faculty and Student Committee Members for II, III, IV B.Tech students of all branches. 630 teams (1260 participants).',
-    facts: [["1260", "Participants"], ["630", "Teams"], ["Intra Collegiate"]],
+    facts: [["1260", "Participants"], ["II, III, IV B.Tech (All Branches)", "Target Audience"], ["Data Structures Contest", "Event Type"]],
     banners: ["CODAGE Data Structures 2024"],
     gallery: [],
     fields: {
@@ -751,7 +750,7 @@ var EV_INTRA_COLLEGE = [
     title: 'CODEWIZ — A Python Programming Contest',
     description: 'Intra Collegiate Python programming contest for B.Tech students of all branches and MCA (711 participants).',
     desc: 'CODEWIZ - A Python Programming Contest organized on 23-09-2023 by Faculty and Student Committee Members for B.Tech students of all branches and MCA. 711 participants.',
-    facts: [["711", "Participants"], ["All Branches & MCA"], ["Intra Collegiate"]],
+    facts: [["711", "Participants"], ["All Branches & MCA", "Target Audience"], ["Python Contest", "Event Type"]],
     banners: ["CODEWIZ Python Contest 2023"],
     gallery: [],
     fields: {
@@ -774,7 +773,7 @@ var EV_INTRA_COLLEGE = [
     title: 'ESTRATEGIA — A Contest on C Programming',
     description: 'Intra Collegiate contest on C programming for B.Tech students of all branches and MCA (547 participants).',
     desc: 'ESTRATEGIA - A Contest on C Programming organized on 05-11-2022 by Faculty and Student Committee Members for B.Tech students of all branches and MCA. 547 participants.',
-    facts: [["547", "Participants"], ["All Branches & MCA"], ["Intra Collegiate"]],
+    facts: [["547", "Participants"], ["All Branches & MCA", "Target Audience"], ["C Programming Contest", "Event Type"]],
     banners: ["ESTRATEGIA C Programming 2022"],
     gallery: [],
     fields: {
@@ -797,7 +796,7 @@ var EV_INTRA_COLLEGE = [
     title: 'CODEWIZ — A Python Programming Contest',
     description: 'Intra Collegiate Python programming contest for B.Tech students of all branches and MCA (563 participants).',
     desc: 'CODEWIZ - A Python Programming Contest organized on 30-08-2022 by Faculty and Student Committee Members for B.Tech students of all branches and MCA. 563 participants.',
-    facts: [["563", "Participants"], ["All Branches & MCA"], ["Intra Collegiate"]],
+    facts: [["563", "Participants"], ["All Branches & MCA", "Target Audience"], ["Python Contest", "Event Type"]],
     banners: ["CODEWIZ Python Contest 2022"],
     gallery: [],
     fields: {
@@ -820,7 +819,7 @@ var EV_INTRA_COLLEGE = [
     title: 'CODAGE — A Programming Contest On Data Structures',
     description: 'Intra Collegiate programming contest on Data Structures for B.Tech students of all branches (233 participants).',
     desc: 'CODAGE - A Programming Contest On Data Structures organized on 16-04-2022 by Faculty and Student Committee Members for B.Tech students of all branches. 233 participants.',
-    facts: [["233", "Participants"], ["All Branches"], ["Intra Collegiate"]],
+    facts: [["233", "Participants"], ["All Branches", "Target Audience"], ["Data Structures Contest", "Event Type"]],
     banners: ["CODAGE Data Structures 2022"],
     gallery: [],
     fields: {
@@ -843,7 +842,7 @@ var EV_INTRA_COLLEGE = [
     title: 'Codage — A programming contest',
     description: 'Intra Collegiate programming contest for B.Tech students of all branches (296 participants).',
     desc: 'Codage - A programming contest organized on 13-11-2021 by Faculty and Student Committee Members for B.Tech students of all branches. 296 participants.',
-    facts: [["296", "Participants"], ["All Branches"], ["Intra Collegiate"]],
+    facts: [["296", "Participants"], ["All Branches", "Target Audience"], ["Programming Contest", "Event Type"]],
     banners: ["Codage Contest 2021"],
     gallery: [],
     fields: {
@@ -866,7 +865,7 @@ var EV_INTRA_COLLEGE = [
     title: 'CODEWIZ — A PYTHON Programming Contest',
     description: 'Intra Collegiate Python programming contest for B.Tech students of all branches and MCA (423 participants).',
     desc: 'CODEWIZ - A PYTHON Programming Contest organized on 08-07-2021 by Faculty and Student Committee Members for B.Tech students of all branches and MCA. 423 participants.',
-    facts: [["423", "Participants"], ["All Branches & MCA"], ["Intra Collegiate"]],
+    facts: [["423", "Participants"], ["All Branches & MCA", "Target Audience"], ["Python Contest", "Event Type"]],
     banners: ["CODEWIZ Python Contest 2021"],
     gallery: [],
     fields: {
@@ -889,7 +888,7 @@ var EV_INTRA_COLLEGE = [
     title: 'Codage — A programming contest',
     description: 'Intra Collegiate programming contest for B.Tech students of IInd and IIIrd year CSE (43 participants).',
     desc: 'Codage - A programming contest organized on 05-11-2020 by Faculty and Student Committee Members for B.Tech students of IInd and IIIrd year CSE. 43 participants.',
-    facts: [["43", "Participants"], ["IInd & IIIrd CSE"], ["Intra Collegiate"]],
+    facts: [["43", "Participants"], ["II & III B.Tech CSE", "Target Audience"], ["Programming Contest", "Event Type"]],
     banners: ["Codage Programming Contest 2020"],
     gallery: [],
     fields: {
@@ -912,7 +911,7 @@ var EV_INTRA_COLLEGE = [
     title: 'Codage — A programming contest on Data Structures',
     description: 'Intra Collegiate programming contest on Data Structures for B.Tech students of all branches and MCA (263 participants).',
     desc: 'Codage - A programming contest on Data Structures organized on 30-1-2020 by Faculty and Student Committee Members for B.Tech students of all branches and MCA. 263 participants.',
-    facts: [["263", "Participants"], ["All Branches & MCA"], ["Intra Collegiate"]],
+    facts: [["263", "Participants"], ["All Branches & MCA", "Target Audience"], ["Data Structures Contest", "Event Type"]],
     banners: ["Codage Data Structures 2020"],
     gallery: [],
     fields: {
@@ -935,7 +934,7 @@ var EV_INTRA_COLLEGE = [
     title: 'Query Cracking Contest — (A Database design contest)',
     description: 'Intra Collegiate database design contest for B.Tech students of all branches and MCA (232 participants).',
     desc: 'Query Cracking Contest (A Database design contest) organized on 04-07-2019 by Faculty and Student Committee Members for B.Tech students of all branches and MCA. 232 participants.',
-    facts: [["232", "Participants"], ["All Branches & MCA"], ["Intra Collegiate"]],
+    facts: [["232", "Participants"], ["All Branches & MCA", "Target Audience"], ["Database Design Contest", "Event Type"]],
     banners: ["Query Cracking Contest 2019"],
     gallery: [],
     fields: {
@@ -958,7 +957,7 @@ var EV_INTRA_COLLEGE = [
     title: 'Tech Maerid — Project Expo',
     description: 'Intra Collegiate project expo for B.Tech students of all branches (38 participants).',
     desc: 'Tech Maerid Project Expo organized on 12-03-2019 by Faculty and Student Committee Members for B.Tech students of all branches. 38 participants.',
-    facts: [["38", "Participants"], ["All Branches"], ["Intra Collegiate"]],
+    facts: [["38", "Participants"], ["All Branches", "Target Audience"], ["Project Expo", "Event Type"]],
     banners: ["Tech Maerid Project Expo 2019"],
     gallery: [],
     fields: {
@@ -981,7 +980,7 @@ var EV_INTRA_COLLEGE = [
     title: 'INDOCTRINATION — Coding Contest',
     description: 'Intra Collegiate coding contest for B.Tech students of all branches and MCA (536 participants).',
     desc: 'INDOCTRINATION Coding Contest organized on 07-03-2019 by Faculty and Student Committee Members for B.Tech students of all branches and MCA. 536 participants.',
-    facts: [["536", "Participants"], ["All Branches & MCA"], ["Intra Collegiate"]],
+    facts: [["536", "Participants"], ["All Branches & MCA", "Target Audience"], ["Coding Contest", "Event Type"]],
     banners: ["Indoctrination Coding Contest 2019"],
     gallery: [],
     fields: {
@@ -995,7 +994,29 @@ var EV_INTRA_COLLEGE = [
     photo: null,
     category: 'intraCollege'
   },
-
+  {
+    year: 2019,
+    day: '22',
+    month: 'FEBRUARY',
+    date: '22-02-2019',
+    status: 'past',
+    title: 'Techstalk: Tech Hunt',
+    description: 'Intra Collegiate coding contest for B.Tech students of all branches and MCA (286 participants).',
+    desc: 'Techstalk: The Tech Hunt organized on 22-02-2019 by Faculty and Student Committee Members for B.Tech students of all branches and MCA. 286 participants.',
+    facts: [["286", "Participants"], ["All Branches & MCA", "Target Audience"], ["Tech Hunt", "Event Type"]],
+    banners: ["Techstalk: The Tech Hunt 2019"],
+    gallery: [],
+    fields: {
+      'Date': '22-02-2019',
+      'Type': 'Intra Collegiate',
+      'Organizers': 'Faculty and Student Committee Members',
+      'Target Audience': 'B.Tech students of all branches and MCA',
+      'Participants': '286'
+    },
+    registerUrl: null,
+    photo: null,
+    category: 'intraCollege'
+  },
   {
     year: 2018,
     day: '29',
@@ -1005,7 +1026,7 @@ var EV_INTRA_COLLEGE = [
     title: '“THEME PARAUSIASI” Paper Presentation Contest',
     description: 'Intra Collegiate paper presentation contest for IInd, IIIrd and IVth year B.Tech students of all branches (540 participants).',
     desc: '“THEME PARAUSIASI” Paper Presentation Contest organized on 29.09.2018 by Faculty and Student Committee Members for IInd, IIIrd and IVth year B.Tech students of all branches. 540 participants.',
-    facts: [["540", "Participants"], ["All Branches"], ["Intra Collegiate"]],
+    facts: [["540", "Participants"], ["All Branches", "Target Audience"], ["Paper Presentation", "Event Type"]],
     banners: ["Theme Parausiasi Paper Presentation 2018"],
     gallery: [],
     fields: {
@@ -1028,7 +1049,7 @@ var EV_INTRA_COLLEGE = [
     title: 'Estrategia Coding Contest',
     description: 'Intra Collegiate coding contest for IInd, IIIrd and IVth year B.Tech students of all branches (540 participants).',
     desc: 'Estrategia Coding Contest organized on 11.09.2018 by Faculty and Student Committee Members for IInd, IIIrd and IVth year B.Tech students of all branches. 540 participants.',
-    facts: [["540", "Participants"], ["All Branches"], ["Intra Collegiate"]],
+    facts: [["540", "Participants"], ["All Branches", "Target Audience"], ["Coding Contest", "Event Type"]],
     banners: ["Estrategia Coding Contest 2018"],
     gallery: [],
     fields: {
@@ -1051,7 +1072,7 @@ var EV_INTRA_COLLEGE = [
     title: 'Multi-Core Programming',
     description: 'Department Event by Sri A.V Maruthi Sairam, Scientist ‘E’, DRDO, Ministry of Defence, Hyderabad (207 participants).',
     desc: 'Department Event on Multi-Core Programming delivered by Sri A.V Maruthi Sairam, Scientist ‘E’, DRDO, Ministry of Defence, Hyderabad on 29.12.2017 for IVth year B.Tech CSE students. 207 participants.',
-    facts: [["207", "Participants"], ["IVth B.Tech CSE"], ["Department Event"]],
+    facts: [["207", "Participants"], ["IV B.Tech CSE", "Target Audience"], ["Department Event", "Event Type"]],
     banners: ["Multi-Core Programming 2017"],
     gallery: [],
     fields: {
@@ -1074,7 +1095,7 @@ var EV_INTRA_COLLEGE = [
     title: 'Logo And Web Page designing Contest in (PHP)',
     description: 'Intra Collegiate contest organized by Faculty and Student Committee Members for IInd, IIIrd and IVth year B.Tech CSE, IT and EEE (180 participants).',
     desc: 'Intra Collegiate Logo And Web Page designing Contest in (PHP) organized on 28-08-2017 by Faculty and Student Committee Members for IInd, IIIrd and IVth year B.Tech CSE, IT and EEE. 180 participants.',
-    facts: [["180", "Participants"], ["CSE, IT & EEE"], ["Intra Collegiate"]],
+    facts: [["180", "Participants"], ["CSE, IT & EEE", "Target Audience"], ["Page Designing Contest", "Event Type"]],
     banners: ["Logo & Web Page Designing Contest 2017"],
     gallery: [],
     fields: {
@@ -1097,7 +1118,7 @@ var EV_INTRA_COLLEGE = [
     title: 'Reverse Coding Contest',
     description: 'Intra Collegiate contest organized by Faculty and Student Committee Members for IInd, IIIrd and IVth year B.Tech CSE, IT (160 participants).',
     desc: 'Intra Collegiate Reverse Coding Contest organized on 28-08-2017 by Faculty and Student Committee Members for IInd, IIIrd and IVth year B.Tech CSE, IT. 160 participants.',
-    facts: [["160", "Participants"], ["CSE & IT"], ["Intra Collegiate"]],
+    facts: [["160", "Participants"], ["CSE & IT", "Target Audience"], ["Coding Contest", "Event Type"]],
     banners: ["Reverse Coding Contest 2017"],
     gallery: [],
     fields: {
