@@ -715,7 +715,7 @@
   display: none;
   align-items: flex-start;
   justify-content: center;
-  z-index: 100;
+  z-index: 99999 !important;
   padding: 60px 20px;
   overflow-y: auto;
   scrollbar-width: none;

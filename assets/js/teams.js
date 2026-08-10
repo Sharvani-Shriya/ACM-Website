@@ -308,6 +308,7 @@ document.addEventListener('DOMContentLoaded', function () {
     modalFilter = "All"; modalQuery = ""; modalPage = 1;
     document.getElementById('modalSearchInput').value = "";
     renderModalTable();
+    document.body.style.overflow = 'hidden';
     document.getElementById('rosterModal').classList.add('open');
   };
 
@@ -360,11 +361,18 @@ document.addEventListener('DOMContentLoaded', function () {
   };
 
   window.closeModal = function () {
+    document.body.style.overflow = '';
     document.getElementById('rosterModal').classList.remove('open');
   };
 
   document.getElementById('rosterModal').addEventListener('click', function (e) {
     if (e.target.id === 'rosterModal') window.closeModal();
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && document.getElementById('rosterModal').classList.contains('open')) {
+      window.closeModal();
+    }
   });
 
   /* Alumni search */
