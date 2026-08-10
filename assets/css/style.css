@@ -3095,9 +3095,11 @@ table.data-table td.placeholder {
   }
 }
 
+/* Members grid stays 2-column even on small phones (user requirement: 3 rows × 2 cols) */
 @media (max-width: 480px) {
   .members-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
   }
 }
 
@@ -5602,5 +5604,346 @@ table.data-table td.placeholder {
   .wheel-center-btn {
     width: 80px;
     height: 80px;
+  }
+}
+
+/* ===========================================================
+   MOBILE RESPONSIVE — INDEX / ABOUT PAGE
+   All fixes organized by section. Edit one block at a time.
+   =========================================================== */
+
+/* -----------------------------------------------------------
+   FIX 1 — HAMBURGER NAV MENU (mobile open/close & underlines)
+   ----------------------------------------------------------- */
+@media (max-width: 900px) {
+  /* Scale down the ☰ toggle icon — was inheriting --text-h2 (~2rem) */
+  .nav-toggle {
+    font-size: 1.55rem;
+    padding: 4px 8px;
+    line-height: 1;
+  }
+
+  /* Remove the animated underline pseudo-element inside the stacked dropdown;
+     the border-bottom separator already gives visual separation */
+  .nav-links a::after {
+    display: none;
+  }
+
+  /* Tighten the dropdown link styling — remove rounded corners, clean spacing */
+  .nav-links a {
+    padding: 13px 20px;
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0;
+  }
+
+  /* Subtle hover state in dropdown */
+  .nav-links a:hover,
+  .nav-links a.active {
+    background: rgba(255, 255, 255, 0.08);
+    padding-left: 26px; /* indent on active/hover */
+    transition: padding-left 0.2s ease, background 0.2s ease;
+  }
+
+  /* Remove border from the last link */
+  .nav-links a:last-child {
+    border-bottom: none;
+  }
+}
+
+/* -----------------------------------------------------------
+   FIX 2 — TECHNIZEN MARQUEE BAR (mobile sizing)
+   ----------------------------------------------------------- */
+@media (max-width: 600px) {
+  .event-marquee-bar {
+    height: 38px;          /* was 44px — slimmer on mobile */
+    margin: 8px 0;         /* was 15px — tighter vertical spacing */
+  }
+
+  .event-marquee-badge {
+    padding: 0 10px;
+    font-size: 0.64rem;    /* slightly smaller label */
+    gap: 5px;
+  }
+
+  .event-marquee-badge .badge-pulse {
+    width: 6px;
+    height: 6px;           /* scale down pulse dot */
+  }
+
+  .marquee-item {
+    font-size: 0.74rem;    /* was var(--text-xs) which can be wide */
+    padding: 0 8px;
+    gap: 6px;
+  }
+
+  .marquee-cta {
+    font-size: 0.72rem;
+    padding: 3px 9px;
+  }
+}
+
+/* -----------------------------------------------------------
+   FIX 3 — ABOUT HERO BANNER & IMAGE SLIDER CAROUSEL
+   ----------------------------------------------------------- */
+@media (max-width: 768px) {
+  /* Shrink the banner — 480px min-height is too tall for phones */
+  .about-hero-banner {
+    min-height: 320px;
+    max-height: 420px;
+    padding: 28px 0 44px;
+  }
+
+  /* Fix content overflow — margin-left: -35px bleeds off screen */
+  .about-hero-content {
+    margin-left: 0;
+    max-width: 100%;
+    padding: 0 4px;
+  }
+
+  /* Scale down the title */
+  .about-hero-title {
+    font-size: clamp(1.25rem, 5vw, 1.6rem);
+  }
+
+  /* Compact subtitle */
+  .about-hero-subtitle {
+    font-size: 0.78rem;
+    margin-bottom: 10px;
+  }
+
+  /* Compact bullet list */
+  .about-hero-list {
+    gap: 7px;
+    margin-bottom: 14px;
+  }
+
+  .about-hero-list li {
+    font-size: 0.77rem;
+    gap: 8px;
+  }
+
+  .about-hero-list .list-icon {
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+  }
+
+  /* Pull slider controls in from the edge */
+  .about-hero-controls {
+    right: 12px;
+    bottom: 10px;
+    gap: 8px;
+  }
+
+  /* Scale down slider arrow buttons */
+  .hero-slider-arrow {
+    width: 30px;
+    height: 30px;
+    font-size: 0.78rem;
+  }
+
+  /* Scale down dots */
+  .about-hero-dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .about-hero-dot.active {
+    width: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-hero-banner {
+    min-height: 260px;
+    max-height: 360px;
+    padding: 20px 0 36px;
+  }
+
+  .about-hero-eyebrow {
+    font-size: 0.6rem;
+  }
+
+  .about-hero-title {
+    font-size: clamp(1.1rem, 5.5vw, 1.4rem);
+  }
+
+  /* Hide the bullet list items on very small screens to reduce clutter */
+  .about-hero-list li:nth-child(n+2) {
+    display: none;
+  }
+}
+
+/* -----------------------------------------------------------
+   FIX 4 — FACULTY & TEAM GRID (Who We Are section)
+   Layout: Faculty Advisor → full-width rect
+           Then 2 cols × 3 rows for 6 member cards
+   ----------------------------------------------------------- */
+@media (max-width: 768px) {
+  /* Master card — reduce heavy padding on mobile */
+  .team-master-card {
+    padding: 24px 16px;
+    border-radius: 16px;
+  }
+
+  /* Faculty Advisor card — span full width, horizontal layout with photo left */
+  .faculty-card-wrapper {
+    width: 100%;
+  }
+
+  .faculty-card {
+    max-width: 100%;          /* full-width rectangle */
+    flex-direction: row;      /* photo LEFT, info RIGHT */
+    align-items: center;
+    text-align: left;
+    padding: 20px 18px;
+    gap: 18px;
+  }
+
+  .faculty-card .team-img-placeholder {
+    width: 90px;
+    height: 90px;
+    min-height: 90px;
+    min-width: 90px;
+    flex-shrink: 0;
+  }
+
+  .faculty-card .team-card-info {
+    align-items: flex-start;
+    text-align: left;
+    padding: 0;
+  }
+
+  .faculty-card .badge.faculty-badge {
+    align-self: flex-start;
+    margin-top: 0;    /* remove the negative margin used for overlap on desktop */
+    margin-bottom: 6px;
+  }
+
+  .faculty-card h3 {
+    font-size: 1.1rem;
+    text-align: left;
+  }
+
+  .faculty-card .designation {
+    text-align: left;
+    font-size: 0.84rem;
+  }
+
+  .faculty-card .bio {
+    text-align: left;
+    font-size: 0.8rem;
+    line-height: 1.45;
+  }
+
+  /* Members grid: 2 columns × 3 rows */
+  .members-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  /* Tighter member card padding on mobile */
+  .members-grid .member-card {
+    padding: 18px 10px 14px;
+  }
+
+  /* Slightly smaller avatar on mobile */
+  .member-card .team-img-placeholder {
+    width: 80px;
+    height: 80px;
+    min-height: 80px;
+  }
+
+  .team-card-info h4 {
+    font-size: 0.9rem;
+  }
+
+  .team-card-info .designation {
+    font-size: 0.78rem;
+  }
+
+  .badge {
+    font-size: 0.65rem;
+    padding: 4px 10px;
+    margin-top: -18px;   /* adjust overlap for smaller avatar */
+  }
+
+  /* Divider label */
+  .team-card-divider {
+    margin: 20px 0 16px;
+  }
+}
+
+/* -----------------------------------------------------------
+   FIX 5 — CHAPTER OVERVIEW STATS GRID
+   Keep it as a 2×2 grid on mobile (not single column) so
+   it matches the desktop capsule feel on smaller screens.
+   ----------------------------------------------------------- */
+@media (max-width: 576px) {
+  .stats-overview-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2×2 grid instead of 1-col */
+    padding: 14px 10px;
+    gap: 6px;
+    border-radius: 16px;
+  }
+
+  .stat-overview-card {
+    flex-direction: column;    /* icon on top, info below — centred */
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 14px 8px;
+    gap: 8px;
+  }
+
+  .stat-icon-circle {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    margin-bottom: 0;     /* reset the odd margin override that existed before */
+  }
+
+  .stat-icon-circle svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .stat-info {
+    align-items: center;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-size: 1.6rem;
+    text-align: center;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    white-space: normal;    /* allow wrap inside the 2-col cell */
+    text-align: center;
+    line-height: 1.25;
+  }
+}
+
+@media (max-width: 360px) {
+  .stats-overview-grid {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 10px 6px;
+    gap: 4px;
+  }
+
+  .stat-overview-card {
+    padding: 10px 6px;
+  }
+
+  .stat-number {
+    font-size: 1.35rem;
+  }
+
+  .stat-label {
+    font-size: 0.68rem;
   }
 }
