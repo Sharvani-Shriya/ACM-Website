@@ -855,6 +855,8 @@ html, body {
 
   .teams-section {
     padding-top: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
   }
 
   /* Unified Mobile Page Hero (1:1 match with Events and Photo Gallery) */
@@ -882,6 +884,24 @@ html, body {
     color: rgba(255, 255, 255, 0.88) !important;
     max-width: 640px !important;
     margin: 0 auto !important;
+  }
+
+  /* Full-width container components on mobile */
+  .explorer,
+  .year-panel,
+  .chart-card,
+  .search-band,
+  .spotlight-grid {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .spotlight-grid {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
   }
 
   /* 2-Column Leadership Grid for all mobile devices */
@@ -992,7 +1012,7 @@ html, body {
   .search-band {
     grid-template-columns: 1fr !important;
     padding: 24px 16px !important;
-    margin: 32px 12px 0 !important;
+    margin: 32px 0 0 !important;
   }
 
   .year-search {

@@ -537,9 +537,22 @@
         color: #5b6478;
       }
 
+      .filmstrip {
+        gap: 10px !important;
+        padding: 8px 2px 12px !important;
+      }
+
       .photo-card {
-        width: 220px;
-        padding: 7px;
+        width: clamp(140px, 44vw, 175px) !important;
+        padding: 6px !important;
+        border-radius: 10px !important;
+        border-width: 1.5px !important;
+      }
+
+      .photo-card .cap {
+        font-size: 11px !important;
+        padding: 2px 0 !important;
+        line-height: 1.2 !important;
       }
     }
   </style>
