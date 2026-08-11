@@ -106,10 +106,16 @@
 
 html {
   scroll-behavior: smooth;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
   background: var(--white);
   color: var(--ink);
   font-family: var(--font-body);
@@ -188,16 +194,19 @@ p {
    ============================================================ */
 .top-banner {
   width: 100%;
+  max-width: 100%;
   background: var(--white);
   border-bottom: 3px solid var(--navy);
-  padding: 6px 16px;
+  padding: 6px 12px;
   display: flex;
   justify-content: center;
   align-items: center;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .top-banner img {
-  max-width: 1100px;
+  max-width: 100%;
   max-height: 120px;
   width: 100%;
   height: auto;
@@ -3564,7 +3573,7 @@ table.data-table td.placeholder {
   }
 
   .ev-chart-canvas-inner {
-    min-width: 820px;
+    min-width: 980px;
     height: 100%;
     position: relative;
   }
@@ -6035,85 +6044,45 @@ table.data-table td.placeholder {
    and Gallery pages for consistent mobile UI layout.
    ----------------------------------------------------------- */
 /* -----------------------------------------------------------
-   FIX 5 — UNIVERSAL 2×2 MOBILE STATS MATRIX
-   Fully fluid 2×2 grid layout engineered to adapt seamlessly
-   to 100% of mobile screen sizes (280px to 768px).
+   UNIVERSAL SINGLE HORIZONTAL ROW MOBILE STATS STRIP
+   Renders stats across ALL pages (Gallery, Events, Teams, About)
+   as a clean, fluid single horizontal row on all mobile devices (280px to 768px).
    ----------------------------------------------------------- */
 @media (max-width: 768px) {
   .stats-overview-grid,
-  .ev-stats-strip:not(.gallery-stats-strip) {
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    padding: clamp(10px, 3vw, 14px) clamp(6px, 2vw, 12px) !important;
-    gap: clamp(6px, 2vw, 10px) !important;
-    border-radius: 16px !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-  }
-
-  /* Photo Gallery Stats Strip — Single Horizontal Row on Mobile */
-  .ev-stats-strip.gallery-stats-strip {
+  .ev-stats-strip {
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
     justify-content: space-around !important;
-    padding: 10px 4px !important;
-    gap: 4px !important;
+    padding: clamp(8px, 2.5vw, 12px) clamp(4px, 1.5vw, 8px) !important;
+    gap: clamp(3px, 1.2vw, 6px) !important;
     width: 100% !important;
     border-radius: 16px !important;
     box-sizing: border-box !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
   }
 
-  .gallery-stats-strip .ev-stat-item {
+  .stat-overview-card,
+  .ev-stat-item {
     flex: 1 1 0px !important;
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
-    padding: 8px 3px !important;
-    gap: 4px !important;
-    min-width: 0 !important;
-    border: none !important;
-  }
-
-  .gallery-stats-strip .ev-stat-icon {
-    width: clamp(34px, 9vw, 42px) !important;
-    height: clamp(34px, 9vw, 42px) !important;
-    min-width: clamp(34px, 9vw, 42px) !important;
-  }
-
-  .gallery-stats-strip .ev-stat-icon svg {
-    width: clamp(16px, 4vw, 20px) !important;
-    height: clamp(16px, 4vw, 20px) !important;
-  }
-
-  .gallery-stats-strip .ev-stat-num {
-    font-size: clamp(1.05rem, 4.2vw, 1.35rem) !important;
-    line-height: 1.1 !important;
-  }
-
-  .gallery-stats-strip .ev-stat-label {
-    font-size: clamp(0.60rem, 2.3vw, 0.70rem) !important;
-    line-height: 1.2 !important;
-  }
-
-  .stat-overview-card,
-  .ev-stat-item:not(.gallery-stats-strip .ev-stat-item) {
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
     text-align: center !important;
-    padding: clamp(8px, 2.5vw, 14px) clamp(4px, 1.5vw, 8px) !important;
-    gap: clamp(4px, 1.5vw, 8px) !important;
-    border: none !important;
+    padding: clamp(6px, 2vw, 10px) clamp(2px, 1vw, 4px) !important;
+    gap: clamp(3px, 1vw, 6px) !important;
     min-width: 0 !important;
+    border: none !important;
     box-sizing: border-box !important;
   }
 
   .stat-icon-circle,
   .ev-stat-icon {
-    width: clamp(38px, 11vw, 48px) !important;
-    height: clamp(38px, 11vw, 48px) !important;
-    min-width: clamp(38px, 11vw, 48px) !important;
+    width: clamp(32px, 8.5vw, 42px) !important;
+    height: clamp(32px, 8.5vw, 42px) !important;
+    min-width: clamp(32px, 8.5vw, 42px) !important;
     margin-bottom: 0 !important;
     border-radius: 50% !important;
     display: flex !important;
@@ -6124,8 +6093,8 @@ table.data-table td.placeholder {
 
   .stat-icon-circle svg,
   .ev-stat-icon svg {
-    width: clamp(18px, 5vw, 22px) !important;
-    height: clamp(18px, 5vw, 22px) !important;
+    width: clamp(15px, 4vw, 20px) !important;
+    height: clamp(15px, 4vw, 20px) !important;
   }
 
   .stat-info,
@@ -6140,7 +6109,7 @@ table.data-table td.placeholder {
 
   .stat-number,
   .ev-stat-num {
-    font-size: clamp(1.2rem, 5.2vw, 1.65rem) !important;
+    font-size: clamp(1.0rem, 4.0vw, 1.35rem) !important;
     text-align: center !important;
     line-height: 1.1 !important;
     font-weight: 800 !important;
@@ -6151,10 +6120,10 @@ table.data-table td.placeholder {
 
   .stat-label,
   .ev-stat-label {
-    font-size: clamp(0.68rem, 2.8vw, 0.78rem) !important;
+    font-size: clamp(0.58rem, 2.2vw, 0.70rem) !important;
     white-space: normal !important;
     text-align: center !important;
-    line-height: 1.25 !important;
+    line-height: 1.2 !important;
     width: 100% !important;
     display: block !important;
     overflow-wrap: break-word !important;
