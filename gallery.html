@@ -171,19 +171,27 @@
 
     .reel-head {
       display: flex;
+      flex-direction: column;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #e3e1d9;
+      gap: 4px;
+    }
+
+    .reel-top-row {
+      display: flex;
       align-items: center;
       justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 14px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid #e3e1d9;
+      width: 100%;
+      gap: 10px;
     }
 
     .reel-head .left {
       display: flex;
       align-items: center;
       gap: 10px;
+      min-width: 0;
+      flex: 1;
     }
 
     .reel-head h3 {
@@ -192,12 +200,22 @@
       color: #0a1f3d;
       margin: 0;
       font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .meta-row {
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
     }
 
     .reel-head .meta {
       font-family: 'JetBrains Mono', monospace;
       font-size: 11.5px;
       color: #5b6478;
+      text-align: right;
     }
 
     .reel-nav {
@@ -478,7 +496,24 @@
       transform: translateY(-50%);
     }
 
-    @media (max-width: 720px) {
+    @media (max-width: 768px) {
+      .reel-head h3 {
+        font-size: clamp(0.85rem, 3.8vw, 1.10rem) !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+      }
+
+      .meta-row {
+        justify-content: flex-end !important;
+        margin-top: 2px !important;
+      }
+
+      .reel-head .meta {
+        font-size: 11px !important;
+        text-align: right !important;
+      }
+
       .frame {
         width: 190px;
       }
@@ -539,7 +574,7 @@
   </header>
 
   <!-- STATS STRIP (Placed below hero header matching Teams page layout) -->
-  <div class="ev-stats-strip gallery-stats-strip" style="max-width:1120px;margin:48px auto 54px;">
+  <div class="ev-stats-strip gallery-stats-strip">
     <div class="ev-stat-item">
       <div class="ev-stat-icon bg-blue" aria-hidden="true">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -762,14 +797,18 @@
       reel.id = 'reel-' + ev.id;
       reel.innerHTML = `
       <div class="reel-head" style="border-left: 4px solid ${ev.color}; padding-left: 14px;">
-        <div class="left">
-          <span class="cat-badge-pill" style="background:${ev.color}">${ev.abbr}</span>
-          <h3>${ev.name}</h3>
-          <span class="meta">${ev.meta}</span>
+        <div class="reel-top-row">
+          <div class="left">
+            <span class="cat-badge-pill" style="background:${ev.color}">${ev.abbr}</span>
+            <h3>${ev.name}</h3>
+          </div>
+          <div class="reel-nav">
+            <button class="rl-left" aria-label="Scroll left">‹</button>
+            <button class="rl-right" aria-label="Scroll right">›</button>
+          </div>
         </div>
-        <div class="reel-nav">
-          <button class="rl-left" aria-label="Scroll left">‹</button>
-          <button class="rl-right" aria-label="Scroll right">›</button>
+        <div class="meta-row">
+          <span class="meta">${ev.meta}</span>
         </div>
       </div>
       <div class="filmstrip-wrap">

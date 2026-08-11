@@ -6130,7 +6130,9 @@ table.data-table td.placeholder {
    ----------------------------------------------------------- */
 @media (max-width: 768px) {
   .stats-overview-grid,
-  .ev-stats-strip {
+  .ev-stats-strip,
+  .stats,
+  .gallery-stats-strip {
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
@@ -6139,11 +6141,27 @@ table.data-table td.placeholder {
     gap: clamp(3px, 1.2vw, 6px) !important;
     width: calc(100% - 24px) !important;
     max-width: 1120px !important;
-    margin: 24px auto 32px !important;
+    margin-top: 24px !important;
+    margin-bottom: 24px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
     border-radius: 16px !important;
     box-sizing: border-box !important;
     overflow-x: auto !important;
     -webkit-overflow-scrolling: touch !important;
+  }
+
+  /* Reset extra top padding and section margins for equal top/bottom stats spacing */
+  #events-master-view {
+    padding-top: 0 !important;
+  }
+
+  .v2-section-head,
+  .year-panel,
+  .chart-card,
+  .ev-chart-card,
+  .ev-chart-wrap {
+    margin-top: 0 !important;
   }
 
   .stat-overview-card,

@@ -842,16 +842,8 @@ html, body {
     overflow-x: hidden !important;
   }
 
-  .teams-hero,
-  .year-panel,
-  .chart-card,
-  .search-band,
-  .spotlight-grid,
-  .lead-grid,
-  .staff-row {
-    max-width: 100% !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
+  .teams-section {
+    padding-top: 0 !important;
   }
 
   /* Unified Mobile Page Hero (1:1 match with Events and Photo Gallery) */
@@ -1003,6 +995,6 @@ html, body {
   }
 
   .stats {
-    margin: 0 12px 28px !important;
+    margin: 24px auto 24px !important;
   }
 }
