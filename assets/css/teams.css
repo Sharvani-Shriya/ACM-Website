@@ -854,6 +854,33 @@ html, body {
     box-sizing: border-box !important;
   }
 
+  /* Unified Mobile Page Hero (1:1 match with Events and Photo Gallery) */
+  .page-hero.teams-hero {
+    padding: 28px 16px 22px !important;
+    text-align: center !important;
+  }
+
+  .page-hero.teams-hero .crumb {
+    font-size: 0.72rem !important;
+    letter-spacing: .12em !important;
+    margin-bottom: 6px !important;
+  }
+
+  .page-hero.teams-hero h1 {
+    font-size: 1.75rem !important;
+    line-height: 1.25 !important;
+    margin-top: 4px !important;
+    margin-bottom: 6px !important;
+  }
+
+  .page-hero.teams-hero p {
+    font-size: 0.88rem !important;
+    line-height: 1.5 !important;
+    color: rgba(255, 255, 255, 0.88) !important;
+    max-width: 640px !important;
+    margin: 0 auto !important;
+  }
+
   /* 2-Column Leadership Grid for all mobile devices */
   .lead-grid {
     display: grid !important;

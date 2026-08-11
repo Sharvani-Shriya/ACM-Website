@@ -5,16 +5,42 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
-  /* ---------- Mobile nav toggle ---------- */
+  /* ---------- Mobile nav toggle & Close on Outside Click ---------- */
   var navToggle = document.querySelector('.nav-toggle');
   var navLinks = document.querySelector('.nav-links');
+  var mainNav = document.querySelector('.main-nav');
   if (navToggle && navLinks) {
-    navToggle.addEventListener('click', function () {
+    navToggle.addEventListener('click', function (e) {
+      e.stopPropagation();
       navLinks.classList.toggle('open');
+      navLinks.classList.toggle('active');
     });
+
     navLinks.querySelectorAll('a').forEach(function (a) {
-      a.addEventListener('click', function () { navLinks.classList.remove('open'); });
+      a.addEventListener('click', function () {
+        navLinks.classList.remove('open');
+        navLinks.classList.remove('active');
+      });
     });
+
+    // Close mobile nav menu when clicking or tapping anywhere outside
+    document.addEventListener('click', function (e) {
+      if (navLinks.classList.contains('open') || navLinks.classList.contains('active')) {
+        if (mainNav && !mainNav.contains(e.target)) {
+          navLinks.classList.remove('open');
+          navLinks.classList.remove('active');
+        }
+      }
+    });
+
+    document.addEventListener('touchstart', function (e) {
+      if (navLinks.classList.contains('open') || navLinks.classList.contains('active')) {
+        if (mainNav && !mainNav.contains(e.target)) {
+          navLinks.classList.remove('open');
+          navLinks.classList.remove('active');
+        }
+      }
+    }, { passive: true });
   }
 
   /* ---------- Highlight active nav link ---------- */
