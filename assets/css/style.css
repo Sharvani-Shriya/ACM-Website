@@ -4579,8 +4579,11 @@ table.data-table td.placeholder {
   color: var(--navy);
   margin: 0;
   line-height: 1.3;
-  flex: 1;
+  flex: 1 1 auto;
   min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Light Gradient Horizontal Connector Line (from middle line to box) */
@@ -4738,31 +4741,34 @@ table.data-table td.placeholder {
   text-overflow: ellipsis;
 }
 
-/* Mobile responsive timeline overrides (<640px) */
-@media (max-width: 640px) {
+/* Mobile responsive timeline overrides (<=768px for all mobile devices) */
+@media (max-width: 768px) {
   .ev-timeline::before {
-    left: 20px !important;
+    left: 18px !important;
     transform: none !important;
   }
 
   .ev-t-node {
-    width: calc(100% - 50px) !important;
-    left: 50px !important;
-    margin-bottom: 24px !important;
-    padding: 16px 18px !important;
+    width: calc(100% - 40px) !important;
+    left: 40px !important;
+    margin-bottom: 16px !important;
+    padding: 12px 14px !important;
+    min-height: 88px !important;
+    box-sizing: border-box !important;
+    align-items: center !important;
   }
 
   .ev-t-node::after {
-    left: -34px !important;
+    left: -22px !important;
     right: auto !important;
-    width: 34px !important;
+    width: 22px !important;
     top: 50% !important;
     transform: translateY(-50%) !important;
     background: linear-gradient(270deg, var(--node-color, var(--blue)) 0%, rgba(200, 161, 58, 0.25) 100%) !important;
   }
 
   .ev-t-node .ev-t-dot {
-    left: -34px !important;
+    left: -22px !important;
     right: auto !important;
     top: 50% !important;
     transform: translate(-50%, -50%) !important;
@@ -4770,6 +4776,95 @@ table.data-table td.placeholder {
 
   .ev-t-node:hover .ev-t-dot {
     transform: translate(-50%, -50%) scale(1.35) !important;
+  }
+
+  .ev-t-date-col {
+    flex: 0 0 54px !important;
+    padding-right: 8px !important;
+  }
+
+  .ev-t-date-day {
+    font-size: 1.2rem !important;
+  }
+
+  .ev-t-date-month {
+    font-size: 0.58rem !important;
+  }
+
+  .ev-t-date-year {
+    font-size: 0.65rem !important;
+    padding: 1px 6px !important;
+  }
+
+  .ev-t-divider {
+    margin: 2px 10px 2px 0 !important;
+  }
+
+  .ev-t-body-col {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+  }
+
+  .ev-t-title-row {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    margin-bottom: 2px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .ev-t-title-row h4 {
+    font-size: clamp(0.85rem, 3.6vw, 0.98rem) !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+  }
+
+  .ev-t-badge {
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+    font-size: 0.62rem !important;
+    padding: 2px 6px !important;
+  }
+
+  .ev-t-body-col p {
+    font-size: 0.78rem !important;
+    line-height: 1.35 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    display: block !important;
+  }
+
+  /* Photo Gallery marquee at bottom of events - Decreased size so at least 2 photos display simultaneously on mobile screens */
+  .ev-photo-marquee-wrap {
+    padding: 14px 0 !important;
+    margin-top: 24px !important;
+    margin-bottom: 24px !important;
+  }
+
+  .ev-photo-strip-marquee {
+    gap: 10px !important;
+  }
+
+  .ev-photo-strip-marquee .ev-photo-tile {
+    width: clamp(140px, 44vw, 175px) !important;
+    height: clamp(100px, 30vw, 125px) !important;
+    border-radius: 10px !important;
+    border-width: 1.5px !important;
+  }
+
+  .ev-photo-overlay {
+    padding: 8px 10px !important;
+  }
+
+  .ev-photo-title {
+    font-size: clamp(0.7rem, 2.6vw, 0.8rem) !important;
+    line-height: 1.2 !important;
   }
 }
 
@@ -4838,11 +4933,61 @@ table.data-table td.placeholder {
   box-sizing: border-box;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .ev-archive-grid {
-    grid-template-columns: 1fr;
-    grid-auto-rows: auto;
-    max-width: 100%;
+    grid-template-columns: 1fr !important;
+    grid-auto-rows: auto !important;
+    gap: 14px !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 0 4px !important;
+    box-sizing: border-box !important;
+  }
+
+  .ev-a-card {
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    padding: 12px 14px !important;
+    min-height: 88px !important;
+    align-items: center !important;
+    overflow: hidden !important;
+  }
+
+  .ev-a-card .ev-t-body-col {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .ev-a-card .ev-t-title-row {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    margin-bottom: 2px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .ev-a-card h4 {
+    font-size: clamp(0.85rem, 3.6vw, 0.98rem) !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+  }
+
+  .ev-a-card p {
+    font-size: 0.78rem !important;
+    line-height: 1.35 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    display: block !important;
+    margin: 0 !important;
   }
 }
 
@@ -4863,7 +5008,7 @@ table.data-table td.placeholder {
   padding: 12px 18px;
   box-sizing: border-box;
   transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
-  overflow: visible;
+  overflow: hidden;
   justify-self: stretch;
   align-self: start;
 }
@@ -4913,6 +5058,11 @@ table.data-table td.placeholder {
   color: var(--navy);
   margin: 0;
   line-height: 1.3;
+  flex: 1 1 auto;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .ev-a-card p {
@@ -4920,6 +5070,9 @@ table.data-table td.placeholder {
   color: var(--ink-soft);
   line-height: var(--lh-body);
   margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* ---- Interactive Event Modal ---- */
