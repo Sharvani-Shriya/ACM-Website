@@ -1072,6 +1072,104 @@ html, body {
     max-width: 100% !important;
     box-sizing: border-box !important;
   }
+
+  /* Full Member Directory Roster Modal Responsive Fixed Table Layout */
+  .modal-overlay {
+    padding: clamp(20px, 5vw, 40px) clamp(8px, 2.5vw, 16px) !important;
+  }
+
+  .modal-card {
+    padding: clamp(16px, 4vw, 24px) clamp(10px, 3vw, 18px) clamp(16px, 4vw, 22px) !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    border-radius: 14px !important;
+  }
+
+  .modal-search {
+    padding: 8px 10px !important;
+    font-size: 12.5px !important;
+  }
+
+  .modal-filters {
+    gap: 4px 6px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .filter-chip {
+    font-size: 11px !important;
+    padding: 4px 10px !important;
+  }
+
+  .modal-table-wrap {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important; /* Prevents moving left and right */
+    overflow-y: auto !important;
+    box-sizing: border-box !important;
+    border-radius: 8px !important;
+  }
+
+  .modal-table {
+    width: 100% !important;
+    table-layout: fixed !important;
+    border-collapse: collapse !important;
+    font-size: clamp(0.68rem, 2.5vw, 0.78rem) !important;
+    box-sizing: border-box !important;
+  }
+
+  .modal-table th,
+  .modal-table td {
+    padding: 6px 4px !important;
+    line-height: 1.25 !important;
+    overflow-wrap: break-word !important;
+    word-break: break-word !important;
+    hyphens: auto !important;
+    box-sizing: border-box !important;
+  }
+
+  .modal-table th {
+    font-size: clamp(0.60rem, 2.2vw, 0.70rem) !important;
+    padding: 7px 4px !important;
+    letter-spacing: 0.02em !important;
+  }
+
+  /* Fixed column width allocation so all 4 columns fit 100% inside phone screen width */
+  .modal-table th:nth-child(1),
+  .modal-table td:nth-child(1) {
+    width: 31% !important;
+    text-align: left !important;
+  }
+
+  .modal-table th:nth-child(2),
+  .modal-table td:nth-child(2) {
+    width: 27% !important;
+    text-align: left !important;
+  }
+
+  .modal-table th:nth-child(3),
+  .modal-table td:nth-child(3) {
+    width: 18% !important;
+    text-align: center !important;
+  }
+
+  .modal-table th:nth-child(4),
+  .modal-table td:nth-child(4) {
+    width: 24% !important;
+    text-align: center !important;
+  }
+
+  .modal-pagination {
+    font-size: 11.5px !important;
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+    margin-top: 10px !important;
+  }
+
+  .modal-pagination .pg-btns button {
+    padding: 4px 10px !important;
+    font-size: 11.5px !important;
+  }
 }
 
 @media(max-width: 580px) {
