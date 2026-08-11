@@ -704,16 +704,16 @@ p {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin-top: -22px;
-  margin-left: -40px;
+  margin-top: 0;
+  margin-left: 0;
   margin-bottom: var(--space-md);
   width: 100%;
 }
 
 .ev-back-btn,
 .ev-back-tag {
-  margin-top: -14px;
-  margin-left: -40px;
+  margin-top: 0;
+  margin-left: 0;
   display: inline-flex;
   align-items: center;
   gap: 4px;
@@ -5837,19 +5837,27 @@ table.data-table td.placeholder {
    ----------------------------------------------------------- */
 @media (max-width: 768px) {
 
-  /* Universal mobile hero banner scaling for all phone sizes (320px to 768px) */
+  /* Full edge-to-edge mobile hero banner (0px left/right space, 0px top/bottom space) */
   .about-hero-banner {
-    min-height: clamp(250px, 55vh, 420px);
-    height: auto;
-    max-height: 480px;
-    padding: 24px 0 40px;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 3.6 / 1 !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
   }
 
-  /* Mobile view image swap for Technizen poster slide */
-  .about-hero-slide.technizen-slide {
-    background-image: url('../images/mobile-responsive/mobile-view-technizen.jpeg') !important;
-    background-size: cover;
-    background-position: center center;
+  .about-hero-slide {
+    background-size: 100% 100% !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    width: 100% !important;
+    height: 100% !important;
   }
 
   /* Fix content overflow — margin-left: -35px bleeds off screen */
@@ -5889,26 +5897,26 @@ table.data-table td.placeholder {
 
   /* Pull slider controls in from the edge */
   .about-hero-controls {
-    right: 12px;
-    bottom: 10px;
-    gap: 8px;
+    right: 8px !important;
+    bottom: 6px !important;
+    gap: 5px !important;
   }
 
   /* Scale down slider arrow buttons */
   .hero-slider-arrow {
-    width: 30px;
-    height: 30px;
-    font-size: 0.78rem;
+    width: 24px !important;
+    height: 24px !important;
+    font-size: 0.65rem !important;
   }
 
   /* Scale down dots */
   .about-hero-dot {
-    width: 8px;
-    height: 8px;
+    width: 6px !important;
+    height: 6px !important;
   }
 
   .about-hero-dot.active {
-    width: 20px;
+    width: 16px !important;
   }
 }
 

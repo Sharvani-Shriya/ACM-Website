@@ -14,7 +14,7 @@ var EV_CATEGORIES = {
     cssVar: '--ev-technizen',
     slug: 'technizen',
     description: 'Annual inter-collegiate technical fest featuring competitive sub-events across core domain tracks.',
-    url: 'events/technizen.html',
+    url: 'events/inter-college-events.html',
     openMaster: 'INTER COLLEGIATE TECH EVENTS'
   },
   hourOfCode: {
