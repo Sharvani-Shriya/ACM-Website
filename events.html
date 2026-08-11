@@ -341,8 +341,9 @@
             if (!xAxis) return;
             var numYears = chart.data.labels.length;
             var numDatasets = chart.data.datasets.length;
-            var W = 16; // fixed bar width in px
-            var G = 3;  // fixed gap between adjacent bars in px
+            var chartWidth = chart.width || 600;
+            var W = chartWidth < 500 ? 10 : 14; // dynamic bar width in px
+            var G = chartWidth < 500 ? 2 : 3;   // dynamic gap between adjacent bars in px
 
             for (var i = 0; i < numYears; i++) {
               var xCenter = xAxis.getPixelForValue(i);

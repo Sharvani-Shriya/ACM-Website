@@ -3553,6 +3553,12 @@ table.data-table td.placeholder {
   .ev-chart-canvas-wrap {
     height: 310px;
     padding: 10px 8px 4px 4px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .ev-chart-canvas-wrap canvas {
+    min-width: 600px !important;
   }
 }
 
@@ -5797,16 +5803,19 @@ table.data-table td.placeholder {
    ----------------------------------------------------------- */
 @media (max-width: 768px) {
 
-  /* Shrink the banner — 480px min-height is too tall for phones */
+  /* Universal mobile hero banner scaling for all phone sizes (320px to 768px) */
   .about-hero-banner {
-    min-height: 320px;
-    max-height: 420px;
-    padding: 28px 0 44px;
+    min-height: clamp(250px, 55vh, 420px);
+    height: auto;
+    max-height: 480px;
+    padding: 24px 0 40px;
   }
 
   /* Mobile view image swap for Technizen poster slide */
   .about-hero-slide.technizen-slide {
     background-image: url('../images/mobile-responsive/mobile-view-technizen.jpeg') !important;
+    background-size: cover;
+    background-position: center center;
   }
 
   /* Fix content overflow — margin-left: -35px bleeds off screen */
@@ -5996,77 +6005,134 @@ table.data-table td.placeholder {
 }
 
 /* -----------------------------------------------------------
-   FIX 5 — CHAPTER OVERVIEW STATS GRID
-   Keep it as a 2×2 grid on mobile (not single column) so
-   it matches the desktop capsule feel on smaller screens.
+   FIX 5 — CHAPTER OVERVIEW & PAGE STATS MATRIX (2×2 GRID ON MOBILE)
+   Keep stats as a 2×2 grid on mobile across About, Events, Teams,
+   and Gallery pages for consistent mobile UI layout.
    ----------------------------------------------------------- */
-@media (max-width: 576px) {
-  .stats-overview-grid {
-    grid-template-columns: repeat(2, 1fr);
-    /* 2×2 grid instead of 1-col */
-    padding: 14px 10px;
-    gap: 6px;
-    border-radius: 16px;
+/* -----------------------------------------------------------
+   FIX 5 — UNIVERSAL 2×2 MOBILE STATS MATRIX
+   Fully fluid 2×2 grid layout engineered to adapt seamlessly
+   to 100% of mobile screen sizes (280px to 768px).
+   ----------------------------------------------------------- */
+@media (max-width: 768px) {
+  .stats-overview-grid,
+  .ev-stats-strip:not(.gallery-stats-strip) {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    padding: clamp(10px, 3vw, 14px) clamp(6px, 2vw, 12px) !important;
+    gap: clamp(6px, 2vw, 10px) !important;
+    border-radius: 16px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
 
-  .stat-overview-card {
-    flex-direction: column;
-    /* icon on top, info below — centred */
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 14px 8px;
-    gap: 8px;
+  /* Photo Gallery Stats Strip — Single Horizontal Row on Mobile */
+  .ev-stats-strip.gallery-stats-strip {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-around !important;
+    padding: 10px 4px !important;
+    gap: 4px !important;
+    width: 100% !important;
+    border-radius: 16px !important;
+    box-sizing: border-box !important;
   }
 
-  .stat-icon-circle {
-    width: 48px;
-    height: 48px;
-    min-width: 48px;
-    margin-bottom: 0;
-    /* reset the odd margin override that existed before */
+  .gallery-stats-strip .ev-stat-item {
+    flex: 1 1 0px !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 8px 3px !important;
+    gap: 4px !important;
+    min-width: 0 !important;
+    border: none !important;
   }
 
-  .stat-icon-circle svg {
-    width: 22px;
-    height: 22px;
+  .gallery-stats-strip .ev-stat-icon {
+    width: clamp(34px, 9vw, 42px) !important;
+    height: clamp(34px, 9vw, 42px) !important;
+    min-width: clamp(34px, 9vw, 42px) !important;
   }
 
-  .stat-info {
-    align-items: center;
-    text-align: center;
+  .gallery-stats-strip .ev-stat-icon svg {
+    width: clamp(16px, 4vw, 20px) !important;
+    height: clamp(16px, 4vw, 20px) !important;
   }
 
-  .stat-number {
-    font-size: 1.6rem;
-    text-align: center;
+  .gallery-stats-strip .ev-stat-num {
+    font-size: clamp(1.05rem, 4.2vw, 1.35rem) !important;
+    line-height: 1.1 !important;
   }
 
-  .stat-label {
-    font-size: 0.75rem;
-    white-space: normal;
-    /* allow wrap inside the 2-col cell */
-    text-align: center;
-    line-height: 1.25;
-  }
-}
-
-@media (max-width: 360px) {
-  .stats-overview-grid {
-    grid-template-columns: repeat(2, 1fr);
-    padding: 10px 6px;
-    gap: 4px;
+  .gallery-stats-strip .ev-stat-label {
+    font-size: clamp(0.60rem, 2.3vw, 0.70rem) !important;
+    line-height: 1.2 !important;
   }
 
-  .stat-overview-card {
-    padding: 10px 6px;
+  .stat-overview-card,
+  .ev-stat-item:not(.gallery-stats-strip .ev-stat-item) {
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    padding: clamp(8px, 2.5vw, 14px) clamp(4px, 1.5vw, 8px) !important;
+    gap: clamp(4px, 1.5vw, 8px) !important;
+    border: none !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
   }
 
-  .stat-number {
-    font-size: 1.35rem;
+  .stat-icon-circle,
+  .ev-stat-icon {
+    width: clamp(38px, 11vw, 48px) !important;
+    height: clamp(38px, 11vw, 48px) !important;
+    min-width: clamp(38px, 11vw, 48px) !important;
+    margin-bottom: 0 !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
   }
 
-  .stat-label {
-    font-size: 0.68rem;
+  .stat-icon-circle svg,
+  .ev-stat-icon svg {
+    width: clamp(18px, 5vw, 22px) !important;
+    height: clamp(18px, 5vw, 22px) !important;
+  }
+
+  .stat-info,
+  .ev-stat-info {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .stat-number,
+  .ev-stat-num {
+    font-size: clamp(1.2rem, 5.2vw, 1.65rem) !important;
+    text-align: center !important;
+    line-height: 1.1 !important;
+    font-weight: 800 !important;
+    width: 100% !important;
+    display: block !important;
+    overflow-wrap: break-word !important;
+  }
+
+  .stat-label,
+  .ev-stat-label {
+    font-size: clamp(0.68rem, 2.8vw, 0.78rem) !important;
+    white-space: normal !important;
+    text-align: center !important;
+    line-height: 1.25 !important;
+    width: 100% !important;
+    display: block !important;
+    overflow-wrap: break-word !important;
+    hyphens: auto !important;
   }
 }
