@@ -4424,8 +4424,28 @@ table.data-table td.placeholder {
     height: auto !important;
   }
 
+  /* Spread spotlight event details evenly in a 2-column grid on mobile screens */
   .ev-spotlight-fields {
-    grid-template-columns: 1fr;
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px clamp(8px, 3vw, 16px) !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .ev-sf:nth-child(5),
+  .ev-sf.full-width {
+    grid-column: 1 / -1 !important;
+  }
+
+  /* Center the Register Now button in the middle of the card/page on mobile */
+  .ev-reg-btn {
+    display: block !important;
+    margin: 22px auto 0 auto !important;
+    width: fit-content !important;
+    min-width: 180px !important;
+    max-width: 90% !important;
+    text-align: center !important;
   }
 
   .ev-photo-strip {
@@ -4866,6 +4886,36 @@ table.data-table td.placeholder {
     font-size: clamp(0.7rem, 2.6vw, 0.8rem) !important;
     line-height: 1.2 !important;
   }
+
+  /* Quick Highlights / Quick Facts stat boxes font size reduction for mobile view */
+  .ev-modal-facts {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: stretch !important;
+    justify-content: space-between !important;
+    gap: clamp(4px, 1.5vw, 8px) !important;
+    width: 100% !important;
+    margin-bottom: 14px !important;
+    box-sizing: border-box !important;
+  }
+
+  .ev-mf {
+    flex: 1 1 0px !important;
+    min-width: 0 !important;
+    padding: clamp(5px, 1.2vw, 7px) clamp(2px, 0.8vw, 4px) !important;
+    min-height: 44px !important;
+  }
+
+  .ev-mf-num {
+    font-size: clamp(0.72rem, 2.5vw, 0.88rem) !important;
+    line-height: 1.1 !important;
+  }
+
+  .ev-mf-label {
+    font-size: clamp(0.50rem, 1.6vw, 0.60rem) !important;
+    letter-spacing: 0.01em !important;
+    line-height: 1.1 !important;
+  }
 }
 
 /* ---- Collapsible Archive Toggle & Grid ---- */
@@ -5207,13 +5257,19 @@ table.data-table td.placeholder {
 }
 
 .ev-modal-facts {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(115px, 1fr));
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-between;
   gap: 8px;
+  width: 100%;
   margin-bottom: 14px;
+  box-sizing: border-box;
 }
 
 .ev-mf {
+  flex: 1 1 0px;
+  min-width: 0;
   background: #f8fafc;
   border: 1px solid var(--line);
   border-top: 2px solid var(--blue);
@@ -5237,6 +5293,8 @@ table.data-table td.placeholder {
   margin-bottom: 0;
   text-align: center;
   width: 100%;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .ev-mf-label {
@@ -5250,6 +5308,9 @@ table.data-table td.placeholder {
   text-align: center;
   width: 100%;
   margin-top: 2px;
+  line-height: 1.2;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .ev-mf-label:empty {
