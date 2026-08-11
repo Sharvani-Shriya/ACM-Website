@@ -163,7 +163,10 @@
           '<span class="ev-spotlight-badge ev-gradient-badge"><span class="pulse"></span> ' + (upcoming.status === 'ongoing' ? 'ONGOING NOW &middot; 11 &amp; 12 August 2026' : 'Open &middot; Register Now') + '</span>' +
           '<div class="ev-spotlight-grid">' +
             '<div class="ev-spotlight-photo ev-poster-box">' +
-              '<img src="../' + posterPath + '" alt="' + upcoming.title + ' Poster" class="ev-poster-img">' +
+              '<picture>' +
+                '<source media="(max-width: 768px)" srcset="../assets/images/mobile-responsive/mobile-view-technizen.jpeg">' +
+                '<img src="../' + posterPath + '" alt="' + upcoming.title + ' Poster" class="ev-poster-img">' +
+              '</picture>' +
             '</div>' +
             '<div class="ev-spotlight-info">' +
               '<h3 class="ev-gradient-heading">' + upcoming.title + '</h3>' +
