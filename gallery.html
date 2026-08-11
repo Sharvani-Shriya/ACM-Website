@@ -497,7 +497,7 @@
       }
     }
 
-    /* Mobile Responsive styles for Photo Gallery Reel Headers */
+    /* Mobile Responsive styles for Photo Gallery Reel Headers & Touch Dragging */
     @media (max-width: 768px) {
       .reel-head {
         align-items: flex-start;
@@ -511,6 +511,11 @@
         gap: 4px;
         flex: 1 1 auto;
         min-width: 0;
+        width: 100%;
+      }
+
+      .reel-nav {
+        display: none !important;
       }
 
       .reel-head .reel-title-group {
@@ -537,9 +542,16 @@
         color: #5b6478;
       }
 
+      .filmstrip {
+        -webkit-overflow-scrolling: touch;
+        touch-action: pan-x;
+        scroll-snap-type: x proximity;
+      }
+
       .photo-card {
         width: 220px;
         padding: 7px;
+        scroll-snap-align: start;
       }
     }
   </style>
@@ -921,6 +933,43 @@
           reelObj.pos = strip.scrollLeft % setWidth;
         }
       }, { passive: true });
+
+      // Touch drag gesture support for responsive mobile screens across all devices
+      let isTouching = false;
+      let startX = 0;
+      let startScrollLeft = 0;
+
+      strip.addEventListener('touchstart', (e) => {
+        if (e.touches.length === 1) {
+          isTouching = true;
+          reelObj.isInteracting = true;
+          clearTimeout(reelObj.interactTimer);
+          startX = e.touches[0].clientX;
+          startScrollLeft = strip.scrollLeft;
+        }
+      }, { passive: true });
+
+      strip.addEventListener('touchmove', (e) => {
+        if (!isTouching || e.touches.length !== 1) return;
+        const deltaX = e.touches[0].clientX - startX;
+        strip.scrollLeft = startScrollLeft - deltaX;
+      }, { passive: true });
+
+      const handleTouchEnd = () => {
+        if (!isTouching) return;
+        isTouching = false;
+        clearTimeout(reelObj.interactTimer);
+        reelObj.interactTimer = setTimeout(() => {
+          const setWidth = reelObj.getSingleSetWidth();
+          if (setWidth > 0) {
+            reelObj.pos = strip.scrollLeft % setWidth;
+          }
+          reelObj.isInteracting = false;
+        }, 1200);
+      };
+
+      strip.addEventListener('touchend', handleTouchEnd, { passive: true });
+      strip.addEventListener('touchcancel', handleTouchEnd, { passive: true });
 
       // Smooth navigation buttons
       function handleNavClick(dir) {
