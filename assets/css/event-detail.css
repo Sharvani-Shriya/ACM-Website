@@ -13,42 +13,48 @@
 }
 
 .hero-breadcrumb {
-  display: flex;
-  align-items: center;
-  gap: var(--space-xs);
-  margin-top: 0;
-  margin-left: 0;
-  margin-bottom: var(--space-md);
-  flex-wrap: wrap;
+  display: flex !important;
+  align-items: center !important;
+  gap: var(--space-xs) !important;
+  margin-top: 0 !important;
+  margin-left: 0 !important;
+  margin-bottom: var(--space-md) !important;
+  flex-wrap: wrap !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+  z-index: 5 !important;
 }
 
 .event-detail-hero .back-link {
-  margin-top: 0;
-  margin-left: 0;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
+  margin-top: 0 !important;
+  margin-left: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
   color: var(--gold) !important;
-  font-family: var(--font-mono, inherit);
-  font-size: 0.70rem;
-  font-weight: 700;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  text-decoration: none;
-  padding: 3px 9px;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(212, 160, 23, 0.35);
-  transition: all 0.25s ease;
-  backdrop-filter: blur(4px);
+  font-family: var(--font-mono, inherit) !important;
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  letter-spacing: .06em !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  padding: 4px 12px !important;
+  border-radius: 14px !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(212, 160, 23, 0.35) !important;
+  transition: all 0.25s ease !important;
+  backdrop-filter: blur(4px) !important;
+  line-height: 1.2 !important;
+  flex-shrink: 0 !important;
 }
 
 .event-detail-hero .back-link:hover {
-  background: var(--gold);
+  background: var(--gold) !important;
   color: #061938 !important;
-  border-color: var(--gold);
-  transform: translateX(-4px);
-  box-shadow: 0 4px 12px rgba(212, 160, 23, 0.3);
+  border-color: var(--gold) !important;
+  transform: translateX(-4px) !important;
+  box-shadow: 0 4px 12px rgba(212, 160, 23, 0.3) !important;
   text-decoration: none;
 }
 
