@@ -90,6 +90,32 @@ document.addEventListener('DOMContentLoaded', function () {
       heroBanner.addEventListener('mouseleave', function () {
         heroAutoplay = setInterval(function () { goToHeroSlide(heroCurrent + 1); }, 4500);
       });
+
+      /* Mobile touch swipe gesture support */
+      var touchStartX = 0;
+      heroBanner.addEventListener('touchstart', function (e) {
+        if (e.touches.length === 1) {
+          touchStartX = e.touches[0].clientX;
+          clearInterval(heroAutoplay);
+        }
+      }, { passive: true });
+
+      heroBanner.addEventListener('touchend', function (e) {
+        if (e.changedTouches.length === 1) {
+          var touchEndX = e.changedTouches[0].clientX;
+          var diffX = touchStartX - touchEndX;
+          if (Math.abs(diffX) > 30) {
+            if (diffX > 0) {
+              // Sliding left -> move left
+              goToHeroSlide(heroCurrent - 1);
+            } else {
+              // Sliding right -> move right
+              goToHeroSlide(heroCurrent + 1);
+            }
+          }
+          heroAutoplay = setInterval(function () { goToHeroSlide(heroCurrent + 1); }, 4500);
+        }
+      }, { passive: true });
     }
   }
 
