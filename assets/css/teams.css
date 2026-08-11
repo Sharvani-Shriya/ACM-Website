@@ -854,11 +854,60 @@ html, body {
     box-sizing: border-box !important;
   }
 
+  /* 2-Column Leadership Grid for all mobile devices */
   .lead-grid {
     display: grid !important;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)) !important;
-    gap: 16px !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: clamp(8px, 2.5vw, 14px) !important;
     width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .lead-card {
+    padding: clamp(12px, 3.5vw, 18px) clamp(6px, 2vw, 10px) !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    text-align: center !important;
+  }
+
+  .lead-card .avatar {
+    width: clamp(42px, 12vw, 54px) !important;
+    height: clamp(42px, 12vw, 54px) !important;
+    font-size: clamp(14px, 4vw, 18px) !important;
+    margin: 2px auto 8px auto !important;
+  }
+
+  .lead-card .role-badge {
+    font-size: clamp(8px, 2.3vw, 10px) !important;
+    padding: 3px clamp(6px, 1.8vw, 10px) !important;
+    letter-spacing: .03em !important;
+    margin-bottom: 6px !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow-wrap: break-word !important;
+    white-space: normal !important;
+    line-height: 1.2 !important;
+  }
+
+  .lead-card .mname {
+    font-size: clamp(0.72rem, 3.2vw, 0.90rem) !important;
+    line-height: 1.25 !important;
+    font-weight: 700 !important;
+    overflow-wrap: break-word !important;
+    word-break: break-word !important;
+    hyphens: auto !important;
+    min-width: 0 !important;
+  }
+
+  .lead-card .mrole {
+    font-size: clamp(0.62rem, 2.6vw, 0.75rem) !important;
+    line-height: 1.25 !important;
+    margin-top: 2px !important;
+    overflow-wrap: break-word !important;
+    word-break: break-word !important;
+    min-width: 0 !important;
   }
 
   .staff-row {
@@ -876,7 +925,6 @@ html, body {
     padding: 20px 12px !important;
   }
 
-  .lead-card,
   .staff-card,
   .spotlight-card,
   .team-card {
@@ -887,8 +935,6 @@ html, body {
     word-break: break-word !important;
   }
 
-  .lead-card .mname,
-  .lead-card .mrole,
   .staff-card .mname,
   .staff-card .mrole {
     overflow-wrap: break-word !important;
@@ -909,10 +955,6 @@ html, body {
 }
 
 @media(max-width: 580px) {
-  .lead-grid {
-    grid-template-columns: 1fr !important;
-  }
-
   .staff-row {
     grid-template-columns: 1fr !important;
   }
