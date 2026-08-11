@@ -5804,6 +5804,11 @@ table.data-table td.placeholder {
     padding: 28px 0 44px;
   }
 
+  /* Mobile view image swap for Technizen poster slide */
+  .about-hero-slide.technizen-slide {
+    background-image: url('../images/mobile-responsive/mobile-view-technizen.jpeg') !important;
+  }
+
   /* Fix content overflow — margin-left: -35px bleeds off screen */
   .about-hero-content {
     margin-left: 0;
