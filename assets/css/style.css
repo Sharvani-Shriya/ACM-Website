@@ -2427,19 +2427,38 @@ table.data-table td.placeholder {
   }
 }
 
-@media (max-width:576px) {
+@media (max-width: 768px) {
   .footer-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 12px !important;
   }
 
-  /* College info block spans full width on top */
-  .footer-grid>div:first-child {
-    grid-column: 1 / -1;
-    border-bottom: 1px solid rgba(255, 255, 255, .15);
-    padding-bottom: 12px;
-    margin-bottom: 4px;
-    text-align: center;
+  /* College info & address block centered in the middle on mobile */
+  .footer-grid > div:first-child {
+    grid-column: 1 / -1 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, .15) !important;
+    padding-bottom: 16px !important;
+    margin-bottom: 12px !important;
+    text-align: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+  }
+
+  .footer-grid > div:first-child h4 {
+    text-align: center !important;
+    margin: 0 auto 8px auto !important;
+    width: 100% !important;
+  }
+
+  .footer-grid > div:first-child p {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    max-width: 100% !important;
+    width: 100% !important;
   }
 
   .site-footer h4 {
