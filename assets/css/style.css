@@ -3402,7 +3402,8 @@ table.data-table td.placeholder {
   box-shadow:
     0 12px 36px rgba(11, 31, 77, 0.07),
     0 0 30px rgba(20, 80, 158, 0.14);
-  margin-bottom: var(--space-xl);
+  max-width: 1120px;
+  margin: 0 auto var(--space-xl);
   padding: 16px 12px;
   position: relative;
   overflow: hidden;
