@@ -128,7 +128,9 @@
           <div class="ev-chart-hover-pill" id="ev-chart-hover-info" style="display:none;"></div>
         </div>
         <div class="ev-chart-canvas-wrap">
-          <canvas id="activityChart"></canvas>
+          <div class="ev-chart-canvas-inner">
+            <canvas id="activityChart"></canvas>
+          </div>
         </div>
       </div>
 
@@ -373,6 +375,43 @@
           }
         };
 
+        function showYearDetails(index) {
+          var hoverInfo = document.getElementById('ev-chart-hover-info');
+          if (!hoverInfo) return;
+          var isMobile = (window.innerWidth <= 768);
+
+          var year = years[index];
+          var row = EV_CHART_DATA[index];
+
+          var parts = [];
+          catKeys.forEach(function (k) {
+            var v = row[k] || 0;
+            if (v > 0) {
+              var cat = EV_CATEGORIES[k];
+              var dotHtml = '<span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:' + cat.color + ';margin-right:4px;vertical-align:middle;"></span>';
+              parts.push('<span style="display:inline-flex;align-items:center;margin-right:8px;font-weight:600;color:var(--navy);">' + dotHtml + '<strong>' + v + '</strong>&nbsp;' + cat.name + '</span>');
+            }
+          });
+
+          var activeCount = parts.length;
+          var fontSize = isMobile ? '12px' : (activeCount >= 5 ? '11.8px' : '13px');
+          var paddingStr = isMobile ? '6px 12px' : '5px 14px';
+
+          hoverInfo.innerHTML = '<div style="font-size:' + fontSize + ';display:flex;flex-wrap:wrap;align-items:center;gap:6px;"><strong>' + year + ':</strong> ' + (parts.join('') || '<span style="color:#888;">No events recorded</span>') + '</div>';
+          hoverInfo.style.display = 'flex';
+          hoverInfo.style.padding = paddingStr;
+          hoverInfo.style.borderColor = 'rgba(20, 80, 158, 0.35)';
+          hoverInfo.style.boxShadow = '0 4px 14px rgba(20, 80, 158, 0.12)';
+        }
+
+        function hideYearDetails() {
+          var hoverInfo = document.getElementById('ev-chart-hover-info');
+          if (hoverInfo) {
+            hoverInfo.innerHTML = '';
+            hoverInfo.style.display = 'none';
+          }
+        }
+
         var ctx = canvas.getContext('2d');
         var chartInstance = new Chart(ctx, {
           type: 'bar',
@@ -388,45 +427,20 @@
               duration: 1000,
               easing: 'easeOutQuart'
             },
-            onHover: function (event, activeElements) {
-              var hoverInfo = document.getElementById('ev-chart-hover-info');
-              if (!hoverInfo) return;
-
+            onClick: function (event, activeElements) {
               if (activeElements && activeElements.length > 0) {
                 var index = activeElements[0].index;
-                var year = years[index];
-                var row = EV_CHART_DATA[index];
-
-                var parts = [];
-                catKeys.forEach(function (k) {
-                  var v = row[k] || 0;
-                  if (v > 0) {
-                    var cat = EV_CATEGORIES[k];
-                    parts.push('<span style="color:' + cat.color + ';font-weight:700;">' + v + ' ' + cat.name + '</span>');
-                  }
-                });
-
-                var activeCount = parts.length;
-                var fontSize = '13.5px';
-                var paddingStr = '5px 14px';
-
-                if (activeCount >= 5) {
-                  fontSize = '11.8px';
-                  paddingStr = '4px 10px';
-                } else if (activeCount >= 4) {
-                  fontSize = '12.5px';
-                  paddingStr = '4px 12px';
-                }
-
-                hoverInfo.innerHTML = '<span style="white-space:nowrap;font-size:' + fontSize + ';display:inline-flex;align-items:center;gap:4px;"><strong>' + year + ':</strong> ' + (parts.join('<span style="opacity:0.4;margin:0 2px;">·</span>') || 'No events') + '</span>';
-                hoverInfo.style.display = 'inline-flex';
-                hoverInfo.style.whiteSpace = 'nowrap';
-                hoverInfo.style.padding = paddingStr;
-                hoverInfo.style.borderColor = 'rgba(20, 80, 158, 0.35)';
-                hoverInfo.style.boxShadow = '0 4px 14px rgba(20, 80, 158, 0.12)';
+                showYearDetails(index);
+              }
+            },
+            onHover: function (event, activeElements) {
+              var isMobile = (window.innerWidth <= 768);
+              if (isMobile) return; // On mobile, display year details on tap/click only
+              if (activeElements && activeElements.length > 0) {
+                var index = activeElements[0].index;
+                showYearDetails(index);
               } else {
-                hoverInfo.innerHTML = '';
-                hoverInfo.style.display = 'none';
+                hideYearDetails();
               }
             },
             interaction: {
