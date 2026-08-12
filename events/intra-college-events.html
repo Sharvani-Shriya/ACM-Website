@@ -53,6 +53,40 @@
     <div class="container">
 
       <div id="ev-spotlight-zone"></div>
+      <!-- 
+      ===================================================================================
+      OPTIONAL FEATURED FEST SPOTLIGHT CARD TEMPLATE (TECHNIZEN / INTRA-COLLEGE FEST)
+      Uncomment this card structure below when Technizen / Intra-College Fest is conducted:
+      ===================================================================================
+      <div class="ev-spotlight is-technizen">
+        <span class="ev-spotlight-badge ev-gradient-badge">
+          <span class="pulse"></span> ONGOING NOW &middot; 11 &amp; 12 August 2026
+        </span>
+        <div class="ev-spotlight-grid">
+          <div class="ev-spotlight-photo ev-poster-box">
+            <picture>
+              <source media="(max-width: 768px)" srcset="../assets/images/mobile-responsive/mobile-view-technizen.jpeg">
+              <img src="../assets/images/global/Technizen banner.jpeg" alt="Technizen 2K26 Poster" class="ev-poster-img">
+            </picture>
+          </div>
+          <div class="ev-spotlight-info">
+            <h3 class="ev-gradient-heading">Technizen 2K26</h3>
+            <p class="role">Flagship annual technical fest conducted on 11th &amp; 12th August 2026 featuring six competitive sub-events.</p>
+            <div class="ev-spotlight-fields">
+              <div class="ev-sf"><b>STATUS</b><span>ONGOING NOW</span></div>
+              <div class="ev-sf"><b>DATES</b><span>11-12 August 2026</span></div>
+              <div class="ev-sf"><b>SUB-EVENTS</b><span>6 competitions</span></div>
+              <div class="ev-sf"><b>THEME</b><span>Beyond Limits</span></div>
+              <div class="ev-sf full-width"><b>VENUE</b><span>R.V.R. &amp; J.C. College of Engineering</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="ev-spotlight-action">
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSeDW0DpeITrhsGaFSjEOmpCF9epj_gNF6fMaIv4bmQzgfpsgQ/viewform" class="ev-reg-btn" target="_blank" rel="noopener">Register Now &rarr;</a>
+        </div>
+      </div>
+      ===================================================================================
+      -->
       <!-- <div class="ev-detail-stats" id="ev-detail-stats"></div> -->
 
       <div class="ev-timeline-wrap">
@@ -168,8 +202,10 @@
               '<h3>' + upcoming.title + '</h3>' +
               '<p class="role">' + upcoming.description + '</p>' +
               '<div class="ev-spotlight-fields">' + fieldsHtml + '</div>' +
-              '<a href="' + (upcoming.registerUrl || '#') + '" class="ev-reg-btn" target="_blank" rel="noopener">Register Now &rarr;</a>' +
             '</div>' +
+          '</div>' +
+          '<div class="ev-spotlight-action">' +
+            '<a href="' + (upcoming.registerUrl || '#') + '" class="ev-reg-btn" target="_blank" rel="noopener">Register Now &rarr;</a>' +
           '</div>' +
         '</div>';
     }
@@ -195,8 +231,10 @@
               '<h3 class="ev-gradient-heading">' + upcomingFest.title + '</h3>' +
               '<p class="role">' + upcomingFest.description + '</p>' +
               '<div class="ev-spotlight-fields">' + fieldsHtmlFest + '</div>' +
-              '<a href="' + (upcomingFest.registerUrl || 'https://docs.google.com/forms/d/e/1FAIpQLSeDW0DpeITrhsGaFSjEOmpCF9epj_gNF6fMaIv4bmQzgfpsgQ/viewform') + '" class="ev-reg-btn" target="_blank" rel="noopener">Register Now &rarr;</a>' +
             '</div>' +
+          '</div>' +
+          '<div class="ev-spotlight-action">' +
+            '<a href="' + (upcomingFest.registerUrl || 'https://docs.google.com/forms/d/e/1FAIpQLSeDW0DpeITrhsGaFSjEOmpCF9epj_gNF6fMaIv4bmQzgfpsgQ/viewform') + '" class="ev-reg-btn" target="_blank" rel="noopener">Register Now &rarr;</a>' +
           '</div>' +
         '</div>';
     }

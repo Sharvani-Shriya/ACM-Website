@@ -228,7 +228,7 @@ document.addEventListener('DOMContentLoaded', function () {
       '<h3>' + year + '</h3>' +
       '<div class="meta"><span><b>' + d.students + '</b> student members</span><span class="meta-dot">·</span><span><b>' + d.staff + '</b> staff members</span></div>' +
       '</div>' +
-      '<button class="btn-prototype btn-primary" id="openRosterBtn">View full member directory ↗</button>' +
+      '<button class="btn-prototype btn-primary" id="openRosterBtn">View full directory… ↗</button>' +
       '</div>' +
       '<div class="subhead">Leadership team</div>' +
       '<div class="lead-grid">' + leadHtml + '</div>' +

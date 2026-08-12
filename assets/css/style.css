@@ -518,15 +518,36 @@ p {
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+  .event-marquee-bar {
+    height: 32px !important;
+    margin: 8px 0 !important;
+  }
+
   .event-marquee-badge {
-    padding: 0 10px;
-    font-size: var(--text-xs);
+    padding: 0 10px !important;
+    font-size: 0.65rem !important;
+  }
+
+  .event-marquee-badge .badge-pulse {
+    width: 6px !important;
+    height: 6px !important;
   }
 
   .marquee-item {
-    font-size: var(--text-xs);
-    padding: 0 10px;
+    font-size: 0.72rem !important;
+    padding: 0 8px !important;
+    gap: 6px !important;
+  }
+
+  .marquee-tag {
+    font-size: 0.58rem !important;
+    padding: 1px 6px !important;
+  }
+
+  .marquee-cta {
+    font-size: 0.65rem !important;
+    padding: 2px 8px !important;
   }
 }
 
@@ -803,10 +824,13 @@ p {
 .about-hero-controls {
   position: absolute;
   bottom: 22px;
-  right: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  right: auto;
   z-index: 3;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 12px;
 }
 
@@ -4004,6 +4028,13 @@ body.modal-open {
   margin: 0 0 var(--space-xs);
 }
 
+.ev-spotlight-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+}
+
 .ev-spotlight-info .role {
   font-size: var(--text-base);
   color: #334155;
@@ -4092,8 +4123,24 @@ body.modal-open {
   }
 }
 
+.ev-spotlight-action {
+  width: 100%;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin-top: 24px;
+  text-align: center !important;
+}
+
 .ev-reg-btn {
-  display: inline-block;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 auto !important;
+  align-self: center !important;
+  text-align: center !important;
+  width: fit-content !important;
+  min-width: 180px !important;
   background: #14509e !important;
   color: #ffffff !important;
   font-weight: 700;
@@ -5095,12 +5142,25 @@ body.modal-open {
   .ev-mf-num {
     font-size: clamp(0.72rem, 2.5vw, 0.88rem) !important;
     line-height: 1.1 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
   }
 
   .ev-mf-label {
-    font-size: clamp(0.50rem, 1.6vw, 0.60rem) !important;
+    font-size: clamp(0.48rem, 1.5vw, 0.58rem) !important;
     letter-spacing: 0.01em !important;
     line-height: 1.1 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  /* Hero Slider active dot indicator — Blue color on Mobile View */
+  .about-hero-dot.active {
+    background: var(--blue) !important;
+    border-color: var(--blue) !important;
+    box-shadow: 0 0 8px rgba(20, 80, 158, 0.6) !important;
   }
 }
 
@@ -5479,8 +5539,10 @@ body.modal-open {
   margin-bottom: 0;
   text-align: center;
   width: 100%;
-  overflow-wrap: break-word;
-  word-break: break-word;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  box-sizing: border-box !important;
 }
 
 .ev-mf-label {
@@ -5495,8 +5557,10 @@ body.modal-open {
   width: 100%;
   margin-top: 2px;
   line-height: 1.2;
-  overflow-wrap: break-word;
-  hyphens: auto;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  box-sizing: border-box !important;
 }
 
 .ev-mf-label:empty {
@@ -6385,7 +6449,9 @@ body.modal-open {
   .about-hero-dot.active {
     width: 22px !important;
     border-radius: 999px !important;
-    background: var(--gold) !important;
+    background: #14509e !important;
+    border-color: #14509e !important;
+    box-shadow: 0 0 10px rgba(20, 80, 158, 0.8) !important;
   }
 }
 

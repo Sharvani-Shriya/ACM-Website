@@ -6,17 +6,6 @@
 
 /* ---- Category Metadata ---- */
 var EV_CATEGORIES = {
-  technizen: {
-    key: 'technizen',
-    name: 'Inter Collegiate Tech Events',
-    abbr: 'IC',
-    color: '#c8a13a',
-    cssVar: '--ev-technizen',
-    slug: 'technizen',
-    description: 'Inter-collegiate technical fest featuring competitive sub-events across core domains.',
-    url: 'events/inter-college-events.html',
-    openMaster: 'INTER COLLEGIATE TECH EVENTS'
-  },
   hourOfCode: {
     key: 'hourOfCode',
     name: 'Hour of Code',
@@ -47,6 +36,16 @@ var EV_CATEGORIES = {
     description: 'Industry professionals and academics invited to speak with CSE students.',
     url: 'events/guest-lectures.html'
   },
+  workshops: {
+    key: 'workshops',
+    name: 'Technical Workshops',
+    abbr: 'TW',
+    color: '#4a7a3d',
+    cssVar: '--ev-workshop',
+    slug: 'workshops',
+    description: 'Hands-on sessions building practical skills outside the regular curriculum.',
+    url: 'events/workshops.html'
+  },
   intraCollege: {
     key: 'intraCollege',
     name: 'Intra Collegiate Tech Events',
@@ -57,15 +56,16 @@ var EV_CATEGORIES = {
     description: 'Coding contests, hackathons, and quizzes run within the college.',
     url: 'events/intra-college-events.html'
   },
-  workshops: {
-    key: 'workshops',
-    name: 'Technical Workshops',
-    abbr: 'TW',
-    color: '#4a7a3d',
-    cssVar: '--ev-workshop',
-    slug: 'workshops',
-    description: 'Hands-on sessions building practical skills outside the regular curriculum.',
-    url: 'events/workshops.html'
+  technizen: {
+    key: 'technizen',
+    name: 'Inter Collegiate Tech Events',
+    abbr: 'IC',
+    color: '#c8a13a',
+    cssVar: '--ev-technizen',
+    slug: 'technizen',
+    description: 'Inter-collegiate technical fest featuring competitive sub-events across core domains.',
+    url: 'events/inter-college-events.html',
+    openMaster: 'INTER COLLEGIATE TECH EVENTS'
   }
 };
 

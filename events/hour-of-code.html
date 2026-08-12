@@ -5,7 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hour of Code | ACM Student Chapter – Dept. of CSE, RVRJC</title>
-  <meta name="description" content="Hour of Code — ACM Student Chapter volunteer visits to local schools introducing programming basics to young students since 2018.">
+  <meta name="description"
+    content="Hour of Code — ACM Student Chapter volunteer visits to local schools introducing programming basics to young students since 2018.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@500&display=swap"
@@ -16,7 +17,8 @@
 <body>
 
   <div class="top-banner">
-    <img src="../assets/images/global/college-banner.png" alt="R.V.R. & J.C. College of Engineering – EAPCET Code: RVJC">
+    <img src="../assets/images/global/college-banner.png"
+      alt="R.V.R. & J.C. College of Engineering – EAPCET Code: RVJC">
   </div>
 
   <nav class="main-nav">
@@ -45,7 +47,8 @@
       </div>
       <div class="crumb">Hour of Code</div>
       <h1>Hour of Code</h1>
-      <p>Community outreach initiatives introducing computer science principles and programming fundamentals to school students.</p>
+      <p>Community outreach initiatives introducing computer science principles and programming fundamentals to school
+        students.</p>
     </div>
   </header>
 
@@ -92,7 +95,8 @@
             Andhra Pradesh — 522019.
           </p>
           <p style="max-width:360px;font-size:.82rem;opacity:0.8;line-height:1.4;">
-            An autonomous institution affiliated to Acharya Nagarjuna University, sponsored by Nagarjuna Education Society.
+            An autonomous institution affiliated to Acharya Nagarjuna University, sponsored by Nagarjuna Education
+            Society.
           </p>
         </div>
         <div>
@@ -117,7 +121,8 @@
           <a href="https://rvrjcce.ac.in/CSE/" target="_blank" rel="noopener">Dept. of CSE</a>
         </div>
       </div>
-      <div class="footer-bottom">&copy; 2026 ACM Student Chapter, Dept. of CSE — R.V.R. &amp; J.C. College of Engineering (Autonomous). All rights reserved.</div>
+      <div class="footer-bottom">&copy; 2026 ACM Student Chapter, Dept. of CSE — R.V.R. &amp; J.C. College of
+        Engineering (Autonomous). All rights reserved.</div>
     </div>
   </footer>
 
@@ -125,77 +130,78 @@
   <script src="../assets/js/events-timeline.js"></script>
   <script src="../assets/js/script.js"></script>
   <script>
-  (function () {
-    var CAT_KEY   = 'hourOfCode';
-    var CAT_COLOR = EV_CATEGORIES[CAT_KEY].color;
-    var DATA      = EV_HOUR_OF_CODE;
+    (function () {
+      var CAT_KEY = 'hourOfCode';
+      var CAT_COLOR = EV_CATEGORIES[CAT_KEY].color;
+      var DATA = EV_HOUR_OF_CODE;
 
-    /* Stats (commented out for future updates)
-    var pastInstances = evGetPast(DATA);
-    var stats = [
-      { num: '3+',                  label: 'Schools Visited' },
-      { num: '800+',                 label: 'Students Reached' },
-      { num: pastInstances.length,  label: 'Editions Conducted' }
-    ];
-    var statsEl = document.getElementById('ev-detail-stats');
-    if (statsEl) {
-      statsEl.classList.add('ev-stats-' + CAT_KEY);
-      stats.forEach(function(s, i) {
-        var item = document.createElement('div');
-        item.className = 'ev-stat-item';
-        item.innerHTML = '<span class="ev-stat-num">' + s.num + '</span><span class="ev-stat-label">' + s.label + '</span>';
-        statsEl.appendChild(item);
-      });
-      if (typeof initStatCounters === 'function') initStatCounters();
-    }
-    */
+      /* Stats (commented out for future updates)
+      var pastInstances = evGetPast(DATA);
+      var stats = [
+        { num: '3+',                  label: 'Schools Visited' },
+        { num: '800+',                 label: 'Students Reached' },
+        { num: pastInstances.length,  label: 'Editions Conducted' }
+      ];
+      var statsEl = document.getElementById('ev-detail-stats');
+      if (statsEl) {
+        statsEl.classList.add('ev-stats-' + CAT_KEY);
+        stats.forEach(function(s, i) {
+          var item = document.createElement('div');
+          item.className = 'ev-stat-item';
+          item.innerHTML = '<span class="ev-stat-num">' + s.num + '</span><span class="ev-stat-label">' + s.label + '</span>';
+          statsEl.appendChild(item);
+        });
+        if (typeof initStatCounters === 'function') initStatCounters();
+      }
+      */
 
-    /* Spotlight */
-    var upcoming = evGetUpcoming(DATA);
-    var spotlightEl = document.getElementById('ev-spotlight-zone');
-    if (upcoming && spotlightEl) {
-      var fieldsHtml = Object.keys(upcoming.fields).map(function(k) {
-        return '<div class="ev-sf"><b>' + k + '</b><span>' + upcoming.fields[k] + '</span></div>';
-      }).join('');
-      spotlightEl.innerHTML =
-        '<div class="ev-spotlight">' +
+      /* Spotlight */
+      var upcoming = evGetUpcoming(DATA);
+      var spotlightEl = document.getElementById('ev-spotlight-zone');
+      if (upcoming && spotlightEl) {
+        var fieldsHtml = Object.keys(upcoming.fields).map(function (k) {
+          return '<div class="ev-sf"><b>' + k + '</b><span>' + upcoming.fields[k] + '</span></div>';
+        }).join('');
+        spotlightEl.innerHTML =
+          '<div class="ev-spotlight">' +
           '<span class="ev-spotlight-badge"><span class="pulse"></span> Open &middot; Register Now</span>' +
           '<div class="ev-spotlight-grid">' +
-            '<div class="ev-spotlight-photo">' + (upcoming.photo ? '<img src="../' + upcoming.photo + '" alt="' + upcoming.title + '">' : 'Photo') + '</div>' +
-            '<div class="ev-spotlight-info">' +
-              '<h3>' + upcoming.title + '</h3>' +
-              '<p class="role">' + upcoming.description + '</p>' +
-              '<div class="ev-spotlight-fields">' + fieldsHtml + '</div>' +
-              '<a href="' + upcoming.registerUrl + '" class="ev-reg-btn" target="_blank" rel="noopener">Register Now &rarr;</a>' +
-            '</div>' +
+          '<div class="ev-spotlight-photo">' + (upcoming.photo ? '<img src="../' + upcoming.photo + '" alt="' + upcoming.title + '">' : 'Photo') + '</div>' +
+          '<div class="ev-spotlight-info">' +
+          '<h3>' + upcoming.title + '</h3>' +
+          '<p class="role">' + upcoming.description + '</p>' +
+          '<div class="ev-spotlight-fields">' + fieldsHtml + '</div>' +
+          '<a href="' + upcoming.registerUrl + '" class="ev-reg-btn" target="_blank" rel="noopener">Register Now &rarr;</a>' +
           '</div>' +
-        '</div>';
-    }
-
-    /* Timeline */
-    var timelineEl = document.getElementById('ev-timeline');
-    var eyebrowEl  = document.getElementById('ev-timeline-eyebrow');
-    if (timelineEl) {
-      var past = evGetPast(DATA);
-      if (eyebrowEl && past.length) {
-        var minY = past[past.length - 1].year;
-        var maxY = past[0].year;
-        eyebrowEl.textContent = minY + ' \u2192 ' + maxY;
+          '</div>' +
+          '</div>';
       }
-      evRenderTimelineArchive({
-        pastInstances: past,
-        timelineEl: timelineEl,
-        categoryColor: CAT_COLOR,
-        categoryLabel: 'Hour of Code',
-        recentCount: 5
-      });
-    }
 
-    var photoEl = document.getElementById('ev-photo-strip');
-    if (photoEl && typeof evRenderPhotoMarquee === 'function') {
-      evRenderPhotoMarquee(photoEl, past, 'Hour of Code');
-    }
-  })();
+      /* Timeline */
+      var timelineEl = document.getElementById('ev-timeline');
+      var eyebrowEl = document.getElementById('ev-timeline-eyebrow');
+      if (timelineEl) {
+        var past = evGetPast(DATA);
+        if (eyebrowEl && past.length) {
+          var minY = past[past.length - 1].year;
+          var maxY = past[0].year;
+          eyebrowEl.textContent = minY + ' \u2192 ' + maxY;
+        }
+        evRenderTimelineArchive({
+          pastInstances: past,
+          timelineEl: timelineEl,
+          categoryColor: CAT_COLOR,
+          categoryLabel: 'Hour of Code',
+          recentCount: 5
+        });
+      }
+
+      var photoEl = document.getElementById('ev-photo-strip');
+      if (photoEl && typeof evRenderPhotoMarquee === 'function') {
+        evRenderPhotoMarquee(photoEl, past, 'Hour of Code');
+      }
+    })();
   </script>
 </body>
+
 </html>

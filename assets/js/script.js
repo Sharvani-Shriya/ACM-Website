@@ -77,26 +77,29 @@ document.addEventListener('DOMContentLoaded', function () {
       heroDots[heroCurrent] && heroDots[heroCurrent].classList.add('active');
     }
 
+    function resetHeroAutoplay() {
+      if (heroAutoplay) clearInterval(heroAutoplay);
+      heroAutoplay = setInterval(function () { goToHeroSlide(heroCurrent + 1); }, 4500);
+    }
+
     var heroPrev = document.getElementById('about-hero-prev');
     var heroNext = document.getElementById('about-hero-next');
-    heroPrev && heroPrev.addEventListener('click', function () { goToHeroSlide(heroCurrent - 1); });
-    heroNext && heroNext.addEventListener('click', function () { goToHeroSlide(heroCurrent + 1); });
+    heroPrev && heroPrev.addEventListener('click', function () { goToHeroSlide(heroCurrent - 1); resetHeroAutoplay(); });
+    heroNext && heroNext.addEventListener('click', function () { goToHeroSlide(heroCurrent + 1); resetHeroAutoplay(); });
 
     var heroAutoplay = setInterval(function () { goToHeroSlide(heroCurrent + 1); }, 4500);
 
     var heroBanner = document.querySelector('.about-hero-banner');
     if (heroBanner) {
-      heroBanner.addEventListener('mouseenter', function () { clearInterval(heroAutoplay); });
-      heroBanner.addEventListener('mouseleave', function () {
-        heroAutoplay = setInterval(function () { goToHeroSlide(heroCurrent + 1); }, 4500);
-      });
+      heroBanner.addEventListener('mouseenter', function () { if (heroAutoplay) clearInterval(heroAutoplay); });
+      heroBanner.addEventListener('mouseleave', function () { resetHeroAutoplay(); });
 
-      /* Mobile touch swipe gesture support */
+      /* Mobile touch swipe gesture support with smooth continuous autoplay */
       var touchStartX = 0;
       heroBanner.addEventListener('touchstart', function (e) {
         if (e.touches.length === 1) {
           touchStartX = e.touches[0].clientX;
-          clearInterval(heroAutoplay);
+          if (heroAutoplay) clearInterval(heroAutoplay);
         }
       }, { passive: true });
 
@@ -106,14 +109,12 @@ document.addEventListener('DOMContentLoaded', function () {
           var diffX = touchStartX - touchEndX;
           if (Math.abs(diffX) > 30) {
             if (diffX > 0) {
-              // Sliding left -> move left
-              goToHeroSlide(heroCurrent - 1);
-            } else {
-              // Sliding right -> move right
               goToHeroSlide(heroCurrent + 1);
+            } else {
+              goToHeroSlide(heroCurrent - 1);
             }
           }
-          heroAutoplay = setInterval(function () { goToHeroSlide(heroCurrent + 1); }, 4500);
+          resetHeroAutoplay();
         }
       }, { passive: true });
     }
