@@ -573,7 +573,7 @@
       var rawCssSpeed = getComputedStyle(document.documentElement).getPropertyValue('--marquee-speed-px').trim();
       var speedPxPerSec = window.MARQUEE_SPEED_PX || parseFloat(rawCssSpeed);
       if (!speedPxPerSec || isNaN(speedPxPerSec) || speedPxPerSec <= 0) {
-        speedPxPerSec = 18;
+        speedPxPerSec = 32;
       }
       var totalWidth = el.scrollWidth;
       var halfWidth = totalWidth / 2;

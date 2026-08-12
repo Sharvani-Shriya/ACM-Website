@@ -274,7 +274,7 @@
 
     .photo-card {
       flex: 0 0 auto;
-      width: 250px;
+      width: 290px;
       cursor: pointer;
       position: relative;
       background: #ffffff;
@@ -287,11 +287,12 @@
 
     .photo-card:hover {
       transform: translateY(-6px);
+      box-shadow: 0 12px 28px rgba(10, 31, 61, 0.15);
     }
 
     .photo-card .img-wrap {
       width: 100%;
-      aspect-ratio: 4 / 3;
+      aspect-ratio: 16 / 10;
       border-radius: 10px;
       position: relative;
       overflow: hidden;
@@ -575,13 +576,15 @@
       }
 
       .photo-card {
-        width: clamp(120px, 40vw, 155px) !important;
+        flex: 0 0 auto !important;
+        width: clamp(135px, 44vw, 175px) !important;
         padding: 5px !important;
         border-radius: 8px !important;
         border-width: 1.5px !important;
       }
 
       .photo-card .img-wrap {
+        aspect-ratio: 16 / 10 !important;
         border-radius: 6px !important;
       }
 
@@ -1008,7 +1011,7 @@
 
       // Retrieve globalized speed setting (--marquee-speed-px or window.MARQUEE_SPEED_PX)
       const rawCssSpeed = getComputedStyle(document.documentElement).getPropertyValue('--marquee-speed-px').trim();
-      const speedPxPerSec = window.MARQUEE_SPEED_PX || parseFloat(rawCssSpeed) || 18;
+      const speedPxPerSec = window.MARQUEE_SPEED_PX || parseFloat(rawCssSpeed) || 32;
       const distance = speedPxPerSec * Math.min(delta, 0.1);
 
       activeReels.forEach(reelObj => {
