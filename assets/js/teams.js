@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', function () {
         { name: "P. Poorna Sai Sri Harsha", role: "Chair", branch: "CSE" },
         { name: "D. Supriya", role: "Vice Chair", branch: "CSE" },
         { name: "K. Kalyan", role: "Secretary", branch: "CSE" },
-        { name: "B. Madhu", role: "Treasurer", branch: "CSE" },
+        { name: "G. Madhu", role: "Treasurer", branch: "CSE" },
         { name: "A. Eswar", role: "Web Master", branch: "CSE" },
         { name: "M. Pavan", role: "Event Lead", branch: "CSE" }
       ],
