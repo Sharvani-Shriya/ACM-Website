@@ -6406,14 +6406,17 @@ table.data-table td.placeholder {
   }
 
   .stat-label,
-  .ev-stat-label {
-    font-size: clamp(0.58rem, 2.2vw, 0.70rem) !important;
-    white-space: normal !important;
+  .ev-stat-label,
+  .stat .lbl {
+    font-size: clamp(0.52rem, 2.1vw, 0.68rem) !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
     text-align: center !important;
     line-height: 1.2 !important;
     width: 100% !important;
+    max-width: 100% !important;
     display: block !important;
-    overflow-wrap: break-word !important;
-    hyphens: auto !important;
+    box-sizing: border-box !important;
   }
 }
