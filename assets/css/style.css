@@ -1563,11 +1563,32 @@ img.about-tab-img {
   .about-tabbed-container {
     grid-template-columns: 1fr;
   }
+}
 
+/* Split-screen desktop & tablet view specific rule (541px to 900px) */
+@media (min-width: 541px) and (max-width: 900px) {
   .about-image-col {
-    height: 260px;
-    min-height: auto;
+    height: 360px;
+    background: #ffffff;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
   }
+
+  .about-image-col picture.about-tab-img img,
+  .about-image-col img.about-tab-img {
+    object-fit: contain !important;
+    object-position: center !important;
+    background: #ffffff !important;
+  }
+}
+
+@media (max-width: 540px) {
+  .about-image-col {
+    height: auto;
+    aspect-ratio: 4 / 3;
+    min-height: 200px;
+  }
+}
 
   .about-tabs-nav {
     justify-content: flex-start;
