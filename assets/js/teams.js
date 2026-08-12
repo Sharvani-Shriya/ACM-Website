@@ -157,15 +157,15 @@ document.addEventListener('DOMContentLoaded', function () {
       members: genMembers(37, []),
       staffList: [{ name: "Dr. N. Ravi Shankar", role: "Faculty Advisor" }]
     },
-    "2017-2018":{
-      students: 143,staff: 30, hasData: true,
+    "2017-2018": {
+      students: 143, staff: 30, hasData: true,
       leadership: [
-        { name: "P. Poorna Sai Sri Harsha", role: "Chair", branch: "CSE"},
-        { name: "D. Supriya", role: "Vice Chair", branch: "CSE"},
-        { name: "K. Kalyan", role: "Secretary", branch: "CSE"},
-        { name: "B. Madhu", role: "Treasurer", branch: "CSE"},
-        { name: "K. Jaash", role: "Web Master", branch: "CSE"},
-        { name: "M. Pavan", role: "Event Lead", branch: "CSE"}  
+        { name: "P. Poorna Sai Sri Harsha", role: "Chair", branch: "CSE" },
+        { name: "D. Supriya", role: "Vice Chair", branch: "CSE" },
+        { name: "K. Kalyan", role: "Secretary", branch: "CSE" },
+        { name: "B. Madhu", role: "Treasurer", branch: "CSE" },
+        { name: "A. Eswar", role: "Web Master", branch: "CSE" },
+        { name: "M. Pavan", role: "Event Lead", branch: "CSE" }
       ],
       members: genMembers(143, []),
       staffList: [{ name: "Dr. S. S. Rajamouli", role: "Faculty Advisor" }]
@@ -224,11 +224,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     panelEl.innerHTML =
       '<div class="year-panel-head">' +
-        '<div class="year-head-left">' +
-          '<h3>' + year + '</h3>' +
-          '<div class="meta"><span><b>' + d.students + '</b> student members</span><span class="meta-dot">·</span><span><b>' + d.staff + '</b> staff members</span></div>' +
-        '</div>' +
-        '<button class="btn-prototype btn-primary" id="openRosterBtn">View full member directory ↗</button>' +
+      '<div class="year-head-left">' +
+      '<h3>' + year + '</h3>' +
+      '<div class="meta"><span><b>' + d.students + '</b> student members</span><span class="meta-dot">·</span><span><b>' + d.staff + '</b> staff members</span></div>' +
+      '</div>' +
+      '<button class="btn-prototype btn-primary" id="openRosterBtn">View full member directory ↗</button>' +
       '</div>' +
       '<div class="subhead">Leadership team</div>' +
       '<div class="lead-grid">' + leadHtml + '</div>' +
