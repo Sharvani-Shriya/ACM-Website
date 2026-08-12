@@ -4390,7 +4390,7 @@ body.modal-open {
   gap: 20px;
   width: max-content;
   will-change: transform;
-  animation: scrollLeft var(--marquee-speed, 40s) linear infinite;
+  animation: scrollLeft var(--sub-event-marquee-speed, 18s) linear infinite;
   padding: 4px 0;
 }
 
