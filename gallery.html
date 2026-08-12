@@ -662,7 +662,7 @@
             </svg>
           </div>
           <div class="ev-stat-info">
-            <span class="ev-stat-num">45</span>
+            <span class="ev-stat-num" id="gal-events-count">46</span>
             <span class="ev-stat-label">Events covered</span>
           </div>
         </div>
@@ -1047,6 +1047,18 @@
       renderThumbs();
       showLB();
       lb.classList.add('open');
+      document.documentElement.classList.add('modal-open');
+      document.body.classList.add('modal-open');
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLB() {
+      lb.classList.remove('open');
+      document.documentElement.classList.remove('modal-open');
+      document.body.classList.remove('modal-open');
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
     }
 
     function renderThumbs() {
@@ -1071,13 +1083,14 @@
       document.querySelectorAll('.lb-thumbs .t').forEach((t, i) => t.classList.toggle('active', i === lbIndex));
     }
 
-    document.getElementById('lb-close').addEventListener('click', () => lb.classList.remove('open'));
-    lb.addEventListener('click', (e) => { if (e.target === lb) lb.classList.remove('open'); });
+    document.getElementById('lb-close').addEventListener('click', closeLB);
+    lb.addEventListener('click', (e) => { if (e.target === lb) closeLB(); });
+    lb.addEventListener('touchmove', (e) => { if (!e.target.closest('#lb-main-wrap') && !e.target.closest('.lb-thumbs')) e.preventDefault(); }, { passive: false });
     document.getElementById('lb-prev').addEventListener('click', () => { lbIndex = (lbIndex - 1 + currentReelPhotos.length) % currentReelPhotos.length; showLB(); });
     document.getElementById('lb-next').addEventListener('click', () => { lbIndex = (lbIndex + 1) % currentReelPhotos.length; showLB(); });
     document.addEventListener('keydown', (e) => {
       if (!lb.classList.contains('open')) return;
-      if (e.key === 'Escape') lb.classList.remove('open');
+      if (e.key === 'Escape') closeLB();
       if (e.key === 'ArrowLeft') { lbIndex = (lbIndex - 1 + currentReelPhotos.length) % currentReelPhotos.length; showLB(); }
       if (e.key === 'ArrowRight') { lbIndex = (lbIndex + 1) % currentReelPhotos.length; showLB(); }
     });

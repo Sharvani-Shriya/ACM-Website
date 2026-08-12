@@ -1208,6 +1208,7 @@ function evHasUpcoming(arr) {
 /* Global totals for the master stats strip */
 var EV_ALL_INSTANCES = [].concat(EV_TECHNIZEN, EV_HOUR_OF_CODE, EV_OUTREACH, EV_GUEST_LECTURES, EV_INTRA_COLLEGE, EV_WORKSHOPS);
 var EV_TOTAL_EVENTS = EV_ALL_INSTANCES.length;
+var EV_PARTICIPANTS_TOTAL = '5,000+';
 var EV_SCHOOLS_VISITED = 27;   // Hour of Code cumulative
 var EV_GUEST_COUNT = EV_GUEST_LECTURES.length;
 var EV_YEARS_ACTIVE = 10;    // 2017-2026

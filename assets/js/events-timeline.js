@@ -381,8 +381,11 @@
       setupSlider(banners.length, categoryColor);
     }
 
-    // 4. Show Backdrop
+    // 4. Show Backdrop & Lock Background Scroll
     backdrop.classList.add('is-open');
+    document.documentElement.classList.add('modal-open');
+    document.body.classList.add('modal-open');
+    document.documentElement.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
   }
 
@@ -471,6 +474,12 @@
       }
     });
 
+    backdrop.addEventListener('touchmove', function (e) {
+      if (!e.target.closest('.ev-modal')) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' || e.keyCode === 27) {
         closeEvModal();
@@ -487,6 +496,9 @@
         modalEl.scrollTop = 0;
       }
     }
+    document.documentElement.classList.remove('modal-open');
+    document.body.classList.remove('modal-open');
+    document.documentElement.style.overflow = '';
     document.body.style.overflow = '';
     if (currentSliderInterval) {
       clearInterval(currentSliderInterval);

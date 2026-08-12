@@ -108,14 +108,14 @@ html {
   scroll-behavior: smooth;
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {
   margin: 0;
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
   background: var(--white);
   color: var(--ink);
   font-family: var(--font-body);
@@ -220,10 +220,12 @@ p {
 .main-nav {
   background: var(--navy);
   background-image: linear-gradient(180deg, var(--navy) 0%, var(--navy-dark) 100%);
+  position: -webkit-sticky;
   position: sticky;
   top: 0;
-  z-index: 500;
-  box-shadow: var(--shadow-md);
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(10, 31, 61, 0.25);
+  will-change: transform;
 }
 
 .nav-inner {
@@ -1311,16 +1313,21 @@ p {
   display: none;
   opacity: 0;
   transition: opacity 0.4s ease;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
 }
 
 .about-image-col .about-tab-img.active {
-  display: flex;
-  opacity: 1;
-}
-
-img.about-tab-img.active {
   display: block !important;
   opacity: 1 !important;
+}
+
+.about-image-col picture.about-tab-img img,
+img.about-tab-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
 }
 
 .about-placeholder-box {
@@ -2036,6 +2043,12 @@ table.data-table td.placeholder {
 }
 
 /* Modal (event details) */
+html.modal-open,
+body.modal-open {
+  overflow: hidden !important;
+  touch-action: none;
+  overscroll-behavior: contain;
+}
 
 .modal-backdrop {
   position: fixed;

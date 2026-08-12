@@ -80,7 +80,7 @@
             </svg>
           </div>
           <div class="ev-stat-info">
-            <span class="ev-stat-num" id="ev-participants-count" data-count="3800">3,800+</span>
+            <span class="ev-stat-num" id="ev-participants-count" data-count="5000">5,000+</span>
             <span class="ev-stat-label">Participants reached</span>
           </div>
         </div>
@@ -296,12 +296,17 @@
     (function () {
       /* Stats Dynamic Auto-Updater */
       var totalEl = document.getElementById('ev-events-count');
+      var partEl = document.getElementById('ev-participants-count');
       var guestEl = document.getElementById('ev-speakers-count');
       var yearsEl = document.getElementById('ev-years-count');
 
       if (totalEl && typeof EV_TOTAL_EVENTS !== 'undefined') {
         totalEl.setAttribute('data-count', EV_TOTAL_EVENTS);
         totalEl.textContent = EV_TOTAL_EVENTS;
+      }
+      if (partEl && typeof EV_PARTICIPANTS_TOTAL !== 'undefined') {
+        partEl.setAttribute('data-count', '5000');
+        partEl.textContent = EV_PARTICIPANTS_TOTAL;
       }
       if (guestEl && typeof EV_GUEST_COUNT !== 'undefined') {
         guestEl.setAttribute('data-count', EV_GUEST_COUNT);

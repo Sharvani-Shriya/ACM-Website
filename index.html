@@ -89,7 +89,7 @@
   <header class="about-hero-banner">
     <!-- Background Image Slider Carousel (3 Banners) -->
     <div class="about-hero-slider" id="about-hero-slider">
-      <div class="about-hero-slide active" style="background-image: url('assets/images/global/hero-banner.jpeg');">
+      <div class="about-hero-slide active" style="background-image: url('assets/images/global/hero-banner.png');">
       </div>
       <div class="about-hero-slide" style="background-image: url('assets/images/global/Technizen banner.jpeg');"></div>
       <div class="about-hero-slide about-hero-placeholder-slide">
@@ -205,10 +205,16 @@
           </div>
 
           <!-- Vision Image -->
-          <img src="assets/images/global/vision.png" alt="Our Vision — ACM Student Chapter" class="about-tab-img" id="tab-img-our-vision">
+          <picture class="about-tab-img" id="tab-img-our-vision">
+            <source media="(max-width: 768px)" srcset="assets/images/global/visionmobile.jpeg">
+            <img src="assets/images/global/vision.png" alt="Our Vision — ACM Student Chapter">
+          </picture>
 
           <!-- Mission Image -->
-          <img src="assets/images/global/mission.png" alt="Our Mission — ACM Student Chapter" class="about-tab-img" id="tab-img-our-mission">
+          <picture class="about-tab-img" id="tab-img-our-mission">
+            <source media="(max-width: 768px)" srcset="assets/images/global/missionmobile.jpeg">
+            <img src="assets/images/global/mission.png" alt="Our Mission — ACM Student Chapter">
+          </picture>
         </div>
 
         <!-- Right Content Column with Tabs -->
