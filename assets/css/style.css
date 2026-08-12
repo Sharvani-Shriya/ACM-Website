@@ -6364,7 +6364,8 @@ table.data-table td.placeholder {
   }
 
   /* Reset extra top padding and section margins for equal top/bottom stats spacing */
-  #events-master-view {
+  #events-master-view,
+  #teams-master-view {
     padding-top: 0 !important;
   }
 

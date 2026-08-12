@@ -92,9 +92,12 @@ html, body {
 }
 
 /* ---------- STATS STRIP (Sits after hero with a gap, like events.html) ---------- */
-.stats {
-  max-width: 1120px;
-  margin: 0 auto 54px;
+.stats,
+#teams-master-stats {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 0 36px;
+  box-sizing: border-box;
   background: #fff;
   border-radius: var(--teams-radius);
   box-shadow: var(--teams-shadow-lift);
@@ -148,19 +151,23 @@ html, body {
 }
 
 /* ---------- SECTIONS & HEADINGS ---------- */
+#teams-master-view {
+  padding: var(--space-xl) 0 var(--space-2xl);
+}
+
 .teams-section {
-  padding: 56px 32px 0;
+  padding: 40px 0 0;
 }
 
 .section-head {
   text-align: center;
   max-width: 640px;
-  margin: 0 auto 40px;
+  margin: 0 auto 36px;
 }
 
 .section-head h2 {
   font-family: 'Playfair Display', serif;
-  font-size: 32px;
+  font-size: var(--text-h2);
   color: var(--teams-navy-900);
   margin: 10px 0 12px;
 }
@@ -182,8 +189,10 @@ html, body {
 
 /* ---------- GROWTH CHART (Events page chart card design) ---------- */
 .chart-card {
-  max-width: 1120px;
-  margin: 0 auto;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 0 44px;
+  box-sizing: border-box;
   background: linear-gradient(145deg, #ffffff 0%, #f8fafc 60%, #f1f5f9 100%);
   background-image: 
     radial-gradient(circle at 8% 15%, rgba(200, 161, 58, 0.07) 0%, transparent 45%),
@@ -276,7 +285,7 @@ html, body {
 .gpt-val   { font-family: 'Space Grotesk', system-ui, sans-serif; font-size: 11px; font-weight: 700; fill: var(--teams-navy-900); }
 
 /* ---------- YEAR EXPLORER ---------- */
-.explorer { max-width: 1120px; margin: 0 auto; }
+.explorer { width: 100%; max-width: 100%; margin: 0 auto; box-sizing: border-box; }
 
 .year-tabs {
   display: flex;
