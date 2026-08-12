@@ -308,6 +308,9 @@ document.addEventListener('DOMContentLoaded', function () {
     modalFilter = "All"; modalQuery = ""; modalPage = 1;
     document.getElementById('modalSearchInput').value = "";
     renderModalTable();
+    document.documentElement.classList.add('modal-open');
+    document.body.classList.add('modal-open');
+    document.documentElement.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
     document.getElementById('rosterModal').classList.add('open');
   };
@@ -361,13 +364,24 @@ document.addEventListener('DOMContentLoaded', function () {
   };
 
   window.closeModal = function () {
+    document.documentElement.classList.remove('modal-open');
+    document.body.classList.remove('modal-open');
+    document.documentElement.style.overflow = '';
     document.body.style.overflow = '';
     document.getElementById('rosterModal').classList.remove('open');
   };
 
-  document.getElementById('rosterModal').addEventListener('click', function (e) {
-    if (e.target.id === 'rosterModal') window.closeModal();
-  });
+  var rosterModalEl = document.getElementById('rosterModal');
+  if (rosterModalEl) {
+    rosterModalEl.addEventListener('click', function (e) {
+      if (e.target.id === 'rosterModal') window.closeModal();
+    });
+    rosterModalEl.addEventListener('touchmove', function (e) {
+      if (!e.target.closest('.modal-card')) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+  }
 
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && document.getElementById('rosterModal').classList.contains('open')) {
