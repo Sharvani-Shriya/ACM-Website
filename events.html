@@ -558,9 +558,11 @@
         var total = evTotalInstances(data);
         var years = data.length ? data.reduce(function (mn, e) { return Math.min(mn, e.year); }, 9999) : 2018;
 
-        /* All 6 cards link to their detail pages */
+        /* All 6 cards link to their detail pages with category-specific hover colors */
         var card = document.createElement('a');
-        card.className = 'ev-cat-card';
+        card.className = 'ev-cat-card ev-cat-card-' + k;
+        card.setAttribute('data-cat', k);
+        card.style.setProperty('--card-accent', cat.color);
         if (k === 'technizen') {
           card.setAttribute('href', 'events/inter-college-events.html');
         } else if (cat.url) {

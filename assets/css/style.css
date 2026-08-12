@@ -3648,6 +3648,27 @@ body.modal-open {
   flex-shrink: 0;
 }
 
+/* ---- Keyframe Animations for Card Special Effects ---- */
+@keyframes evPillPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 6px rgba(200, 161, 58, 0.4);
+  }
+  50% {
+    transform: scale(1.06);
+    box-shadow: 0 0 14px rgba(200, 161, 58, 0.85);
+  }
+}
+
+@keyframes evBadgeHalo {
+  0%, 100% {
+    box-shadow: 0 4px 12px rgba(11, 31, 77, 0.15), 0 0 0 0 rgba(20, 80, 158, 0.2);
+  }
+  50% {
+    box-shadow: 0 6px 16px rgba(11, 31, 77, 0.22), 0 0 0 4px rgba(20, 80, 158, 0.15);
+  }
+}
+
 /* ---- 6-card master category grid ---- */
 .ev-cat-grid {
   display: grid;
@@ -3656,22 +3677,54 @@ body.modal-open {
 }
 
 .ev-cat-card {
-  background: var(--white);
-  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.95);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(20, 80, 158, 0.16);
   border-radius: var(--radius-lg);
   overflow: hidden;
   position: relative;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 6px 20px -4px rgba(11, 31, 77, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
   cursor: pointer;
-  transition: transform .28s ease, box-shadow .28s ease;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease, border-color 0.35s ease;
   display: block;
   text-decoration: none;
   color: inherit;
 }
 
-.ev-cat-card:hover {
+/* Shimmer Light Reflection Sweep */
+.ev-cat-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.65), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.75s ease;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Category-specific accent variables for all 6 cards */
+.ev-cat-card[data-cat="technizen"], .ev-cat-card-technizen { --card-accent: #c8a13a; }
+.ev-cat-card[data-cat="hourOfCode"], .ev-cat-card-hourOfCode { --card-accent: #2e7d6b; }
+.ev-cat-card[data-cat="outreach"], .ev-cat-card-outreach { --card-accent: #b5502f; }
+.ev-cat-card[data-cat="guestLectures"], .ev-cat-card-guestLectures { --card-accent: #6b4a8a; }
+.ev-cat-card[data-cat="intraCollege"], .ev-cat-card-intraCollege { --card-accent: #14509e; }
+.ev-cat-card[data-cat="workshops"], .ev-cat-card-workshops { --card-accent: #4a7a3d; }
+
+.ev-cat-card:hover,
+.ev-cat-card:active {
   transform: translateY(-5px);
-  box-shadow: var(--shadow-lg);
+  border-color: var(--card-accent, var(--blue));
+  box-shadow: 0 14px 32px -6px rgba(11, 31, 77, 0.18), 0 0 20px var(--card-accent, var(--blue));
+}
+
+.ev-cat-card:hover::before,
+.ev-cat-card:active::before {
+  left: 140%;
 }
 
 .ev-cat-swatch {
@@ -3696,6 +3749,13 @@ body.modal-open {
   color: var(--white);
   margin-bottom: var(--space-sm);
   flex-shrink: 0;
+  animation: evBadgeHalo 4s infinite ease-in-out;
+  transition: transform 0.3s ease;
+}
+
+.ev-cat-card:hover .ev-cat-badge,
+.ev-cat-card:active .ev-cat-badge {
+  transform: scale(1.05);
 }
 
 .ev-cat-card h3 {
@@ -3752,17 +3812,21 @@ body.modal-open {
   transition: all 0.28s ease;
 }
 
-.ev-cat-card:hover .ev-cat-meta {
+.ev-cat-card:hover .ev-cat-meta,
+.ev-cat-card:active .ev-cat-meta {
   background: var(--navy);
   border-color: rgba(200, 161, 58, 0.4);
   box-shadow: 0 4px 14px rgba(11, 31, 77, 0.2);
+  transform: translateX(4px);
 }
 
-.ev-cat-card:hover .ev-meta-count {
+.ev-cat-card:hover .ev-meta-count,
+.ev-cat-card:active .ev-meta-count {
   color: var(--white);
 }
 
-.ev-cat-card:hover .ev-meta-since {
+.ev-cat-card:hover .ev-meta-since,
+.ev-cat-card:active .ev-meta-since {
   color: var(--gold);
   background: rgba(200, 161, 58, 0.25);
 }
@@ -3781,6 +3845,9 @@ body.modal-open {
   padding: 4px 10px;
   border-radius: var(--radius-pill);
   white-space: nowrap;
+  animation: evPillPulse 2.5s infinite ease-in-out;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  z-index: 2;
 }
 
 /* ---- Spotlight banner (conditional — detail pages) ---- */
@@ -4412,6 +4479,116 @@ body.modal-open {
 
   .ev-photo-strip {
     grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ---- Mobile Special Effects for Event Category Cards (max-width: 768px) ---- */
+@media (max-width: 768px) {
+  @keyframes mobilePillPulse {
+    0%, 100% {
+      transform: scale(1);
+      box-shadow: 0 0 6px rgba(200, 161, 58, 0.4);
+    }
+    50% {
+      transform: scale(1.06);
+      box-shadow: 0 0 14px rgba(200, 161, 58, 0.85);
+    }
+  }
+
+  @keyframes mobileBadgeHalo {
+    0%, 100% {
+      box-shadow: 0 4px 12px rgba(11, 31, 77, 0.15), 0 0 0 0 rgba(20, 80, 158, 0.2);
+    }
+    50% {
+      box-shadow: 0 6px 16px rgba(11, 31, 77, 0.22), 0 0 0 4px rgba(20, 80, 158, 0.15);
+    }
+  }
+
+  /* 6-Card Master Event Grid Category Cards on Mobile */
+  .ev-cat-card {
+    border-radius: clamp(12px, 3.5vw, 18px) !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(20, 80, 158, 0.16) !important;
+    box-shadow: 0 6px 20px -4px rgba(11, 31, 77, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04) !important;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease, border-color 0.35s ease !important;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Shimmer / Light Beam Reflection Sweep */
+  .ev-cat-card::before {
+    content: "" !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: -100% !important;
+    width: 60% !important;
+    height: 100% !important;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.65), transparent) !important;
+    transform: skewX(-20deg) !important;
+    transition: left 0.75s ease !important;
+    pointer-events: none !important;
+    z-index: 3 !important;
+  }
+
+  /* Interactive Touch / Active & Hover Feedback on Mobile */
+  .ev-cat-card:active,
+  .ev-cat-card:hover {
+    transform: translateY(-4px) scale(1.012) !important;
+    border-color: var(--card-accent, var(--blue)) !important;
+    box-shadow: 0 14px 32px -6px rgba(11, 31, 77, 0.18), 0 0 20px var(--card-accent, var(--blue)) !important;
+  }
+
+  .ev-cat-card:active::before,
+  .ev-cat-card:hover::before {
+    left: 140% !important;
+  }
+
+  /* Category Top Color Swatch Bar */
+  .ev-cat-swatch {
+    height: 6px !important;
+  }
+
+  /* Category Abbreviation Badge with Halo Glow — No Tilt */
+  .ev-cat-badge {
+    animation: mobileBadgeHalo 4s infinite ease-in-out;
+    transition: transform 0.3s ease !important;
+  }
+
+  .ev-cat-card:active .ev-cat-badge,
+  .ev-cat-card:hover .ev-cat-badge {
+    transform: scale(1.05) !important;
+  }
+
+  /* Typography Fluid Scaling for Mobile */
+  .ev-cat-card h3 {
+    font-size: clamp(1.1rem, 4vw, 1.25rem) !important;
+    color: var(--navy) !important;
+    letter-spacing: -0.01em !important;
+  }
+
+  .ev-cat-card p {
+    font-size: clamp(0.84rem, 3.2vw, 0.92rem) !important;
+    line-height: 1.45 !important;
+  }
+
+  /* Meta Badge (Count & Year) on Mobile */
+  .ev-cat-meta {
+    padding: 5px 12px !important;
+    border-radius: 20px !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .ev-cat-card:active .ev-cat-meta,
+  .ev-cat-card:hover .ev-cat-meta {
+    transform: translateX(4px) !important;
+  }
+
+  /* Live Open Pill Glow Animation */
+  .ev-open-pill {
+    animation: mobilePillPulse 2.5s infinite ease-in-out !important;
+    border: 1px solid rgba(255, 255, 255, 0.6) !important;
   }
 }
 
