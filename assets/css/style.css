@@ -1614,26 +1614,26 @@ img.about-tab-img {
   }
 }
 
-  .about-tabs-nav {
-    justify-content: flex-start;
-    overflow-x: auto;
-    padding-left: 6px;
-  }
+.about-tabs-nav {
+  justify-content: flex-start;
+  overflow-x: auto;
+  padding-left: 6px;
+}
 
-  .about-tab-btn {
-    padding: var(--space-2xs) var(--space-sm);
-    font-size: var(--text-nav);
-    white-space: nowrap;
-  }
+.about-tab-btn {
+  padding: var(--space-2xs) var(--space-sm);
+  font-size: var(--text-nav);
+  white-space: nowrap;
+}
 
-  .about-tab-body {
-    padding: var(--space-md) var(--space-sm);
-  }
+.about-tab-body {
+  padding: var(--space-md) var(--space-sm);
+}
 
-  .about-tab-panel h3 {
-    font-size: var(--text-h3);
-    margin-bottom: var(--space-xs);
-  }
+.about-tab-panel h3 {
+  font-size: var(--text-h3);
+  margin-bottom: var(--space-xs);
+}
 }
 
 /* ============================================================
@@ -2471,7 +2471,7 @@ body.modal-open {
   }
 
   /* College info & address block centered in the middle on mobile */
-  .footer-grid > div:first-child {
+  .footer-grid>div:first-child {
     grid-column: 1 / -1 !important;
     border-bottom: 1px solid rgba(255, 255, 255, .15) !important;
     padding-bottom: 16px !important;
@@ -2484,13 +2484,13 @@ body.modal-open {
     width: 100% !important;
   }
 
-  .footer-grid > div:first-child h4 {
+  .footer-grid>div:first-child h4 {
     text-align: center !important;
     margin: 0 auto 8px auto !important;
     width: 100% !important;
   }
 
-  .footer-grid > div:first-child p {
+  .footer-grid>div:first-child p {
     text-align: center !important;
     margin-left: auto !important;
     margin-right: auto !important;
@@ -3674,10 +3674,13 @@ body.modal-open {
 
 /* ---- Keyframe Animations for Card Special Effects ---- */
 @keyframes evPillPulse {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(1);
     box-shadow: 0 0 6px rgba(200, 161, 58, 0.4);
   }
+
   50% {
     transform: scale(1.06);
     box-shadow: 0 0 14px rgba(200, 161, 58, 0.85);
@@ -3685,9 +3688,12 @@ body.modal-open {
 }
 
 @keyframes evBadgeHalo {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0 4px 12px rgba(11, 31, 77, 0.15), 0 0 0 0 rgba(20, 80, 158, 0.2);
   }
+
   50% {
     box-shadow: 0 6px 16px rgba(11, 31, 77, 0.22), 0 0 0 4px rgba(20, 80, 158, 0.15);
   }
@@ -3732,12 +3738,35 @@ body.modal-open {
 }
 
 /* Category-specific accent variables for all 6 cards */
-.ev-cat-card[data-cat="technizen"], .ev-cat-card-technizen { --card-accent: #c8a13a; }
-.ev-cat-card[data-cat="hourOfCode"], .ev-cat-card-hourOfCode { --card-accent: #2e7d6b; }
-.ev-cat-card[data-cat="outreach"], .ev-cat-card-outreach { --card-accent: #b5502f; }
-.ev-cat-card[data-cat="guestLectures"], .ev-cat-card-guestLectures { --card-accent: #6b4a8a; }
-.ev-cat-card[data-cat="intraCollege"], .ev-cat-card-intraCollege { --card-accent: #14509e; }
-.ev-cat-card[data-cat="workshops"], .ev-cat-card-workshops { --card-accent: #4a7a3d; }
+.ev-cat-card[data-cat="technizen"],
+.ev-cat-card-technizen {
+  --card-accent: #c8a13a;
+}
+
+.ev-cat-card[data-cat="hourOfCode"],
+.ev-cat-card-hourOfCode {
+  --card-accent: #2e7d6b;
+}
+
+.ev-cat-card[data-cat="outreach"],
+.ev-cat-card-outreach {
+  --card-accent: #b5502f;
+}
+
+.ev-cat-card[data-cat="guestLectures"],
+.ev-cat-card-guestLectures {
+  --card-accent: #6b4a8a;
+}
+
+.ev-cat-card[data-cat="intraCollege"],
+.ev-cat-card-intraCollege {
+  --card-accent: #14509e;
+}
+
+.ev-cat-card[data-cat="workshops"],
+.ev-cat-card-workshops {
+  --card-accent: #4a7a3d;
+}
 
 .ev-cat-card:hover,
 .ev-cat-card:active {
@@ -3954,7 +3983,7 @@ body.modal-open {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px var(--space-lg);
-  margin-bottom: var(--space-md);
+  margin-bottom: 0;
 }
 
 .ev-sf b {
@@ -3980,22 +4009,23 @@ body.modal-open {
   background: #fdf6e7;
   border: 1px solid #e8d49a;
   box-shadow: 0 16px 40px rgba(11, 31, 77, 0.12);
-  padding: var(--space-xl);
+  padding: 32px 32px 20px 32px;
   border-radius: var(--radius-lg);
   margin-bottom: var(--space-lg);
 }
 
 .ev-spotlight-grid {
   display: grid;
-  grid-template-columns: 240px 1fr;
+  grid-template-columns: 190px 1fr;
   gap: var(--space-xl);
   align-items: flex-start;
 }
 
 .ev-poster-box {
   width: 100%;
-  max-width: 240px;
+  max-width: 190px;
   height: auto;
+  margin-top: 0;
   border-radius: var(--radius-md);
   box-shadow: 0 10px 28px rgba(11, 31, 77, 0.16);
   border: 3px solid #ffffff;
@@ -4068,9 +4098,23 @@ body.modal-open {
   box-shadow: 0 10px 28px rgba(20, 80, 158, 0.45);
 }
 
+.ev-spotlight-action {
+  width: 100%;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin-top: 20px;
+  margin-bottom: 0;
+  text-align: center !important;
+}
+
 @media (max-width: 768px) {
   .ev-spotlight {
-    padding: 20px 16px !important;
+    padding: 20px 16px 14px 16px !important;
+  }
+
+  .ev-spotlight-fields {
+    margin-bottom: 0 !important;
   }
 
   .ev-spotlight-badge {
@@ -4121,15 +4165,12 @@ body.modal-open {
     border: 2px solid #ffffff !important;
     box-sizing: border-box !important;
   }
-}
 
-.ev-spotlight-action {
-  width: 100%;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  margin-top: 24px;
-  text-align: center !important;
+  .ev-spotlight.is-technizen .ev-spotlight-action,
+  .ev-spotlight-action {
+    margin-top: -6px !important;
+    margin-bottom: 0 !important;
+  }
 }
 
 .ev-reg-btn {
@@ -4532,10 +4573,13 @@ body.modal-open {
 /* ---- Mobile Special Effects for Event Category Cards (max-width: 768px) ---- */
 @media (max-width: 768px) {
   @keyframes mobilePillPulse {
-    0%, 100% {
+
+    0%,
+    100% {
       transform: scale(1);
       box-shadow: 0 0 6px rgba(200, 161, 58, 0.4);
     }
+
     50% {
       transform: scale(1.06);
       box-shadow: 0 0 14px rgba(200, 161, 58, 0.85);
@@ -4543,9 +4587,12 @@ body.modal-open {
   }
 
   @keyframes mobileBadgeHalo {
-    0%, 100% {
+
+    0%,
+    100% {
       box-shadow: 0 4px 12px rgba(11, 31, 77, 0.15), 0 0 0 0 rgba(20, 80, 158, 0.2);
     }
+
     50% {
       box-shadow: 0 6px 16px rgba(11, 31, 77, 0.22), 0 0 0 4px rgba(20, 80, 158, 0.15);
     }
@@ -6592,6 +6639,7 @@ body.modal-open {
    as a clean, fluid single horizontal row on all mobile devices (280px to 768px).
    ----------------------------------------------------------- */
 @media (max-width: 768px) {
+
   .stats-overview-grid,
   .ev-stats-strip,
   .stats,
