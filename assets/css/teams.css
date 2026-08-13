@@ -524,12 +524,22 @@ html, body {
   background: var(--teams-bg-soft2);
   border: 1px solid var(--teams-line);
   border-radius: 999px;
-  padding: 9px 16px;
+  padding: 8px 16px;
   font-family: 'Space Grotesk', system-ui, sans-serif;
   font-size: 12.5px;
   color: var(--teams-navy-800);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
 }
-.breakdown-chip b { color: var(--teams-navy-900); font-size: 13.5px; }
+.breakdown-chip:hover {
+  background: #ffffff;
+  border-color: var(--teams-navy-800);
+  box-shadow: 0 4px 12px rgba(11, 31, 77, 0.08);
+  transform: translateY(-1px);
+}
+.breakdown-chip b { color: var(--teams-navy-900); font-size: 13.5px; font-weight: 700; }
 
 /* ---------- YEAR SEARCH ---------- */
 .year-search {
@@ -831,7 +841,7 @@ html, body {
   font-size: 13.5px;
 }
 
-.modal-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.modal-filters { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px; margin-bottom: 14px; }
 .filter-chip {
   font-family: 'Space Grotesk', system-ui, sans-serif;
   font-size: 12px;

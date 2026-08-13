@@ -1006,18 +1006,23 @@
         }
       }, { passive: true });
 
-      // Smooth navigation buttons
+      // Smooth navigation buttons (On mobile, arrow buttons navigate to previous/next event marquee)
       function handleNavClick(dir) {
-        reelObj.isInteracting = true;
-        clearTimeout(reelObj.interactTimer);
-        strip.scrollBy({ left: dir * 480, behavior: 'smooth' });
-        reelObj.interactTimer = setTimeout(() => {
-          const setWidth = reelObj.getSingleSetWidth();
-          if (setWidth > 0) {
-            reelObj.pos = strip.scrollLeft % setWidth;
-          }
-          reelObj.isInteracting = false;
-        }, 550);
+        if (window.innerWidth <= 768) {
+          const targetIdx = (idx + dir + EVENTS.length) % EVENTS.length;
+          selectEventReel(EVENTS[targetIdx].id);
+        } else {
+          reelObj.isInteracting = true;
+          clearTimeout(reelObj.interactTimer);
+          strip.scrollBy({ left: dir * 480, behavior: 'smooth' });
+          reelObj.interactTimer = setTimeout(() => {
+            const setWidth = reelObj.getSingleSetWidth();
+            if (setWidth > 0) {
+              reelObj.pos = strip.scrollLeft % setWidth;
+            }
+            reelObj.isInteracting = false;
+          }, 550);
+        }
       }
 
       reel.querySelector('.rl-left').addEventListener('click', () => handleNavClick(-1));

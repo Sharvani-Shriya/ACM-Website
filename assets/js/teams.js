@@ -208,10 +208,27 @@ document.addEventListener('DOMContentLoaded', function () {
     }).join('');
 
     /* Cohort Breakdown */
-    var branchCounts = {};
-    d.members.forEach(function (m) { branchCounts[m.branch] = (branchCounts[m.branch] || 0) + 1; });
-    var breakdownHtml = Object.keys(branchCounts).map(function (b) {
-      return '<div class="breakdown-chip"><b>' + branchCounts[b] + '</b> ' + b + '</div>';
+    var totalStudents = d.students || d.members.length;
+    var totalStaff = d.staff || d.staffList.length;
+    var totalLead = d.leadership.length;
+    var genMembersCount = Math.max(0, totalStudents - totalLead);
+    var facultyAdvisorCount = d.staffList.filter(function (s) { return s.role && s.role.indexOf('Advisor') !== -1; }).length || 1;
+    var coordinatorCount = Math.max(0, totalStaff - facultyAdvisorCount);
+
+    var breakdownItems = [
+      { num: totalStudents, label: 'CSE Students' },
+      { num: totalStaff, label: 'Faculty & Staff' },
+      { num: totalLead, label: 'Leadership Core' },
+      { num: genMembersCount, label: 'Chapter Members' },
+      { num: facultyAdvisorCount, label: 'Faculty ' + (facultyAdvisorCount > 1 ? 'Advisors' : 'Advisor') }
+    ];
+
+    if (coordinatorCount > 0) {
+      breakdownItems.push({ num: coordinatorCount, label: 'Staff ' + (coordinatorCount > 1 ? 'Coordinators' : 'Coordinator') });
+    }
+
+    var breakdownHtml = breakdownItems.map(function (item) {
+      return '<div class="breakdown-chip"><b>' + item.num + '</b> ' + item.label + '</div>';
     }).join('');
 
     /* Staff Cards */

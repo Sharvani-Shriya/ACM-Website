@@ -809,6 +809,25 @@ p {
   transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+@media (max-width: 768px) {
+  .about-hero-banner {
+    min-height: 360px !important;
+    max-height: 400px !important;
+    height: 380px !important;
+    padding: 0 !important;
+  }
+
+  .about-hero-slide {
+    background-size: cover !important;
+    background-position: center 15% !important;
+    transform: none !important;
+  }
+
+  .about-hero-controls {
+    bottom: 16px !important;
+  }
+}
+
 .about-hero-slide.active {
   opacity: 1;
   transform: scale(1);
